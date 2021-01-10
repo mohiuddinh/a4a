@@ -3,6 +3,8 @@ import { Router } from "@reach/router";
 import NotFound from "./pages/NotFound.js";
 import Skeleton from "./pages/Skeleton.js";
 import Header from "./pages/Header.js";
+import Background from "./pages/Background.js";
+import Home from "./pages/Home.js";
 
 import "../css/utilities.css";
 import "../css/App.css";
@@ -59,6 +61,8 @@ class App extends Component {
           <NotFound default />
         </Router> */}
         <Header />
+        <Background />
+        <Home />
       </>
     );
   }
