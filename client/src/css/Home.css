@@ -1,0 +1,20 @@
+@import "./Root.css";
+
+.home {
+  height: calc(100vh - 64px);
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.home > input {
+  width: 639px;
+  height: 61px;
+  text-align: center;
+  outline: none;
+  border: 1px solid var(--border-accent);
+  border-radius: 61px;
+  color: var(--small-text);
+  font-size: 18px;
+}
