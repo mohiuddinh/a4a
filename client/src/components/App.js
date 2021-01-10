@@ -1,8 +1,11 @@
 import React, { Component } from "react";
-import { Router } from "@reach/router";
+// import { Router } from "@reach/router";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+
 import NotFound from "./pages/NotFound.js";
 import Skeleton from "./pages/Skeleton.js";
 import Header from "./pages/Header.js";
+import Post from "./pages/Post.js";
 
 import "../css/utilities.css";
 import "../css/App.css";
@@ -58,7 +61,15 @@ class App extends Component {
           />
           <NotFound default />
         </Router> */}
-        <Header />
+        <Router>
+          <Header />
+          <Switch>
+            <Route path="/post">
+              <Post />
+            </Route>
+            <Route path="/"></Route>
+          </Switch>
+        </Router>
       </>
     );
   }
