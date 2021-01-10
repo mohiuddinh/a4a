@@ -69,7 +69,9 @@ class App extends Component {
             <Route path="/post">
               <Post />
             </Route>
-            <Route path="/"></Route>
+            <Route path="/">
+              <Home />
+            </Route>
           </Switch>
         </Router>
       </>
