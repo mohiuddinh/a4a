@@ -1,0 +1,62 @@
+@import "./Root.css";
+
+.header {
+  height: 64px;
+  background-color: var(--white);
+  border-bottom: 1px solid var(--border-accent);
+  display: flex;
+}
+
+.header__selection {
+  flex: 1;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.header__selection > h5 {
+  margin-right: 48px;
+  font-size: 18px;
+  font-weight: 400;
+  color: var(--small-text);
+  opacity: 0.7;
+}
+
+.header__selection > h5:nth-child(1) {
+  margin-left: 48px;
+}
+
+.header__title {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.header__title > h1 {
+  font-size: 48px;
+  font-weight: 500;
+  color: var(--heading-text);
+  opacity: 0.7;
+}
+
+.header__user {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.header__user > button {
+  margin-left: 36px;
+  background-color: var(--tea-green);
+}
+
+.header__user > button:nth-child(2) {
+  margin-right: 48px;
+}
+
+.header__user button span {
+  font-size: 14px;
+  opacity: 0.8;
+}

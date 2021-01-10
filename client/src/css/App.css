@@ -1,0 +1,5 @@
+@import "./Root.css";
+
+body {
+  background-color: var(--background);
+}
