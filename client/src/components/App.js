@@ -66,6 +66,7 @@ class App extends Component {
         </Router> */}
         <Router>
           <Header />
+          <Background />
           <Switch>
             <Route path="/post">
               <Post />
