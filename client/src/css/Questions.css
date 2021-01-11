@@ -1,0 +1,6 @@
+@import "./Root.css";
+
+p {
+    color: blue;
+    text-align: center;
+}

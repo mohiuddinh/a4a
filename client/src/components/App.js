@@ -6,6 +6,7 @@ import NotFound from "./pages/NotFound.js";
 import Skeleton from "./pages/Skeleton.js";
 import Header from "./pages/Header.js";
 import Post from "./pages/Post.js";
+import Questions from "./pages/Questions.js";
 import Background from "./pages/Background.js";
 import Home from "./pages/Home.js";
 
@@ -68,6 +69,9 @@ class App extends Component {
           <Switch>
             <Route path="/post">
               <Post />
+            </Route>
+            <Route path="/questions">
+              <Questions />
             </Route>
             <Route path="/">
               <Home />

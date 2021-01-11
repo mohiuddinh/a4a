@@ -8,8 +8,11 @@ class Header extends Component {
     return (
       <div className="header">
         <div className="header__selection">
-          <h5>Questions</h5>
-
+          <h5>
+            <Link to="/questions" style={{ color: "inherit", textDecoration: "inherit" }}>
+              Questions
+            </Link>
+          </h5>
           <h5>
             <Link to="/post" style={{ color: "inherit", textDecoration: "inherit" }}>
               Post
