@@ -1,6 +1,10 @@
 import React, { Component } from "react";
-
 import "../../css/Header.css";
+import {Link} from 'react-router-dom'; 
+
+const link_style = {
+  textDecoration: 'none'
+}
 
 class Header extends Component {
   render() {
@@ -14,11 +18,11 @@ class Header extends Component {
           <h1>MIT Ask</h1>
         </div>
         <div className="header__user">
-          <button className="btn">
-            <span>Login</span>
+          <button className='btn'>
+            <Link to='/login' style={link_style}><span>Login</span></Link>
           </button>
           <button className="btn">
-            <span>Register</span>
+            <Link to='/register' style={link_style}><span>Register</span></Link>
           </button>
         </div>
       </div>

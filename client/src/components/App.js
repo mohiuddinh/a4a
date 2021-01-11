@@ -1,8 +1,10 @@
 import React, { Component } from "react";
-import { Router } from "@reach/router";
+//import { Router } from "@reach/router";
 import NotFound from "./pages/NotFound.js";
 import Skeleton from "./pages/Skeleton.js";
 import Header from "./pages/Header.js";
+import Login from './pages/login'; 
+import Register from './pages/register'; 
 
 import "../css/utilities.css";
 import "../css/App.css";
@@ -10,6 +12,7 @@ import "../css/App.css";
 import { socket } from "../client-socket.js";
 
 import { get, post } from "../utilities";
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'; 
 
 /**
  * Define the "App" component as a class.
@@ -58,7 +61,13 @@ class App extends Component {
           />
           <NotFound default />
         </Router> */}
-        <Header />
+        <Router>
+          <Header />
+          <Switch>
+            <Route path='/login' component={Login}/>
+            <Route path='/register' component={Register}/>
+          </Switch>
+        </Router>
       </>
     );
   }
