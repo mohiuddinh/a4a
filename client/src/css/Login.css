@@ -1,0 +1,61 @@
+@import "./Root.css";
+
+.login {
+  height: calc(100vh - 64px);
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login__container {
+  background-color: var(--white);
+  width: 500px;
+  height: 500px;
+  display: flex;
+  border-radius: 12px;
+  border: 1px solid var(--border-accent);
+}
+
+.login__container > form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.login__textInput {
+  outline: none;
+  border: none;
+  background-color: var(--background);
+}
+
+.login__btnInput {
+  background-color: var(--tea-green);
+  font-weight: 800;
+  font-size: 18px;
+  color: var(--btn-text);
+}
+
+.login__container form input {
+  width: 80%;
+  height: 64px;
+  text-align: center;
+  border-radius: 12px;
+  margin: 24px 0;
+}
+
+.login__otherSelection {
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
+  height: auto;
+}
+
+.login__otherSelection h5:nth-child(1) {
+  color: var(--forgot-password);
+}
+
+.login__otherSelection h5:nth-child(2) {
+  color: var(--create-account);
+}

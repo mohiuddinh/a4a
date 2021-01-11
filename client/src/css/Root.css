@@ -12,6 +12,9 @@
   --heading-text: #333333;
   --small-text: #2f2f2f;
   --background-icons: #ededed;
+  --forgot-password: #00c0ea;
+  --create-account: #36bd4f;
+  --btn-text: #5f5f5f;
 }
 
 * {

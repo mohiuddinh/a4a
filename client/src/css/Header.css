@@ -59,8 +59,8 @@
 
 .header__user button span {
   font-size: 14px;
-  opacity: 0.8;
+  color: var(--btn-text);
 }
 .link_style {
-  text-decoration: 'none';
+  text-decoration: "none";
 }

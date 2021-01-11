@@ -1,0 +1,60 @@
+@import "./Root.css";
+
+.register {
+  height: calc(100vh - 64px);
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.register__container {
+  background-color: var(--white);
+  width: 550px;
+  height: 700px;
+  display: flex;
+  border-radius: 12px;
+  border: 1px solid var(--border-accent);
+}
+
+.register__nameContainer {
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
+}
+
+.register__nameContainer input:nth-child(1) {
+  margin-right: 12px;
+}
+
+.register__nameContainer input:nth-child(2) {
+  margin-left: 12px;
+}
+
+.register__container > form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.register__textInput {
+  outline: none;
+  border: none;
+  background-color: var(--background);
+}
+
+.register__btnInput {
+  background-color: var(--tea-green);
+  font-weight: 800;
+  font-size: 18px;
+  color: var(--btn-text);
+}
+
+.register__container form input {
+  width: 80%;
+  height: 64px;
+  text-align: center;
+  border-radius: 12px;
+  margin: 12px 0;
+}
