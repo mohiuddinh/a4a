@@ -42,6 +42,26 @@ router.post("/initsocket", (req, res) => {
 // | write your API methods below!|
 // |------------------------------|
 
+router.get('/login', function (req, res, next) {
+  return res.render('login', {
+  });
+});
+
+router.get('/register', function (req, res, next) {
+  return res.render('signup', {
+  });
+});
+
+router.get('/post', function (req, res, next) {
+  return res.render('Post', {
+  });
+}); 
+
+router.get('/questions', function (req, res, next) {
+  return res.render('Questions', {
+  });
+}); 
+
 // anything else falls to this "not found" case
 router.all("*", (req, res) => {
   console.log(`API route not found: ${req.method} ${req.url}`);
