@@ -15,6 +15,7 @@
 }
 
 .header__selection > h5 {
+  cursor: pointer;
   margin-right: 48px;
   font-size: 18px;
   font-weight: 400;
@@ -59,4 +60,7 @@
 .header__user button span {
   font-size: 14px;
   opacity: 0.8;
+}
+.link_style {
+  text-decoration: 'none';
 }

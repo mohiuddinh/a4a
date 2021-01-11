@@ -1,0 +1,68 @@
+@import "./Root.css";
+
+.post {
+  height: calc(100vh - 64px);
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.post__container {
+  background-color: var(--white);
+  width: 600px;
+  height: 700px;
+  display: flex;
+  border-radius: 12px;
+  border: 1px solid var(--border-accent);
+}
+
+.post__container > form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.post__textInput {
+  height: 50px;
+  width: 100%;
+  padding: 0 12px;
+  border: none;
+  border-bottom: 1px solid var(--border-accent);
+  outline: none;
+}
+
+.post__textInput:nth-child(1) {
+  border-radius: 12px 12px 0 0;
+}
+
+.post textarea {
+  resize: none;
+  border: none;
+  outline: none;
+  height: 500px;
+  width: 100%;
+  padding: 12px 12px 0 12px;
+  /* border-bottom: 1px solid var(--border-accent); */
+}
+
+.post__selection {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100px;
+  width: 100%;
+  border-radius: 0;
+}
+
+.post__btnInput {
+  margin: 0 24px;
+}
+
+.post__btnInput:nth-child(1) {
+  background-color: var(--pale-pink);
+}
+
+.post__btnInput:nth-child(2) {
+  background-color: var(--tea-green);
+}

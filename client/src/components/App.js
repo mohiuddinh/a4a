@@ -1,8 +1,16 @@
 import React, { Component } from "react";
-import { Router } from "@reach/router";
+// import { Router } from "@reach/router";
+import { BrowserRouter as Router, Switch, Route, BrowserRouter } from "react-router-dom";
+
 import NotFound from "./pages/NotFound.js";
 import Skeleton from "./pages/Skeleton.js";
 import Header from "./pages/Header.js";
+import Post from "./pages/Post.js";
+import Questions from "./pages/Questions.js";
+import Background from "./pages/Background.js";
+import Home from "./pages/Home.js";
+import Login from './pages/login.js';
+import Register from './pages/register.js';
 
 import "../css/utilities.css";
 import "../css/App.css";
@@ -14,6 +22,7 @@ import { get, post } from "../utilities";
 /**
  * Define the "App" component as a class.
  */
+
 class App extends Component {
   // makes props available in this component
   constructor(props) {
@@ -58,7 +67,17 @@ class App extends Component {
           />
           <NotFound default />
         </Router> */}
-        <Header />
+        <Router>
+          <Header />
+          <Background />
+          <Switch>
+            <Route exact path="/post" component={Post} />
+            <Route exact path="/questions" component={Questions} />
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/register" component={Register} />
+            <Route exact path="/" component={Home} />
+          </Switch>
+        </Router>
       </>
     );
   }
