@@ -1,7 +1,11 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import { GoogleLogin, GoogleLogout } from "react-google-login";
 
 import "../../css/Header.css";
+import { get, post } from "../../utilities";
+
+const GOOGLE_CLIENT_ID = "1093512085888-qcun701nmlf6j0pdohdqs37laptbm1a6.apps.googleusercontent.com";
 
 const link_style = {
   textDecoration: "inherit",
@@ -9,6 +13,31 @@ const link_style = {
 };
 
 class Header extends Component {
+  constructor(props) {
+    super(props); 
+    this.state = {
+      loggedIn: false
+    }; 
+  }
+
+  handleLogin = (res) => {
+    console.log('Logged in'); 
+    this.setState({ loggedIn: true });
+
+    const userToken = res.tokenObj.id_token;
+    post('/api/login', { token: userToken }).then((user) => {
+      console.log(user);
+    }); 
+
+  }; 
+
+  handleLogout = (res) => { 
+    this.setState({ loggedIn: false })
+    post('/api/logout').then(()=>{
+      console.log('Logged out')
+    }); 
+  }; 
+
   render() {
     return (
       <div className="header">
@@ -32,16 +61,23 @@ class Header extends Component {
           </h1>
         </div>
         <div className="header__user">
-          <button className="btn">
-            <Link to="/login" style={link_style}>
-              <span>Login</span>
-            </Link>
-          </button>
-          <button className="btn">
-            <Link to="/register" style={link_style}>
-              <span>Register</span>
-            </Link>
-          </button>
+          {this.state.loggedIn ? (
+            <GoogleLogout
+              clientId={GOOGLE_CLIENT_ID}
+              buttonText="Logout"
+              onLogoutSuccess={this.handleLogout}
+              onFailure={(err) => console.log(err)}
+              className="btn"
+            />
+          ) : (
+            <GoogleLogin
+              clientId={GOOGLE_CLIENT_ID}
+              buttonText="Login"
+              onSuccess={this.handleLogin}
+              onFailure={(err) => console.log(err)}
+              className="btn"
+            />
+          )}
         </div>
       </div>
     );
