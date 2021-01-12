@@ -44,23 +44,30 @@
 .header__user {
   flex: 1;
   display: flex;
-  justify-content: flex-end;
-  align-items: center;
+  justify-content: center;
 }
 
-.header__user > button {
+/* .header__user > button {
   margin-left: 36px;
   background-color: var(--tea-green);
+  border-radius: 50%;
+} */
+
+.googleButton {
+  margin-left: 36px;
+  height: 75%;
+  margin-top: 7.875px;
 }
 
-.header__user > button:nth-child(2) {
+/* .header__user > button:nth-child(2) {
   margin-right: 48px;
-}
+} */
 
-.header__user button span {
+/* .header__user button span {
   font-size: 14px;
   color: var(--btn-text);
-}
+}  */
+
 .link_style {
   text-decoration: "none";
 }
