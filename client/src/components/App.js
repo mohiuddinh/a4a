@@ -9,8 +9,8 @@ import Post from "./pages/Post.js";
 import Questions from "./pages/Questions.js";
 import Background from "./pages/Background.js";
 import Home from "./pages/Home.js";
-import Login from './pages/login.js';
-import Register from './pages/register.js';
+import Login from "./pages/Login.js";
+import Register from "./pages/Register.js";
 
 import "../css/utilities.css";
 import "../css/App.css";

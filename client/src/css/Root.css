@@ -5,13 +5,18 @@
   --ivory: #fcffe9;
   --blanched-almond: #fff2cc;
   --pale-pink: #fde0d9;
+  --pale-pinkHover: #f0c8bf;
   --tea-green: #caefd1;
+  --tea-greenHover: #addbb6;
   --white: #ffffff;
   --background: #fafafa;
   --border-accent: #dbdbdb;
   --heading-text: #333333;
   --small-text: #2f2f2f;
   --background-icons: #ededed;
+  --forgot-password: #00c0ea;
+  --create-account: #36bd4f;
+  --btn-text: #5f5f5f;
 }
 
 * {
