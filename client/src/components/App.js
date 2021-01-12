@@ -14,6 +14,7 @@ import Register from "./pages/Register.js";
 
 import "../css/utilities.css";
 import "../css/App.css";
+import "../css/scrollbar.css";
 
 import { socket } from "../client-socket.js";
 
