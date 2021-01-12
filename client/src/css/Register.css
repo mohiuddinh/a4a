@@ -11,7 +11,7 @@
 .register__container {
   background-color: var(--white);
   width: 550px;
-  height: 700px;
+  height: 60vh;
   display: flex;
   border-radius: 12px;
   border: 1px solid var(--border-accent);
@@ -49,6 +49,11 @@
   font-weight: 800;
   font-size: 18px;
   color: var(--btn-text);
+  transition: all 0.25s ease-in-out;
+}
+
+.register__btnInput:hover {
+  background-color: var(--tea-greenHover);
 }
 
 .register__container form input {

@@ -11,7 +11,7 @@
 .post__container {
   background-color: var(--white);
   width: 600px;
-  height: 700px;
+  height: 75vh;
   display: flex;
   border-radius: 12px;
   border: 1px solid var(--border-accent);
@@ -61,8 +61,18 @@
 
 .post__btnInput:nth-child(1) {
   background-color: var(--pale-pink);
+  transition: all 0.25s ease-in-out;
+}
+
+.post__btnInput:nth-child(1):hover {
+  background-color: var(--pale-pinkHover);
 }
 
 .post__btnInput:nth-child(2) {
   background-color: var(--tea-green);
+  transition: all 0.25s ease-in-out;
+}
+
+.post__btnInput:nth-child(2):hover {
+  background-color: var(--tea-greenHover);
 }
