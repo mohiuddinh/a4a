@@ -10,9 +10,10 @@ class SingleQuestion extends Component {
   render() {
     return (
       <div>
-        <span>{this.props.subject}</span>
-        <p>{this.props.tag}</p>
-        <p>{this.props.question}</p>
+        <span>Subject: {this.props.subject}</span>
+        <p>Tag: {this.props.tag}</p>
+        <p>Question: {this.props.question}</p>
+        <hr></hr>
       </div>
     );
   }

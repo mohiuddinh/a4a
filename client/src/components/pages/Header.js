@@ -61,23 +61,16 @@ class Header extends Component {
           </h1>
         </div>
         <div className="header__user">
-          {this.state.loggedIn ? (
-            <GoogleLogout
-              clientId={GOOGLE_CLIENT_ID}
-              buttonText="Logout"
-              onLogoutSuccess={this.handleLogout}
-              onFailure={(err) => console.log(err)}
-              className="btn"
-            />
-          ) : (
-            <GoogleLogin
-              clientId={GOOGLE_CLIENT_ID}
-              buttonText="Login"
-              onSuccess={this.handleLogin}
-              onFailure={(err) => console.log(err)}
-              className="btn"
-            />
-          )}
+          <button className="btn">
+            <Link to="/login" style={link_style}>
+              <span>Login</span>
+            </Link>
+          </button>
+          <button className="btn">
+            <Link to="/register" style={link_style}>
+              <span>Register</span>
+            </Link>
+          </button>
         </div>
       </div>
     );

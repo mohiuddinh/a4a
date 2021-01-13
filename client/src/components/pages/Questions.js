@@ -20,8 +20,8 @@ class Questions extends Component {
   render() {
     let questionsList = null; 
     if (this.state.questions.length !== 0) {
-      questionsList = this.state.questions.map(questionObj => (
-        <SingleQuestion subject={questionObj.subject} tag={questionObj.tag} question={questionObj.question}/>
+      questionsList = this.state.questions.map((questionObj, i) => (
+        <SingleQuestion key= {i} subject={questionObj.subject} tag={questionObj.tag} question={questionObj.question}/>
       ))
     } else {
       questionsList = <div>No questions :(</div>

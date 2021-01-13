@@ -11,6 +11,7 @@ import Background from "./pages/Background.js";
 import Home from "./pages/Home.js";
 import Login from "./pages/Login.js";
 import Register from "./pages/Register.js";
+import ChangePassword from "./pages/ChangePassword.js";
 
 import "../css/utilities.css";
 import "../css/App.css";
@@ -72,6 +73,7 @@ class App extends Component {
           <Header />
           <Background />
           <Switch>
+            <Route exact path="/change-password" component={ChangePassword} />
             <Route exact path="/post" component={Post} />
             <Route exact path="/questions" component={Questions} />
             <Route exact path="/login" component={Login} />
