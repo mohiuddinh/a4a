@@ -24,13 +24,14 @@ const socketManager = require("./server-socket");
 router.post("/login", auth.login);
 router.post("/logout", auth.logout);
 router.get("/whoami", (req, res) => {
-  if (!req.user) {
-    // not logged in
-    return res.send({});
+  if (req.user) {
+    res.send(req.user);
+  } else {
+    // user is not logged in
+    res.send({});
   }
-
-  res.send(req.user);
 });
+
 
 router.post("/initsocket", (req, res) => {
   // do nothing if user not logged in
@@ -42,7 +43,7 @@ router.post("/initsocket", (req, res) => {
 // | write your API methods below!|
 // |------------------------------|
 
-router.get('/login', function (req, res, next) {
+/* router.get('/login', function (req, res, next) {
   return res.render('login', {
   });
 });
@@ -60,7 +61,7 @@ router.get('/post', function (req, res, next) {
 router.get('/questions', function (req, res, next) {
   return res.render('Questions', {
   });
-}); 
+});  */
 
 // anything else falls to this "not found" case
 router.all("*", (req, res) => {

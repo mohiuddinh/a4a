@@ -44,8 +44,10 @@ class App extends Component {
   handleLogin = (res) => {
     console.log(`Logged in as ${res.profileObj.name}`);
     const userToken = res.tokenObj.id_token;
+    console.log(userToken);
     post("/api/login", { token: userToken }).then((user) => {
       this.setState({ userId: user._id });
+      console.log(user);
       post("/api/initsocket", { socketid: socket.id });
     });
   };
@@ -68,11 +70,14 @@ class App extends Component {
           <NotFound default />
         </Router> */}
         <Router>
-          <Header />
+          <Header 
+            handleLogin={this.handleLogin}
+            handleLogout={this.handleLogout}
+            userId={this.state.userId}/>
           <Background />
           <Switch>
             <Route exact path="/post" component={Post} />
-            <Route exact path="/questions" component={Questions} />
+            <Route exact path="/skeleton" component={Skeleton} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/register" component={Register} />
             <Route exact path="/" component={Home} />
