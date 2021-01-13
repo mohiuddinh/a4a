@@ -8,6 +8,7 @@
 */
 
 const express = require("express");
+const Question = require('./models/question');
 
 // import models so we can interact with the database
 const User = require("./models/user");
@@ -20,6 +21,9 @@ const router = express.Router();
 
 //initialize socket
 const socketManager = require("./server-socket");
+const bodyParser = require('body-parser');
+
+var urlEncondedParser = bodyParser.urlencoded({ extended: false });
 
 router.post("/login", auth.login);
 router.post("/logout", auth.logout);
@@ -52,15 +56,25 @@ router.get('/register', function (req, res, next) {
   });
 });
 
-router.get('/post', function (req, res, next) {
+router.get('/q', function (req, res, next) {
   return res.render('Post', {
   });
 }); 
 
-router.get('/questions', function (req, res, next) {
-  return res.render('Questions', {
-  });
-}); 
+router.get("/post", (req, res) => {
+  // empty selector means get all documents
+  Question.find({}).then((questions) => res.send(questions));
+});
+
+router.post('/post', (req, res) => {
+  let newQuestion = new Question({
+    subject: req.body.subject,
+    tag: req.body.tag, 
+    question: req.body.question
+  })
+  newQuestion.save().then((question) => res.send(question));
+
+})
 
 // anything else falls to this "not found" case
 router.all("*", (req, res) => {

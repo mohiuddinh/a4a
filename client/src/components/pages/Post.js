@@ -1,27 +1,55 @@
 import React, { Component } from "react";
 
 import "../../css/Post.css";
+import { post } from '../../utilities';
+import { Link } from 'react-router-dom'; 
 
 class Post extends Component {
+  constructor(props){
+    super(props); 
+    this.state = {
+      subject: '', 
+      tag: '', 
+      question: '',
+    }
+  };
+
+  onChange = (e) => {
+    this.setState({ [e.target.name]: e.target.value });
+  }
+
+  handleSubmit = (e) => {
+    e.preventDefault(); 
+    const { subject, tag, question } = this.state; 
+    post('/api/post', { subject, tag, question } ).then((res) => {
+      console.log('form submitted')
+    })
+  }
+  
   render() {
+    const { subject, tag, question } = this.state;
     return (
       <div className="post">
         <div className="post__container">
-          <form action="/register" method="POST">
+          <form onSubmit={this.handleSubmit}>
             <input
               type="text"
               name="subject"
               placeholder="Subject"
               className="post__textInput"
+              value={subject}
+              onChange={this.onChange}
               required
             />
-            <input type="text" name="tag" placeholder="Tags" className="post__textInput" required />
+            <input type="text" name="tag" placeholder="Tags" className="post__textInput" value={tag} onChange={this.onChange} required />
             <textarea
               name="question"
               id="post__questionField"
               cols="30"
               rows="10"
               placeholder="Question"
+              value={question}
+              onChange={this.onChange}
               required
             ></textarea>
             <div className="post__selection">

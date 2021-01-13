@@ -1,6 +1,25 @@
 @import "./Root.css";
 
-p {
-    color: blue;
-    text-align: center;
+.questions {
+  min-height: calc(100vh - 64px);
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.questions__sidebar {
+  position: fixed;
+  top: 20%;
+  left: 10%;
+  width: 300px;
+  height: 500px;
+  background-color: var(--pale-pink);
+}
+
+.questions__main {
+  display: inline;
+  background-color: var(--water);
+  width: 700px;
+  height: 80vh;
 }
