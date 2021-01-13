@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import CheckCircleIcon from "@material-ui/icons/CheckCircle";
+import ErrorIcon from "@material-ui/icons/Error";
 
 import "../../css/Register.css";
 
@@ -8,23 +10,32 @@ class Register extends Component {
     form.addEventListener("submit", registerUser);
     async function registerUser(event) {
       event.preventDefault();
+      const fullName = document.getElementById("fullName").value;
       const username = document.getElementById("username").value;
       const password = document.getElementById("password").value;
+      const passwordTwo = document.getElementById("passwordTwo").value;
+      const email = document.getElementById("email").value;
+
+      const message = document.getElementById("register__message");
+
       const result = await fetch("/api/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
+          fullName,
           username,
           password,
+          passwordTwo,
+          email,
         }),
       }).then((res) => res.json());
 
       if (result.status === "ok") {
-        alert("Success!");
+        message.innerHTML = "Success!";
       } else {
-        alert(result.error);
+        message.innerHTML = result.error + " !";
       }
     }
   }
@@ -33,53 +44,60 @@ class Register extends Component {
       <div className="register">
         <div className="register__container">
           <form id="register-form">
-            <div className="register__nameContainer">
+            <h1 id="register__message"></h1>
+            <div className="register__control">
               <input
                 type="text"
-                name="firstname"
-                placeholder="first name"
-                className="register__textInput"
-                required
-              />
-              <input
-                type="text"
-                name="lastname"
-                placeholder="last name"
+                name="fullname"
+                id="fullName"
+                placeholder="full name"
                 className="register__textInput"
                 required
               />
             </div>
-            <input
-              type="text"
-              name="username"
-              id="username"
-              placeholder="username"
-              className="register__textInput"
-              required
-            />
-            <input
-              type="text"
-              name="email"
-              placeholder="email"
-              className="register__textInput"
-              required
-            />
-            <input
-              type="password"
-              name="password"
-              id="password"
-              placeholder="password"
-              className="register__textInput"
-              required
-            />
-            <input
-              type="password"
-              name="confirmpassword"
-              placeholder="confirm password"
-              className="register__textInput"
-              required
-            />
-            <input type="submit" value="Register" className="register__btnInput btn" required />
+            <div className="register__control">
+              <input
+                type="text"
+                name="username"
+                id="username"
+                placeholder="username"
+                className="register__textInput"
+                required
+              />
+            </div>
+            <div className="register__control">
+              <input
+                type="email"
+                name="email"
+                id="email"
+                placeholder="email"
+                className="register__textInput"
+                required
+              />
+            </div>
+            <div className="register__control">
+              <input
+                type="text"
+                name="password"
+                id="password"
+                placeholder="password"
+                className="register__textInput"
+                required
+              />
+            </div>
+            <div className="register__control">
+              <input
+                type="text"
+                name="passwordTwo"
+                id="passwordTwo"
+                placeholder="confirm password"
+                className="register__textInput"
+                required
+              />
+            </div>
+            <div className="register__control">
+              <input type="submit" value="Register" className="register__btnInput btn" required />
+            </div>
           </form>
         </div>
       </div>

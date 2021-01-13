@@ -33,6 +33,36 @@ const socketManager = require("./server-socket");
 
 router.use(bodyParser.json());
 
+// router.post("/login", auth.login);
+// router.post("/logout", auth.logout);
+router.get("/whoami", (req, res) => {
+  if (!req.user) {
+    // not logged in
+    return res.send({});
+  }
+
+  res.send(req.user);
+});
+
+router.post("/initsocket", (req, res) => {
+  // do nothing if user not logged in
+  if (req.user)
+    socketManager.addUser(req.user, socketManager.getSocketFromSocketID(req.body.socketid));
+  res.send({});
+});
+
+// |------------------------------|
+// | write your API methods below!|
+// |------------------------------|
+
+router.get("/login", function (req, res, next) {
+  return res.render("login", {});
+});
+
+router.get("/register", function (req, res, next) {
+  return res.render("signup", {});
+});
+
 // change-password
 router.post("/change-password", async (req, res) => {
   const { token, newpassword: plainTextPassword } = req.body;
@@ -91,7 +121,9 @@ router.post("/login", async (req, res) => {
 
 // register
 router.post("/register", async (req, res) => {
-  const { username, password: plainTextPassword } = req.body;
+  const { username, password: plainTextPassword, passwordTwo, fullName, email } = req.body;
+
+  var regex = /[ !@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/g;
 
   if (!username || typeof username !== "string") {
     return res.json({ status: "error", error: "Invalid username" });
@@ -101,10 +133,21 @@ router.post("/register", async (req, res) => {
     return res.json({ status: "error", error: "Invalid password" });
   }
 
-  if (plainTextPassword.length < 5) {
+  if (!regex.test(plainTextPassword)) {
+    return res.json({ status: "error", error: "Password does not contain any special characters" });
+  }
+
+  if (plainTextPassword !== passwordTwo) {
+    console.log(plainTextPassword);
+    console.log(passwordTwo);
+    console.log(email);
+    return res.json({ status: "error", error: "Passwords do not match" });
+  }
+
+  if (plainTextPassword.length < 8) {
     return res.json({
       status: "error",
-      error: "Password too small. Should be at least 6 characters",
+      error: "Password too small. Should be at least 8 characters",
     });
   }
 
@@ -112,7 +155,9 @@ router.post("/register", async (req, res) => {
 
   try {
     const response = await User.create({
+      fullName,
       username,
+      email,
       password,
     });
     console.log("User created successfully: ", response);
@@ -125,36 +170,6 @@ router.post("/register", async (req, res) => {
   }
   res.json({ status: "ok" });
 });
-
-// router.post("/login", auth.login);
-// router.post("/logout", auth.logout);
-router.get("/whoami", (req, res) => {
-  if (!req.user) {
-    // not logged in
-    return res.send({});
-  }
-
-  res.send(req.user);
-});
-
-router.post("/initsocket", (req, res) => {
-  // do nothing if user not logged in
-  if (req.user)
-    socketManager.addUser(req.user, socketManager.getSocketFromSocketID(req.body.socketid));
-  res.send({});
-});
-
-// |------------------------------|
-// | write your API methods below!|
-// |------------------------------|
-
-// router.get("/login", function (req, res, next) {
-//   return res.render("login", {});
-// });
-
-// router.get("/register", function (req, res, next) {
-//   return res.render("signup", {});
-// });
 
 router.get("/post", function (req, res, next) {
   return res.render("Post", {});
