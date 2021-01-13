@@ -24,7 +24,7 @@ const jwt = require("jsonwebtoken");
 const JWT_SECRET = "askljdhaksh*&#^$*&@kjashdkjashd*&^1827368jkasdk87ty8asyuidhbkj";
 
 // import authentication library
-const auth = require("./auth");
+// const auth = require("./auth");
 
 // api endpoints: all these paths will be prefixed with "/api/"
 const router = express.Router();
@@ -126,8 +126,8 @@ router.post("/register", async (req, res) => {
   res.json({ status: "ok" });
 });
 
-router.post("/login", auth.login);
-router.post("/logout", auth.logout);
+// router.post("/login", auth.login);
+// router.post("/logout", auth.logout);
 router.get("/whoami", (req, res) => {
   if (!req.user) {
     // not logged in
@@ -148,13 +148,13 @@ router.post("/initsocket", (req, res) => {
 // | write your API methods below!|
 // |------------------------------|
 
-router.get("/login", function (req, res, next) {
-  return res.render("login", {});
-});
+// router.get("/login", function (req, res, next) {
+//   return res.render("login", {});
+// });
 
-router.get("/register", function (req, res, next) {
-  return res.render("signup", {});
-});
+// router.get("/register", function (req, res, next) {
+//   return res.render("signup", {});
+// });
 
 router.get('/q', function (req, res, next) {
   return res.render('Post', {
