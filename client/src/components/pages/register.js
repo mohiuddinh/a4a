@@ -77,7 +77,7 @@ class Register extends Component {
             </div>
             <div className="register__control">
               <input
-                type="text"
+                type="password"
                 name="password"
                 id="password"
                 placeholder="password"
@@ -87,7 +87,7 @@ class Register extends Component {
             </div>
             <div className="register__control">
               <input
-                type="text"
+                type="password"
                 name="passwordTwo"
                 id="passwordTwo"
                 placeholder="confirm password"

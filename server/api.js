@@ -74,7 +74,7 @@ router.post("/change-password", async (req, res) => {
   if (plainTextPassword.length < 5) {
     return res.json({
       status: "error",
-      error: "Password too small. Should be atleast 6 characters",
+      error: "Password too small. Should be at least 6 characters",
     });
   }
 
@@ -160,8 +160,9 @@ router.post("/register", async (req, res) => {
       email,
       password,
     });
-    console.log("User created successfully: ", response);
+    console.log("User created successfully:", response);
   } catch (error) {
+    console.log(error);
     if (error.code === 11000) {
       // duplicate key
       return res.json({ status: "error", error: "Username already exists" });
