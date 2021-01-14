@@ -25,9 +25,7 @@ class Post extends Component {
     const { subject, tag, question,  } = this.state;
     post('/api/post', { subject, tag, question } ).then((res) => {
       console.log('form submitted');
-      navigate(`/questions/${res._id}`).then(() => {
-window.location.reload()
-});
+      navigate(`/questions/${res._id}`);
 
     });
     

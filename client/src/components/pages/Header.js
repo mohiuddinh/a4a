@@ -21,12 +21,11 @@ class Header extends Component {
   }
 
   handleLogin = (res) => {
-    console.log('Logged in'); 
     this.setState({ loggedIn: true });
 
     const userToken = res.tokenObj.id_token;
     post('/api/login', { token: userToken }).then((user) => {
-      console.log(user);
+      console.log('Logged in');
     }); 
 
   }; 

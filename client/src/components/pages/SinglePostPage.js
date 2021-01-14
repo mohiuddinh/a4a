@@ -8,8 +8,7 @@ function SinglePostPage(props){
 
   useEffect( () => {
     get(`/api/question_by_id?id=${questionId}&type=single`).then((res) => {
-      setQuestion(res[0])
-      console.log(Question); 
+      setQuestion(res[0]);
     })
   }, [])
 
