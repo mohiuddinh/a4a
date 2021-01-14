@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import SingleQuestion from '../pages/SingleQuestion.js'; 
 import "../../css/Questions.css";
 import { get } from "../../utilities";
-import { Link, Redirect } from 'react-router-dom'; 
+import { Link } from '@reach/router'; 
 
 class Questions extends Component {
   constructor(props){

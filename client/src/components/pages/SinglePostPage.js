@@ -3,7 +3,7 @@ import { get } from '../../utilities.js';
 
 
 function SinglePostPage(props){
-  const questionId = props.computedMatch.params.questionId; 
+  const questionId = props.questionId; 
   const [Question, setQuestion] = useState([])
 
   useEffect( () => {

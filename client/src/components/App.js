@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-// import { Router } from "@reach/router";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { Router, Link } from "@reach/router";
 
 import NotFound from "./pages/NotFound.js";
 import Skeleton from "./pages/Skeleton.js";
@@ -70,20 +69,19 @@ class App extends Component {
           />
           <NotFound default />
         </Router> */}
-        <Router>
-          <Header />
+        <div>
+        <Header />
           <Background />
-          <Switch>
-            <Route  path="/change-password" exact component={ChangePassword} />
-            <Route  path="/post" exact component={Post} />
-            {/* <Route path='/questions/:questionId' exact component={SinglePostPage} /> */}
+          <Router>
+            <ChangePassword  path="/change-password" />
+            <Post  path="/post" />
             <SinglePostPage path='/questions/:questionId' />
-            <Route  path="/questions" exact component={Questions} />
-            <Route  path="/login" exact component={Login} />
-            <Route  path="/register" exact component={Register} />
-            <Route  path="/" exact component={Home} />
-          </Switch>
+            <Questions path="/questions" />
+            <Login  path="/login"/>
+            <Register  path="/register"/>
+            <Home  path="/" />
         </Router>
+        </div>
       </>
     );
   }
