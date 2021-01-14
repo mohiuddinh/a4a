@@ -1,0 +1,124 @@
+@import "./Root.css";
+
+.singlePost {
+  height: auto;
+  padding: 24px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.singlePost__avatar {
+  text-align: center;
+  margin-right: 12px;
+}
+
+.singlePost__avatar h5 {
+  margin: 4px 0;
+  font-size: 12px;
+}
+
+.singlePost__container {
+  width: 850px;
+}
+
+.singlePost__container:nth-child(1),
+.singlePost__container:nth-child(3) {
+  background-color: var(--white);
+  border: 1px solid var(--border-accent);
+  margin: 24px 0;
+  padding: 12px 12px;
+  border-radius: 12px;
+}
+
+.singlePost__container:nth-child(1) {
+  display: flex;
+}
+
+.singlePost__main {
+  flex: 1;
+  padding: 0 12px;
+}
+
+.singlePost__mainSub:nth-child(1),
+.singlePost__mainSub:nth-child(2) {
+  border-bottom: 1px solid var(--border-accent);
+}
+
+.singlePost__mainSub:nth-child(1) {
+  padding-bottom: 8px;
+}
+
+.singlePost__mainSub:nth-child(2) {
+  padding: 8px 0;
+}
+
+.singlePost__mainSub:nth-child(3) {
+  padding-top: 8px;
+}
+
+.singlePost__main h5 {
+  font-size: 16px;
+  font-weight: 300;
+}
+
+.singlePost__main span {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.singlePost__commentContainer {
+  background-color: var(--white);
+  border-radius: 12px;
+  border: 1px solid var(--border-accent);
+  margin: 24px 0;
+  display: flex;
+  padding: 12px 12px;
+}
+
+.singlePost__comment {
+  margin-bottom: 12px;
+  padding: 0 12px;
+  flex: 1;
+}
+
+.singlePost__commentSub {
+  display: flex;
+  justify-content: space-between;
+}
+
+.singlePost__commentSub input {
+  width: 100%;
+  margin-right: 8px;
+  outline: none;
+  border: none;
+  border-bottom: 1px solid var(--border-accent);
+}
+
+.singlePost__container:nth-child(3) {
+  display: flex;
+  justify-content: space-between;
+}
+
+.singlePost__container:nth-child(3) input {
+  flex: 1;
+  outline: none;
+  border: none;
+  padding-left: 8px;
+  margin-right: 8px;
+  background-color: var(--white);
+}
+
+.singlePost__container:nth-child(3) input:focus {
+  border-bottom: 2px solid var(--border-accent);
+}
+
+.singlePost__container button {
+  background-color: var(--tea-green);
+  transition: all 0.2s ease-in-out;
+}
+
+.singlePost__container button:hover {
+  background-color: var(--tea-greenHover);
+}
