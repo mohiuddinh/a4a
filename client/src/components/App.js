@@ -76,7 +76,8 @@ class App extends Component {
           <Switch>
             <Route  path="/change-password" exact component={ChangePassword} />
             <Route  path="/post" exact component={Post} />
-            <Route path='/questions/:id' exact component={SinglePostPage} />
+            {/* <Route path='/questions/:questionId' exact component={SinglePostPage} /> */}
+            <SinglePostPage path='/questions/:questionId' />
             <Route  path="/questions" exact component={Questions} />
             <Route  path="/login" exact component={Login} />
             <Route  path="/register" exact component={Register} />

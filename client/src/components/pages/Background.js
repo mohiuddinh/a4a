@@ -5,7 +5,7 @@ import ParticlesBg from "particles-bg";
 
 class Background extends Component {
   render() {
-    return <ParticlesBg num={25} type="cobweb" bg={true} />;
+    return <ParticlesBg num={50} type="cobweb" bg={true} />;
   }
 }
 

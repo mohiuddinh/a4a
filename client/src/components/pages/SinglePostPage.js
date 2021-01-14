@@ -1,22 +1,25 @@
-import React, { Component } from "react";
-import { Link } from "@reach/router";
+import React, { Component, useEffect, useState } from "react";
+import { get } from '../../utilities.js'; 
 
 
-class SinglePostPage extends Component {
-  constructor(props) {
-    super(props);
-  }
+function SinglePostPage(props){
+  const questionId = props.computedMatch.params.questionId; 
+  const [Question, setQuestion] = useState([])
 
-  render() {
-    return (
-      <div>
-        <span>Subject: sdfsdf</span>
-        <p>Tag: sdfsdf</p>
-        <p>Question: sdfsdf</p>
-        <hr></hr>
-      </div>
-    );
-  }
+  useEffect( () => {
+    get(`/api/question_by_id?id=${questionId}&type=single`).then((res) => {
+      setQuestion(res[0])
+      console.log(Question); 
+    })
+  }, [])
+
+  return(
+    <div>
+      <p>{Question.subject}</p>
+      <i>{Question.tag}</i>
+      <p>{Question.question}</p>
+    </div>
+  )
+
 }
-
 export default SinglePostPage;

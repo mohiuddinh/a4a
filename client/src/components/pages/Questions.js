@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import SingleQuestion from '../pages/SingleQuestion.js'; 
 import "../../css/Questions.css";
 import { get } from "../../utilities";
-import { Link } from 'react-router-dom'; 
+import { Link, Redirect } from 'react-router-dom'; 
 
 class Questions extends Component {
   constructor(props){
@@ -14,17 +14,20 @@ class Questions extends Component {
 
   componentDidMount () {
     get('/api/post').then((questionObjs)=> {
-      this.setState({ questions: questionObjs })
+      let reversedObjs = questionObjs.reverse(); 
+      this.setState({ questions: reversedObjs }); 
+      console.log('received questions')
     }); 
   }
   
+
   render() {
-    let questionsList = null; 
+    let questionsList= null; 
     if (this.state.questions.length !== 0) {
       questionsList = this.state.questions.map((questionObj, i) => {
-        <SingleQuestion key={questionObj._id} subject={questionObj.subject} tag={questionObj.tag} question={questionObj.question}/> 
-        console.log('done')
+        return (<a href={`/questions/${questionObj._id}`}><SingleQuestion key={questionObj._id} subject={questionObj.subject} tag={questionObj.tag} question={questionObj.question}/></a>)
     })
+    console.log({questionsList});
     } else {
       questionsList = <div>No questions :(</div>
     }

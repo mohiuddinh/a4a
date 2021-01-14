@@ -172,9 +172,7 @@ router.post("/register", async (req, res) => {
   res.json({ status: "ok" });
 });
 
-router.get("/post", function (req, res, next) {
-  return res.render("Post", {});
-});
+
 
 router.get("/post", (req, res) => {
   // empty selector means get all documents
@@ -188,6 +186,19 @@ router.post('/post', (req, res) => {
     question: req.body.question
   })
   newQuestion.save().then((question) => res.send(question));
+})
+
+router.get('/question_by_id', (req, res) => {
+  let type = req.query.type; 
+  let questionId = req.query.id; 
+
+  if (type === 'array'){
+
+  }
+  Question.find({ '_id': {$in: questionId}}).populate('writer').exec((err, product) => {
+    if (err) {return req.status(400).send(err)} 
+    return res.status(200).send(product)
+  })
 
 })
 
