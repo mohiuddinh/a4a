@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "@reach/router";
 
+import "../../css/SingleQuestion.css";
 
 class SingleQuestion extends Component {
   constructor(props) {
@@ -9,11 +10,19 @@ class SingleQuestion extends Component {
 
   render() {
     return (
-      <div>
-        <span>Subject: {this.props.subject}</span>
-        <p>Tag: {this.props.tag}</p>
-        <p>Question: {this.props.question}</p>
-        <hr></hr>
+      <div className="singleQuestion">
+        <div className="singleQuestion__container">
+          <h5>Subject: {this.props.subject}</h5>
+        </div>
+        <div className="singleQuestion__container">
+          <span>Tag: </span>
+          <i>{this.props.tag}</i>
+        </div>
+        <div className="singleQuestion__container">
+          <p>
+            <span>Question:</span> {this.props.question}
+          </p>
+        </div>
       </div>
     );
   }
