@@ -37,6 +37,7 @@
 }
 
 .post textarea {
+  flex: 1;
   resize: none;
   border: none;
   outline: none;
