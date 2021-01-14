@@ -17,6 +17,9 @@ class Login extends Component {
       event.preventDefault();
       const username = document.getElementById("username").value;
       const password = document.getElementById("password").value;
+
+      const message = document.getElementById("login__message");
+
       const result = await fetch("/api/login", {
         method: "POST",
         headers: {
@@ -31,9 +34,9 @@ class Login extends Component {
       if (result.status === "ok") {
         console.log("Got the token: ", result.data);
         localStorage.setItem("token", result.data);
-        alert("Success!");
+        message.innerHTML = "Success!";
       } else {
-        alert(result.error);
+        message.innerHTML = result.error + " !";
       }
     }
   }
@@ -43,24 +46,31 @@ class Login extends Component {
       <div className="login">
         <div className="login__container">
           <form id="login-form">
-            <input
-              type="text"
-              name="username"
-              id="username"
-              placeholder="username"
-              className="login__textInput"
-              required
-            />
-            <input
-              type="password"
-              name="password"
-              id="password"
-              placeholder="password"
-              className="login__textInput"
-              required
-            />
-            <input type="submit" value="Login" className="login__btnInput btn" required />
-            <div className="login__otherSelection">
+            <h1 id="login__message"></h1>
+            <div className="login__control">
+              <input
+                type="text"
+                name="username"
+                id="username"
+                placeholder="username"
+                className="login__textInput"
+                required
+              />
+            </div>
+            <div className="login__control">
+              <input
+                type="password"
+                name="password"
+                id="password"
+                placeholder="password"
+                className="login__textInput"
+                required
+              />
+            </div>
+            <div className="login__control">
+              <input type="submit" value="Login" className="login__btnInput btn" required />
+            </div>
+            <div className="login__control">
               <Link to="/change-password" style={link_style}>
                 <h5 className="login__forgotPassword">Forgot password?</h5>
               </Link>
