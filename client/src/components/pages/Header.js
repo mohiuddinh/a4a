@@ -5,7 +5,8 @@ import { GoogleLogin, GoogleLogout } from "react-google-login";
 import "../../css/Header.css";
 import { get, post } from "../../utilities";
 
-const GOOGLE_CLIENT_ID = "1093512085888-qcun701nmlf6j0pdohdqs37laptbm1a6.apps.googleusercontent.com";
+const GOOGLE_CLIENT_ID =
+  "1093512085888-qcun701nmlf6j0pdohdqs37laptbm1a6.apps.googleusercontent.com";
 
 const link_style = {
   textDecoration: "inherit",
@@ -14,29 +15,36 @@ const link_style = {
 
 class Header extends Component {
   constructor(props) {
-    super(props); 
+    super(props);
     this.state = {
-      loggedIn: false
-    }; 
+      loggedIn: false,
+    };
   }
 
   handleLogin = (res) => {
-    console.log('Logged in'); 
+    console.log("Logged in");
     this.setState({ loggedIn: true });
 
     const userToken = res.tokenObj.id_token;
-    post('/api/login', { token: userToken }).then((user) => {
+    post("/api/login", { token: userToken }).then((user) => {
       console.log(user);
-    }); 
+    });
+  };
 
-  }; 
+  handleLogout = (res) => {
+    this.setState({ loggedIn: false });
+    post("/api/logout").then(() => {
+      console.log("Logged out");
+    });
+  };
 
-  handleLogout = (res) => { 
-    this.setState({ loggedIn: false })
-    post('/api/logout').then(()=>{
-      console.log('Logged out')
-    }); 
-  }; 
+  componentDidMount() {
+    const logo = document.querySelectorAll("#header-logo path");
+
+    for (let i = 0; i < logo.length; i++) {
+      console.log(`Letter ${i} is ${logo[i].getTotalLength()}`);
+    }
+  }
 
   render() {
     return (
