@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-// import { Router } from "@reach/router";
-import { BrowserRouter as Router, Switch, Route, BrowserRouter } from "react-router-dom";
+import { Router, Link } from "@reach/router";
 
 import NotFound from "./pages/NotFound.js";
 import Skeleton from "./pages/Skeleton.js";
@@ -9,11 +8,14 @@ import Post from "./pages/Post.js";
 import Questions from "./pages/Questions.js";
 import Background from "./pages/Background.js";
 import Home from "./pages/Home.js";
-import Login from './pages/login.js';
-import Register from './pages/register.js';
+import Login from "./pages/Login.js";
+import Register from "./pages/Register.js";
+import ChangePassword from "./pages/ChangePassword.js";
+import SinglePostPage from './pages/SinglePostPage.js'; 
 
 import "../css/utilities.css";
 import "../css/App.css";
+import "../css/scrollbar.css";
 
 import { socket } from "../client-socket.js";
 
@@ -67,17 +69,19 @@ class App extends Component {
           />
           <NotFound default />
         </Router> */}
-        <Router>
-          <Header />
+        <div>
+        <Header />
           <Background />
-          <Switch>
-            <Route exact path="/post" component={Post} />
-            <Route exact path="/questions" component={Questions} />
-            <Route exact path="/login" component={Login} />
-            <Route exact path="/register" component={Register} />
-            <Route exact path="/" component={Home} />
-          </Switch>
+          <Router>
+            <ChangePassword  path="/change-password" />
+            <Post  path="/post" />
+            <SinglePostPage path='/questions/:questionId' />
+            <Questions path="/questions" />
+            <Login  path="/login"/>
+            <Register  path="/register"/>
+            <Home  path="/" />
         </Router>
+        </div>
       </>
     );
   }
