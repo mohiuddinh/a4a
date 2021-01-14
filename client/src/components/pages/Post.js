@@ -2,7 +2,11 @@ import React, { Component } from "react";
 
 import "../../css/Post.css";
 import { post } from '../../utilities';
-import { Link } from 'react-router-dom'; 
+import { Link, Redirect } from 'react-router-dom'; 
+import SinglePostPage from '../pages/SinglePostPage';
+import { BrowserRouter as Router, Switch, Route, withRouter } from "react-router-dom";
+
+
 
 class Post extends Component {
   constructor(props){
@@ -11,6 +15,7 @@ class Post extends Component {
       subject: '', 
       tag: '', 
       question: '',
+      redirect: false
     }
   };
 
@@ -20,14 +25,19 @@ class Post extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault(); 
-    const { subject, tag, question } = this.state; 
+    const { subject, tag, question, redirect } = this.state;
+    this.setState({redirect: true});  
     post('/api/post', { subject, tag, question } ).then((res) => {
-      console.log('form submitted')
+      console.log('form submitted'); 
+      console.log(res)
+      this.props.history.push(`/questions/${res._id}`);
     })
+    
   }
   
   render() {
-    const { subject, tag, question } = this.state;
+    const { subject, tag, question, redirect } = this.state;
+    
     return (
       <div className="post">
         <div className="post__container">
@@ -63,4 +73,4 @@ class Post extends Component {
   }
 }
 
-export default Post;
+export default withRouter(Post);

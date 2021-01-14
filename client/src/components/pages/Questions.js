@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import SingleQuestion from '../pages/SingleQuestion.js'; 
 import "../../css/Questions.css";
 import { get } from "../../utilities";
+import { Link } from 'react-router-dom'; 
 
 class Questions extends Component {
   constructor(props){
@@ -20,9 +21,10 @@ class Questions extends Component {
   render() {
     let questionsList = null; 
     if (this.state.questions.length !== 0) {
-      questionsList = this.state.questions.map((questionObj, i) => (
-        <SingleQuestion key= {i} subject={questionObj.subject} tag={questionObj.tag} question={questionObj.question}/>
-      ))
+      questionsList = this.state.questions.map((questionObj, i) => {
+        <SingleQuestion key={questionObj._id} subject={questionObj.subject} tag={questionObj.tag} question={questionObj.question}/> 
+        console.log('done')
+    })
     } else {
       questionsList = <div>No questions :(</div>
     }

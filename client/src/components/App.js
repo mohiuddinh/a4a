@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 // import { Router } from "@reach/router";
-import { BrowserRouter as Router, Switch, Route, BrowserRouter } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import NotFound from "./pages/NotFound.js";
 import Skeleton from "./pages/Skeleton.js";
@@ -12,6 +12,7 @@ import Home from "./pages/Home.js";
 import Login from "./pages/Login.js";
 import Register from "./pages/Register.js";
 import ChangePassword from "./pages/ChangePassword.js";
+import SinglePostPage from './pages/SinglePostPage.js'; 
 
 import "../css/utilities.css";
 import "../css/App.css";
@@ -73,12 +74,13 @@ class App extends Component {
           <Header />
           <Background />
           <Switch>
-            <Route exact path="/change-password" component={ChangePassword} />
-            <Route exact path="/post" component={Post} />
-            <Route exact path="/questions" component={Questions} />
-            <Route exact path="/login" component={Login} />
-            <Route exact path="/register" component={Register} />
-            <Route exact path="/" component={Home} />
+            <Route  path="/change-password" exact component={ChangePassword} />
+            <Route  path="/post" exact component={Post} />
+            <Route path='/questions/:id' exact component={SinglePostPage} />
+            <Route  path="/questions" exact component={Questions} />
+            <Route  path="/login" exact component={Login} />
+            <Route  path="/register" exact component={Register} />
+            <Route  path="/" exact component={Home} />
           </Switch>
         </Router>
       </>
