@@ -5,7 +5,7 @@ import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import "../../css/SinglePostPage.css";
 
 function SinglePostPage(props) {
-  const questionId = props.computedMatch.params.questionId;
+  const questionId = props.questionId;
   const [Question, setQuestion] = useState([]);
 
   useEffect(() => {

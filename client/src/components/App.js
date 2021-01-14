@@ -30,7 +30,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      userId: undefined,
+      userId: null,
     };
   }
 
@@ -53,7 +53,7 @@ class App extends Component {
   };
 
   handleLogout = () => {
-    this.setState({ userId: undefined });
+    this.setState({ userId: null });
     post("/api/logout");
   };
 
