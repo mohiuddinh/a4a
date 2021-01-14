@@ -4,22 +4,41 @@
   min-height: calc(100vh - 64px);
   width: 100%;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
-.questions__sidebar {
+/* .questions__sidebar {
   position: fixed;
   top: 20%;
   left: 10%;
   width: 300px;
   height: 500px;
   background-color: var(--pale-pink);
-}
+} */
 
 .questions__main {
-  display: inline;
-  background-color: var(--water);
-  width: 700px;
-  height: 80vh;
+  /* background-color: var(--white); */
+  /* border: 1px solid var(--border-accent); */
+  position: relative;
+  overflow: auto;
+  width: 750px;
+  height: 70vh;
+  border-radius: 12px;
+  padding: 0 24px;
+}
+
+.questions__main input {
+  position: sticky;
+  outline: none;
+  border: none;
+  background-color: var(--background);
+  border-bottom: 1px solid var(--border-accent);
+  padding: 8px 24px;
+  /* border-radius: 32px; */
+  text-align: center;
+  width: 100%;
+  top: 0;
+  left: 0;
 }
