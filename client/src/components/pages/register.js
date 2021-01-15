@@ -1,98 +1,89 @@
 import React, { Component } from "react";
-import CheckCircleIcon from "@material-ui/icons/CheckCircle";
-import ErrorIcon from "@material-ui/icons/Error";
+import axios from "axios";
 
 import "../../css/Register.css";
 
 class Register extends Component {
-  componentDidMount() {
-    const form = document.getElementById("register-form");
-    form.addEventListener("submit", registerUser);
-    async function registerUser(event) {
-      event.preventDefault();
-      const fullName = document.getElementById("fullName").value;
-      const username = document.getElementById("username").value;
-      const password = document.getElementById("password").value;
-      const passwordTwo = document.getElementById("passwordTwo").value;
-      const email = document.getElementById("email").value;
+  onSubmit = (e) => {
+    e.preventDefault();
 
-      const message = document.getElementById("register__message");
+    console.log("form was submitted");
 
-      const result = await fetch("/api/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          fullName,
-          username,
-          password,
-          passwordTwo,
-          email,
-        }),
-      }).then((res) => res.json());
+    const registerMessage = document.getElementById("register__message");
 
-      if (result.status === "ok") {
-        message.innerHTML = "Success!";
+    const registered = {
+      fullName: this.fullName,
+      username: this.username,
+      email: this.email,
+      password: this.password,
+      passwordTwo: this.passwordTwo,
+    };
+
+    console.log(registered);
+
+    axios.post("/api/register", registered).then((res) => {
+      if (res.data.status === "ok") {
+        registerMessage.innerHTML = "Success!";
       } else {
-        message.innerHTML = result.error + " !";
+        registerMessage.innerHTML = res.data.error;
       }
-    }
-  }
+    });
+  };
+
   render() {
     return (
       <div className="register">
         <div className="register__container">
-          <form id="register-form">
+          <form onSubmit={this.onSubmit}>
             <h1 id="register__message"></h1>
             <div className="register__control">
               <input
                 type="text"
                 name="fullname"
-                id="fullName"
                 placeholder="full name"
                 className="register__textInput"
                 required
+                onChange={(e) => (this.fullName = e.target.value)}
               />
             </div>
             <div className="register__control">
               <input
                 type="text"
                 name="username"
-                id="username"
                 placeholder="username"
                 className="register__textInput"
                 required
+                onChange={(e) => (this.username = e.target.value)}
               />
             </div>
             <div className="register__control">
               <input
                 type="email"
                 name="email"
-                id="email"
                 placeholder="email"
                 className="register__textInput"
                 required
+                onChange={(e) => (this.email = e.target.value)}
               />
             </div>
             <div className="register__control">
               <input
                 type="password"
                 name="password"
-                id="password"
                 placeholder="password"
                 className="register__textInput"
                 required
+                onChange={(e) => (this.password = e.target.value)}
               />
             </div>
             <div className="register__control">
               <input
                 type="password"
                 name="passwordTwo"
-                id="passwordTwo"
                 placeholder="confirm password"
                 className="register__textInput"
                 required
+                onChange={(e) => (this.passwordTwo = e.target.value)}
               />
             </div>
             <div className="register__control">

@@ -16,15 +16,23 @@ const User = require("./models/user");
 // import bodyParser
 const bodyParser = require("body-parser");
 
+// import nodemailer
+const nodemailer = require("nodemailer");
+
 // import bcrypt
 const bcrypt = require("bcryptjs");
 const dotenv = require("dotenv");
 
 dotenv.config();
 
+// import from dotenv
+const JWT_SECRET = process.env.JWT_SECRET_STR;
+const EMAIL_SECRET = process.env.EMAIL_SECRET_STR;
+const EMAIL_USERNAME = process.env.MIT_ASK_USERNAME;
+const EMAIL_PASSWORD = process.env.MIT_ASK_PASSWORD;
+
 // import jwt
 const jwt = require("jsonwebtoken");
-const JWT_SECRET = process.env.JWT_SECRET_STR;
 
 // import authentication library
 // const auth = require("./auth");
@@ -34,6 +42,7 @@ const router = express.Router();
 
 //initialize socket
 const socketManager = require("./server-socket");
+const { _ } = require("core-js");
 
 // router.post("/login", auth.login);
 // router.post("/logout", auth.logout);
@@ -67,16 +76,28 @@ router.get("/register", function (req, res, next) {
 
 // change-password
 router.post("/change-password", async (req, res) => {
-  const { token, newpassword: plainTextPassword } = req.body;
+  const { token, newPassword: plainTextPassword, newPasswordTwo } = req.body;
+
+  console.log(req.body);
+
+  var regex = /[ !@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/g;
 
   if (!plainTextPassword || typeof plainTextPassword !== "string") {
     return res.json({ status: "error", error: "Invalid password" });
   }
 
-  if (plainTextPassword.length < 5) {
+  if (!regex.test(plainTextPassword)) {
+    return res.json({ status: "error", error: "Password does not contain any special characters" });
+  }
+
+  if (plainTextPassword !== newPasswordTwo) {
+    return res.json({ status: "error", error: "Passwords do not match" });
+  }
+
+  if (plainTextPassword.length < 8) {
     return res.json({
       status: "error",
-      error: "Password too small. Should be at least 6 characters",
+      error: "Password too small. Should be at least 8 characters",
     });
   }
 
@@ -84,6 +105,8 @@ router.post("/change-password", async (req, res) => {
     const user = jwt.verify(token, JWT_SECRET);
 
     const _id = user.id;
+
+    console.log(_id);
 
     const password = await bcrypt.hash(plainTextPassword, 10);
 
@@ -123,7 +146,9 @@ router.post("/login", async (req, res) => {
 
 // register
 router.post("/register", async (req, res) => {
-  const { username, password: plainTextPassword, passwordTwo, fullName, email } = req.body;
+  const { fullName, username, email, password: plainTextPassword, passwordTwo } = req.body;
+
+  // console.log(req.body);
 
   var regex = /[ !@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/g;
 
@@ -140,9 +165,6 @@ router.post("/register", async (req, res) => {
   }
 
   if (plainTextPassword !== passwordTwo) {
-    console.log(plainTextPassword);
-    console.log(passwordTwo);
-    console.log(email);
     return res.json({ status: "error", error: "Passwords do not match" });
   }
 
@@ -156,22 +178,54 @@ router.post("/register", async (req, res) => {
   const password = await bcrypt.hash(plainTextPassword, 10);
 
   try {
-    const response = await User.create({
+    const user = await User.create({
       fullName,
       username,
       email,
       password,
     });
-    console.log("User created successfully:", response);
+
+    console.log(user);
+
+    try {
+      var transporter = nodemailer.createTransport({
+        service: "MIT Ask",
+        auth: { user: EMAIL_USERNAME, pass: EMAIL_PASSWORD },
+      });
+
+      const emailToken = jwt.sign(
+        {
+          user: _.pick(user, "id"),
+        },
+        EMAIL_SECRET,
+        {
+          expiresIn: "1d",
+        }
+      );
+
+      const url = `http://localhost:3000/confirmation/${emailToken}`;
+
+      await transporter.sendMail({
+        from: "no-reply@mitask.com",
+        to: user.email,
+        subject: "Account Verification Token",
+        html: `Please click this email to confirm your email: <a href="${url}">${url}</a>`,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+    console.log("User created successfully:", user);
   } catch (error) {
-    console.log(error);
-    if (error.code === 11000) {
+    console.log(JSON.stringify(error));
+    if (error.keyPattern.username) {
       // duplicate key
       return res.json({ status: "error", error: "Username already exists" });
+    } else if (error.keyPattern.email) {
+      return res.json({ status: "error", error: "A username with this email already exists" });
     }
     throw error;
   }
-  res.json({ status: "ok" });
+  // res.json({ status: "ok" });
 });
 
 router.get("/post", (req, res) => {
