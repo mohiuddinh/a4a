@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Router, Link } from "@reach/router";
+import { Router, Link, Redirect, navigate } from "@reach/router";
 
 import NotFound from "./pages/NotFound.js";
 import Skeleton from "./pages/Skeleton.js";
@@ -12,7 +12,6 @@ import Login from "./pages/Login.js";
 import Register from "./pages/Register.js";
 import ChangePassword from "./pages/ChangePassword.js";
 import SinglePostPage from './pages/SinglePostPage.js'; 
-
 import "../css/utilities.css";
 import "../css/App.css";
 import "../css/scrollbar.css";
@@ -34,23 +33,28 @@ class App extends Component {
     };
   }
 
+  liftStateUp = (data) =>{
+    this.setState({ userId: data})
+  }
+
   componentDidMount() {
     get("/api/whoami").then((user) => {
-      if (user._id) {
+      if (user) {
         // they are registed in the database, and currently logged in.
-        this.setState({ userId: user._id });
+        this.setState({ userId: user.id});
       }
     });
   }
 
-  handleLogin = (res) => {
-    console.log(`Logged in as ${res.profileObj.name}`);
-    const userToken = res.tokenObj.id_token;
-    post("/api/login", { token: userToken }).then((user) => {
-      this.setState({ userId: user._id });
-      post("/api/initsocket", { socketid: socket.id });
-    });
-  };
+  // handleLogin = (res) => {
+  //   console.log(`Logged in as ${res.profileObj.name}`);
+  //   const userToken = res.tokenObj.id_token;
+  //   post("/api/login", { token: userToken }).then((user) => {
+  //     this.setState({ userId: user.id });
+  //     post("/api/initsocket", { socketid: socket.id });
+  //   });
+  // };
+  
 
   handleLogout = () => {
     this.setState({ userId: null });
@@ -70,14 +74,14 @@ class App extends Component {
           <NotFound default />
         </Router> */}
         <div>
-        <Header />
-          <Background />
+        <Header userId={this.state.userId} handleLogout={this.handleLogout}/>
+          <Background /> 
           <Router>
             <ChangePassword  path="/change-password" />
-            <Post  path="/post" />
+            {this.state.userId ? <Post  path="/post" /> : <Redirect from='/post' to='/login' />}
             <SinglePostPage path='/questions/:questionId' />
             <Questions path="/questions" />
-            <Login  path="/login"/>
+            <Login  path="/login" liftStateUp={this.liftStateUp}/>
             <Register  path="/register"/>
             <Home  path="/" />
         </Router>

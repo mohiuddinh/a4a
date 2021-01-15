@@ -20,6 +20,7 @@ class Questions extends Component {
       this.setState({ questions: reversedObjs });
       console.log("received questions");
     });
+    get('/api/whoami').then((res)=>{console.log(res)});
   }
 
   render() {

@@ -24,7 +24,7 @@ const jwt = require("jsonwebtoken");
 const JWT_SECRET = "askljdhaksh*&#^$*&@kjashdkjashd*&^1827368jkasdk87ty8asyuidhbkj";
 
 // import authentication library
-// const auth = require("./auth");
+const auth = require("./auth");
 
 // api endpoints: all these paths will be prefixed with "/api/"
 const router = express.Router();
@@ -34,19 +34,19 @@ const socketManager = require("./server-socket");
 
 
 // router.post("/login", auth.login);
-// router.post("/logout", auth.logout);
+router.post("/logout", auth.logout);
 router.get("/whoami", (req, res) => {
-  if (!req.user) {
+  if (!req.session.user) {
     // not logged in
     return res.send({});
   }
 
-  res.send(req.user);
+  res.send(req.session.user);
 });
 
 router.post("/initsocket", (req, res) => {
   // do nothing if user not logged in
-  if (req.user)
+  if (req.session.user)
     socketManager.addUser(req.user, socketManager.getSocketFromSocketID(req.body.socketid));
   res.send({});
 });
@@ -55,13 +55,13 @@ router.post("/initsocket", (req, res) => {
 // | write your API methods below!|
 // |------------------------------|
 
-router.get("/login", function (req, res, next) {
-  return res.render("login", {});
-});
+// router.get("/login", function (req, res, next) {
+//   return res.render("login", {});
+// });
 
-router.get("/register", function (req, res, next) {
-  return res.render("signup", {});
-});
+// router.get("/register", function (req, res, next) {
+//   return res.render("signup", {});
+// });
 
 // change-password
 router.post("/change-password", async (req, res) => {
@@ -101,22 +101,24 @@ router.post("/change-password", async (req, res) => {
 // login
 router.post("/login", async (req, res) => {
   const { username, password } = req.body;
-
-  const user = await User.findOne({ username }).lean();
-
-  if (!user) {
+try{
+  User.findOne({ username }).then(async (user) => {
+    if (!user) {
     return res.json({ status: "error", error: "Invalid username/password" });
   }
 
   if (await bcrypt.compare(password, user.password)) {
-    // the username, password combination is successful
-
-    const token = jwt.sign({ id: user._id, username: user.username }, JWT_SECRET);
-
-    return res.json({ status: "ok", data: token });
+    const sessUser = { id: user._id, username: user.username }
+    req.session.user = sessUser; 
+    //console.log(req.session.user);
+    //res.json({ msg: 'Logged in successfully', sessUser});
+    const token = jwt.sign( sessUser, JWT_SECRET);
+    return res.json({ status: "ok", data: token, userInfo: sessUser });
   }
-
-  res.json({ status: "error", error: "Invalid username/password" });
+    // the username, password combination is successful
+    
+}); } catch(e){
+  return res.json({ status: "error", error: "Invalid username/password" });}
 });
 
 // register
@@ -179,7 +181,7 @@ router.get("/post", (req, res) => {
   Question.find({}).then((questions) => res.send(questions));
 });
 
-router.post('/post', (req, res) => {
+router.post('/post', auth.ensureLoggedIn, (req, res) => {
   let newQuestion = new Question({
     subject: req.body.subject,
     tag: req.body.tag, 
