@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from "@reach/router";
+import { Link, navigate } from "@reach/router";
 
 import "../../css/Login.css";
 
@@ -9,6 +9,10 @@ const link_style = {
 };
 
 class Login extends Component {
+  constructor(props){
+    super(props); 
+  }
+
   componentDidMount() {
     const form = document.getElementById("login-form");
     form.addEventListener("submit", loginUser);
@@ -35,6 +39,7 @@ class Login extends Component {
         console.log("Got the token: ", result.data);
         localStorage.setItem("token", result.data);
         message.innerHTML = "Success!";
+        navigate('/questions');
       } else {
         message.innerHTML = result.error + " !";
       }

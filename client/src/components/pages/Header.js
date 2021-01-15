@@ -21,22 +21,22 @@ class Header extends Component {
     };
   }
 
-  handleLogin = (res) => {
-    console.log("Logged in");
-    this.setState({ loggedIn: true });
+  // handleLogin = (res) => {
+  //   console.log("Logged in");
+  //   this.setState({ loggedIn: true });
 
-    const userToken = res.tokenObj.id_token;
-    post("/api/login", { token: userToken }).then((user) => {
-      console.log(user);
-    });
-  };
+  //   const userToken = res.tokenObj.id_token;
+  //   post("/api/login", { token: userToken }).then((user) => {
+  //     console.log(user);
+  //   });
+  // };
 
-  handleLogout = (res) => {
-    this.setState({ loggedIn: false });
-    post("/api/logout").then(() => {
-      console.log("Logged out");
-    });
-  };
+  // handleLogout = () => {
+  //   this.setState({ loggedIn: false });
+  //   post("/api/logout").then((res) => {
+  //     console.log("Logged out");
+  //   });
+  // };
 
   componentDidMount() {
     const logo = document.querySelectorAll("#header-logo path");
@@ -55,11 +55,11 @@ class Header extends Component {
               Questions
             </Link>
           </h5>
-          <h5>
+          {this.props.userId ? <h5>
             <Link to="/post" style={link_style}>
               Post
             </Link>
-          </h5>
+          </h5> : null}
         </div>
         <div className="header__title">
           <h1>
@@ -69,16 +69,21 @@ class Header extends Component {
           </h1>
         </div>
         <div className="header__user">
+          {!this.props.userId ? 
           <button className="btn">
             <Link to="/login" style={link_style}>
               <span>Login</span>
             </Link>
-          </button>
-          <button className="btn">
+          </button> : null }
+          {this.props.userId ? 
+            <button className="btn" onClick={this.props.handleLogout}>
+              <span>Logout</span>
+            </button> :
+            <button className="btn">
             <Link to="/register" style={link_style}>
               <span>Register</span>
             </Link>
-          </button>
+          </button> }
         </div>
       </div>
     );

@@ -34,7 +34,7 @@ const socketManager = require("./server-socket");
 
 
 // router.post("/login", auth.login);
-// router.post("/logout", auth.logout);
+router.post("/logout", auth.logout);
 router.get("/whoami", (req, res) => {
   if (!req.session.user) {
     // not logged in
@@ -176,12 +176,12 @@ router.post("/register", async (req, res) => {
 
 
 
-router.get("/post", auth.ensureLoggedIn, (req, res) => {
+router.get("/post", (req, res) => {
   // empty selector means get all documents
   Question.find({}).then((questions) => res.send(questions));
 });
 
-router.post('/post', (req, res) => {
+router.post('/post', auth.ensureLoggedIn, (req, res) => {
   let newQuestion = new Question({
     subject: req.body.subject,
     tag: req.body.tag, 

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Router, Link } from "@reach/router";
+import { Router, Link, Redirect } from "@reach/router";
 
 import NotFound from "./pages/NotFound.js";
 import Skeleton from "./pages/Skeleton.js";
@@ -36,9 +36,9 @@ class App extends Component {
 
   componentDidMount() {
     get("/api/whoami").then((user) => {
-      if (user._id) {
+      if (user) {
         // they are registed in the database, and currently logged in.
-        this.setState({ userId: user._id });
+        this.setState({ userId: user.id});
       }
     });
   }
@@ -47,7 +47,7 @@ class App extends Component {
     console.log(`Logged in as ${res.profileObj.name}`);
     const userToken = res.tokenObj.id_token;
     post("/api/login", { token: userToken }).then((user) => {
-      this.setState({ userId: user._id });
+      this.setState({ userId: user.id });
       post("/api/initsocket", { socketid: socket.id });
     });
   };
@@ -70,14 +70,14 @@ class App extends Component {
           <NotFound default />
         </Router> */}
         <div>
-        <Header />
-          <Background />
+        <Header userId={this.state.userId} handleLogout={this.handleLogout}/>
+          <Background /> 
           <Router>
             <ChangePassword  path="/change-password" />
-            <Post  path="/post" />
+            {this.state.userId ? <Post  path="/post" /> : <Redirect from='/post' to='/login' />}
             <SinglePostPage path='/questions/:questionId' />
             <Questions path="/questions" />
-            <Login  path="/login"/>
+            <Login  path="/login" />
             <Register  path="/register"/>
             <Home  path="/" />
         </Router>
