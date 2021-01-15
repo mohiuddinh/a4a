@@ -8,7 +8,7 @@
 */
 
 const express = require("express");
-const Question = require('./models/question');
+const Question = require("./models/question");
 
 // import models so we can interact with the database
 const User = require("./models/user");
@@ -18,10 +18,13 @@ const bodyParser = require("body-parser");
 
 // import bcrypt
 const bcrypt = require("bcryptjs");
+const dotenv = require("dotenv");
+
+dotenv.config();
 
 // import jwt
 const jwt = require("jsonwebtoken");
-const JWT_SECRET = "askljdhaksh*&#^$*&@kjashdkjashd*&^1827368jkasdk87ty8asyuidhbkj";
+const JWT_SECRET = process.env.JWT_SECRET_STR;
 
 // import authentication library
 // const auth = require("./auth");
@@ -31,7 +34,6 @@ const router = express.Router();
 
 //initialize socket
 const socketManager = require("./server-socket");
-
 
 // router.post("/login", auth.login);
 // router.post("/logout", auth.logout);
@@ -172,35 +174,35 @@ router.post("/register", async (req, res) => {
   res.json({ status: "ok" });
 });
 
-
-
 router.get("/post", (req, res) => {
   // empty selector means get all documents
   Question.find({}).then((questions) => res.send(questions));
 });
 
-router.post('/post', (req, res) => {
+router.post("/post", (req, res) => {
   let newQuestion = new Question({
     subject: req.body.subject,
-    tag: req.body.tag, 
-    question: req.body.question
-  })
+    tag: req.body.tag,
+    question: req.body.question,
+  });
   newQuestion.save().then((question) => res.send(question));
-})
+});
 
-router.get('/question_by_id', (req, res) => {
-  let type = req.query.type; 
-  let questionId = req.query.id; 
+router.get("/question_by_id", (req, res) => {
+  let type = req.query.type;
+  let questionId = req.query.id;
 
-  if (type === 'array'){
-
+  if (type === "array") {
   }
-  Question.find({ '_id': {$in: questionId}}).populate('writer').exec((err, product) => {
-    if (err) {return req.status(400).send(err)} 
-    return res.status(200).send(product)
-  })
-
-})
+  Question.find({ _id: { $in: questionId } })
+    .populate("writer")
+    .exec((err, product) => {
+      if (err) {
+        return req.status(400).send(err);
+      }
+      return res.status(200).send(product);
+    });
+});
 
 // anything else falls to this "not found" case
 router.all("*", (req, res) => {
