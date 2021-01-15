@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link, navigate } from "@reach/router";
+import axios from "axios";
 
 import "../../css/Login.css";
 
@@ -13,63 +14,54 @@ class Login extends Component {
     super(props); 
   }
 
-  componentDidMount() {
-    const form = document.getElementById("login-form");
-    form.addEventListener("submit", loginUser);
+  onSubmit = (e) => {
+    console.log("form was submitted");
+    e.preventDefault();
 
-    async function loginUser(event) {
-      event.preventDefault();
-      const username = document.getElementById("username").value;
-      const password = document.getElementById("password").value;
+    const loginMessage = document.getElementById("login__message");
 
-      const message = document.getElementById("login__message");
+    const login = {
+      username: this.username,
+      password: this.password,
+    };
 
-      const result = await fetch("/api/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          username,
-          password,
-        }),
-      }).then((res) => res.json());
-
-      if (result.status === "ok") {
-        console.log("Got the token: ", result.data);
-        localStorage.setItem("token", result.data);
-        message.innerHTML = "Success!";
-        navigate('/questions');
+    axios.post("/api/login", login).then((res) => {
+      localStorage.setItem("token", res.token);
+      console.log(res.data.data);
+      this.props.liftStateUp(res.data.userInfo.id); 
+      if (res.data.status === "ok") {
+        loginMessage.innerHTML = "Success!";
       } else {
-        message.innerHTML = result.error + " !";
+        loginMessage.innerHTML = res.data.error;
       }
-    }
-  }
+      navigate('/'); 
+    });
+  };
 
   render() {
     return (
       <div className="login">
         <div className="login__container">
-          <form id="login-form">
+          <form id="login-form" onSubmit={this.onSubmit}>
             <h1 id="login__message"></h1>
             <div className="login__control">
               <input
                 type="text"
                 name="username"
-                id="username"
                 placeholder="username"
                 className="login__textInput"
                 required
+                onChange={(e) => (this.username = e.target.value)}
               />
             </div>
             <div className="login__control">
               <input
                 type="password"
                 name="password"
-                id="password"
                 placeholder="password"
                 className="login__textInput"
                 required
+                onChange={(e) => (this.password = e.target.value)}
               />
             </div>
             <div className="login__control">

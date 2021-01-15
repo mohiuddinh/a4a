@@ -110,10 +110,10 @@ try{
   if (await bcrypt.compare(password, user.password)) {
     const sessUser = { id: user._id, username: user.username }
     req.session.user = sessUser; 
-    console.log(req.session.user);
+    //console.log(req.session.user);
     //res.json({ msg: 'Logged in successfully', sessUser});
     const token = jwt.sign( sessUser, JWT_SECRET);
-    return res.json({ status: "ok", data: token });
+    return res.json({ status: "ok", data: token, userInfo: sessUser });
   }
     // the username, password combination is successful
     
