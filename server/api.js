@@ -9,6 +9,7 @@
 
 const express = require("express");
 const Question = require('./models/question');
+const Comment = require('./models/comment'); 
 
 // import models so we can interact with the database
 const User = require("./models/user");
@@ -182,11 +183,7 @@ router.get("/post", (req, res) => {
 });
 
 router.post('/post', auth.ensureLoggedIn, (req, res) => {
-  let newQuestion = new Question({
-    subject: req.body.subject,
-    tag: req.body.tag, 
-    question: req.body.question
-  })
+  let newQuestion = new Question(req.body); 
   newQuestion.save().then((question) => res.send(question));
 })
 
@@ -203,6 +200,34 @@ router.get('/question_by_id', (req, res) => {
   })
 
 })
+
+router.post('/saveComment', auth.ensureLoggedIn, (req, res) => {
+  const comment = new Comment(req.body) 
+
+    comment.save((err, comment ) => {
+        if(err) return res.json({ success:false, err})
+
+        Comment.find({ '_id': comment._id })
+        .populate('writer')
+        .exec((err, result) => {
+            if(err) return res.json({ success:false, err })
+            return res.status(200).json({ success:true, result })
+        })
+
+    })
+});
+
+
+router.post("/getComments", (req, res) => {
+
+    Comment.find({ "questionId": req.body.questionId })
+        .populate('writer')
+        .exec((err, comments) => {
+            if (err) return res.status(400).send(err)
+            res.status(200).json({ success: true, comments })
+        })
+
+});
 
 // anything else falls to this "not found" case
 router.all("*", (req, res) => {

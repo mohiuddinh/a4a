@@ -78,10 +78,10 @@ class App extends Component {
           <Background /> 
           <Router>
             <ChangePassword  path="/change-password" />
-            {this.state.userId ? <Post  path="/post" /> : <Redirect from='/post' to='/login' />}
-            <SinglePostPage path='/questions/:questionId' />
+            {this.state.userId ? <Post  path="/post" writerId={this.state.userId}/> : <Redirect from='/post' to='/login' />}
+            <SinglePostPage path='/questions/:questionId' props={this.state.userId}/>
             <Questions path="/questions" />
-            <Login  path="/login" liftStateUp={this.liftStateUp}/>
+            {this.state.userId ? <Redirect from='/login' to='/' /> : <Login  path="/login" liftStateUp={this.liftStateUp}/>}
             <Register  path="/register"/>
             <Home  path="/" />
         </Router>
