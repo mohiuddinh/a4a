@@ -81,52 +81,104 @@ router.get("/register", function (req, res, next) {
   return res.render("signup", {});
 });
 
-// change-password
-router.post("/change-password", async (req, res) => {
-  const { token, newPassword: plainTextPassword, newPasswordTwo } = req.body;
-
-  console.log(req.body);
-
-  var regex = /[ !@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/g;
-
-  if (!plainTextPassword || typeof plainTextPassword !== "string") {
-    return res.json({ status: "error", error: "Invalid password" });
-  }
-
-  if (!regex.test(plainTextPassword)) {
-    return res.json({ status: "error", error: "Password does not contain any special characters" });
-  }
-
-  if (plainTextPassword !== newPasswordTwo) {
-    return res.json({ status: "error", error: "Passwords do not match" });
-  }
-
-  if (plainTextPassword.length < 8) {
-    return res.json({
-      status: "error",
-      error: "Password too small. Should be at least 8 characters",
-    });
-  }
+// reset-password
+router.post("/reset-password/:token", async (req, res) => {
+  console.log("Accessed reset-password endpoint");
+  const { token } = req.params;
+  const { password, passwordTwo } = req.body;
 
   try {
-    const user = jwt.verify(token, JWT_SECRET);
+    const {
+      user: { id },
+    } = jwt.verify(token, EMAIL_SECRET);
 
-    const _id = user.id;
+    const user = await User.findOne({ id });
 
-    console.log(_id);
+    if (!user) {
+      return res.json({ status: "noUserFound" });
+    } else {
+      var regex = /[ !@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/g;
 
-    const password = await bcrypt.hash(plainTextPassword, 10);
-
-    await User.updateOne(
-      { _id },
-      {
-        $set: { password },
+      if (!password || typeof password !== "string") {
+        return res.json({ status: "error", error: "Invalid password" });
       }
-    );
-    res.json({ status: "ok" });
+
+      if (!regex.test(password)) {
+        return res.json({
+          status: "error",
+          error: "Password does not contain any special characters",
+        });
+      }
+
+      if (password !== passwordTwo) {
+        return res.json({ status: "error", error: "Passwords do not match" });
+      }
+
+      if (password.length < 8) {
+        return res.json({
+          status: "error",
+          error: "Password is too small. It should be at least 8 characters long",
+        });
+      }
+
+      const passwordHashed = await bcrypt.hash(password, 10);
+
+      await User.updateOne(
+        { id },
+        {
+          $set: { password: passwordHashed },
+        }
+      );
+      return res.json({ status: "success" });
+    }
   } catch (error) {
     console.log(error);
-    res.json({ status: "error", error: "Error updating your password" });
+    return res.json({ status: "tokenExpired" });
+  }
+});
+
+// email-password-link
+router.post("/email-password-link", async (req, res) => {
+  const { email } = req.body;
+  const user = await User.findOne({ email });
+
+  if (!user) {
+    console.log("user does not exists");
+    return res.json({ status: "error" });
+  } else {
+    try {
+      var transporter = nodemailer.createTransport({
+        service: "gmail",
+        auth: { user: EMAIL_USERNAME, pass: EMAIL_PASSWORD },
+      });
+
+      const emailToken = jwt.sign(
+        {
+          user: user._id,
+        },
+        EMAIL_SECRET,
+        {
+          expiresIn: 900,
+        }
+      );
+
+      // var emailTokenBase64Url = emailToken.split(".")[1];
+
+      const url = `http://localhost:5000/reset-password/${emailToken}`;
+
+      await transporter.sendMail({
+        from: EMAIL_USERNAME,
+        to: user.email,
+        subject: "Reset Password for your MIT Ask Account",
+        html: `Please click on this link to reset your password: <a href="${url}">${url}</a>`,
+      });
+
+      return res.json({
+        status: "ok",
+      });
+    } catch (error) {
+      console.log(error);
+    }
   }
 });
 
@@ -137,7 +189,10 @@ router.post("/login", async (req, res) => {
   const user = await User.findOne({ username }).lean();
 
   if (!user) {
-    return res.json({ status: "error", error: "Invalid username/password" });
+    return res.json({
+      status: "error",
+      error: "No user with this username has been found in the database",
+    });
   }
 
   if (!user.isVerified) {
@@ -157,36 +212,37 @@ router.post("/login", async (req, res) => {
 
 // confirmation
 router.get("/confirmation/:token", async (req, res) => {
-  console.log("accessed endpoint 1");
   const { token } = req.params;
-  console.log(token);
   try {
     const {
       user: { id },
-    } = JSON.parse(atob(token));
+    } = jwt.verify(token, EMAIL_SECRET);
 
-    await User.updateOne(
-      { id },
-      {
-        $set: { isVerified: true },
-      }
-    );
-    console.log("accessed endpoint 2");
-  } catch (e) {
-    console.log(e);
+    const user = await User.findOne({ id });
+
+    if (!user) {
+      return res.json({ status: "noUserFound" });
+    } else if (user.isVerified) {
+      return res.json({ status: "alreadyVerified" });
+    } else {
+      await User.updateOne(
+        { id },
+        {
+          $set: { isVerified: true },
+        }
+      );
+      return res.json({ status: "Verified" });
+    }
+  } catch (error) {
+    console.log(error);
     res.json({ status: "error", error: e });
-    console.log("accessed endpoint 3");
   }
-
-  console.log("accessed endpoint 4");
-  return res.json({ status: "ok", ok: "success" });
+  return res.send({ status: "success!" });
 });
 
 // register
 router.post("/register", async (req, res) => {
   const { fullName, username, email, password: plainTextPassword, passwordTwo } = req.body;
-
-  // console.log(req.body);
 
   var regex = /[ !@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/g;
 
@@ -209,7 +265,7 @@ router.post("/register", async (req, res) => {
   if (plainTextPassword.length < 8) {
     return res.json({
       status: "error",
-      error: "Password too small. Should be at least 8 characters",
+      error: "Password is too small. It should be at least 8 characters long",
     });
   }
 
@@ -233,26 +289,23 @@ router.post("/register", async (req, res) => {
         {
           user: user._id,
         },
-        EMAIL_SECRET,
-        {
-          expiresIn: "1d",
-        }
+        EMAIL_SECRET
       );
 
-      var emailTokenBase64Url = emailToken.split(".")[1];
+      // var emailTokenBase64Url = emailToken.split(".")[1];
       // var decodedValue = JSON.parse(atob(emailTokenBase64Url));
 
-      console.log(emailToken);
-      console.log(emailTokenBase64Url);
+      // console.log(emailToken);
+      // console.log(emailTokenBase64Url);
       // console.log(decodedValue);
 
-      const url = `http://localhost:5000/confirmation/${emailTokenBase64Url}`;
+      const url = `http://localhost:5000/confirmation/${emailToken}`;
 
       await transporter.sendMail({
         from: EMAIL_USERNAME,
         to: user.email,
         subject: "Account Verification Token",
-        html: `Please click this email to confirm your email: <a href="${url}">${url}</a>`,
+        html: `Please click on this link to confirm your email: <a href="${url}">${url}</a>`,
       });
     } catch (error) {
       console.log(error);

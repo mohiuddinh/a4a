@@ -22,8 +22,6 @@ class Login extends Component {
     };
 
     axios.post("/api/login", login).then((res) => {
-      localStorage.setItem("token", res.token);
-      // console.log(res.data.data);
       if (res.data.status === "ok") {
         loginMessage.innerHTML = "Success!";
       } else {
@@ -62,7 +60,7 @@ class Login extends Component {
               <input type="submit" value="Login" className="login__btnInput btn" required />
             </div>
             <div className="login__control">
-              <Link to="/change-password" style={link_style}>
+              <Link to="/email-password-link" style={link_style}>
                 <h5 className="login__forgotPassword">Forgot password?</h5>
               </Link>
               <Link to="/register" style={link_style}>
