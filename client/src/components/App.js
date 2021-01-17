@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Router, Link } from "@reach/router";
+import { Route } from "react-router-dom";
 
 import NotFound from "./pages/NotFound.js";
 import Skeleton from "./pages/Skeleton.js";
@@ -11,7 +12,8 @@ import Home from "./pages/Home.js";
 import Login from "./pages/Login.js";
 import Register from "./pages/Register.js";
 import ChangePassword from "./pages/ChangePassword.js";
-import SinglePostPage from './pages/SinglePostPage.js'; 
+import SinglePostPage from "./pages/SinglePostPage.js";
+import Confirmation from "./pages/Confirmation.js";
 
 import "../css/utilities.css";
 import "../css/App.css";
@@ -70,17 +72,18 @@ class App extends Component {
           <NotFound default />
         </Router> */}
         <div>
-        <Header />
+          <Header />
           <Background />
           <Router>
-            <ChangePassword  path="/change-password" />
-            <Post  path="/post" />
-            <SinglePostPage path='/questions/:questionId' />
+            <ChangePassword path="/change-password" />
+            <Confirmation path="/confirmation/:token" />
+            <Post path="/post" />
+            <SinglePostPage path="/questions/:questionId" />
             <Questions path="/questions" />
-            <Login  path="/login"/>
-            <Register  path="/register"/>
-            <Home  path="/" />
-        </Router>
+            <Login path="/login" />
+            <Register path="/register" />
+            <Home path="/" />
+          </Router>
         </div>
       </>
     );

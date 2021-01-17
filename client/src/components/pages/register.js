@@ -23,7 +23,7 @@ class Register extends Component {
 
     axios.post("/api/register", registered).then((res) => {
       if (res.data.status === "ok") {
-        registerMessage.innerHTML = "Success!";
+        registerMessage.innerHTML = res.data.ok;
       } else {
         registerMessage.innerHTML = res.data.error;
       }

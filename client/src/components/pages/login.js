@@ -23,7 +23,7 @@ class Login extends Component {
 
     axios.post("/api/login", login).then((res) => {
       localStorage.setItem("token", res.token);
-      console.log(res.data.data);
+      // console.log(res.data.data);
       if (res.data.status === "ok") {
         loginMessage.innerHTML = "Success!";
       } else {

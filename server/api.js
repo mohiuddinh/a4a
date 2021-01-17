@@ -19,6 +19,12 @@ const bodyParser = require("body-parser");
 // import nodemailer
 const nodemailer = require("nodemailer");
 
+// import crypto
+// const crypto = require("crypto");
+
+// import atob
+const atob = require("atob");
+
 // import bcrypt
 const bcrypt = require("bcryptjs");
 const dotenv = require("dotenv");
@@ -43,6 +49,7 @@ const router = express.Router();
 //initialize socket
 const socketManager = require("./server-socket");
 const { _ } = require("core-js");
+const { resolve } = require("../webpack.config");
 
 // router.post("/login", auth.login);
 // router.post("/logout", auth.logout);
@@ -119,7 +126,7 @@ router.post("/change-password", async (req, res) => {
     res.json({ status: "ok" });
   } catch (error) {
     console.log(error);
-    res.json({ status: "error", error: ";))" });
+    res.json({ status: "error", error: "Error updating your password" });
   }
 });
 
@@ -133,6 +140,10 @@ router.post("/login", async (req, res) => {
     return res.json({ status: "error", error: "Invalid username/password" });
   }
 
+  if (!user.isVerified) {
+    return res.json({ status: "error", error: "Your account has not been verified yet" });
+  }
+
   if (await bcrypt.compare(password, user.password)) {
     // the username, password combination is successful
 
@@ -142,6 +153,33 @@ router.post("/login", async (req, res) => {
   }
 
   res.json({ status: "error", error: "Invalid username/password" });
+});
+
+// confirmation
+router.get("/confirmation/:token", async (req, res) => {
+  console.log("accessed endpoint 1");
+  const { token } = req.params;
+  console.log(token);
+  try {
+    const {
+      user: { id },
+    } = JSON.parse(atob(token));
+
+    await User.updateOne(
+      { id },
+      {
+        $set: { isVerified: true },
+      }
+    );
+    console.log("accessed endpoint 2");
+  } catch (e) {
+    console.log(e);
+    res.json({ status: "error", error: e });
+    console.log("accessed endpoint 3");
+  }
+
+  console.log("accessed endpoint 4");
+  return res.json({ status: "ok", ok: "success" });
 });
 
 // register
@@ -185,17 +223,15 @@ router.post("/register", async (req, res) => {
       password,
     });
 
-    console.log(user);
-
     try {
       var transporter = nodemailer.createTransport({
-        service: "MIT Ask",
+        service: "gmail",
         auth: { user: EMAIL_USERNAME, pass: EMAIL_PASSWORD },
       });
 
       const emailToken = jwt.sign(
         {
-          user: _.pick(user, "id"),
+          user: user._id,
         },
         EMAIL_SECRET,
         {
@@ -203,10 +239,17 @@ router.post("/register", async (req, res) => {
         }
       );
 
-      const url = `http://localhost:3000/confirmation/${emailToken}`;
+      var emailTokenBase64Url = emailToken.split(".")[1];
+      // var decodedValue = JSON.parse(atob(emailTokenBase64Url));
+
+      console.log(emailToken);
+      console.log(emailTokenBase64Url);
+      // console.log(decodedValue);
+
+      const url = `http://localhost:5000/confirmation/${emailTokenBase64Url}`;
 
       await transporter.sendMail({
-        from: "no-reply@mitask.com",
+        from: EMAIL_USERNAME,
         to: user.email,
         subject: "Account Verification Token",
         html: `Please click this email to confirm your email: <a href="${url}">${url}</a>`,
@@ -225,7 +268,10 @@ router.post("/register", async (req, res) => {
     }
     throw error;
   }
-  // res.json({ status: "ok" });
+  res.json({
+    status: "ok",
+    ok: "An email with the verification link has been sent! Please check your inbox!",
+  });
 });
 
 router.get("/post", (req, res) => {
