@@ -18,7 +18,7 @@ class Questions extends Component {
     get("/api/post").then((questionObjs) => {
       let reversedObjs = questionObjs.reverse();
       this.setState({ questions: reversedObjs });
-      console.log("received questions");
+      //console.log("received questions");
     });
     get('/api/whoami').then((res)=>{console.log(res)});
   }

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "@reach/router";
+import LikeDislikes from './LikeDislikes.js'; 
 
 import "../../css/SingleQuestion.css";
 

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'; 
 import "../../css/SinglePostPage.css";
-import { post } from '../../utilities.js'; 
+import { get, post } from '../../utilities.js'; 
 import SingleComment from './SingleComment.js'; 
 import ReplyComment from './ReplyComment.js'; 
 import { Button, Input } from 'antd'; 
@@ -57,7 +57,7 @@ function Comments(props) {
                     style={{ width: '100%', borderRadius: '5px' }}
                     onChange={handleChange}
                     value={Comment}
-                    placeholder="write some comments"
+                    placeholder="comments"
                 />
                 <br />
                 <Button style={{ width: '20%', height: '52px' }} onClick={onSubmit}>Submit</Button>
