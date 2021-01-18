@@ -148,39 +148,22 @@ router.post("/email-password-link", async (req, res) => {
     console.log("user does not exists");
     return res.json({ status: "error" });
   } else {
-    try {
-      var transporter = nodemailer.createTransport({
-        service: "gmail",
-        auth: { user: EMAIL_USERNAME, pass: EMAIL_PASSWORD },
-      });
+    var transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: { user: EMAIL_USERNAME, pass: EMAIL_PASSWORD },
+    });
 
-      const emailToken = jwt.sign(
-        {
-          user: user._id,
-        },
-        EMAIL_SECRET,
-        {
-          expiresIn: 900,
-        }
-      );
-
-      // var emailTokenBase64Url = emailToken.split(".")[1];
-
+    jwt.sign({ user: user._id }, EMAIL_SECRET, { expiresIn: 900 }, (err, emailToken) => {
       const url = `http://localhost:5000/reset-password/${emailToken}`;
 
-      await transporter.sendMail({
+      transporter.sendMail({
         from: EMAIL_USERNAME,
         to: user.email,
         subject: "Reset Password for your MIT Ask Account",
         html: `Please click on this link to reset your password: <a href="${url}">${url}</a>`,
       });
-
-      return res.json({
-        status: "ok",
-      });
-    } catch (error) {
-      console.log(error);
-    }
+    });
+    return res.json({ status: "ok" });
   }
 });
 
@@ -282,41 +265,21 @@ router.post("/register", async (req, res) => {
       password,
     });
 
-    try {
-      var transporter = nodemailer.createTransport({
-        service: "gmail",
-        auth: { user: EMAIL_USERNAME, pass: EMAIL_PASSWORD },
-      });
+    var transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: { user: EMAIL_USERNAME, pass: EMAIL_PASSWORD },
+    });
 
-      console.log(user._id);
-
-      const emailToken = jwt.sign(
-        {
-          user: user._id,
-        },
-        EMAIL_SECRET
-      );
-
-      console.log(emailToken);
-
-      // var emailTokenBase64Url = emailToken.split(".")[1];
-      // var decodedValue = JSON.parse(atob(emailTokenBase64Url));
-
-      // console.log(emailToken);
-      // console.log(emailTokenBase64Url);
-      // console.log(decodedValue);
-
+    jwt.sign({ user: user._id }, EMAIL_SECRET, (err, emailToken) => {
       const url = `http://localhost:5000/confirmation/${emailToken}`;
 
-      await transporter.sendMail({
+      transporter.sendMail({
         from: EMAIL_USERNAME,
         to: user.email,
         subject: "Account Verification Token",
         html: `Please click on this link to confirm your email: <a href="${url}">${url}</a>`,
       });
-    } catch (error) {
-      console.log(error);
-    }
+    });
     console.log("User created successfully:", user);
   } catch (error) {
     console.log(JSON.stringify(error));
