@@ -23,6 +23,7 @@ class SingleQuestion extends Component {
           <p>
             <span>Question:</span> {this.props.question}
           </p>
+          <LikeDislikes question questionId={this.props.questionId} userId={this.props.userId}/>
         </div>
       </div>
     );

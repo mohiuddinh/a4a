@@ -42,8 +42,9 @@ function LikeDislikes(props) {
                     //if I already click this like button or not 
                     res.likes.map(like => {
                         //console.log(like.userId); 
-                        if (like.userId === props.userId && (like.questionId === props.questionId || like.commentId === props.commentId)) {
-                            console.log('liked')
+                        if (like.userId === props.userId && (props.question && (like.questionId === props.questionId) || props.comment && (like.commentId === props.commentId))) {
+                            //console.log('liked'); 
+                            //console.log((like)); 
                             setLikeAction('liked');
                         }
                     })
@@ -61,7 +62,9 @@ function LikeDislikes(props) {
 
                     //if I already click this like button or not 
                     res.dislikes.map(dislike => {
-                        if (dislike.userId === props.userId && (dislike.questionId === props.questionId || dislike.commentId === props.commentId)) {
+                        if (dislike.userId === props.userId && (props.question && (dislike.questionId === props.questionId) || props.comment && (dislike.commentId === props.commentId))) {
+                            console.log('disliked'); 
+                            console.log(dislike); 
                             setDislikeAction('disliked')
                         }
                     })
@@ -84,6 +87,7 @@ function LikeDislikes(props) {
                         setLikes(Likes + 1)
                         setLikeAction('liked')
                         console.log('Liked message')
+                        console.log(res);
 
                         //If dislike button is already clicked
 
@@ -177,7 +181,7 @@ function LikeDislikes(props) {
                     {/* <Icon type="like"
                         theme={LikeAction === 'liked' ? 'filled' : 'outlined'}
                         onClick={onLike} /> */}
-                    {LikeAction === 'liked' ? <LikeFilled onClick={onLike} /> : <LikeOutlined onClick={onLike} />}
+                    {(LikeAction === 'liked') ? <LikeFilled onClick={onLike} /> : <LikeOutlined onClick={onLike} />}
                 </Tooltip>
                 <span style={{ paddingLeft: '8px', cursor: 'auto' }}>{Likes}</span>
             </span>&nbsp;&nbsp;
@@ -188,7 +192,7 @@ function LikeDislikes(props) {
                         theme={DislikeAction === 'disliked' ? 'filled' : 'outlined'}
                         onClick={onDisLike}
                     /> */}
-                    {DislikeAction === 'disliked' ? <DislikeFilled onClick={onDisLike}/> : <DislikeOutlined onClick={onDisLike}/>}
+                    {(DislikeAction === 'disliked') ? <DislikeFilled onClick={onDisLike}/> : <DislikeOutlined onClick={onDisLike}/>}
                 </Tooltip>
                 <span style={{ paddingLeft: '8px', cursor: 'auto' }}>{Dislikes}</span>
             </span>

@@ -31,16 +31,18 @@ class Questions extends Component {
           <a href={`/questions/${questionObj._id}`}>
             <SingleQuestion
               key={questionObj._id}
+              questionId={questionObj._id}
               subject={questionObj.subject}
               tag={questionObj.tag}
               question={questionObj.question}
+              userId = {this.props.userId}
             />
           </a>
         );
       });
       console.log({ questionsList });
     } else {
-      questionsList = <div>No questions :(</div>;
+      questionsList = <div>Loading...</div>;
     }
 
     return (

@@ -32,8 +32,8 @@ function Comments(props) {
         alert("Failed to save comment");
       }
     });
-  };
 
+  }
   return (
     <div>
       <br />
@@ -54,30 +54,12 @@ function Comments(props) {
                   writerId={props.writerId}
                   displayReplyTo={replyTo}
                 />
-                <ReplyComment
-                  CommentLists={props.CommentLists}
-                  questionId={props.questionId}
-                  parentCommentId={comment._id}
-                  refreshFunction={props.refreshFunction}
-                />
-              </React.Fragment>
-            )
-        )}
-      {/* Root Comment Form */}
-      <form style={{ display: "flex" }} onSubmit={onSubmit}>
-        <TextArea
-          style={{ width: "100%", borderRadius: "5px" }}
-          onChange={handleChange}
-          value={Comment}
-          placeholder="comments"
-        />
-        <br />
-        <Button style={{ width: "20%", height: "52px" }} onClick={onSubmit}>
-          Submit
-        </Button>
-      </form>
-    </div>
-  );
+                <br />
+                <Button style={{ width: '20%', height: '52px' }} onClick={onSubmit}>Submit</Button>
+            </form>
+
+        </div>
+  ) 
 }
 
 export default Comments;

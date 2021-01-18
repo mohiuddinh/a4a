@@ -1,7 +1,5 @@
 import React, { Component, useEffect, useState } from "react";
 import { get, post } from "../../utilities.js";
-import AccountCircleIcon from "@material-ui/icons/AccountCircle";
-import axios from 'axios'; 
 import LikeDislikes from './LikeDislikes.js'; 
 
 import "../../css/SinglePostPage.css";
@@ -37,7 +35,7 @@ function SinglePostPage(props) {
   const updateComment = (newComment) => {
     setCommentLists(CommentLists.concat(newComment)); 
   }
-
+  if(Question.writer){
   return (
     <div >
       <p>{Question.subject}</p>
@@ -46,7 +44,10 @@ function SinglePostPage(props) {
       <LikeDislikes question questionId={questionId} userId={writer}/>
       <Comments CommentLists={CommentLists} writerId={writer} questionId={questionId} refreshFunction={updateComment}/>
     </div>
-  );
+  ); }
+  else {
+    return(<div>Loading...</div>)
+  }
 }
 
 export default SinglePostPage;
