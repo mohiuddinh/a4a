@@ -7,6 +7,7 @@ import Skeleton from "./pages/Skeleton.js";
 import Header from "./pages/Header.js";
 import Post from "./pages/Post.js";
 import Questions from "./pages/Questions.js";
+import EECS from "./pages/EECS.js"
 import Background from "./pages/Background.js";
 import Home from "./pages/Home.js";
 import Login from "./pages/Login.js";
@@ -82,6 +83,7 @@ class App extends Component {
             <Route  path="/login" exact component={Login} />
             <Route  path="/register" exact component={Register} />
             <Route  path="/" exact component={Home} />
+            <Route  path="/EECS" exact component={EECS} />
           </Switch>
         </Router>
       </>
