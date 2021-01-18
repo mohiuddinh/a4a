@@ -19,7 +19,7 @@ class Register extends Component {
       passwordTwo: this.passwordTwo,
     };
 
-    console.log(registered);
+    // console.log(registered);
 
     axios.post("/api/register", registered).then((res) => {
       if (res.data.status === "ok") {

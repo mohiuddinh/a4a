@@ -61,7 +61,7 @@ router.get("/whoami", (req, res) => {
     // not logged in
     return res.send({});
   }
-  //console.log(res); 
+  //console.log(res);
   return res.send(req.session.user);
 });
 
@@ -91,11 +91,10 @@ router.post("/reset-password/:token", async (req, res) => {
   const { password, passwordTwo } = req.body;
 
   try {
-    const {
-      user: { id },
-    } = jwt.verify(token, EMAIL_SECRET);
+    const result = jwt.verify(token, EMAIL_SECRET);
+    const id = result.user;
 
-    const user = await User.findOne({ id });
+    const user = await User.findOne({ _id: id });
 
     if (!user) {
       return res.json({ status: "noUserFound" });
@@ -127,7 +126,7 @@ router.post("/reset-password/:token", async (req, res) => {
       const passwordHashed = await bcrypt.hash(password, 10);
 
       await User.updateOne(
-        { id },
+        { _id: id },
         {
           $set: { password: passwordHashed },
         }
@@ -218,11 +217,11 @@ router.post("/login", async (req, res) => {
 router.get("/confirmation/:token", async (req, res) => {
   const { token } = req.params;
   try {
-    const {
-      user: { id },
-    } = jwt.verify(token, EMAIL_SECRET);
+    const result = jwt.verify(token, EMAIL_SECRET);
+    const id = result.user;
 
-    const user = await User.findOne({ id });
+    console.log(id);
+    const user = await User.findOne({ _id: id });
 
     if (!user) {
       return res.json({ status: "noUserFound" });
@@ -230,7 +229,7 @@ router.get("/confirmation/:token", async (req, res) => {
       return res.json({ status: "alreadyVerified" });
     } else {
       await User.updateOne(
-        { id },
+        { _id: id },
         {
           $set: { isVerified: true },
         }
@@ -289,12 +288,16 @@ router.post("/register", async (req, res) => {
         auth: { user: EMAIL_USERNAME, pass: EMAIL_PASSWORD },
       });
 
+      console.log(user._id);
+
       const emailToken = jwt.sign(
         {
           user: user._id,
         },
         EMAIL_SECRET
       );
+
+      console.log(emailToken);
 
       // var emailTokenBase64Url = emailToken.split(".")[1];
       // var decodedValue = JSON.parse(atob(emailTokenBase64Url));

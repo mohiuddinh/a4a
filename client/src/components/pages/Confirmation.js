@@ -19,7 +19,7 @@ function Confirmation(props) {
       .then((data) => {
         console.log(data.status);
         if (data.status === "noUserFound") {
-          setVerificationMessage("Uh oh, no user has been found with this email. ");
+          setVerificationMessage("Uh oh, no user has been found with this email.");
         } else if (data.status === "alreadyVerified") {
           setVerificationMessage("You have already been verified!");
         } else {

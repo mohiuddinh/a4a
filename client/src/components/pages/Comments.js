@@ -1,9 +1,13 @@
 import React, { useState } from "react";
-import "../../css/SinglePostPage.css";
+import { Button, Input } from "antd";
+
 import { get, post } from "../../utilities.js";
 import SingleComment from "./SingleComment.js";
 import ReplyComment from "./ReplyComment.js";
-import { Button, Input } from "antd";
+
+import "../../css/SinglePostPage.css";
+import "../../css/Comments.css";
+
 const { TextArea } = Input;
 
 const replyTo = true;
@@ -32,13 +36,10 @@ function Comments(props) {
         alert("Failed to save comment");
       }
     });
-
-  }
+  };
   return (
     <div>
-      <br />
       <p> replies</p>
-      <hr />
       {/* Comment Lists  */}
       {/* {console.log(props.CommentLists)} */}
 
@@ -54,12 +55,30 @@ function Comments(props) {
                   writerId={props.writerId}
                   displayReplyTo={replyTo}
                 />
-                <br />
-                <Button style={{ width: '20%', height: '52px' }} onClick={onSubmit}>Submit</Button>
-            </form>
-
-        </div>
-  ) 
+                <ReplyComment
+                  CommentLists={props.CommentLists}
+                  questionId={props.questionId}
+                  parentCommentId={comment._id}
+                  refreshFunction={props.refreshFunction}
+                />
+              </React.Fragment>
+            )
+        )}
+      {/* Root Comment Form */}
+      <form style={{ display: "flex" }} onSubmit={onSubmit}>
+        <TextArea
+          style={{ width: "100%", borderRadius: "5px" }}
+          onChange={handleChange}
+          value={Comment}
+          placeholder="comments"
+        />
+        <br />
+        <Button style={{ width: "20%", height: "52px" }} onClick={onSubmit}>
+          Submit
+        </Button>
+      </form>
+    </div>
+  );
 }
 
 export default Comments;
