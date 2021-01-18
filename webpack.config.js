@@ -63,7 +63,9 @@ module.exports = {
   },
   plugins: [new webpack.HotModuleReplacementPlugin()],
   devServer: {
-    historyApiFallback: true,
+    historyApiFallback: {
+      disableDotRule: true,
+    },
     contentBase: "./client/dist",
     hot: true,
     proxy: {
@@ -71,6 +73,13 @@ module.exports = {
       "/socket.io/*": {
         target: "http://localhost:3000",
         ws: true,
+      },
+      "/*.*": {
+        // Match all URL's with period/dot
+        target: "http://localhost:3000/", // send to webpack dev server
+        rewrite: function (req) {
+          req.url = "./client/dist/index.html"; // Send to react app
+        },
       },
     },
   },

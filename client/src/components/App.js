@@ -10,8 +10,11 @@ import Background from "./pages/Background.js";
 import Home from "./pages/Home.js";
 import Login from "./pages/Login.js";
 import Register from "./pages/Register.js";
-import ChangePassword from "./pages/ChangePassword.js";
-import SinglePostPage from './pages/SinglePostPage.js'; 
+import EmailPasswordLink from "./pages/EmailPasswordLink.js";
+import SinglePostPage from "./pages/SinglePostPage.js";
+import Confirmation from "./pages/Confirmation.js";
+import ResetPassword from "./pages/ResetPassword.js";
+
 import "../css/utilities.css";
 import "../css/App.css";
 import "../css/scrollbar.css";
@@ -77,7 +80,9 @@ class App extends Component {
         <Header userId={this.state.userId} handleLogout={this.handleLogout}/>
           <Background /> 
           <Router>
-            <ChangePassword  path="/change-password" />
+            <ResetPassword path="/reset-password/:token" />
+            <EmailPasswordLink path="/email-password-link" />
+            <Confirmation path="/confirmation/:token" />
             {this.state.userId ? <Post  path="/post" writerId={this.state.userId}/> : <Redirect from='/post' to='/login' />}
             <SinglePostPage path='/questions/:questionId' writerId={this.state.userId}/>
             <Questions path="/questions" userId={this.state.userId}/>

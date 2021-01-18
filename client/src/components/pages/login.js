@@ -27,14 +27,14 @@ class Login extends Component {
 
     axios.post("/api/login", login).then((res) => {
       localStorage.setItem("token", res.token);
-      console.log(res.data.data);
-      this.props.liftStateUp(res.data.userInfo.id); 
       if (res.data.status === "ok") {
+        this.props.liftStateUp(res.data.userInfo.id); 
         loginMessage.innerHTML = "Success!";
+        navigate('/'); 
       } else {
         loginMessage.innerHTML = res.data.error;
       }
-      navigate('/'); 
+      
     });
   };
 
@@ -68,7 +68,7 @@ class Login extends Component {
               <input type="submit" value="Login" className="login__btnInput btn" required />
             </div>
             <div className="login__control">
-              <Link to="/change-password" style={link_style}>
+              <Link to="/email-password-link" style={link_style}>
                 <h5 className="login__forgotPassword">Forgot password?</h5>
               </Link>
               <Link to="/register" style={link_style}>

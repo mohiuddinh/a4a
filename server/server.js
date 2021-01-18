@@ -27,13 +27,16 @@ const path = require("path"); // provide utilities for working with file and dir
 
 const api = require("./api");
 const auth = require("./auth");
+const dotenv = require("dotenv");
+
+dotenv.config();
 
 // socket stuff
 const socketManager = require("./server-socket");
 
 // Server configuration below
 // TODO change connection URL after setting up your team database
-const mongoConnectionURL = 'mongodb+srv://admin:YoFSuxp9GP0cPlhp@cluster0.rfscu.mongodb.net/Cluster0?retryWrites=true&w=majority';
+const mongoConnectionURL = process.env.DB_CONNECT;
 // TODO change database name to the name you chose
 const databaseName = "Cluster0";
 
