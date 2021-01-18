@@ -225,10 +225,10 @@ router.get("/confirmation/:token", async (req, res) => {
     } = jwt.verify(token, EMAIL_SECRET);
 
     const user = await User.findOne({ id });
-
     if (!user) {
       return res.json({ status: "noUserFound" });
     } else if (user.isVerified) {
+      console.log(user.isVerified); 
       return res.json({ status: "alreadyVerified" });
     } else {
       await User.updateOne(
