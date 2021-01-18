@@ -58,7 +58,7 @@ function populateCurrentUser(req, res, next) {
 }
 
 function ensureLoggedIn(req, res, next) {
-  if (!req.user) {
+  if (!req.session.user) {
     return res.status(401).send({ err: "not logged in" });
   }
 

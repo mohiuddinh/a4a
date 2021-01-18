@@ -8,7 +8,10 @@
 */
 
 const express = require("express");
-const Question = require("./models/question");
+const Question = require('./models/question');
+const Comment = require('./models/comment'); 
+const Like = require('./models/like');
+const Dislike = require('./models/dislike'); 
 
 // import models so we can interact with the database
 const User = require("./models/user");
@@ -41,7 +44,7 @@ const EMAIL_PASSWORD = process.env.MIT_ASK_PASSWORD;
 const jwt = require("jsonwebtoken");
 
 // import authentication library
-// const auth = require("./auth");
+const auth = require("./auth");
 
 // api endpoints: all these paths will be prefixed with "/api/"
 const router = express.Router();
@@ -52,19 +55,19 @@ const { _ } = require("core-js");
 const { resolve } = require("../webpack.config");
 
 // router.post("/login", auth.login);
-// router.post("/logout", auth.logout);
+router.post("/logout", auth.logout);
 router.get("/whoami", (req, res) => {
-  if (!req.user) {
+  if (!req.session.user) {
     // not logged in
     return res.send({});
   }
 
-  res.send(req.user);
+  res.send(req.session.user);
 });
 
 router.post("/initsocket", (req, res) => {
   // do nothing if user not logged in
-  if (req.user)
+  if (req.session.user)
     socketManager.addUser(req.user, socketManager.getSocketFromSocketID(req.body.socketid));
   res.send({});
 });
@@ -73,13 +76,13 @@ router.post("/initsocket", (req, res) => {
 // | write your API methods below!|
 // |------------------------------|
 
-router.get("/login", function (req, res, next) {
-  return res.render("login", {});
-});
+// router.get("/login", function (req, res, next) {
+//   return res.render("login", {});
+// });
 
-router.get("/register", function (req, res, next) {
-  return res.render("signup", {});
-});
+// router.get("/register", function (req, res, next) {
+//   return res.render("signup", {});
+// });
 
 // reset-password
 router.post("/reset-password/:token", async (req, res) => {
@@ -185,29 +188,25 @@ router.post("/email-password-link", async (req, res) => {
 // login
 router.post("/login", async (req, res) => {
   const { username, password } = req.body;
-
-  const user = await User.findOne({ username }).lean();
-
-  if (!user) {
-    return res.json({
-      status: "error",
-      error: "No user with this username has been found in the database",
-    });
-  }
-
-  if (!user.isVerified) {
-    return res.json({ status: "error", error: "Your account has not been verified yet" });
-  }
+try{
+  User.findOne({ username }).then(async (user) => {
+    if (!user) {
+    return res.json({ status: "error", error: "Invalid username/password" });
+  } else  if (!user.isVerified) {
+    return res.json({ status: "error", error: "Your account has not been verified yet" });}
 
   if (await bcrypt.compare(password, user.password)) {
-    // the username, password combination is successful
-
-    const token = jwt.sign({ id: user._id, username: user.username }, JWT_SECRET);
-
-    return res.json({ status: "ok", data: token });
+    const sessUser = { id: user._id, username: user.username }
+    req.session.user = sessUser; 
+    //console.log(req.session.user);
+    //res.json({ msg: 'Logged in successfully', sessUser});
+    const token = jwt.sign( sessUser, JWT_SECRET);
+    return res.json({ status: "ok", data: token, userInfo: sessUser });
   }
-
-  res.json({ status: "error", error: "Invalid username/password" });
+    // the username, password combination is successful
+    
+}); } catch(e){
+  return res.json({ status: "error", error: "Invalid username/password" });}
 });
 
 // confirmation
@@ -332,12 +331,8 @@ router.get("/post", (req, res) => {
   Question.find({}).then((questions) => res.send(questions));
 });
 
-router.post("/post", (req, res) => {
-  let newQuestion = new Question({
-    subject: req.body.subject,
-    tag: req.body.tag,
-    question: req.body.question,
-  });
+router.post('/post', auth.ensureLoggedIn, (req, res) => {
+  let newQuestion = new Question(req.body); 
   newQuestion.save().then((question) => res.send(question));
 });
 
@@ -356,6 +351,142 @@ router.get("/question_by_id", (req, res) => {
       return res.status(200).send(product);
     });
 });
+
+router.post('/saveComment', auth.ensureLoggedIn, (req, res) => {
+  const comment = new Comment(req.body) 
+
+    comment.save((err, comment ) => {
+        if(err) return res.json({ success:false, err})
+
+        Comment.find({ '_id': comment._id })
+        .populate('writer')
+        .exec((err, result) => {
+            if(err) return res.json({ success:false, err })
+            return res.status(200).json({ success:true, result })
+        })
+
+    })
+});
+
+
+router.post("/getComments", (req, res) => {
+
+    Comment.find({ "questionId": req.body.questionId })
+        .populate('writer')
+        .exec((err, comments) => {
+            if (err) return res.status(400).send(err)
+            res.status(200).json({ success: true, comments })
+        })
+
+});
+
+router.post('/getLikes', (req, res) => {
+  let variable = {}
+  if(req.body.questionId){
+    variable = {questionId: req.body.questionId}
+  } else {
+    variable = {commentId: req.body.commentId}
+  }
+
+  Like.find(variable)
+        .exec((err, likes) => {
+            if (err) return res.status(400).send(err);
+            res.status(200).json({ success: true, likes })
+        })
+}); 
+
+router.post("/getDislikes", (req, res) => {
+
+    let variable = {}
+    if (req.body.questionId) {
+        variable = { questionId: req.body.questionId }
+    } else {
+        variable = { commentId: req.body.commentId }
+    }
+
+    Dislike.find(variable)
+        .exec((err, dislikes) => {
+            if (err) return res.status(400).send(err);
+            res.status(200).json({ success: true, dislikes })
+        })
+}); 
+
+router.post("/upLike", auth.ensureLoggedIn, (req, res) => {
+
+    let variable = {}
+    if (req.body.questionId) {
+        variable = { questionId: req.body.questionId, userId: req.body.userId }
+    } else {
+        variable = { commentId: req.body.commentId , userId: req.body.userId }
+    }
+
+    const like = new Like(variable)
+    //save the like information data in MongoDB
+    like.save((err, likeResult) => {
+        if (err) return res.json({ success: false, err });
+        //In case disLike Button is already clicked, we need to decrease the dislike by 1 
+        Dislike.findOneAndDelete(variable)
+            .exec((err, disLikeResult) => {
+                if (err) return res.status(400).json({ success: false, err });
+                res.status(200).json({ success: true })
+            })
+    })
+}); 
+
+router.post("/unLike", auth.ensureLoggedIn, (req, res) => {
+
+    let variable = {}
+    if (req.body.questionId) {
+        variable = { questionId: req.body.questionId, userId: req.body.userId }
+    } else {
+        variable = { commentId: req.body.commentId , userId: req.body.userId }
+    }
+
+    Like.findOneAndDelete(variable)
+        .exec((err, result) => {
+            if (err) return res.status(400).json({ success: false, err })
+            res.status(200).json({ success: true })
+        })
+}); 
+
+router.post("/unDisLike", auth.ensureLoggedIn, (req, res) => {
+
+    let variable = {}
+    if (req.body.questionId) {
+        variable = { questionId: req.body.questionId, userId: req.body.userId }
+    } else {
+        variable = { commentId: req.body.commentId , userId: req.body.userId }
+    }
+
+    Dislike.findOneAndDelete(variable)
+    .exec((err, result) => {
+        if (err) return res.status(400).json({ success: false, err })
+        res.status(200).json({ success: true })
+    })
+});
+
+router.post("/upDisLike", auth.ensureLoggedIn, (req, res) => {
+
+    let variable = {}
+    if (req.body.questionId) {
+        variable = { questionId: req.body.questionId, userId: req.body.userId }
+    } else {
+        variable = { commentId: req.body.commentId , userId: req.body.userId }
+    }
+
+    const disLike = new Dislike(variable)
+    //save the like information data in MongoDB
+    disLike.save((err, dislikeResult) => {
+        if (err) return res.json({ success: false, err });
+        //In case Like Button is already clicked, we need to decrease the like by 1 
+        Like.findOneAndDelete(variable)
+            .exec((err, likeResult) => {
+                if (err) return res.status(400).json({ success: false, err });
+                res.status(200).json({ success: true })
+            })
+    })
+}); 
+
 
 // anything else falls to this "not found" case
 router.all("*", (req, res) => {

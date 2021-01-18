@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from "@reach/router";
+import { Link, navigate } from "@reach/router";
 import axios from "axios";
 
 import "../../css/Login.css";
@@ -10,6 +10,10 @@ const link_style = {
 };
 
 class Login extends Component {
+  constructor(props){
+    super(props); 
+  }
+
   onSubmit = (e) => {
     console.log("form was submitted");
     e.preventDefault();
@@ -22,11 +26,15 @@ class Login extends Component {
     };
 
     axios.post("/api/login", login).then((res) => {
+      localStorage.setItem("token", res.token);
+      console.log(res.data.data);
+      this.props.liftStateUp(res.data.userInfo.id); 
       if (res.data.status === "ok") {
         loginMessage.innerHTML = "Success!";
       } else {
         loginMessage.innerHTML = res.data.error;
       }
+      navigate('/'); 
     });
   };
 

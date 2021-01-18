@@ -12,4 +12,4 @@ const UserSchema = new mongoose.Schema(
 );
 
 // compile model from schema
-module.exports = mongoose.model("UserSchema", UserSchema);
+module.exports = mongoose.model("User", UserSchema);

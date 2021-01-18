@@ -23,17 +23,17 @@ class Post extends Component {
   handleSubmit = (e) => {
     e.preventDefault(); 
     const { subject, tag, question,  } = this.state;
-    post('/api/post', { subject, tag, question } ).then((res) => {
+    const writer = this.props.writerId;
+    console.log(writer);
+    post('/api/post', { subject, tag, question, writer } ).then((res) => {
       console.log('form submitted');
       navigate(`/questions/${res._id}`);
-
     });
     
   }
   
   render() {
     const { subject, tag, question} = this.state;
-
     return (
       <div className="post">
         <div className="post__container">
