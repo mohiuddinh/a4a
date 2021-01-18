@@ -27,14 +27,15 @@ class Login extends Component {
 
     axios.post("/api/login", login).then((res) => {
       localStorage.setItem("token", res.token);
-      console.log(res.data.data);
-      this.props.liftStateUp(res.data.userInfo.id);
+      console.log(res.data.status);
+      console.log(res.data.error);
       if (res.data.status === "ok") {
+        this.props.liftStateUp(res.data.userInfo.id);
         loginMessage.innerHTML = "Success!";
+        navigate("/");
       } else {
         loginMessage.innerHTML = res.data.error;
       }
-      navigate("/");
     });
   };
 

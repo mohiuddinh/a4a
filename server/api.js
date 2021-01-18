@@ -187,22 +187,25 @@ router.post("/email-password-link", async (req, res) => {
 
 // login
 router.post("/login", async (req, res) => {
+  console.log("Accessed login endpoint");
   const { username, password } = req.body;
   try {
     User.findOne({ username }).then(async (user) => {
       if (!user) {
+        console.log("Accessed login enpoint 2");
         return res.json({ status: "error", error: "Invalid username/password" });
       } else if (!user.isVerified) {
+        console.log("Accessed login enpoint 3");
         return res.json({ status: "error", error: "Your account has not been verified yet" });
       }
 
       if (await bcrypt.compare(password, user.password)) {
         const sessUser = { id: user._id, username: user.username };
         req.session.user = sessUser;
-        //console.log(req.session.user);
-        //res.json({ msg: 'Logged in successfully', sessUser});
         const token = jwt.sign(sessUser, JWT_SECRET);
         return res.json({ status: "ok", data: token, userInfo: sessUser });
+      } else {
+        return res.json({ status: "error", error: "Incorrect password" });
       }
       // the username, password combination is successful
     });

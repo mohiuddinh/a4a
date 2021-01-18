@@ -68,6 +68,10 @@
   margin-right: 48px;
 }
 
+.btn-logout {
+  margin-right: 48px;
+}
+
 .header__user button span {
   font-size: 14px;
   color: var(--btn-text);

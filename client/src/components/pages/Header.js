@@ -55,11 +55,13 @@ class Header extends Component {
               Questions
             </Link>
           </h5>
-          {this.props.userId ? <h5>
-            <Link to="/post" style={link_style}>
-              Post
-            </Link>
-          </h5> : null}
+          {this.props.userId ? (
+            <h5>
+              <Link to="/post" style={link_style}>
+                Post
+              </Link>
+            </h5>
+          ) : null}
         </div>
         <div className="header__title">
           <h1>
@@ -69,21 +71,24 @@ class Header extends Component {
           </h1>
         </div>
         <div className="header__user">
-          {!this.props.userId ? 
-          <button className="btn">
-            <Link to="/login" style={link_style}>
-              <span>Login</span>
-            </Link>
-          </button> : null }
-          {this.props.userId ? 
-            <button className="btn" onClick={this.props.handleLogout}>
-              <span>Logout</span>
-            </button> :
+          {!this.props.userId ? (
             <button className="btn">
-            <Link to="/register" style={link_style}>
-              <span>Register</span>
-            </Link>
-          </button> }
+              <Link to="/login" style={link_style}>
+                <span>Login</span>
+              </Link>
+            </button>
+          ) : null}
+          {this.props.userId ? (
+            <button className="btn btn-logout" onClick={this.props.handleLogout}>
+              <span>Logout</span>
+            </button>
+          ) : (
+            <button className="btn">
+              <Link to="/register" style={link_style}>
+                <span>Register</span>
+              </Link>
+            </button>
+          )}
         </div>
       </div>
     );
