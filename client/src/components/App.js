@@ -36,15 +36,15 @@ class App extends Component {
     };
   }
 
-  liftStateUp = (data) =>{
-    this.setState({ userId: data})
-  }
+  liftStateUp = (data) => {
+    this.setState({ userId: data });
+  };
 
   componentDidMount() {
     get("/api/whoami").then((user) => {
       if (user) {
         // they are registed in the database, and currently logged in.
-        this.setState({ userId: user.id});
+        this.setState({ userId: user.id });
       }
     });
   }
@@ -57,7 +57,6 @@ class App extends Component {
   //     post("/api/initsocket", { socketid: socket.id });
   //   });
   // };
-  
 
   handleLogout = () => {
     this.setState({ userId: null });
@@ -77,7 +76,7 @@ class App extends Component {
           <NotFound default />
         </Router> */}
         <div>
-        <Header userId={this.state.userId} handleLogout={this.handleLogout}/>
+        <Header userId={this.state.userId} handleLogout={this.handleLogout} />
           <Background /> 
           <Router>
             <ResetPassword path="/reset-password/:token" />

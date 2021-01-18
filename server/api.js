@@ -8,10 +8,10 @@
 */
 
 const express = require("express");
-const Question = require('./models/question');
-const Comment = require('./models/comment'); 
-const Like = require('./models/like');
-const Dislike = require('./models/dislike'); 
+const Question = require("./models/question");
+const Comment = require("./models/comment");
+const Like = require("./models/like");
+const Dislike = require("./models/dislike");
 
 // import models so we can interact with the database
 const User = require("./models/user");
@@ -61,7 +61,7 @@ router.get("/whoami", (req, res) => {
     // not logged in
     return res.send({});
   }
-  //console.log(res); 
+  //console.log(res);
   return res.send(req.session.user);
 });
 
@@ -91,11 +91,10 @@ router.post("/reset-password/:token", async (req, res) => {
   const { password, passwordTwo } = req.body;
 
   try {
-    const {
-      user: { id },
-    } = jwt.verify(token, EMAIL_SECRET);
+    const result = jwt.verify(token, EMAIL_SECRET);
+    const id = result.user;
 
-    const user = await User.findOne({ id });
+    const user = await User.findOne({ _id: id });
 
     if (!user) {
       return res.json({ status: "noUserFound" });
@@ -127,7 +126,7 @@ router.post("/reset-password/:token", async (req, res) => {
       const passwordHashed = await bcrypt.hash(password, 10);
 
       await User.updateOne(
-        { id },
+        { _id: id },
         {
           $set: { password: passwordHashed },
         }
@@ -187,52 +186,50 @@ router.post("/email-password-link", async (req, res) => {
 
 // login
 router.post("/login", async (req, res) => {
+  //console.log("Accessed login endpoint");
   const { username, password } = req.body;
-  //console.log(req.body);
-try{
-  User.findOne({ username }).then(async (user) => {
-    //console.log('first checkpoint');
-    //console.log(user)
-    if (!user) {
-      return res.json({ status: "error", error: "Invalid username/password" });
+  try {
+    User.findOne({ username }).then(async (user) => {
+      if (!user) {
+        //console.log("Accessed login enpoint 2");
+        return res.json({ status: "error", error: "Invalid username/password" });
+      } else if (!user.isVerified) {
+        //console.log("Accessed login enpoint 3");
+        return res.json({ status: "error", error: "Your account has not been verified yet" });
+      }
+
+      if (await bcrypt.compare(password, user.password)) {
+        const sessUser = { id: user._id, username: user.username };
+        req.session.user = sessUser;
+        const token = jwt.sign(sessUser, JWT_SECRET);
+        return res.json({ status: "ok", data: token, userInfo: sessUser });
+      } else {
+        return res.json({ status: "error", error: "Incorrect password" });
+      }
+      // the username, password combination is successful
+    });
+  } catch (e) {
+    return res.json({ status: "error", error: "Invalid username/password" });
   }
-  if (!user.isVerified){
-      return res.json({ status: "error", error: "Your account has not been verified yet" });
-    }
-    console.log('second checkpoint'); 
-  if (await bcrypt.compare(password, user.password)) {
-    const sessUser = { id: user._id, username: user.username }
-    req.session.user = sessUser; 
-    const token = jwt.sign( sessUser, JWT_SECRET);
-    return res.json({ status: "ok", data: token, userInfo: sessUser });
-  }
-  else{
-    return res.json({ status: 'error', error: 'Incorrect password' })
-  }
-    // the username, password combination is successful
-    
-}); } catch(e){
-  console.log('fourth checkpoint'); 
-  return res.json({ status: "error", error: "Invalid username/password" });}
 });
 
 // confirmation
 router.get("/confirmation/:token", async (req, res) => {
   const { token } = req.params;
   try {
-    const {
-      user: { id },
-    } = jwt.verify(token, EMAIL_SECRET);
+    const result = jwt.verify(token, EMAIL_SECRET);
+    const id = result.user;
 
-    const user = await User.findOne({ id });
+    
+    const user = await User.findOne({ _id: id });
+
     if (!user) {
       return res.json({ status: "noUserFound" });
     } else if (user.isVerified) {
-      console.log(user.isVerified); 
       return res.json({ status: "alreadyVerified" });
     } else {
       await User.updateOne(
-        { id },
+        { _id: id },
         {
           $set: { isVerified: true },
         }
@@ -291,12 +288,16 @@ router.post("/register", async (req, res) => {
         auth: { user: EMAIL_USERNAME, pass: EMAIL_PASSWORD },
       });
 
+      console.log(user._id);
+
       const emailToken = jwt.sign(
         {
           user: user._id,
         },
         EMAIL_SECRET
       );
+
+      console.log(emailToken);
 
       // var emailTokenBase64Url = emailToken.split(".")[1];
       // var decodedValue = JSON.parse(atob(emailTokenBase64Url));
@@ -329,7 +330,7 @@ router.post("/register", async (req, res) => {
   }
   res.json({
     status: "ok",
-    ok: "An email with the verification link has been sent! Please check your inbox!",
+    ok: "An email with the verification link has been sent! Please check your inbox or junk mail!",
   });
 });
 
@@ -338,8 +339,8 @@ router.get("/post", (req, res) => {
   Question.find({}).then((questions) => res.send(questions));
 });
 
-router.post('/post', auth.ensureLoggedIn, (req, res) => {
-  let newQuestion = new Question(req.body); 
+router.post("/post", auth.ensureLoggedIn, (req, res) => {
+  let newQuestion = new Question(req.body);
   newQuestion.save().then((question) => res.send(question));
 });
 
@@ -359,141 +360,125 @@ router.get("/question_by_id", (req, res) => {
     });
 });
 
-router.post('/saveComment', auth.ensureLoggedIn, (req, res) => {
-  const comment = new Comment(req.body) 
+router.post("/saveComment", auth.ensureLoggedIn, (req, res) => {
+  const comment = new Comment(req.body);
 
-    comment.save((err, comment ) => {
-        if(err) return res.json({ success:false, err})
+  comment.save((err, comment) => {
+    if (err) return res.json({ success: false, err });
 
-        Comment.find({ '_id': comment._id })
-        .populate('writer')
-        .exec((err, result) => {
-            if(err) return res.json({ success:false, err })
-            return res.status(200).json({ success:true, result })
-        })
-
-    })
+    Comment.find({ _id: comment._id })
+      .populate("writer")
+      .exec((err, result) => {
+        if (err) return res.json({ success: false, err });
+        return res.status(200).json({ success: true, result });
+      });
+  });
 });
-
 
 router.post("/getComments", (req, res) => {
-
-    Comment.find({ "questionId": req.body.questionId })
-        .populate('writer')
-        .exec((err, comments) => {
-            if (err) return res.status(400).send(err)
-            res.status(200).json({ success: true, comments })
-        })
-
+  Comment.find({ questionId: req.body.questionId })
+    .populate("writer")
+    .exec((err, comments) => {
+      if (err) return res.status(400).send(err);
+      res.status(200).json({ success: true, comments });
+    });
 });
 
-router.post('/getLikes', (req, res) => {
-  let variable = {}
-  if(req.body.questionId){
-    variable = {questionId: req.body.questionId}
+router.post("/getLikes", (req, res) => {
+  let variable = {};
+  if (req.body.questionId) {
+    variable = { questionId: req.body.questionId };
   } else {
-    variable = {commentId: req.body.commentId}
+    variable = { commentId: req.body.commentId };
   }
 
-  Like.find(variable)
-        .exec((err, likes) => {
-            if (err) return res.status(400).send(err);
-            res.status(200).json({ success: true, likes })
-        })
-}); 
+  Like.find(variable).exec((err, likes) => {
+    if (err) return res.status(400).send(err);
+    res.status(200).json({ success: true, likes });
+  });
+});
 
 router.post("/getDislikes", (req, res) => {
+  let variable = {};
+  if (req.body.questionId) {
+    variable = { questionId: req.body.questionId };
+  } else {
+    variable = { commentId: req.body.commentId };
+  }
 
-    let variable = {}
-    if (req.body.questionId) {
-        variable = { questionId: req.body.questionId }
-    } else {
-        variable = { commentId: req.body.commentId }
-    }
-
-    Dislike.find(variable)
-        .exec((err, dislikes) => {
-            if (err) return res.status(400).send(err);
-            res.status(200).json({ success: true, dislikes })
-        })
-}); 
+  Dislike.find(variable).exec((err, dislikes) => {
+    if (err) return res.status(400).send(err);
+    res.status(200).json({ success: true, dislikes });
+  });
+});
 
 router.post("/upLike", auth.ensureLoggedIn, (req, res) => {
+  let variable = {};
+  if (req.body.questionId) {
+    variable = { questionId: req.body.questionId, userId: req.body.userId };
+  } else {
+    variable = { commentId: req.body.commentId, userId: req.body.userId };
+  }
 
-    let variable = {}
-    if (req.body.questionId) {
-        variable = { questionId: req.body.questionId, userId: req.body.userId }
-    } else {
-        variable = { commentId: req.body.commentId , userId: req.body.userId }
-    }
-
-    const like = new Like(variable)
-    //save the like information data in MongoDB
-    like.save((err, likeResult) => {
-        if (err) return res.json({ success: false, err });
-        //In case disLike Button is already clicked, we need to decrease the dislike by 1 
-        Dislike.findOneAndDelete(variable)
-            .exec((err, disLikeResult) => {
-                if (err) return res.status(400).json({ success: false, err });
-                res.status(200).json({ success: true })
-            })
-    })
-}); 
+  const like = new Like(variable);
+  //save the like information data in MongoDB
+  like.save((err, likeResult) => {
+    if (err) return res.json({ success: false, err });
+    //In case disLike Button is already clicked, we need to decrease the dislike by 1
+    Dislike.findOneAndDelete(variable).exec((err, disLikeResult) => {
+      if (err) return res.status(400).json({ success: false, err });
+      res.status(200).json({ success: true });
+    });
+  });
+});
 
 router.post("/unLike", auth.ensureLoggedIn, (req, res) => {
+  let variable = {};
+  if (req.body.questionId) {
+    variable = { questionId: req.body.questionId, userId: req.body.userId };
+  } else {
+    variable = { commentId: req.body.commentId, userId: req.body.userId };
+  }
 
-    let variable = {}
-    if (req.body.questionId) {
-        variable = { questionId: req.body.questionId, userId: req.body.userId }
-    } else {
-        variable = { commentId: req.body.commentId , userId: req.body.userId }
-    }
-
-    Like.findOneAndDelete(variable)
-        .exec((err, result) => {
-            if (err) return res.status(400).json({ success: false, err })
-            res.status(200).json({ success: true })
-        })
-}); 
+  Like.findOneAndDelete(variable).exec((err, result) => {
+    if (err) return res.status(400).json({ success: false, err });
+    res.status(200).json({ success: true });
+  });
+});
 
 router.post("/unDisLike", auth.ensureLoggedIn, (req, res) => {
+  let variable = {};
+  if (req.body.questionId) {
+    variable = { questionId: req.body.questionId, userId: req.body.userId };
+  } else {
+    variable = { commentId: req.body.commentId, userId: req.body.userId };
+  }
 
-    let variable = {}
-    if (req.body.questionId) {
-        variable = { questionId: req.body.questionId, userId: req.body.userId }
-    } else {
-        variable = { commentId: req.body.commentId , userId: req.body.userId }
-    }
-
-    Dislike.findOneAndDelete(variable)
-    .exec((err, result) => {
-        if (err) return res.status(400).json({ success: false, err })
-        res.status(200).json({ success: true })
-    })
+  Dislike.findOneAndDelete(variable).exec((err, result) => {
+    if (err) return res.status(400).json({ success: false, err });
+    res.status(200).json({ success: true });
+  });
 });
 
 router.post("/upDisLike", auth.ensureLoggedIn, (req, res) => {
+  let variable = {};
+  if (req.body.questionId) {
+    variable = { questionId: req.body.questionId, userId: req.body.userId };
+  } else {
+    variable = { commentId: req.body.commentId, userId: req.body.userId };
+  }
 
-    let variable = {}
-    if (req.body.questionId) {
-        variable = { questionId: req.body.questionId, userId: req.body.userId }
-    } else {
-        variable = { commentId: req.body.commentId , userId: req.body.userId }
-    }
-
-    const disLike = new Dislike(variable)
-    //save the like information data in MongoDB
-    disLike.save((err, dislikeResult) => {
-        if (err) return res.json({ success: false, err });
-        //In case Like Button is already clicked, we need to decrease the like by 1 
-        Like.findOneAndDelete(variable)
-            .exec((err, likeResult) => {
-                if (err) return res.status(400).json({ success: false, err });
-                res.status(200).json({ success: true })
-            })
-    })
-}); 
-
+  const disLike = new Dislike(variable);
+  //save the like information data in MongoDB
+  disLike.save((err, dislikeResult) => {
+    if (err) return res.json({ success: false, err });
+    //In case Like Button is already clicked, we need to decrease the like by 1
+    Like.findOneAndDelete(variable).exec((err, likeResult) => {
+      if (err) return res.status(400).json({ success: false, err });
+      res.status(200).json({ success: true });
+    });
+  });
+});
 
 // anything else falls to this "not found" case
 router.all("*", (req, res) => {
