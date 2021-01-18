@@ -27,21 +27,24 @@ const path = require("path"); // provide utilities for working with file and dir
 
 const api = require("./api");
 const auth = require("./auth");
+const mongoose_fuzzy_searching = require('mongoose-fuzzy-searching');
+
 
 // socket stuff
 const socketManager = require("./server-socket");
 
 // Server configuration below
 // TODO change connection URL after setting up your team database
-const mongoConnectionURL = 'mongodb+srv://admin:YoFSuxp9GP0cPlhp@cluster0.rfscu.mongodb.net/Cluster0?retryWrites=true&w=majority';
+const mongoConnectionURL = 'mongodb+srv://admin:whendidiask2021@mitask.vm5zw.mongodb.net/<MITAsk>?retryWrites=true&w=majority';
 // TODO change database name to the name you chose
-const databaseName = "Cluster0";
+const databaseName = "MITAsk";
 
 // connect to mongodb
 mongoose
   .connect(mongoConnectionURL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
+    useCreateIndex: true,
     dbName: databaseName,
   })
   .then(() => console.log("Connected to MongoDB"))

@@ -177,6 +177,7 @@ router.post("/register", async (req, res) => {
 router.get("/post", (req, res) => {
   // empty selector means get all documents
   Question.find({}).then((questions) => res.send(questions));
+  Question.fuzzySearch('weenie').then(console.log).catch(console.error);
 });
 
 router.post('/post', (req, res) => {

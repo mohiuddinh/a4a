@@ -6,6 +6,9 @@ import SingleQuestion from "../pages/SingleQuestion.js";
 import "../../css/Questions.css";
 import { get } from "../../utilities";
 
+
+
+
 class Questions extends Component {
   constructor(props) {
     super(props);
@@ -18,7 +21,8 @@ class Questions extends Component {
     get("/api/post").then((questionObjs) => {
       let reversedObjs = questionObjs.reverse();
       this.setState({ questions: reversedObjs });
-      console.log("received questions");
+      console.log("received quesions");
+      //question.fuzzySearch('weenie').then(console.log).catch(console.error);
     });
   }
 
