@@ -10,8 +10,8 @@ const link_style = {
 };
 
 class Login extends Component {
-  constructor(props){
-    super(props); 
+  constructor(props) {
+    super(props);
   }
 
   onSubmit = (e) => {
@@ -28,13 +28,13 @@ class Login extends Component {
     axios.post("/api/login", login).then((res) => {
       localStorage.setItem("token", res.token);
       console.log(res.data.data);
-      this.props.liftStateUp(res.data.userInfo.id); 
+      this.props.liftStateUp(res.data.userInfo.id);
       if (res.data.status === "ok") {
         loginMessage.innerHTML = "Success!";
       } else {
         loginMessage.innerHTML = res.data.error;
       }
-      navigate('/'); 
+      navigate("/");
     });
   };
 

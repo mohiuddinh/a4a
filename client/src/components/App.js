@@ -36,15 +36,15 @@ class App extends Component {
     };
   }
 
-  liftStateUp = (data) =>{
-    this.setState({ userId: data})
-  }
+  liftStateUp = (data) => {
+    this.setState({ userId: data });
+  };
 
   componentDidMount() {
     get("/api/whoami").then((user) => {
       if (user) {
         // they are registed in the database, and currently logged in.
-        this.setState({ userId: user.id});
+        this.setState({ userId: user.id });
       }
     });
   }
@@ -57,7 +57,6 @@ class App extends Component {
   //     post("/api/initsocket", { socketid: socket.id });
   //   });
   // };
-  
 
   handleLogout = () => {
     this.setState({ userId: null });
@@ -77,19 +76,27 @@ class App extends Component {
           <NotFound default />
         </Router> */}
         <div>
-        <Header userId={this.state.userId} handleLogout={this.handleLogout}/>
-          <Background /> 
+          <Header userId={this.state.userId} handleLogout={this.handleLogout} />
+          <Background />
           <Router>
             <ResetPassword path="/reset-password/:token" />
             <EmailPasswordLink path="/email-password-link" />
             <Confirmation path="/confirmation/:token" />
-            {this.state.userId ? <Post  path="/post" writerId={this.state.userId}/> : <Redirect from='/post' to='/login' />}
-            <SinglePostPage path='/questions/:questionId' writerId={this.state.userId}/>
+            {this.state.userId ? (
+              <Post path="/post" writerId={this.state.userId} />
+            ) : (
+              <Redirect from="/post" to="/login" />
+            )}
+            <SinglePostPage path="/questions/:questionId" writerId={this.state.userId} />
             <Questions path="/questions" />
-            {this.state.userId ? <Redirect from='/login' to='/' /> : <Login  path="/login" liftStateUp={this.liftStateUp}/>}
-            <Register  path="/register"/>
-            <Home  path="/" />
-        </Router>
+            {this.state.userId ? (
+              <Redirect from="/login" to="/" />
+            ) : (
+              <Login path="/login" liftStateUp={this.liftStateUp} />
+            )}
+            <Register path="/register" />
+            <Home path="/" />
+          </Router>
         </div>
       </>
     );
