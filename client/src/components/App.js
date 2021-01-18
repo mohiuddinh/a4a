@@ -80,7 +80,7 @@ class App extends Component {
             <ChangePassword  path="/change-password" />
             {this.state.userId ? <Post  path="/post" writerId={this.state.userId}/> : <Redirect from='/post' to='/login' />}
             <SinglePostPage path='/questions/:questionId' writerId={this.state.userId}/>
-            <Questions path="/questions" />
+            <Questions path="/questions" userId={this.state.userId}/>
             {this.state.userId ? <Redirect from='/login' to='/' /> : <Login  path="/login" liftStateUp={this.liftStateUp}/>}
             <Register  path="/register"/>
             <Home  path="/" />

@@ -34,7 +34,6 @@ function Comments(props) {
     });
 
   }
-
   return (
   <div>
             <br />
@@ -64,7 +63,7 @@ function Comments(props) {
             </form>
 
         </div>
-  )
+  ) 
 }
 
 export default Comments; 

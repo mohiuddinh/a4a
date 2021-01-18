@@ -1,21 +1,23 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Comment, Avatar, Button, Input } from 'antd';
 import Axios from 'axios';
 import LikeDislikes from './LikeDislikes';
 import { get, post } from '../../utilities.js'; 
 const { TextArea } = Input;
 
+let writerId = null; 
 
 function SingleComment(props) {
     const [CommentValue, setCommentValue] = useState("");
     const [OpenReply, setOpenReply] = useState(false);
     const [Loading, setLoading] = useState(true); 
 
-    let writerId = null; 
+    
     get('/api/whoami').then((res)=>{
-      writerId = res.id; 
-      setLoading(false);
-    })
+    writerId = res.id; 
+    }).then(() => { 
+        setLoading(false) 
+    }); 
 
     const handleChange = (e) => {
         setCommentValue(e.currentTarget.value)
@@ -56,16 +58,19 @@ function SingleComment(props) {
       <LikeDislikes comment commentId={props.comment._id} userId={writerId}/>, 
       <span onClick={openReply} key="comment-basic-reply-to">Reply to </span>
     ]
+
     // if (props.displayReplyTo){
     //   actions.push(<span onClick={openReply} key="comment-basic-reply-to">Reply to </span>);
     // }
 
     if (Loading){
+        console.log('executed loading statement')
       return (
         <div>Loading</div>
       );
-    };
-
+    }
+    else {
+        console.log('executed not loading statement')
     return (
         <div>
             <Comment
@@ -93,7 +98,7 @@ function SingleComment(props) {
             }
 
         </div>
-    )
+    )}
 }
 
 export default SingleComment;
