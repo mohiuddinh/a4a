@@ -169,15 +169,15 @@ router.post("/email-password-link", async (req, res) => {
 
 // login
 router.post("/login", async (req, res) => {
-  console.log("Accessed login endpoint");
+  //console.log("Accessed login endpoint");
   const { username, password } = req.body;
   try {
     User.findOne({ username }).then(async (user) => {
       if (!user) {
-        console.log("Accessed login enpoint 2");
+        //console.log("Accessed login enpoint 2");
         return res.json({ status: "error", error: "Invalid username/password" });
       } else if (!user.isVerified) {
-        console.log("Accessed login enpoint 3");
+        //console.log("Accessed login enpoint 3");
         return res.json({ status: "error", error: "Your account has not been verified yet" });
       }
 
@@ -203,7 +203,6 @@ router.get("/confirmation/:token", async (req, res) => {
     const result = jwt.verify(token, EMAIL_SECRET);
     const id = result.user;
 
-    console.log(id);
     const user = await User.findOne({ _id: id });
 
     if (!user) {
@@ -293,7 +292,7 @@ router.post("/register", async (req, res) => {
   }
   res.json({
     status: "ok",
-    ok: "An email with the verification link has been sent! Please check your inbox!",
+    ok: "An email with the verification link has been sent! Please check your inbox or junk mail!",
   });
 });
 
