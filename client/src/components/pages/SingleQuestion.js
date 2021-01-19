@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "@reach/router";
+import LikeDislikes from "./LikeDislikes.js";
 
 import "../../css/SingleQuestion.css";
 
@@ -22,6 +23,9 @@ class SingleQuestion extends Component {
           <p>
             <span>Question:</span> {this.props.question}
           </p>
+        </div>
+        <div className="singleQuestion__container">
+          <LikeDislikes question questionId={this.props.questionId} userId={this.props.userId} />
         </div>
       </div>
     );

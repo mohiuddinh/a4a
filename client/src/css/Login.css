@@ -42,6 +42,7 @@
 }
 
 .login__control:last-child h5 {
+  font-size: 14px;
   position: relative;
 }
 

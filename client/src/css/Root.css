@@ -7,7 +7,7 @@
   --pale-pink: #fde0d9;
   --pale-pinkHover: #f0c8bf;
   --tea-green: #caefd1;
-  --tea-greenHover: #addbb6;
+  --tea-greenHover: #a6dfb0;
   --white: #ffffff;
   --background: #fafafa;
   --border-accent: #dbdbdb;
@@ -25,6 +25,15 @@
   padding: 0;
   font-family: "Poppins", sans-serif;
   text-decoration: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin-bottom: 0 !important;
 }
 
 .btn {

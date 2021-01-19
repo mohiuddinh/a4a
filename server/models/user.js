@@ -6,9 +6,10 @@ const UserSchema = new mongoose.Schema(
     password: { type: String, required: true },
     fullName: { type: String, required: true },
     email: { type: String, required: true, unique: true },
+    isVerified: { type: Boolean, default: false },
   },
   { collection: "users" }
 );
 
 // compile model from schema
-module.exports = mongoose.model("UserSchema", UserSchema);
+module.exports = mongoose.model("User", UserSchema);

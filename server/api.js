@@ -8,7 +8,10 @@
 */
 
 const express = require("express");
-const Question = require('./models/question');
+const Question = require("./models/question");
+const Comment = require("./models/comment");
+const Like = require("./models/like");
+const Dislike = require("./models/dislike");
 
 // import models so we can interact with the database
 const User = require("./models/user");
@@ -16,12 +19,29 @@ const User = require("./models/user");
 // import bodyParser
 const bodyParser = require("body-parser");
 
+// import nodemailer
+const nodemailer = require("nodemailer");
+
+// import crypto
+// const crypto = require("crypto");
+
+// import atob
+const atob = require("atob");
+
 // import bcrypt
 const bcrypt = require("bcryptjs");
+const dotenv = require("dotenv");
+
+dotenv.config();
+
+// import from dotenv
+const JWT_SECRET = process.env.JWT_SECRET_STR;
+const EMAIL_SECRET = process.env.EMAIL_SECRET_STR;
+const EMAIL_USERNAME = process.env.MIT_ASK_USERNAME;
+const EMAIL_PASSWORD = process.env.MIT_ASK_PASSWORD;
 
 // import jwt
 const jwt = require("jsonwebtoken");
-const JWT_SECRET = "askljdhaksh*&#^$*&@kjashdkjashd*&^1827368jkasdk87ty8asyuidhbkj";
 
 // import authentication library
 const auth = require("./auth");
@@ -31,7 +51,8 @@ const router = express.Router();
 
 //initialize socket
 const socketManager = require("./server-socket");
-
+const { _ } = require("core-js");
+const { resolve } = require("../webpack.config");
 
 // router.post("/login", auth.login);
 router.post("/logout", auth.logout);
@@ -40,8 +61,8 @@ router.get("/whoami", (req, res) => {
     // not logged in
     return res.send({});
   }
-
-  res.send(req.session.user);
+  //console.log(res);
+  return res.send(req.session.user);
 });
 
 router.post("/initsocket", (req, res) => {
@@ -63,67 +84,151 @@ router.post("/initsocket", (req, res) => {
 //   return res.render("signup", {});
 // });
 
-// change-password
-router.post("/change-password", async (req, res) => {
-  const { token, newpassword: plainTextPassword } = req.body;
-
-  if (!plainTextPassword || typeof plainTextPassword !== "string") {
-    return res.json({ status: "error", error: "Invalid password" });
-  }
-
-  if (plainTextPassword.length < 5) {
-    return res.json({
-      status: "error",
-      error: "Password too small. Should be at least 6 characters",
-    });
-  }
+// reset-password
+router.post("/reset-password/:token", async (req, res) => {
+  console.log("Accessed reset-password endpoint");
+  const { token } = req.params;
+  const { password, passwordTwo } = req.body;
 
   try {
-    const user = jwt.verify(token, JWT_SECRET);
+    const result = jwt.verify(token, EMAIL_SECRET);
+    const id = result.user;
 
-    const _id = user.id;
+    const user = await User.findOne({ _id: id });
 
-    const password = await bcrypt.hash(plainTextPassword, 10);
+    if (!user) {
+      return res.json({ status: "noUserFound" });
+    } else {
+      var regex = /[ !@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/g;
 
-    await User.updateOne(
-      { _id },
-      {
-        $set: { password },
+      if (!password || typeof password !== "string") {
+        return res.json({ status: "error", error: "Invalid password" });
       }
-    );
-    res.json({ status: "ok" });
+
+      if (!regex.test(password)) {
+        return res.json({
+          status: "error",
+          error: "Password does not contain any special characters",
+        });
+      }
+
+      if (password !== passwordTwo) {
+        return res.json({ status: "error", error: "Passwords do not match" });
+      }
+
+      if (password.length < 8) {
+        return res.json({
+          status: "error",
+          error: "Password is too small. It should be at least 8 characters long",
+        });
+      }
+
+      const passwordHashed = await bcrypt.hash(password, 10);
+
+      await User.updateOne(
+        { _id: id },
+        {
+          $set: { password: passwordHashed },
+        }
+      );
+      return res.json({ status: "success" });
+    }
   } catch (error) {
     console.log(error);
-    res.json({ status: "error", error: ";))" });
+    return res.json({ status: "tokenExpired" });
+  }
+});
+
+// email-password-link
+router.post("/email-password-link", async (req, res) => {
+  const { email } = req.body;
+  const user = await User.findOne({ email });
+
+  if (!user) {
+    console.log("user does not exists");
+    return res.json({ status: "error" });
+  } else {
+    var transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: { user: EMAIL_USERNAME, pass: EMAIL_PASSWORD },
+    });
+
+    jwt.sign({ user: user._id }, EMAIL_SECRET, { expiresIn: 900 }, (err, emailToken) => {
+      const url = `http://localhost:5000/reset-password/${emailToken}`;
+
+      transporter.sendMail({
+        from: EMAIL_USERNAME,
+        to: user.email,
+        subject: "Reset Password for your MIT Ask Account",
+        html: `Please click on this link to reset your password: <a href="${url}">${url}</a>`,
+      });
+    });
+    return res.json({ status: "ok" });
   }
 });
 
 // login
 router.post("/login", async (req, res) => {
+  console.log("Accessed login endpoint");
   const { username, password } = req.body;
-try{
-  User.findOne({ username }).then(async (user) => {
-    if (!user) {
+  try {
+    User.findOne({ username }).then(async (user) => {
+      if (!user) {
+        console.log("Accessed login enpoint 2");
+        return res.json({ status: "error", error: "Invalid username/password" });
+      } else if (!user.isVerified) {
+        console.log("Accessed login enpoint 3");
+        return res.json({ status: "error", error: "Your account has not been verified yet" });
+      }
+
+      if (await bcrypt.compare(password, user.password)) {
+        const sessUser = { id: user._id, username: user.username };
+        req.session.user = sessUser;
+        const token = jwt.sign(sessUser, JWT_SECRET);
+        return res.json({ status: "ok", data: token, userInfo: sessUser });
+      } else {
+        return res.json({ status: "error", error: "Incorrect password" });
+      }
+      // the username, password combination is successful
+    });
+  } catch (e) {
     return res.json({ status: "error", error: "Invalid username/password" });
   }
+});
 
-  if (await bcrypt.compare(password, user.password)) {
-    const sessUser = { id: user._id, username: user.username }
-    req.session.user = sessUser; 
-    //console.log(req.session.user);
-    //res.json({ msg: 'Logged in successfully', sessUser});
-    const token = jwt.sign( sessUser, JWT_SECRET);
-    return res.json({ status: "ok", data: token, userInfo: sessUser });
+// confirmation
+router.get("/confirmation/:token", async (req, res) => {
+  const { token } = req.params;
+  try {
+    const result = jwt.verify(token, EMAIL_SECRET);
+    const id = result.user;
+
+    console.log(id);
+    const user = await User.findOne({ _id: id });
+
+    if (!user) {
+      return res.json({ status: "noUserFound" });
+    } else if (user.isVerified) {
+      return res.json({ status: "alreadyVerified" });
+    } else {
+      await User.updateOne(
+        { _id: id },
+        {
+          $set: { isVerified: true },
+        }
+      );
+      return res.json({ status: "Verified" });
+    }
+  } catch (error) {
+    console.log(error);
+    res.json({ status: "error", error: e });
   }
-    // the username, password combination is successful
-    
-}); } catch(e){
-  return res.json({ status: "error", error: "Invalid username/password" });}
+  return res.send({ status: "success!" });
 });
 
 // register
 router.post("/register", async (req, res) => {
-  const { username, password: plainTextPassword, passwordTwo, fullName, email } = req.body;
+  const { fullName, username, email, password: plainTextPassword, passwordTwo } = req.body;
 
   var regex = /[ !@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/g;
 
@@ -140,69 +245,203 @@ router.post("/register", async (req, res) => {
   }
 
   if (plainTextPassword !== passwordTwo) {
-    console.log(plainTextPassword);
-    console.log(passwordTwo);
-    console.log(email);
     return res.json({ status: "error", error: "Passwords do not match" });
   }
 
   if (plainTextPassword.length < 8) {
     return res.json({
       status: "error",
-      error: "Password too small. Should be at least 8 characters",
+      error: "Password is too small. It should be at least 8 characters long",
     });
   }
 
   const password = await bcrypt.hash(plainTextPassword, 10);
 
   try {
-    const response = await User.create({
+    const user = await User.create({
       fullName,
       username,
       email,
       password,
     });
-    console.log("User created successfully:", response);
+
+    var transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: { user: EMAIL_USERNAME, pass: EMAIL_PASSWORD },
+    });
+
+    jwt.sign({ user: user._id }, EMAIL_SECRET, (err, emailToken) => {
+      const url = `http://localhost:5000/confirmation/${emailToken}`;
+
+      transporter.sendMail({
+        from: EMAIL_USERNAME,
+        to: user.email,
+        subject: "Account Verification Token",
+        html: `Please click on this link to confirm your email: <a href="${url}">${url}</a>`,
+      });
+    });
+    console.log("User created successfully:", user);
   } catch (error) {
-    console.log(error);
-    if (error.code === 11000) {
+    console.log(JSON.stringify(error));
+    if (error.keyPattern.username) {
       // duplicate key
       return res.json({ status: "error", error: "Username already exists" });
+    } else if (error.keyPattern.email) {
+      return res.json({ status: "error", error: "A username with this email already exists" });
     }
     throw error;
   }
-  res.json({ status: "ok" });
+  res.json({
+    status: "ok",
+    ok: "An email with the verification link has been sent! Please check your inbox!",
+  });
 });
-
-
 
 router.get("/post", (req, res) => {
   // empty selector means get all documents
   Question.find({}).then((questions) => res.send(questions));
 });
 
-router.post('/post', auth.ensureLoggedIn, (req, res) => {
-  let newQuestion = new Question({
-    subject: req.body.subject,
-    tag: req.body.tag, 
-    question: req.body.question
-  })
+router.post("/post", auth.ensureLoggedIn, (req, res) => {
+  let newQuestion = new Question(req.body);
   newQuestion.save().then((question) => res.send(question));
-})
+});
 
-router.get('/question_by_id', (req, res) => {
-  let type = req.query.type; 
-  let questionId = req.query.id; 
+router.get("/question_by_id", (req, res) => {
+  let type = req.query.type;
+  let questionId = req.query.id;
 
-  if (type === 'array'){
-
+  if (type === "array") {
   }
-  Question.find({ '_id': {$in: questionId}}).populate('writer').exec((err, product) => {
-    if (err) {return req.status(400).send(err)} 
-    return res.status(200).send(product)
-  })
+  Question.find({ _id: { $in: questionId } })
+    .populate("writer")
+    .exec((err, product) => {
+      if (err) {
+        return req.status(400).send(err);
+      }
+      return res.status(200).send(product);
+    });
+});
 
-})
+router.post("/saveComment", auth.ensureLoggedIn, (req, res) => {
+  const comment = new Comment(req.body);
+
+  comment.save((err, comment) => {
+    if (err) return res.json({ success: false, err });
+
+    Comment.find({ _id: comment._id })
+      .populate("writer")
+      .exec((err, result) => {
+        if (err) return res.json({ success: false, err });
+        return res.status(200).json({ success: true, result });
+      });
+  });
+});
+
+router.post("/getComments", (req, res) => {
+  Comment.find({ questionId: req.body.questionId })
+    .populate("writer")
+    .exec((err, comments) => {
+      if (err) return res.status(400).send(err);
+      res.status(200).json({ success: true, comments });
+    });
+});
+
+router.post("/getLikes", (req, res) => {
+  let variable = {};
+  if (req.body.questionId) {
+    variable = { questionId: req.body.questionId };
+  } else {
+    variable = { commentId: req.body.commentId };
+  }
+
+  Like.find(variable).exec((err, likes) => {
+    if (err) return res.status(400).send(err);
+    res.status(200).json({ success: true, likes });
+  });
+});
+
+router.post("/getDislikes", (req, res) => {
+  let variable = {};
+  if (req.body.questionId) {
+    variable = { questionId: req.body.questionId };
+  } else {
+    variable = { commentId: req.body.commentId };
+  }
+
+  Dislike.find(variable).exec((err, dislikes) => {
+    if (err) return res.status(400).send(err);
+    res.status(200).json({ success: true, dislikes });
+  });
+});
+
+router.post("/upLike", auth.ensureLoggedIn, (req, res) => {
+  let variable = {};
+  if (req.body.questionId) {
+    variable = { questionId: req.body.questionId, userId: req.body.userId };
+  } else {
+    variable = { commentId: req.body.commentId, userId: req.body.userId };
+  }
+
+  const like = new Like(variable);
+  //save the like information data in MongoDB
+  like.save((err, likeResult) => {
+    if (err) return res.json({ success: false, err });
+    //In case disLike Button is already clicked, we need to decrease the dislike by 1
+    Dislike.findOneAndDelete(variable).exec((err, disLikeResult) => {
+      if (err) return res.status(400).json({ success: false, err });
+      res.status(200).json({ success: true });
+    });
+  });
+});
+
+router.post("/unLike", auth.ensureLoggedIn, (req, res) => {
+  let variable = {};
+  if (req.body.questionId) {
+    variable = { questionId: req.body.questionId, userId: req.body.userId };
+  } else {
+    variable = { commentId: req.body.commentId, userId: req.body.userId };
+  }
+
+  Like.findOneAndDelete(variable).exec((err, result) => {
+    if (err) return res.status(400).json({ success: false, err });
+    res.status(200).json({ success: true });
+  });
+});
+
+router.post("/unDisLike", auth.ensureLoggedIn, (req, res) => {
+  let variable = {};
+  if (req.body.questionId) {
+    variable = { questionId: req.body.questionId, userId: req.body.userId };
+  } else {
+    variable = { commentId: req.body.commentId, userId: req.body.userId };
+  }
+
+  Dislike.findOneAndDelete(variable).exec((err, result) => {
+    if (err) return res.status(400).json({ success: false, err });
+    res.status(200).json({ success: true });
+  });
+});
+
+router.post("/upDisLike", auth.ensureLoggedIn, (req, res) => {
+  let variable = {};
+  if (req.body.questionId) {
+    variable = { questionId: req.body.questionId, userId: req.body.userId };
+  } else {
+    variable = { commentId: req.body.commentId, userId: req.body.userId };
+  }
+
+  const disLike = new Dislike(variable);
+  //save the like information data in MongoDB
+  disLike.save((err, dislikeResult) => {
+    if (err) return res.json({ success: false, err });
+    //In case Like Button is already clicked, we need to decrease the like by 1
+    Like.findOneAndDelete(variable).exec((err, likeResult) => {
+      if (err) return res.status(400).json({ success: false, err });
+      res.status(200).json({ success: true });
+    });
+  });
+});
 
 // anything else falls to this "not found" case
 router.all("*", (req, res) => {
