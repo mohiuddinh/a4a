@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "@reach/router";
-import LikeDislikes from "./LikeDislikes.js";
+import LikeDislikes from './LikeDislikes.js'; 
 
 import "../../css/SingleQuestion.css";
 
@@ -12,6 +12,7 @@ class SingleQuestion extends Component {
   render() {
     return (
       <div className="singleQuestion">
+        <a href={this.props.url}>
         <div className="singleQuestion__container">
           <h5>Subject: {this.props.subject}</h5>
         </div>
@@ -23,10 +24,11 @@ class SingleQuestion extends Component {
           <p>
             <span>Question:</span> {this.props.question}
           </p>
-        </div>
-        <div className="singleQuestion__container">
-          <LikeDislikes question questionId={this.props.questionId} userId={this.props.userId} />
-        </div>
+          </div>
+          </a>
+          <div className="singleQuestion__container">
+          <LikeDislikes question questionId={this.props.questionId} userId={this.props.userId}/>
+          </div>
       </div>
     );
   }

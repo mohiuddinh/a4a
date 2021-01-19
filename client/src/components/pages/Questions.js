@@ -28,16 +28,17 @@ class Questions extends Component {
     if (this.state.questions.length !== 0) {
       questionsList = this.state.questions.map((questionObj, i) => {
         return (
-          <a href={`/questions/${questionObj._id}`}>
+          //<a href={`/questions/${questionObj._id}`}>
             <SingleQuestion
               key={questionObj._id}
               questionId={questionObj._id}
               subject={questionObj.subject}
               tag={questionObj.tag}
               question={questionObj.question}
-              userId = {this.props.userId}
+              userId={this.props.userId}
+              url={`/questions/${questionObj._id}`}
             />
-          </a>
+          //</a>
         );
       });
       console.log({ questionsList });
