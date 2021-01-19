@@ -203,7 +203,6 @@ router.get("/confirmation/:token", async (req, res) => {
     const result = jwt.verify(token, EMAIL_SECRET);
     const id = result.user;
 
-    
     const user = await User.findOne({ _id: id });
 
     if (!user) {

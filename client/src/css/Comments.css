@@ -1,0 +1,13 @@
+@import "./Root.css";
+
+.comments__container {
+  display: flex;
+}
+
+.comments__container textarea {
+  flex: 1;
+  resize: none;
+  overflow: auto;
+  outline: none;
+  border-radius: 12px;
+}
