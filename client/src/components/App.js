@@ -63,6 +63,8 @@ class App extends Component {
     post("/api/logout");
   };
 
+  // fixed Login and Register spelling
+
   render() {
     return (
       <>
@@ -76,19 +78,27 @@ class App extends Component {
           <NotFound default />
         </Router> */}
         <div>
-        <Header userId={this.state.userId} handleLogout={this.handleLogout} />
-          <Background /> 
+          <Header userId={this.state.userId} handleLogout={this.handleLogout} />
+          <Background />
           <Router>
             <ResetPassword path="/reset-password/:token" />
             <EmailPasswordLink path="/email-password-link" />
             <Confirmation path="/confirmation/:token" />
-            {this.state.userId ? <Post  path="/post" writerId={this.state.userId}/> : <Redirect from='/post' to='/login' />}
-            <SinglePostPage path='/questions/:questionId' writerId={this.state.userId}/>
-            <Questions path="/questions" userId={this.state.userId}/>
-            {this.state.userId ? <Redirect from='/login' to='/' /> : <Login  path="/login" liftStateUp={this.liftStateUp}/>}
-            <Register  path="/register"/>
-            <Home  path="/" />
-        </Router>
+            {this.state.userId ? (
+              <Post path="/post" writerId={this.state.userId} />
+            ) : (
+              <Redirect from="/post" to="/login" />
+            )}
+            <SinglePostPage path="/questions/:questionId" writerId={this.state.userId} />
+            <Questions path="/questions" userId={this.state.userId} />
+            {this.state.userId ? (
+              <Redirect from="/login" to="/" />
+            ) : (
+              <Login path="/login" liftStateUp={this.liftStateUp} />
+            )}
+            <Register path="/register" />
+            <Home path="/" />
+          </Router>
         </div>
       </>
     );
