@@ -52,7 +52,7 @@ const router = express.Router();
 //initialize socket
 const socketManager = require("./server-socket");
 const { _ } = require("core-js");
-const { resolve } = require("../webpack.config");
+// const { resolve } = require("../webpack.config");
 
 // router.post("/login", auth.login);
 router.post("/logout", auth.logout);
@@ -154,7 +154,7 @@ router.post("/email-password-link", async (req, res) => {
     });
 
     jwt.sign({ user: user._id }, EMAIL_SECRET, { expiresIn: 900 }, (err, emailToken) => {
-      const url = `http://localhost:5000/reset-password/${emailToken}`;
+      const url = `https://mit-ask.herokuapp.com/${emailToken}`;
 
       transporter.sendMail({
         from: EMAIL_USERNAME,
@@ -270,7 +270,7 @@ router.post("/register", async (req, res) => {
     });
 
     jwt.sign({ user: user._id }, EMAIL_SECRET, (err, emailToken) => {
-      const url = `http://localhost:5000/confirmation/${emailToken}`;
+      const url = `https://mit-ask.herokuapp.com/${emailToken}`;
 
       transporter.sendMail({
         from: EMAIL_USERNAME,

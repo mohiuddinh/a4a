@@ -1,13 +1,42 @@
 @import "./Root.css";
 
-.comments__container {
-  display: flex;
+.comments__container:nth-child(1) {
+  border-radius: 12px;
+  border: 1px solid var(--border-accent);
+  background-color: var(--white);
+  margin-bottom: 24px;
+  padding: 12px 24px;
 }
 
-.comments__container textarea {
+.comments__container:nth-child(2) {
+  height: 12vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 24px;
+  border-radius: 12px;
+  border: 1px solid var(--border-accent);
+  background-color: var(--white);
+}
+
+.comments__container:nth-child(2) textarea {
   flex: 1;
+  padding: 12px;
+  text-align: left;
   resize: none;
   overflow: auto;
   outline: none;
-  border-radius: 12px;
+}
+
+.comments__container:nth-child(2) button {
+  background-color: var(--tea-green);
+  margin-left: 24px;
+}
+
+.comments__main {
+  border-bottom: 1px solid var(--border-accent);
+}
+
+.comments__main:last-child {
+  border-bottom: none;
 }

@@ -41,32 +41,36 @@ function Comments(props) {
     <div className="comments">
       {/* Comment Lists  */}
       {/* {console.log(props.CommentLists)} */}
+      <div className="comments__container">
+        {props.CommentLists &&
+          props.CommentLists.map(
+            (comment, index) =>
+              !comment.responseTo && (
+                <React.Fragment>
+                  <div className="comments__main">
+                    <SingleComment
+                      comment={comment}
+                      questionId={props.questionId}
+                      refreshFunction={props.refreshFunction}
+                      writerId={props.writerId}
+                      displayReplyTo={replyTo}
+                    />
 
-      {props.CommentLists &&
-        props.CommentLists.map(
-          (comment, index) =>
-            !comment.responseTo && (
-              <React.Fragment>
-                <SingleComment
-                  comment={comment}
-                  questionId={props.questionId}
-                  refreshFunction={props.refreshFunction}
-                  writerId={props.writerId}
-                  displayReplyTo={replyTo}
-                />
-                <ReplyComment
-                  CommentLists={props.CommentLists}
-                  questionId={props.questionId}
-                  parentCommentId={comment._id}
-                  refreshFunction={props.refreshFunction}
-                />
-              </React.Fragment>
-            )
-        )}
+                    <ReplyComment
+                      CommentLists={props.CommentLists}
+                      questionId={props.questionId}
+                      parentCommentId={comment._id}
+                      refreshFunction={props.refreshFunction}
+                    />
+                  </div>
+                </React.Fragment>
+              )
+          )}
+      </div>
       {/* Root Comment Form */}
       <div className="comments__container">
         <form style={{ display: "flex" }} onSubmit={onSubmit}>
-          <textarea onChange={handleChange} value={Comment} placeholder="comments" />
+          <textarea onChange={handleChange} value={Comment} placeholder="comment" />
           <button className="btn" onClick={onSubmit}>
             Submit
           </button>

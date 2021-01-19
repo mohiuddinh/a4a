@@ -1,0 +1,13 @@
+@import "./Root.css";
+
+.singleComment:first-child {
+  /* border-bottom: none; */
+}
+
+.singleComment {
+  /* border-bottom: 1px solid var(--border-accent); */
+}
+
+.singleComment__reply {
+  margin-left: 8px;
+}
