@@ -15,7 +15,7 @@ function ResetPassword(props) {
         );
       } else if (res.data.status === "success") {
         setResetPasswordMessage(
-          "You have successfully reset your password! Trying logging in again now!"
+          "You have successfully reset your password! Try logging in again now!"
         );
       } else if (res.data.status === "error") {
         setResetPasswordMessage(res.data.error + "!");

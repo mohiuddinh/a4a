@@ -40,12 +40,31 @@ function SinglePostPage(props) {
       <div className="singlePost">
         <div className="singlePost__container">
           <div className="singlePost__profile">
-            <AccountCircleIcon />
+            <div className="singlePost__profileContainer">
+              <AccountCircleIcon style={{ color: "lightblue" }} fontSize="large" />
+            </div>
+            <div className="singlePost__profileContainer">
+              <LikeDislikes question questionId={questionId} userId={writer} />
+            </div>
           </div>
-          <p>{Question.subject}</p>
-          <p>{Question.tag}</p>
-          <p>{Question.question}</p>
-          <LikeDislikes question questionId={questionId} userId={writer} />
+          <div className="singlePost__main">
+            <div className="singlePost__sub">
+              <h5>
+                <span>Subject: </span>
+                {Question.subject}
+              </h5>
+            </div>
+            <div className="singlePost__sub">
+              <span>Tags: </span>
+              {Question.tag}
+            </div>
+            <div className="singlePost__sub">
+              <p>
+                <span>Question: </span>
+                {Question.question}
+              </p>
+            </div>
+          </div>
         </div>
         <div className="singlePost__container">
           <Comments
@@ -55,7 +74,6 @@ function SinglePostPage(props) {
             refreshFunction={updateComment}
           />
         </div>
-        <div className="singlePost__container"></div>
       </div>
     );
   } else {
