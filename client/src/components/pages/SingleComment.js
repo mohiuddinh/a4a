@@ -3,6 +3,9 @@ import { Comment, Avatar, Button, Input } from 'antd';
 import Axios from 'axios';
 import LikeDislikes from './LikeDislikes';
 import { get, post } from '../../utilities.js'; 
+import Delete from './Delete.js'; 
+import Edit from './Edit.js'; 
+
 const { TextArea } = Input;
 
 let writerId = null; 
@@ -64,13 +67,11 @@ function SingleComment(props) {
     // }
 
     if (Loading){
-        console.log('executed loading statement')
       return (
         <div>Loading</div>
       );
     }
     else {
-        console.log('executed not loading statement')
     return (
         <div>
             <Comment
@@ -82,7 +83,8 @@ function SingleComment(props) {
                     </p>
                 }
             ></Comment>
-
+            {writerId === props.comment.writer._id ? <Delete comment commentId={props.comment._id} userId={writerId} questionId={props.questionId} /> : null}
+            {writerId === props.comment.writer._id ? <Edit comment commentId={props.comment._id} userId={writerId} questionId={props.questionId} /> : null}
 
             {OpenReply &&
                 <form style={{ display: 'flex' }} onSubmit={onSubmit}>

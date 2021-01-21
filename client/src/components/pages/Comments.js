@@ -53,7 +53,6 @@ function Comments(props) {
                   questionId={props.questionId}
                   refreshFunction={props.refreshFunction}
                   writerId={props.writerId}
-                  displayReplyTo={replyTo}
                 />
                 <ReplyComment
                   CommentLists={props.CommentLists}

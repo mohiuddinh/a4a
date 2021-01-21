@@ -14,6 +14,7 @@ import EmailPasswordLink from "./pages/EmailPasswordLink.js";
 import SinglePostPage from "./pages/SinglePostPage.js";
 import Confirmation from "./pages/Confirmation.js";
 import ResetPassword from "./pages/ResetPassword.js";
+import Edit from './pages/Edit.js'; 
 
 import "../css/utilities.css";
 import "../css/App.css";
@@ -83,6 +84,7 @@ class App extends Component {
             <EmailPasswordLink path="/email-password-link" />
             <Confirmation path="/confirmation/:token" />
             {this.state.userId ? <Post  path="/post" writerId={this.state.userId}/> : <Redirect from='/post' to='/login' />}
+            <Edit path='/questions/edit/:questionId' writerId={this.state.userId} />
             <SinglePostPage path='/questions/:questionId' writerId={this.state.userId}/>
             <Questions path="/questions" userId={this.state.userId}/>
             {this.state.userId ? <Redirect from='/login' to='/' /> : <Login  path="/login" liftStateUp={this.liftStateUp}/>}

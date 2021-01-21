@@ -33,7 +33,7 @@ function LikeDislikes(props) {
         post('/api/getLikes', variable)
             .then((res) => {
                 //console.log('getLikes',response.data)
-                console.log(res);
+                //console.log(res);
 
                 if (res.success) {
                     //How many likes does this video or comment have 
@@ -87,7 +87,7 @@ function LikeDislikes(props) {
                         setLikes(Likes + 1)
                         setLikeAction('liked')
                         console.log('Liked message')
-                        console.log(res);
+                        //console.log(res);
 
                         //If dislike button is already clicked
 

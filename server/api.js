@@ -12,6 +12,7 @@ const Question = require("./models/question");
 const Comment = require("./models/comment");
 const Like = require("./models/like");
 const Dislike = require("./models/dislike");
+const mongoose = require("mongoose");
 
 // import models so we can interact with the database
 const User = require("./models/user");
@@ -53,6 +54,7 @@ const router = express.Router();
 const socketManager = require("./server-socket");
 const { _ } = require("core-js");
 const { resolve } = require("../webpack.config");
+const { isValidObjectId } = require("mongoose");
 
 // router.post("/login", auth.login);
 router.post("/logout", auth.logout);
@@ -442,6 +444,36 @@ router.post("/upDisLike", auth.ensureLoggedIn, (req, res) => {
     });
   });
 });
+
+router.post('/deletePost', auth.ensureLoggedIn, (req, res) => {
+  console.log(req.body); 
+  Question.findOneAndDelete(req.body).exec((err, deleteResult)=>{
+    if (err) res.status(400).json( {success: false, err} ); 
+    res.status(200).json({ success: true })
+  })
+});
+
+router.post('/deleteComment', auth.ensureLoggedIn, (req, res) => {
+  Comment.findOneAndUpdate(
+    { _id: req.body._id },
+    { $set: { writer: mongoose.Types.ObjectId("60073eedea05d207bfbd0eee"), content: "[removed]" } },
+    { returnOriginal: false }
+  ).exec((err, result) => {
+    if (err) res.status(400).json({ success: false, err });
+    res.status(200).json({ success: true, data: result });
+  });
+});
+
+router.post('/updatePost', auth.ensureLoggedIn, (req, res) => {
+  Question.findOneAndUpdate(
+    { _id: req.body._id }, 
+    { $set: { subject: req.body.subject, tag: req.body.tag, question: req.body.question } }, 
+    { returnOriginal: false }).exec((err, result)=>{
+      if (err) res.status(400).json({ success: false, err }); 
+      res.status(200).json({ success: true, data: result }); 
+    })
+  }); 
+
 
 // anything else falls to this "not found" case
 router.all("*", (req, res) => {
