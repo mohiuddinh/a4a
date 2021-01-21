@@ -5,7 +5,7 @@
   "main": "server/server.js",
   "scripts": {
     "hotloader": "webpack serve --config ./webpack.config.js --mode development --port 5000",
-    "start": "nodemon --ignore client/",
+    "start": "nodemon --ignore client/ node index.js",
     "build": "webpack"
   },
   "repository": {
@@ -67,8 +67,8 @@
     "html-webpack-plugin": "^4.5.0",
     "react-hot-loader": "^4.13.0",
     "style-loader": "^2.0.0",
-    "webpack": "^5.11.1",
+    "webpack": "^5.15.0",
     "webpack-cli": "^4.3.1",
-    "webpack-dev-server": "^3.11.1"
+    "webpack-dev-server": "^3.11.2"
   }
 }

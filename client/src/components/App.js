@@ -64,6 +64,8 @@ class App extends Component {
     post("/api/logout");
   };
 
+  // fixed Login and Register spelling
+
   render() {
     return (
       <>
@@ -77,8 +79,8 @@ class App extends Component {
           <NotFound default />
         </Router> */}
         <div>
-        <Header userId={this.state.userId} handleLogout={this.handleLogout} />
-          <Background /> 
+          <Header userId={this.state.userId} handleLogout={this.handleLogout} />
+          <Background />
           <Router>
             <ResetPassword path="/reset-password/:token" />
             <EmailPasswordLink path="/email-password-link" />

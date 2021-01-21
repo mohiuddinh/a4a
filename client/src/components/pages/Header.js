@@ -72,22 +72,22 @@ class Header extends Component {
         </div>
         <div className="header__user">
           {!this.props.userId ? (
-            <button className="btn">
-              <Link to="/login" style={link_style}>
+            <Link to="/login" style={link_style}>
+              <button className="btn">
                 <span>Login</span>
-              </Link>
-            </button>
+              </button>
+            </Link>
           ) : null}
           {this.props.userId ? (
             <button className="btn btn-logout" onClick={this.props.handleLogout}>
               <span>Logout</span>
             </button>
           ) : (
-            <button className="btn">
-              <Link to="/register" style={link_style}>
+            <Link to="/register" style={link_style}>
+              <button className="btn">
                 <span>Register</span>
-              </Link>
-            </button>
+              </button>
+            </Link>
           )}
         </div>
       </div>

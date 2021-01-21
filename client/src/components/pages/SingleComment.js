@@ -33,38 +33,11 @@ function SingleComment(props) {
     const onSubmit = (e) => {
         e.preventDefault();
 
-        const variables = {
-            writer: writerId,
-            questionId: props.questionId,
-            responseTo: props.comment._id,
-            content: CommentValue
-        }
+import "../../css/SingleComment.css";
 
+const { TextArea } = Input;
 
-        post('/api/saveComment', variables)
-            .then((res) => {
-                if (res.success) {
-                    setCommentValue("")
-                    setOpenReply(!OpenReply)
-                    props.refreshFunction(res.result)
-                } else {
-                    alert('Failed to save Comment')
-                }
-            })
-    }
-
-    // let replyText = null; 
-    // if (props.displayReplyTo){
-    //   replyText = <span onClick={openReply} key="comment-basic-reply-to">Reply to </span> ;
-    // }
-    const actions = [
-      <LikeDislikes comment commentId={props.comment._id} userId={writerId}/>, 
-      <span onClick={openReply} key="comment-basic-reply-to">Reply to </span>
-    ]
-
-    // if (props.displayReplyTo){
-    //   actions.push(<span onClick={openReply} key="comment-basic-reply-to">Reply to </span>);
-    // }
+let writerId = null;
 
     if (Loading){
       return (
@@ -101,6 +74,7 @@ function SingleComment(props) {
 
         </div>
     )}
+}
 }
 
 export default SingleComment;

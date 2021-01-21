@@ -18,3 +18,7 @@
   color: var(--small-text);
   font-size: 18px;
 }
+
+.home > input:focus {
+  border: 2px solid var(--border-accent);
+}

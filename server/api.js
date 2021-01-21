@@ -156,7 +156,7 @@ router.post("/email-password-link", async (req, res) => {
     });
 
     jwt.sign({ user: user._id }, EMAIL_SECRET, { expiresIn: 900 }, (err, emailToken) => {
-      const url = `http://localhost:5000/reset-password/${emailToken}`;
+      const url = `https://mit-ask.herokuapp.com/reset-password/${emailToken}`;
 
       transporter.sendMail({
         from: EMAIL_USERNAME,
@@ -205,7 +205,6 @@ router.get("/confirmation/:token", async (req, res) => {
     const result = jwt.verify(token, EMAIL_SECRET);
     const id = result.user;
 
-    
     const user = await User.findOne({ _id: id });
 
     if (!user) {
@@ -273,7 +272,7 @@ router.post("/register", async (req, res) => {
     });
 
     jwt.sign({ user: user._id }, EMAIL_SECRET, (err, emailToken) => {
-      const url = `http://localhost:5000/confirmation/${emailToken}`;
+      const url = `https://mit-ask.herokuapp.com/confirmation/${emailToken}`;
 
       transporter.sendMail({
         from: EMAIL_USERNAME,

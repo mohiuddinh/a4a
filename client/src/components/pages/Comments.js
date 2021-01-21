@@ -38,10 +38,23 @@ function Comments(props) {
     });
   };
   return (
-    <div>
-      <p> replies</p>
+    <div className="comments">
       {/* Comment Lists  */}
       {/* {console.log(props.CommentLists)} */}
+      <div className="comments__container">
+        {props.CommentLists &&
+          props.CommentLists.map(
+            (comment, index) =>
+              !comment.responseTo && (
+                <React.Fragment>
+                  <div className="comments__main">
+                    <SingleComment
+                      comment={comment}
+                      questionId={props.questionId}
+                      refreshFunction={props.refreshFunction}
+                      writerId={props.writerId}
+                      displayReplyTo={replyTo}
+                    />
 
       {props.CommentLists &&
         props.CommentLists.map(
@@ -64,18 +77,14 @@ function Comments(props) {
             )
         )}
       {/* Root Comment Form */}
-      <form style={{ display: "flex" }} onSubmit={onSubmit}>
-        <TextArea
-          style={{ width: "100%", borderRadius: "5px" }}
-          onChange={handleChange}
-          value={Comment}
-          placeholder="comments"
-        />
-        <br />
-        <Button style={{ width: "20%", height: "52px" }} onClick={onSubmit}>
-          Submit
-        </Button>
-      </form>
+      <div className="comments__container">
+        <form style={{ display: "flex" }} onSubmit={onSubmit}>
+          <textarea onChange={handleChange} value={Comment} placeholder="comment" />
+          <button className="btn" onClick={onSubmit}>
+            Submit
+          </button>
+        </form>
+      </div>
     </div>
   );
 }
