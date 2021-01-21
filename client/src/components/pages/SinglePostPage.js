@@ -1,5 +1,7 @@
 import React, { Component, useEffect, useState } from "react";
 import { get, post } from "../../utilities.js";
+import ReactHtmlParser from "react-html-parser";
+
 import LikeDislikes from "./LikeDislikes.js";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 
@@ -35,6 +37,11 @@ function SinglePostPage(props) {
   const updateComment = (newComment) => {
     setCommentLists(CommentLists.concat(newComment));
   };
+
+  const selectedTags = (tags) => {
+    console.log(tags);
+  };
+
   if (Question.writer) {
     return (
       <div className="singlePost">
@@ -55,14 +62,20 @@ function SinglePostPage(props) {
               </h5>
             </div>
             <div className="singlePost__sub">
-              <span>Tags: </span>
-              {Question.tag}
+              <span className="singlePost__tag">Tags: </span>
+              <ul id="tags">
+                {Question.tag.map((tag) => (
+                  <li className="tag">
+                    <span className="tag-title">{tag}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
             <div className="singlePost__sub">
-              <p>
-                <span>Question: </span>
-                {Question.question}
-              </p>
+              <span>Question: </span>
+              <div className="reactHtmlParser__container">
+                {ReactHtmlParser(Question.question)}
+              </div>
             </div>
           </div>
         </div>

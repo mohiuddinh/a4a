@@ -302,7 +302,9 @@ router.get("/post", (req, res) => {
 });
 
 router.post("/post", auth.ensureLoggedIn, (req, res) => {
+  // console.log(req.body);
   let newQuestion = new Question(req.body);
+  // console.log(newQuestion);
   newQuestion.save().then((question) => res.send(question));
 });
 

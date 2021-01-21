@@ -1,0 +1,66 @@
+@import "./Root.css";
+
+.tags-input {
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  background-color: var(--white);
+  height: 100%;
+  width: 100%;
+  /* padding: 0 12px; */
+  /* border: 1px solid var(--border-accent); */
+  /* border-radius: 12px; */
+}
+
+.tags-input input {
+  flex: 1;
+  border: none;
+  height: 100%;
+  font-size: 14px;
+  /* padding: 4px 0 0 0; */
+}
+
+.tags-input input:focus {
+  outline: transparent;
+}
+
+#tags {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  height: 100%;
+}
+
+.tag {
+  width: auto;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--heading-text);
+  padding: 0 8px;
+  font-size: 14px;
+  font-weight: 500;
+  list-style: none;
+  border-radius: 6px;
+  margin-right: 8px;
+  background: var(--water);
+}
+
+.tag .tag-title {
+  /* margin-top: 3px; */
+}
+
+.tag .tag-close-icon {
+  display: block;
+  width: 16px;
+  height: 16px;
+  line-height: 16px;
+  text-align: center;
+  font-size: 14px;
+  margin-left: 8px;
+  color: var(--water);
+  border-radius: 50%;
+  background: var(--small-text);
+  cursor: pointer;
+}
