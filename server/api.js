@@ -33,6 +33,7 @@ const router = express.Router();
 //initialize socket
 const socketManager = require("./server-socket");
 
+const axios = require('axios');
 
 // router.post("/login", auth.login);
 // router.post("/logout", auth.logout);
@@ -173,19 +174,16 @@ router.post("/register", async (req, res) => {
   res.json({ status: "ok" });
 });
 
-const searched = [];
-
-let getData = () => {
-axios.get('api/post')
-   .then(res => searched.push(res.data))
-   .catch(err => console.log(err.data))
-}
-
-console.log(searched);
 
 router.post("/search", (req, res) => {
-  let search = req.body.search;
-  Question.fuzzySearch(search).then((questions) => res.send(questions));
+  let {search} = req.body;
+  console.log(search);
+  if (search == '') {
+    Question.find({}).then((questions) => res.send(questions));
+  } else {
+    Question.fuzzySearch(search).then((questions) => res.send({ data: questions }));
+  }
+  //Question.find({}).then((questions) => res.send(questions));
 });
 
 router.get("/post", (req, res) => {
@@ -197,8 +195,11 @@ router.get("/post", (req, res) => {
   } else {
     Question.fuzzySearch(search).then((questions) => res.send(questions));
   } */
-  
-  Question.fuzzySearch(searched).then((questions) => res.send(questions));
+
+  //Question.fuzzySearch('weenie').then((questions) => res.send(questions));
+  //let {search} = req.body;
+  console.log(req.body);
+  Question.find({}).then((questions) => res.send(questions));
   
 });
 

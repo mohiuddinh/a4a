@@ -6,6 +6,7 @@ import SingleQuestion from "../pages/SingleQuestion.js";
 import "../../css/Questions.css";
 import { get } from "../../utilities";
 
+const axios = require('axios');
 
 class Questions extends Component {
   constructor(props) {
@@ -17,78 +18,35 @@ class Questions extends Component {
   }
 
 
-  /* onChange = (e) => {
-    this.setState({ [e.target.name]: e.target.value });
+  onChange = (e) => {
+    this.setState({ search: e.target.value });
+    //console.log(this.state.search);
   }
 
   handleSubmit = (e) => {
     e.preventDefault(); 
-    const { search } = this.state.search;
+    const search = { search: this.state.search };
     console.log(search);
-    post('/api/search', { search } ).then((questionObjs) => {
-      let reversedObjs = questionObjs.reverse();
-      this.setState({ questions: reversedObjs });
-      console.log(questionObjs);
-      //question.fuzzySearch('weenie').then(console.log).catch(console.error);
-    });  
+    axios.post('/api/search', search).then(res => {
+     // let reversedObjs = questionObjs.reverse();
+      //this.setState({ questions: res });
+      console.log(res.data);
+    });
 
-  }   */
+  }   
   
   componentDidMount() {
-    const form = document.getElementById("search-bar");
-    form.addEventListener("submit", searchQuestions);
-
-    
-
-
-    function searchQuestions(event) {
+/*     function searchQuestions(event) {
       event.preventDefault();
-      const search = document.getElementById("search").value;
-
-      let sendData = () => {
-      axios.post("/api/search", search)
-      .then(res => console.log('Data send'))
-      .catch(err => console.log(err.data))
-      }
-
-      console.log(search);
+      //console.log(search);
       get("/api/post").then((questionObjs) => {
         let reversedObjs = questionObjs.reverse();
         this.setState({ questions: reversedObjs });
         console.log(questionObjs);
-        //question.fuzzySearch('weenie').then(console.log).catch(console.error);
       }); 
-    }
+    }; */
 
-
- /*    const onChange = (event) => {
-      get("/api/hello").then((questionObjs) => {
-        let reversedObjs = questionObjs.reverse();
-        this.setState({ questions: reversedObjs });
-        console.log(questionObjs);
-        //question.fuzzySearch('weenie').then(console.log).catch(console.error);
-      });
-    }
-
-
-    handleSubmit = (e) => {
-      e.preventDefault(); 
-      const { search } = this.state;
-      get('/api/post', { search } ).then((res) => {
-      console.log('search complete');
-      window.location.reload()
-      });
-    } 
- */
-
- /*      get("/api/post").then((questionObjs) => {
-      let reversedObjs = questionObjs.reverse();
-      this.setState({ questions: reversedObjs });
-      console.log(questionObjs);
-      //question.fuzzySearch('weenie').then(console.log).catch(console.error);
-    });  */
-  } 
- 
+  }
 
   render() {
     const { question, search } = this.state;
@@ -120,6 +78,7 @@ class Questions extends Component {
             type="text" 
             placeholder="Search..." 
             id="search"
+            value={this.state.search}
             onChange={this.onChange} />
             {questionsList}
           </form>
