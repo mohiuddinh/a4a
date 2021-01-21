@@ -9,6 +9,7 @@
 
 const express = require("express");
 const Question = require('./models/question');
+//const Questions = require('../client/src/components/pages/Questions');
 
 // import models so we can interact with the database
 const User = require("./models/user");
@@ -172,13 +173,35 @@ router.post("/register", async (req, res) => {
   res.json({ status: "ok" });
 });
 
+const searched = [];
 
+let getData = () => {
+axios.get('api/post')
+   .then(res => searched.push(res.data))
+   .catch(err => console.log(err.data))
+}
+
+console.log(searched);
+
+router.post("/search", (req, res) => {
+  let search = req.body.search;
+  Question.fuzzySearch(search).then((questions) => res.send(questions));
+});
 
 router.get("/post", (req, res) => {
   // empty selector means get all documents
-  Question.find({}).then((questions) => res.send(questions));
-  Question.fuzzySearch('weenie').then(console.log).catch(console.error);
+
+/*   let search = req.body.search;
+  if (search.length == 0 or Undefined) {  //If the search field is empty, display all questions
+    Question.find({}).then((questions) => res.send(questions));
+  } else {
+    Question.fuzzySearch(search).then((questions) => res.send(questions));
+  } */
+  
+  Question.fuzzySearch(searched).then((questions) => res.send(questions));
+  
 });
+
 
 router.post('/post', (req, res) => {
   let newQuestion = new Question({
