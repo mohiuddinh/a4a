@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Comment, Avatar, Button, Input } from "antd";
 import Axios from "axios";
+import ReactHtmlParser from "react-html-parser";
+
 import LikeDislikes from "./LikeDislikes";
 import { get, post } from "../../utilities.js";
 
@@ -71,26 +73,25 @@ function SingleComment(props) {
     console.log("executed loading statement");
     return <div>Loading</div>;
   } else {
-    console.log("executed not loading statement");
+    // console.log("executed not loading statement");
     return (
       <div className="singleComment">
         <Comment
           actions={actions}
           author={props.comment.writer.fullName}
-          content={<p>{props.comment.content}</p>}
+          content={
+            <div className="reactHtmlParser__container">
+              {ReactHtmlParser(props.comment.content)}
+            </div>
+          }
         ></Comment>
 
         {OpenReply && (
-          <form style={{ display: "flex" }} onSubmit={onSubmit}>
-            <TextArea
-              style={{ width: "100%", borderRadius: "5px" }}
-              onChange={handleChange}
-              value={CommentValue}
-              placeholder="comments"
-            />
-            <Button style={{ width: "20%", height: "52px" }} onClick={onSubmit}>
+          <form className="singleComment__form" onSubmit={onSubmit}>
+            <input onChange={handleChange} value={CommentValue} placeholder="comments" />
+            <button className="btn" onClick={onSubmit}>
               Submit
-            </Button>
+            </button>
           </form>
         )}
       </div>

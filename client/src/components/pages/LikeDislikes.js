@@ -29,7 +29,7 @@ function LikeDislikes(props) {
   useEffect(() => {
     post("/api/getLikes", variable).then((res) => {
       //console.log('getLikes',response.data)
-      console.log(res);
+      // console.log(res);
 
       if (res.success) {
         //How many likes does this video or comment have

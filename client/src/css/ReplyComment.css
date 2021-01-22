@@ -1,5 +1,16 @@
 @import "./Root.css";
 
 .replyComment {
-  margin-bottom: 12px;
+  margin: 12px 0;
+}
+
+.replyComment span {
+  cursor: pointer;
+  font-size: 12px;
+  margin: 0;
+  color: "gray";
+}
+
+.replyComment span:hover {
+  color: black !important;
 }

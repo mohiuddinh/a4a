@@ -99,3 +99,17 @@ img {
 .ql-editor {
   font-size: 14px !important;
 }
+
+.ant-comment-actions > li > span {
+  margin: 0 8px !important;
+}
+
+.ant-comment-inner {
+  padding: 8px 0 0 0 !important;
+}
+
+.ant-comment-content-author-name {
+  color: black !important;
+  font-weight: 600 !important;
+  font-size: 13px;
+}

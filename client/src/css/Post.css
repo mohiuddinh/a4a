@@ -25,7 +25,6 @@
 }
 
 .post__textInput {
-  height: 50px;
   width: 100%;
   border: none;
   border-bottom: 1px solid var(--border-accent);
@@ -35,15 +34,24 @@
 
 .post__textInput:nth-child(1) {
   border-radius: 12px 12px 0 0;
+  height: 50px;
+}
+
+.post__textInput:nth-child(2) {
+  display: flex;
+  align-items: center;
+  padding: 12px 12px !important;
+  min-height: 50px;
 }
 
 .post__richTextEditor {
   flex: 1;
-  overflow: auto;
+  overflow: hidden;
   resize: none;
   border: none;
   outline: none;
   width: 100%;
+  /* background-color: lightcoral; */
   /* padding: 12px 12px 0 12px; */
   /* border-bottom: 1px solid var(--border-accent); */
 }

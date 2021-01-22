@@ -10,13 +10,13 @@
 }
 
 .singlePost__container {
-  width: 850px;
+  width: 900px;
+  margin: 24px 0;
 }
 
 .singlePost__container:nth-child(1) {
   background-color: var(--white);
   border: 1px solid var(--border-accent);
-  margin: 24px 0;
   padding: 12px 12px;
   border-radius: 12px;
   display: flex;
@@ -73,7 +73,4 @@
 
 .reactHtmlParser__container {
   margin-top: 12px;
-  /* padding: 0 12px; */
-  /* border: 1px solid var(--border-accent); */
-  /* border-radius: 4px; */
 }
