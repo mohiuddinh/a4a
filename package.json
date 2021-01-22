@@ -19,6 +19,9 @@
     "node": ">=12.0.0"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.34",
+    "@fortawesome/free-solid-svg-icons": "^5.15.2",
+    "@fortawesome/react-fontawesome": "^0.1.14",
     "@material-ui/core": "^4.11.2",
     "@material-ui/icons": "^4.11.2",
     "@reach/router": "^1.3.4",
@@ -53,6 +56,7 @@
     "react-quill": "^1.3.5",
     "react-router-dom": "^5.2.0",
     "react-time-ago": "^6.2.2",
+    "react-timeago": "^5.2.0",
     "react-tsparticles": "^1.18.11",
     "semantic-ui-react": "^2.0.2",
     "socket.io": "^2.3.0",

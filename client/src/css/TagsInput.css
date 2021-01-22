@@ -2,10 +2,10 @@
 
 .tags-input {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   flex-wrap: wrap;
   background-color: var(--white);
-  height: 100%;
+  height: auto;
   width: 100%;
   /* padding: 0 12px; */
   /* border: 1px solid var(--border-accent); */

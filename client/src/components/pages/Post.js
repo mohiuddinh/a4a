@@ -12,7 +12,7 @@ class Post extends Component {
     super(props);
     this.state = {
       subject: "",
-      tag: "",
+      tag: [],
       question: "",
     };
   }
@@ -43,8 +43,10 @@ class Post extends Component {
 
   render() {
     const selectedTags = (tags) => {
-      // console.log(tags);
-      this.setState({ tag: tags });
+      console.log(tags);
+      this.setState({ tag: tags }, () => {
+        console.log(this.state.tag);
+      });
     };
 
     const { subject, tag, question } = this.state;
@@ -62,34 +64,9 @@ class Post extends Component {
               onChange={this.onChange}
               required
             />
-            {/* <input
-              type="text"
-              name="tag"
-              placeholder="Tags"
-              className="post__textInput"
-              value={tag}
-              onChange={this.onChange}
-              required
-            /> */}
             <div className="post__textInput">
-              <TagsInput
-                selectedTags={selectedTags}
-                tags={[]}
-                value={tag}
-                onChange={this.onChange}
-                name="tag"
-              />
+              <TagsInput selectedTags={selectedTags} tags={[]} />
             </div>
-            {/* <textarea
-              name="question"
-              id="post__questionField"
-              cols="30"
-              rows="10"
-              placeholder="Question"
-              value={question}
-              onChange={this.onChange}
-              required
-            ></textarea> */}
             <div className="post__richTextEditor">
               <RichTextEditor value={question} text={this.state.question} stateUp={this.liftStateUp} name="question" />
             </div>

@@ -345,7 +345,7 @@ router.get("/question_by_id", (req, res) => {
     .populate("writer")
     .exec((err, product) => {
       if (err) {
-        return req.status(400).send(err);
+        return res.status(400).send(err);
       }
       return res.status(200).send(product);
     });
@@ -499,6 +499,16 @@ router.post('/updatePost', auth.ensureLoggedIn, (req, res) => {
       res.status(200).json({ success: true, data: result }); 
     })
   }); 
+
+
+//pass in a string, for example: '6': this will return all questions with tag starting with '6'
+router.post('/variousDept', (req, res) => {
+  Question.find({ tag: /^req.body.query/ }).exec((err, res)=>{
+    if (err) res.status(400).json( {success: false, err }); 
+    res.status(200).json({ success: true, data: res })
+  })
+});
+
 
 
 // anything else falls to this "not found" case

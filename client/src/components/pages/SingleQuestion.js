@@ -3,6 +3,7 @@ import { Link } from "@reach/router";
 import LikeDislikes from "./LikeDislikes.js";
 import ReactHtmlParser from "react-html-parser";
 import ReactTimeAgo from "react-time-ago";
+import TimeAgo from 'react-timeago'; 
 import "../../css/SingleQuestion.css";
 
 class SingleQuestion extends Component {
@@ -11,6 +12,7 @@ class SingleQuestion extends Component {
   }
 
   render() {
+    const timestamp = new Date(this.props.timestamp)
     return (
       <div className="singleQuestion">
         <a href={this.props.url}>
@@ -29,7 +31,7 @@ class SingleQuestion extends Component {
             </ul>
           </div>
           <div>
-            Posted at: <ReactTimeAgo date={this.props.timestamp} locale="en-US" timeStyle="round" />
+            Posted at: <TimeAgo date={timestamp} />
           </div>
           <div className="singleQuestion__container">
             <p>

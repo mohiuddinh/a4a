@@ -4,6 +4,7 @@ import { Button, Input } from "antd";
 import { get, post } from "../../utilities.js";
 import SingleComment from "./SingleComment.js";
 import ReplyComment from "./ReplyComment.js";
+import RichTextEditor from "./RichTextEditor.js";
 
 import "../../css/SinglePostPage.css";
 import "../../css/Comments.css";
@@ -15,12 +16,18 @@ const replyTo = true;
 function Comments(props) {
   const [Comment, setComment] = useState("");
 
-  const handleChange = (e) => {
-    setComment(e.currentTarget.value);
+  // const handleChange = (e) => {
+  //   setComment(e.currentTarget.value);
+  // };
+
+  const liftStateUp = (data) => {
+    setComment(data);
   };
 
   const onSubmit = (e) => {
     e.preventDefault();
+
+    console.log(Comment);
 
     const variables = {
       content: Comment,
@@ -69,9 +76,12 @@ function Comments(props) {
       </div>
       {/* Root Comment Form */}
       <div className="comments__container">
-        <form style={{ display: "flex" }} onSubmit={onSubmit}>
-          <textarea onChange={handleChange} value={Comment} placeholder="comment" />
-          <button className="btn" onClick={onSubmit}>
+        <form onSubmit={onSubmit}>
+          {/* <textarea onChange={handleChange} value={Comment} placeholder="comment" /> */}
+          <div className="post__richTextEditor">
+            <RichTextEditor value={Comment} stateUp={liftStateUp} />
+          </div>
+          <button className="btn btn-submit" onClick={onSubmit}>
             Submit
           </button>
         </form>

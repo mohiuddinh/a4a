@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import CancelIcon from "@material-ui/icons/Cancel";
 
 import "../../css/TagsInput.css";
@@ -16,6 +16,10 @@ function TagsInput(props) {
       event.target.value = "";
     }
   };
+
+  useEffect(() => {
+    props.selectedTags([...tags]);
+  }, [tags]);
 
   return (
     <div className="tags-input">

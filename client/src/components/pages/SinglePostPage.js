@@ -2,7 +2,7 @@ import React, { Component, useEffect, useState } from "react";
 import { get, post } from "../../utilities.js";
 import ReactHtmlParser from "react-html-parser";
 import { navigate } from '@reach/router'; 
-import ReactTimeAgo from "react-time-ago";
+import TimeAgo from 'react-timeago'; 
 import LikeDislikes from "./LikeDislikes.js";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 
@@ -59,6 +59,9 @@ function SinglePostPage(props) {
     }
 
   if (Question.writer) {
+    const timestamp = new Date(Question.createdAt);
+    console.log(timestamp); 
+    console.log(typeof(timestamp)); 
     return (
       <div className="singlePost">
         <div className="singlePost__container">
@@ -93,7 +96,7 @@ function SinglePostPage(props) {
               {writer === Question.writer._id ? <button onClick={newPage}>Edit</button> : null}
             </div>
             <div>
-              Posted at: <ReactTimeAgo date={Question.createdAt} locale="en-US" timeStyle="round" />
+              Posted at: <TimeAgo date={timestamp}/>
             </div>
             <div className="singlePost__sub">
               <span>Question: </span>

@@ -23,8 +23,8 @@
   /* border: 1px solid var(--border-accent); */
   position: relative;
   overflow: auto;
-  width: 750px;
-  height: 70vh;
+  width: 800px;
+  height: 80vh;
   border-radius: 12px;
   padding: 0 24px;
 }

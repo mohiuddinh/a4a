@@ -1,0 +1,42 @@
+@import "./Root.css";
+
+.dropdown {
+  margin-left: 48px;
+  width: 220px;
+  position: relative;
+  /* outline: 1px solid var(--border-accent); */
+}
+
+.dropdown button {
+  border: none;
+  cursor: pointer;
+  outline: none;
+  background: none;
+}
+
+.dropdown__selection {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 4px 4px 0 0;
+  padding: 4px 8px;
+}
+
+.dropdown__menu {
+  width: 100%;
+  max-height: 256px;
+  overflow: auto;
+  position: absolute;
+  outline: 1px solid var(--border-accent);
+  background-color: var(--white);
+  transition: height 0.25s ease-in-out;
+  border-radius: 0 0 4px 4px;
+}
+
+.dropdown__items {
+  padding: 4px 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
