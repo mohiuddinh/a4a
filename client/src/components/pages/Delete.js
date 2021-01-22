@@ -46,7 +46,7 @@ function Delete(props){
                     }
                   })
                   .then(() => {
-                    navigate('/questions'); 
+                    window.location.reload(); 
                   });
               }
               

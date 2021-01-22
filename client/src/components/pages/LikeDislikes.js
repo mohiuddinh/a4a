@@ -29,7 +29,7 @@ function LikeDislikes(props) {
   useEffect(() => {
     post("/api/getLikes", variable).then((res) => {
       //console.log('getLikes',response.data)
-      console.log(res);
+      //console.log(res);
 
       if (res.success) {
         //How many likes does this video or comment have
@@ -66,8 +66,8 @@ function LikeDislikes(props) {
             ((props.question && dislike.questionId === props.questionId) ||
               (props.comment && dislike.commentId === props.commentId))
           ) {
-            console.log("disliked");
-            console.log(dislike);
+            //console.log("disliked");
+            //console.log(dislike);
             setDislikeAction("disliked");
           }
         });
@@ -83,8 +83,8 @@ function LikeDislikes(props) {
         if (res.success) {
           setLikes(Likes + 1);
           setLikeAction("liked");
-          console.log("Liked message");
-          console.log(res);
+          //console.log("Liked message");
+          //console.log(res);
 
           //If dislike button is already clicked
 
@@ -97,92 +97,17 @@ function LikeDislikes(props) {
         }
       });
     } else {
-        variable = { commentId: props.commentId, userId: props.userId }
-        //console.log(variable)
-    }
-
-
-    useEffect(() => {
-
-        post('/api/getLikes', variable)
-            .then((res) => {
-                //console.log('getLikes',response.data)
-                //console.log(res);
-
-                if (res.success) {
-                    //How many likes does this video or comment have 
-                    setLikes(res.likes.length)
-                    //console.log(props.userId); 
-                    //if I already click this like button or not 
-                    res.likes.map(like => {
-                        //console.log(like.userId); 
-                        if (like.userId === props.userId && (props.question && (like.questionId === props.questionId) || props.comment && (like.commentId === props.commentId))) {
-                            //console.log('liked'); 
-                            //console.log((like)); 
-                            setLikeAction('liked');
-                        }
-                    })
-                } else {
-                    console.log('Failed to get likes')
-                }
-            })
-
-        post('/api/getDislikes', variable)
-            .then((res) => {
-                //console.log('getDislike',response.data)
-                if (res.success) {
-                    //How many likes does this video or comment have 
-                    setDislikes(res.dislikes.length)
-
-                    //if I already click this like button or not 
-                    res.dislikes.map(dislike => {
-                        if (dislike.userId === props.userId && (props.question && (dislike.questionId === props.questionId) || props.comment && (dislike.commentId === props.commentId))) {
-                            console.log('disliked'); 
-                            console.log(dislike); 
-                            setDislikeAction('disliked')
-                        }
-                    })
-                } else {
-                    console.log('Failed to get dislikes')
-                }
-            })
-
-    }, [])
-
-
-    const onLike = () => {
-
-        if (LikeAction === null) {
-
-            post('/api/upLike', variable)
-                .then((res) => {
-                    if (res.success) {
-
-                        setLikes(Likes + 1)
-                        setLikeAction('liked')
-                        console.log('Liked message')
-                        //console.log(res);
-
-                        //If dislike button is already clicked
-
-                        if (DislikeAction !== null) {
-                            setDislikeAction(null)
-                            setDislikes(Dislikes - 1)
-                        }
-
-
-                    } else {
-                        console.log('Failed to increase the like')
-                    }
-                })
-
-
+      post("/api/unLike", variable).then((res) => {
+        if (res.success) {
+          setLikes(Likes - 1);
+          setLikeAction(null);
+          //console.log("Unliked message");
         } else {
-          console.log("Failed to decrease the like");
+          //console.log("Failed to decrease the like");
         }
-      }
+      });
     }
-  
+  };
 
   const onDisLike = () => {
     if (DislikeAction !== null) {
@@ -255,6 +180,6 @@ function LikeDislikes(props) {
       </div>
     </React.Fragment>
   );
-            }
+}
 
 export default LikeDislikes;

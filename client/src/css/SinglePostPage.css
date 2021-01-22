@@ -58,6 +58,22 @@
   font-weight: 600;
 }
 
+.singlePost__tag {
+  margin-right: 4px;
+}
+
+.singlePost__sub:nth-child(2) {
+  display: flex;
+  align-items: center;
+}
+
 .singlePost__sub:last-child {
   border-bottom: none !important;
+}
+
+.reactHtmlParser__container {
+  margin-top: 12px;
+  /* padding: 0 12px; */
+  /* border: 1px solid var(--border-accent); */
+  /* border-radius: 4px; */
 }

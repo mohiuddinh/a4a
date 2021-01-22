@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { Router, Link, Redirect, navigate } from "@reach/router";
+import TimeAgo from "javascript-time-ago";
+import en from "javascript-time-ago/locale/en";
 
 import NotFound from "./pages/NotFound.js";
 import Skeleton from "./pages/Skeleton.js";
@@ -23,6 +25,8 @@ import "../css/scrollbar.css";
 import { socket } from "../client-socket.js";
 
 import { get, post } from "../utilities";
+
+TimeAgo.addDefaultLocale(en);
 
 /**
  * Define the "App" component as a class.

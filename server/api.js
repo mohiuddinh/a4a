@@ -300,11 +300,13 @@ router.post("/register", async (req, res) => {
 
 router.get("/post", (req, res) => {
   // empty selector means get all documents
-  Question.find({}).then((questions) => res.send(questions));
+  Question.find({}).populate('writer').then((questions) => res.send(questions));
 });
 
 router.post("/post", auth.ensureLoggedIn, (req, res) => {
+  // console.log(req.body);
   let newQuestion = new Question(req.body);
+  // console.log(newQuestion);
   newQuestion.save().then((question) => res.send(question));
 });
 
@@ -455,7 +457,7 @@ router.post('/deletePost', auth.ensureLoggedIn, (req, res) => {
 router.post('/deleteComment', auth.ensureLoggedIn, (req, res) => {
   Comment.findOneAndUpdate(
     { _id: req.body._id },
-    { $set: { writer: mongoose.Types.ObjectId("60073eedea05d207bfbd0eee"), content: "[removed]" } },
+    { $set: { writer: mongoose.Types.ObjectId("6009d372cad12d0733b393d5"), content: "[removed]" } },
     { returnOriginal: false }
   ).exec((err, result) => {
     if (err) res.status(400).json({ success: false, err });

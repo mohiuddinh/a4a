@@ -29,19 +29,21 @@ class Questions extends Component {
       questionsList = this.state.questions.map((questionObj, i) => {
         return (
           //<a href={`/questions/${questionObj._id}`}>
+          
             <SingleQuestion
               key={questionObj._id}
               questionId={questionObj._id}
               subject={questionObj.subject}
               tag={questionObj.tag}
               question={questionObj.question}
+              username={questionObj.writer.username}
               userId={this.props.userId}
               url={`/questions/${questionObj._id}`}
+              timestamp={questionObj.createdAt}
             />
           //</a>
         );
       });
-      console.log({ questionsList });
     } else {
       questionsList = <div>Loading...</div>;
     }

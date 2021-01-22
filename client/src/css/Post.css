@@ -4,14 +4,15 @@
   height: calc(100vh - 64px);
   width: 100%;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
 .post__container {
   background-color: var(--white);
-  width: 600px;
-  height: 75vh;
+  width: 700px;
+  height: 80vh;
   display: flex;
   border-radius: 12px;
   border: 1px solid var(--border-accent);
@@ -26,24 +27,24 @@
 .post__textInput {
   height: 50px;
   width: 100%;
-  padding: 0 12px;
   border: none;
   border-bottom: 1px solid var(--border-accent);
   outline: none;
+  padding: 0 12px;
 }
 
 .post__textInput:nth-child(1) {
   border-radius: 12px 12px 0 0;
 }
 
-.post textarea {
+.post__richTextEditor {
   flex: 1;
+  overflow: auto;
   resize: none;
   border: none;
   outline: none;
-  height: 500px;
   width: 100%;
-  padding: 12px 12px 0 12px;
+  /* padding: 12px 12px 0 12px; */
   /* border-bottom: 1px solid var(--border-accent); */
 }
 
