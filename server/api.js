@@ -317,6 +317,17 @@ router.post("/search", (req, res) => {
   })
 });
 
+// router.post("/search", (req, res) => {
+//   let search  = req.body.query;
+//   console.log(search);
+//   if (search == "") {
+//     Question.find({}).then((questions) => res.send(questions));
+//   } else {
+//     Question.fuzzySearch(search).then((questions) => res.send({ data: questions }));
+//   }
+//   //Question.find({}).then((questions) => res.send(questions));
+// });
+
 router.post("/post", auth.ensureLoggedIn, (req, res) => {
   // console.log(req.body);
   let newQuestion = new Question(req.body);

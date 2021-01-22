@@ -17,6 +17,7 @@ function Home() {
   const fetchUsers = (query) => {
     setSearch(query); 
     post('/api/search', { query: query }).then((res)=>{
+      //console.log(res); 
       setQuestionDetails(res); 
     }
     )}
@@ -31,7 +32,8 @@ function Home() {
             onChange={(e) => fetchUsers(e.target.value)}
           />
           <ul className="collection">
-            {QuestionDetails ? QuestionDetails.map((item) => {
+            {QuestionDetails ? 
+            QuestionDetails.map((item) => {
               return (
                 <Link
                   to={`/questions/${item._id}`}
