@@ -32,6 +32,7 @@ const atob = require("atob");
 // import bcrypt
 const bcrypt = require("bcryptjs");
 const dotenv = require("dotenv");
+const axios = require('axios'); 
 
 dotenv.config();
 
@@ -301,6 +302,19 @@ router.post("/register", async (req, res) => {
 router.get("/post", (req, res) => {
   // empty selector means get all documents
   Question.find({}).populate('writer').then((questions) => res.send(questions));
+});
+
+router.post("/search", (req, res) => {
+  console.log(req.body.query); 
+  let userPattern = new RegExp(req.body.query)
+  Question.find({subject: {$regex:userPattern}})
+  .select("_id subject")
+  .then((question)=>{
+    console.log(question)
+    res.json(question)
+  }).catch(err=>{
+    console.log(err)
+  })
 });
 
 router.post("/post", auth.ensureLoggedIn, (req, res) => {

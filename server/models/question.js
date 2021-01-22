@@ -15,5 +15,6 @@ const QuestionSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
+
 // compile model from schema
 module.exports = mongoose.model("Question", QuestionSchema);
