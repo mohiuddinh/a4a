@@ -5,6 +5,9 @@ import ReactHtmlParser from "react-html-parser";
 
 import LikeDislikes from "./LikeDislikes";
 import { get, post } from "../../utilities.js";
+import Delete from './Delete.js'; 
+import ReactTimeAgo from "react-time-ago";
+import TimeAgo from 'react-timeago'; 
 
 import "../../css/SingleComment.css";
 
@@ -70,10 +73,9 @@ function SingleComment(props) {
   // }
 
   if (Loading) {
-    console.log("executed loading statement");
     return <div>Loading</div>;
   } else {
-    // console.log("executed not loading statement");
+    const timestamp = new Date(props.comment.createdAt);
     return (
       <div className="singleComment">
         <Comment
@@ -85,7 +87,17 @@ function SingleComment(props) {
             </div>
           }
         ></Comment>
-
+        {writerId === props.comment.writer._id ? (
+          <Delete
+            comment
+            commentId={props.comment._id}
+            userId={writerId}
+            questionId={props.questionId}
+          />
+        ) : null}
+        <div>
+          Posted at: <TimeAgo date={timestamp} />
+        </div>
         {OpenReply && (
           <form className="singleComment__form" onSubmit={onSubmit}>
             <input onChange={handleChange} value={CommentValue} placeholder="comments" />

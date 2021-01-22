@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { Router, Link, Redirect, navigate } from "@reach/router";
+import TimeAgo from "javascript-time-ago";
+import en from "javascript-time-ago/locale/en";
 
 import NotFound from "./pages/NotFound.js";
 import Skeleton from "./pages/Skeleton.js";
@@ -16,6 +18,7 @@ import Confirmation from "./pages/Confirmation.js";
 import ResetPassword from "./pages/ResetPassword.js";
 import EECS from "./pages/EECS.js";
 import Physics from "./pages/Physics.js";
+import Edit from './pages/Edit.js'; 
 
 import "../css/utilities.css";
 import "../css/App.css";
@@ -24,6 +27,8 @@ import "../css/scrollbar.css";
 import { socket } from "../client-socket.js";
 
 import { get, post } from "../utilities";
+
+TimeAgo.addDefaultLocale(en);
 
 /**
  * Define the "App" component as a class.
@@ -91,6 +96,7 @@ class App extends Component {
             ) : (
               <Redirect from="/post" to="/login" />
             )}
+            <Edit path='/questions/edit/:questionId' writerId={this.state.userId} />
             <SinglePostPage path="/questions/:questionId" writerId={this.state.userId} />
             <Questions path="/questions" userId={this.state.userId} />
             <EECS path="/questions/eecs" userId={this.state.userId} />

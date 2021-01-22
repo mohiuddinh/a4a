@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import TagsInput from "./TagsInput.js";
 import RichTextEditor from "./RichTextEditor.js";
+import ReactHtmlParser from 'react-html-parser'; 
 
-import { post } from "../../utilities";
+import { get, post } from "../../utilities";
 import { navigate } from "@reach/router";
 
 import "../../css/Post.css";
@@ -12,9 +13,21 @@ class Post extends Component {
     super(props);
     this.state = {
       subject: "",
-      tag: [],
+      tag: "",
       question: "",
+      loading: true,
     };
+  }
+
+  componentDidMount() {
+    get(`/api/question_by_id?id=${this.props.questionId}&type=single`).then((res) => {
+      this.setState({
+        subject: res[0].subject,
+        tag: res[0].tag,
+        question: res[0].question,
+        loading: false,
+      });
+    });
   }
 
   liftStateUp = (data) => {
@@ -32,21 +45,20 @@ class Post extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
     const { subject, tag, question } = this.state;
-
-    const writer = this.props.writerId;
-    post("/api/post", { subject, tag, question, writer }).then((res) => {
-      console.log("form submitted");
-      // console.log(res);
-      navigate(`/questions/${res._id}`);
+    const _id = this.props.questionId;
+    post("/api/updatePost", { subject, tag, question, _id }).then((res) => {
+      navigate(`/questions/${_id}`);
     });
   };
 
   render() {
+    if (this.state.loading) {
+      return <div>Loading...</div>;
+    }
+
     const selectedTags = (tags) => {
-      console.log(tags);
-      this.setState({ tag: tags }, () => {
-        console.log(this.state.tag);
-      });
+      // console.log(tags);
+      this.setState({ tag: tags });
     };
 
     const { subject, tag, question } = this.state;
@@ -64,9 +76,34 @@ class Post extends Component {
               onChange={this.onChange}
               required
             />
+            {/* <input
+              type="text"
+              name="tag"
+              placeholder="Tags"
+              className="post__textInput"
+              value={tag}
+              onChange={this.onChange}
+              required
+            /> */}
             <div className="post__textInput">
-              <TagsInput selectedTags={selectedTags} tags={[]} />
+              <TagsInput
+                selectedTags={selectedTags}
+                tags={this.state.tag}
+                value={tag}
+                onChange={this.onChange}
+                name="tag"
+              />
             </div>
+            {/* <textarea
+              name="question"
+              id="post__questionField"
+              cols="30"
+              rows="10"
+              placeholder="Question"
+              value={question}
+              onChange={this.onChange}
+              required
+            ></textarea> */}
             <div className="post__richTextEditor">
               <RichTextEditor value={question} text={this.state.question} stateUp={this.liftStateUp} name="question" />
             </div>

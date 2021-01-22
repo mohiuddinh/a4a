@@ -1,12 +1,15 @@
 import React, { Component, useEffect, useState } from "react";
 import { get, post } from "../../utilities.js";
 import ReactHtmlParser from "react-html-parser";
-
+import { navigate } from '@reach/router'; 
+import TimeAgo from 'react-timeago'; 
 import LikeDislikes from "./LikeDislikes.js";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 
 import "../../css/SinglePostPage.css";
 import Comments from "./Comments.js";
+import Delete from './Delete.js'; 
+import Edit from './Edit.js'; 
 
 function SinglePostPage(props) {
   const questionId = props.questionId;
@@ -26,7 +29,6 @@ function SinglePostPage(props) {
 
     post("/api/getComments", questionVariable).then((res) => {
       if (res.success) {
-        console.log(res);
         setCommentLists(res.comments);
       } else {
         alert("Failed to load comments");
@@ -42,7 +44,24 @@ function SinglePostPage(props) {
     console.log(tags);
   };
 
+  function newPage() {
+      navigate(`/questions/edit/${questionId}`).then(() => {
+        return (
+          <Edit
+            questionId={questionId}
+            userId={writer}
+            subject={Question.subject}
+            tag={Question.tag}
+            question={Question.question}
+          />
+        );
+      });
+    }
+
   if (Question.writer) {
+    const timestamp = new Date(Question.createdAt);
+    console.log(timestamp); 
+    console.log(typeof(timestamp)); 
     return (
       <div className="singlePost">
         <div className="singlePost__container">
@@ -56,6 +75,7 @@ function SinglePostPage(props) {
           </div>
           <div className="singlePost__main">
             <div className="singlePost__sub">
+              {Question.writer.username}
               <h5>
                 <span>Subject: </span>
                 {Question.subject}
@@ -70,12 +90,17 @@ function SinglePostPage(props) {
                   </li>
                 ))}
               </ul>
+              {writer === Question.writer._id ? (
+                <Delete question questionId={questionId} userId={writer} />
+              ) : null}
+              {writer === Question.writer._id ? <button onClick={newPage}>Edit</button> : null}
+            </div>
+            <div>
+              Posted at: <TimeAgo date={timestamp}/>
             </div>
             <div className="singlePost__sub">
               <span>Question: </span>
-              <div className="reactHtmlParser__container">
-                {ReactHtmlParser(Question.question)}
-              </div>
+              <div className="reactHtmlParser__container">{ReactHtmlParser(Question.question)}</div>
             </div>
           </div>
         </div>

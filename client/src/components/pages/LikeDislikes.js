@@ -29,7 +29,7 @@ function LikeDislikes(props) {
   useEffect(() => {
     post("/api/getLikes", variable).then((res) => {
       //console.log('getLikes',response.data)
-      // console.log(res);
+      //console.log(res);
 
       if (res.success) {
         //How many likes does this video or comment have
@@ -66,8 +66,8 @@ function LikeDislikes(props) {
             ((props.question && dislike.questionId === props.questionId) ||
               (props.comment && dislike.commentId === props.commentId))
           ) {
-            console.log("disliked");
-            console.log(dislike);
+            //console.log("disliked");
+            //console.log(dislike);
             setDislikeAction("disliked");
           }
         });
@@ -83,8 +83,8 @@ function LikeDislikes(props) {
         if (res.success) {
           setLikes(Likes + 1);
           setLikeAction("liked");
-          console.log("Liked message");
-          console.log(res);
+          //console.log("Liked message");
+          //console.log(res);
 
           //If dislike button is already clicked
 
@@ -101,9 +101,9 @@ function LikeDislikes(props) {
         if (res.success) {
           setLikes(Likes - 1);
           setLikeAction(null);
-          console.log("Unliked message");
+          //console.log("Unliked message");
         } else {
-          console.log("Failed to decrease the like");
+          //console.log("Failed to decrease the like");
         }
       });
     }

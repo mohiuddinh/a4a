@@ -12,6 +12,7 @@ const Question = require("./models/question");
 const Comment = require("./models/comment");
 const Like = require("./models/like");
 const Dislike = require("./models/dislike");
+const mongoose = require("mongoose");
 
 // import models so we can interact with the database
 const User = require("./models/user");
@@ -31,6 +32,7 @@ const atob = require("atob");
 // import bcrypt
 const bcrypt = require("bcryptjs");
 const dotenv = require("dotenv");
+const axios = require('axios'); 
 
 dotenv.config();
 
@@ -52,7 +54,8 @@ const router = express.Router();
 //initialize socket
 const socketManager = require("./server-socket");
 const { _ } = require("core-js");
-// const { resolve } = require("../webpack.config");
+const { resolve } = require("../webpack.config");
+const { isValidObjectId } = require("mongoose");
 
 // router.post("/login", auth.login);
 router.post("/logout", auth.logout);
@@ -312,8 +315,32 @@ router.post("/department", (req, res) => {
 
 router.get("/post", (req, res) => {
   // empty selector means get all documents
-  Question.find({}).then((questions) => res.send(questions));
+  Question.find({}).populate('writer').then((questions) => res.send(questions));
 });
+
+router.post("/search", (req, res) => {
+  console.log(req.body.query); 
+  let userPattern = new RegExp(req.body.query)
+  Question.find({subject: {$regex:userPattern}})
+  .select("_id subject")
+  .then((question)=>{
+    console.log(question)
+    res.json(question)
+  }).catch(err=>{
+    console.log(err)
+  })
+});
+
+// router.post("/search", (req, res) => {
+//   let search  = req.body.query;
+//   console.log(search);
+//   if (search == "") {
+//     Question.find({}).then((questions) => res.send(questions));
+//   } else {
+//     Question.fuzzySearch(search).then((questions) => res.send({ data: questions }));
+//   }
+//   //Question.find({}).then((questions) => res.send(questions));
+// });
 
 router.post("/post", auth.ensureLoggedIn, (req, res) => {
   // console.log(req.body);
@@ -457,6 +484,46 @@ router.post("/upDisLike", auth.ensureLoggedIn, (req, res) => {
     });
   });
 });
+
+router.post('/deletePost', auth.ensureLoggedIn, (req, res) => {
+  console.log(req.body); 
+  Question.findOneAndDelete(req.body).exec((err, deleteResult)=>{
+    if (err) res.status(400).json( {success: false, err} ); 
+    res.status(200).json({ success: true })
+  })
+});
+
+router.post('/deleteComment', auth.ensureLoggedIn, (req, res) => {
+  Comment.findOneAndUpdate(
+    { _id: req.body._id },
+    { $set: { writer: mongoose.Types.ObjectId("6009d372cad12d0733b393d5"), content: "[removed]" } },
+    { returnOriginal: false }
+  ).exec((err, result) => {
+    if (err) res.status(400).json({ success: false, err });
+    res.status(200).json({ success: true, data: result });
+  });
+});
+
+router.post('/updatePost', auth.ensureLoggedIn, (req, res) => {
+  Question.findOneAndUpdate(
+    { _id: req.body._id }, 
+    { $set: { subject: req.body.subject, tag: req.body.tag, question: req.body.question } }, 
+    { returnOriginal: false }).exec((err, result)=>{
+      if (err) res.status(400).json({ success: false, err }); 
+      res.status(200).json({ success: true, data: result }); 
+    })
+  }); 
+
+
+//pass in a string, for example: '6': this will return all questions with tag starting with '6'
+router.post('/variousDept', (req, res) => {
+  Question.find({ tag: /^req.body.query/ }).exec((err, res)=>{
+    if (err) res.status(400).json( {success: false, err }); 
+    res.status(200).json({ success: true, data: res })
+  })
+});
+
+
 
 // anything else falls to this "not found" case
 router.all("*", (req, res) => {
