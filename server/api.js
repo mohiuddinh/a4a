@@ -55,6 +55,7 @@ const socketManager = require("./server-socket");
 const { _ } = require("core-js");
 const { resolve } = require("../webpack.config");
 const { isValidObjectId } = require("mongoose");
+const axios = require('axios'); 
 
 // router.post("/login", auth.login);
 router.post("/logout", auth.logout);
@@ -298,10 +299,34 @@ router.post("/register", async (req, res) => {
   });
 });
 
+
+router.post("/search", (req, res) => {
+  let {search} = req.body;
+  console.log(search);
+  if (search == '') {
+    Question.find({}).then((questions) => res.send(questions));
+  } else {
+    Question.fuzzySearch(search).then((questions) => res.send({ data: questions }));
+  }
+  //Question.find({}).then((questions) => res.send(questions));
+});
+
 router.get("/post", (req, res) => {
   // empty selector means get all documents
+
+/*   let search = req.body.search;
+  if (search.length == 0 or Undefined) {  //If the search field is empty, display all questions
+    Question.find({}).then((questions) => res.send(questions));
+  } else {
+    Question.fuzzySearch(search).then((questions) => res.send(questions));
+  } */
+
+  //Question.fuzzySearch('weenie').then((questions) => res.send(questions));
+  //let {search} = req.body;
   Question.find({}).populate('writer').then((questions) => res.send(questions));
+  
 });
+
 
 router.post("/post", auth.ensureLoggedIn, (req, res) => {
   // console.log(req.body);

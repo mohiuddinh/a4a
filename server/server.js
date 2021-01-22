@@ -30,6 +30,8 @@ const auth = require("./auth");
 const dotenv = require("dotenv");
 
 dotenv.config();
+const mongoose_fuzzy_searching = require('mongoose-fuzzy-searching');
+
 
 // socket stuff
 const socketManager = require("./server-socket");
@@ -38,13 +40,14 @@ const socketManager = require("./server-socket");
 // TODO change connection URL after setting up your team database
 const mongoConnectionURL = process.env.DB_CONNECT;
 // TODO change database name to the name you chose
-const databaseName = "Cluster0";
+const databaseName = "MITAsk";
 
 // connect to mongodb
 mongoose
   .connect(mongoConnectionURL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
+    useCreateIndex: true,
     dbName: databaseName,
   })
   .then(() => console.log("Connected to MongoDB"))

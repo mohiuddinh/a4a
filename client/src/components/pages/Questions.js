@@ -6,11 +6,14 @@ import SingleQuestion from "../pages/SingleQuestion.js";
 import "../../css/Questions.css";
 import { get } from "../../utilities";
 
+const axios = require('axios');
+
 class Questions extends Component {
   constructor(props) {
     super(props);
     this.state = {
       questions: [],
+      search: ''
     };
   }
 
@@ -23,7 +26,39 @@ class Questions extends Component {
     get('/api/whoami').then((res)=>{console.log(res)});
   }
 
+  onChange = (e) => {
+    this.setState({ search: e.target.value });
+    //console.log(this.state.search);
+  }
+
+  handleSubmit = (e) => {
+    e.preventDefault(); 
+    const search = { search: this.state.search };
+    console.log(search);
+    axios.post('/api/search', search).then(res => {
+     // let reversedObjs = questionObjs.reverse();
+      //this.setState({ questions: res });
+      console.log(res.data);
+    });
+
+  }   
+  
+//   componentDidMount() {
+// /*     function searchQuestions(event) {
+//       event.preventDefault();
+//       //console.log(search);
+//       get("/api/post").then((questionObjs) => {
+//         let reversedObjs = questionObjs.reverse();
+//         this.setState({ questions: reversedObjs });
+//         console.log(questionObjs);
+//       }); 
+//     }; */
+
+//   }
+
   render() {
+    const { question, search } = this.state;
+
     let questionsList = null;
     if (this.state.questions.length !== 0) {
       questionsList = this.state.questions.map((questionObj, i) => {
@@ -51,8 +86,15 @@ class Questions extends Component {
     return (
       <div className="questions">
         <div className="questions__main">
-          <input type="text" placeholder="search..." />
-          {questionsList}
+          <form id="search-bar" onSubmit={this.handleSubmit}>
+            <input 
+            type="text" 
+            placeholder="Search..." 
+            id="search"
+            value={this.state.search}
+            onChange={this.onChange} />
+            {questionsList}
+          </form>
         </div>
       </div>
     );
