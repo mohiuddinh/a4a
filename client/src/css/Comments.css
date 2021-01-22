@@ -44,6 +44,10 @@
   border-bottom: 1px solid var(--border-accent);
 }
 
+.comments__main:first-child {
+  border-top: 1px solid var(--border-accent);
+}
+
 .comments__main:last-child {
   border-bottom: none;
 }

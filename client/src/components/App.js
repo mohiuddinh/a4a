@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 import { Router, Link, Redirect, navigate } from "@reach/router";
-import TimeAgo from "javascript-time-ago";
-import en from "javascript-time-ago/locale/en";
 
 import NotFound from "./pages/NotFound.js";
 import Skeleton from "./pages/Skeleton.js";
@@ -18,7 +16,7 @@ import Confirmation from "./pages/Confirmation.js";
 import ResetPassword from "./pages/ResetPassword.js";
 import EECS from "./pages/EECS.js";
 import Physics from "./pages/Physics.js";
-import Edit from './pages/Edit.js'; 
+import Edit from "./pages/Edit.js";
 
 import "../css/utilities.css";
 import "../css/App.css";
@@ -28,14 +26,7 @@ import { socket } from "../client-socket.js";
 
 import { get, post } from "../utilities";
 
-TimeAgo.addDefaultLocale(en);
-
-/**
- * Define the "App" component as a class.
- */
-
 class App extends Component {
-  // makes props available in this component
   constructor(props) {
     super(props);
     this.state = {
@@ -50,40 +41,19 @@ class App extends Component {
   componentDidMount() {
     get("/api/whoami").then((user) => {
       if (user) {
-        // they are registed in the database, and currently logged in.
         this.setState({ userId: user.id });
       }
     });
   }
-
-  // handleLogin = (res) => {
-  //   console.log(`Logged in as ${res.profileObj.name}`);
-  //   const userToken = res.tokenObj.id_token;
-  //   post("/api/login", { token: userToken }).then((user) => {
-  //     this.setState({ userId: user.id });
-  //     post("/api/initsocket", { socketid: socket.id });
-  //   });
-  // };
 
   handleLogout = () => {
     this.setState({ userId: null });
     post("/api/logout");
   };
 
-  // fixed Login and Register spelling
-
   render() {
     return (
       <>
-        {/* <Router>
-          <Skeleton
-            path="/"
-            handleLogin={this.handleLogin}
-            handleLogout={this.handleLogout}
-            userId={this.state.userId}
-          />
-          <NotFound default />
-        </Router> */}
         <div>
           <Header userId={this.state.userId} handleLogout={this.handleLogout} />
           <Background />
@@ -96,7 +66,7 @@ class App extends Component {
             ) : (
               <Redirect from="/post" to="/login" />
             )}
-            <Edit path='/questions/edit/:questionId' writerId={this.state.userId} />
+            <Edit path="/questions/edit/:questionId" writerId={this.state.userId} />
             <SinglePostPage path="/questions/:questionId" writerId={this.state.userId} />
             <Questions path="/questions" userId={this.state.userId} />
             <EECS path="/questions/eecs" userId={this.state.userId} />

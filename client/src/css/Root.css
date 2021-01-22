@@ -113,3 +113,7 @@ img {
   font-weight: 600 !important;
   font-size: 13px;
 }
+
+*:focus:not(.focus-visible) {
+  outline: none !important;
+}

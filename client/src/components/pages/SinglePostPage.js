@@ -1,15 +1,15 @@
 import React, { Component, useEffect, useState } from "react";
 import { get, post } from "../../utilities.js";
 import ReactHtmlParser from "react-html-parser";
-import { navigate } from '@reach/router'; 
-import TimeAgo from 'react-timeago'; 
+import { navigate } from "@reach/router";
+import TimeAgo from "react-timeago";
 import LikeDislikes from "./LikeDislikes.js";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 
 import "../../css/SinglePostPage.css";
 import Comments from "./Comments.js";
-import Delete from './Delete.js'; 
-import Edit from './Edit.js'; 
+import Delete from "./Delete.js";
+import Edit from "./Edit.js";
 
 function SinglePostPage(props) {
   const questionId = props.questionId;
@@ -45,23 +45,23 @@ function SinglePostPage(props) {
   };
 
   function newPage() {
-      navigate(`/questions/edit/${questionId}`).then(() => {
-        return (
-          <Edit
-            questionId={questionId}
-            userId={writer}
-            subject={Question.subject}
-            tag={Question.tag}
-            question={Question.question}
-          />
-        );
-      });
-    }
+    navigate(`/questions/edit/${questionId}`).then(() => {
+      return (
+        <Edit
+          questionId={questionId}
+          userId={writer}
+          subject={Question.subject}
+          tag={Question.tag}
+          question={Question.question}
+        />
+      );
+    });
+  }
 
   if (Question.writer) {
     const timestamp = new Date(Question.createdAt);
-    console.log(timestamp); 
-    console.log(typeof(timestamp)); 
+    console.log(timestamp);
+    console.log(typeof timestamp);
     return (
       <div className="singlePost">
         <div className="singlePost__container">
@@ -84,19 +84,21 @@ function SinglePostPage(props) {
             <div className="singlePost__sub">
               <span className="singlePost__tag">Tags: </span>
               <ul id="tags">
-                {Question.tag.map((tag) => (
-                  <li className="tag">
+                {Question.tag.map((tag, index) => (
+                  <li className="tag" key={index}>
                     <span className="tag-title">{tag}</span>
                   </li>
                 ))}
               </ul>
-              {writer === Question.writer._id ? (
-                <Delete question questionId={questionId} userId={writer} />
-              ) : null}
-              {writer === Question.writer._id ? <button onClick={newPage}>Edit</button> : null}
+              <div className="singlePost__userActions">
+                {writer === Question.writer._id ? (
+                  <Delete question questionId={questionId} userId={writer} />
+                ) : null}
+                {writer === Question.writer._id ? <button onClick={newPage}>Edit</button> : null}
+              </div>
             </div>
             <div>
-              Posted at: <TimeAgo date={timestamp}/>
+              Posted at: <TimeAgo date={timestamp} />
             </div>
             <div className="singlePost__sub">
               <span>Question: </span>
