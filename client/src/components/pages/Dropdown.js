@@ -12,7 +12,7 @@ import {
   faAlignJustify,
 } from "@fortawesome/free-solid-svg-icons";
 
-import "../../css/DropdownMenu.css";
+import "../../css/Dropdown.css";
 
 const link_style = {
   textDecoration: "inherit",
@@ -81,13 +81,13 @@ class Dropdown extends Component {
                 <FontAwesomeIcon icon={faAlignJustify} size="1x" />
               </div>
             </Link>
-            <Link to="" style={link_style}>
+            <Link to="/questions/eecs" style={link_style}>
               <div className="dropdown__items">
                 <span>Course 6: EECS</span>
                 <FontAwesomeIcon icon={faBolt} size="1x" />
               </div>
             </Link>
-            <Link to="" style={link_style}>
+            <Link to="/questions/physics" style={link_style}>
               <div className="dropdown__items">
                 <span>Course 8: Physics</span>
                 <FontAwesomeIcon icon={faMagnet} size="1x" />
@@ -108,6 +108,18 @@ class Dropdown extends Component {
             <Link to="" style={link_style}>
               <div className="dropdown__items">
                 <span>Course 14: Economics</span>
+                <FontAwesomeIcon icon={faDollarSign} size="1x" />
+              </div>
+            </Link>
+            <Link to="" style={link_style}>
+              <div className="dropdown__items">
+                <span>Social</span>
+                <FontAwesomeIcon icon={faDollarSign} size="1x" />
+              </div>
+            </Link>
+            <Link to="" style={link_style}>
+              <div className="dropdown__items">
+                <span>Clubs</span>
                 <FontAwesomeIcon icon={faDollarSign} size="1x" />
               </div>
             </Link>

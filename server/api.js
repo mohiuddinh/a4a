@@ -296,6 +296,20 @@ router.post("/register", async (req, res) => {
   });
 });
 
+router.post("/department", (req, res) => {
+  console.log("accessed endpoint department");
+  const data = req.body.group;
+  // console.log(data);
+  let pattern = new RegExp("^" + data);
+  try {
+    Question.find({ tag: pattern }).then((questions) => {
+      return res.json({ status: "success", questions: questions });
+    });
+  } catch (e) {
+    return res.json({ status: "error", error: e });
+  }
+});
+
 router.get("/post", (req, res) => {
   // empty selector means get all documents
   Question.find({}).then((questions) => res.send(questions));
@@ -318,7 +332,7 @@ router.get("/question_by_id", (req, res) => {
     .populate("writer")
     .exec((err, product) => {
       if (err) {
-        return req.status(400).send(err);
+        return res.status(400).send(err);
       }
       return res.status(200).send(product);
     });

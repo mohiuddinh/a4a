@@ -14,6 +14,8 @@ import EmailPasswordLink from "./pages/EmailPasswordLink.js";
 import SinglePostPage from "./pages/SinglePostPage.js";
 import Confirmation from "./pages/Confirmation.js";
 import ResetPassword from "./pages/ResetPassword.js";
+import EECS from "./pages/EECS.js";
+import Physics from "./pages/Physics.js";
 
 import "../css/utilities.css";
 import "../css/App.css";
@@ -91,6 +93,8 @@ class App extends Component {
             )}
             <SinglePostPage path="/questions/:questionId" writerId={this.state.userId} />
             <Questions path="/questions" userId={this.state.userId} />
+            <EECS path="/questions/eecs" userId={this.state.userId} />
+            <Physics path="/questions/physics" userId={this.state.userId} />
             {this.state.userId ? (
               <Redirect from="/login" to="/" />
             ) : (

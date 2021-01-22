@@ -1,12 +1,9 @@
 import React, { Component } from "react";
-import { Link, Redirect } from "react-router-dom";
+import axios from "axios";
 
-import SingleQuestion from "../pages/SingleQuestion.js";
+import SingleQuestion from "./SingleQuestion.js";
 
-import "../../css/Questions.css";
-import { get } from "../../utilities";
-
-class Questions extends Component {
+class EECS extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -15,10 +12,14 @@ class Questions extends Component {
   }
 
   componentDidMount() {
-    get("/api/post").then((questionObjs) => {
+    const data = {
+      group: 6,
+    };
+    axios.post("/api/department", data).then((res) => {
+      const questionObjs = res.data.questions;
+      //   console.log(res.data.questions);
       let reversedObjs = questionObjs.reverse();
       this.setState({ questions: reversedObjs });
-      //console.log("received questions");
     });
   }
 
@@ -28,15 +29,15 @@ class Questions extends Component {
       questionsList = this.state.questions.map((questionObj, i) => {
         return (
           //<a href={`/questions/${questionObj._id}`}>
-            <SingleQuestion
-              key={questionObj._id}
-              questionId={questionObj._id}
-              subject={questionObj.subject}
-              tag={questionObj.tag}
-              question={questionObj.question}
-              userId={this.props.userId}
-              url={`/questions/${questionObj._id}`}
-            />
+          <SingleQuestion
+            key={questionObj._id}
+            questionId={questionObj._id}
+            subject={questionObj.subject}
+            tag={questionObj.tag}
+            question={questionObj.question}
+            userId={this.props.userId}
+            url={`/questions/${questionObj._id}`}
+          />
           //</a>
         );
       });
@@ -56,4 +57,4 @@ class Questions extends Component {
   }
 }
 
-export default Questions;
+export default EECS;
