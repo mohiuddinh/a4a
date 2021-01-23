@@ -23,10 +23,13 @@ function Home() {
     setSearch(query);
     post("/api/search", { query: query }).then((res) => {
       console.log(res);
-      if (res.length > 5) {
+      if (query === '') {
+        console.log(query); 
+        setQuestionDetails([]); 
+      } else if(res.length>5){
         setQuestionDetails(res.slice(0, 5));
       } else {
-        setQuestionDetails(res);
+        setQuestionDetails(res); 
       }
     });
   };
