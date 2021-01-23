@@ -1,5 +1,13 @@
 @import "./Root.css";
 
+.singleComment .timeAgo {
+  margin-top: 8px;
+}
+
+.singleComment .btn-userActions {
+  margin-top: 8px;
+}
+
 .singleComment__form {
   display: flex;
   align-items: center;

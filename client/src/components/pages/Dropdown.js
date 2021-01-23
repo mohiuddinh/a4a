@@ -6,10 +6,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faBolt,
   faAtom,
-  faDollarSign,
+  faMoneyBillAlt,
   faSquareRootAlt,
   faMagnet,
   faAlignJustify,
+  faUser,
+  faDiceThree,
 } from "@fortawesome/free-solid-svg-icons";
 
 import "../../css/Dropdown.css";
@@ -108,19 +110,19 @@ class Dropdown extends Component {
             <Link to="" style={link_style}>
               <div className="dropdown__items">
                 <span>Course 14: Economics</span>
-                <FontAwesomeIcon icon={faDollarSign} size="1x" />
+                <FontAwesomeIcon icon={faMoneyBillAlt} size="1x" />
               </div>
             </Link>
             <Link to="" style={link_style}>
               <div className="dropdown__items">
                 <span>Social</span>
-                <FontAwesomeIcon icon={faDollarSign} size="1x" />
+                <FontAwesomeIcon icon={faUser} size="1x" />
               </div>
             </Link>
             <Link to="" style={link_style}>
               <div className="dropdown__items">
                 <span>Clubs</span>
-                <FontAwesomeIcon icon={faDollarSign} size="1x" />
+                <FontAwesomeIcon icon={faDiceThree} size="1x" />
               </div>
             </Link>
           </div>

@@ -6,8 +6,8 @@ import M from "materialize-css";
 import { Link, navigate } from "@reach/router";
 import SearchIcon from "@material-ui/icons/Search";
 import CloseIcon from "@material-ui/icons/Close";
-import NoResults from './NoResults.js'; 
-import SearchResults from './SearchResults.js'; 
+import NoResults from "./NoResults.js";
+import SearchResults from "./SearchResults.js";
 import "../../css/Post.css";
 
 function Home() {
@@ -48,14 +48,15 @@ function Home() {
       <div className="home__search">
         <form onSubmit={handleSubmit}>
           <div className="home__searchContainer">
-            <input type="submit" value="Submit" className="post__btnInput btn" required />
+            <SearchIcon onClick={handleSubmit} className="home__icon" />
+            {/* <input type="submit" value="Submit" className="post__btnInput btn" required /> */}
             <input
               type="text"
               placeholder="search..."
               value={search}
               onChange={(e) => fetchUsers(e.target.value)}
             />
-            <CloseIcon onClick={() => setSearch("")} className="home__icon icon-close" />
+            <CloseIcon onClick={() => setSearch("")} className="home__icon" />
           </div>
         </form>
         <ul className="home__searchCollection">

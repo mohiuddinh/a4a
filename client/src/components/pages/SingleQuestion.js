@@ -17,14 +17,11 @@ class SingleQuestion extends Component {
       <div className="singleQuestion">
         <a href={this.props.url}>
           <div className="singleQuestion__container">
-            <h5>{this.props.username}</h5>
-            <h5>
-              <span>Subject: </span>
-              {this.props.subject}
-            </h5>
+            <span>{this.props.username}: </span>
+            <h5>{this.props.subject}</h5>
           </div>
           <div className="singleQuestion__container">
-            <span className="singleQuestion__tag">Tag: </span>
+            <span className="singleQuestion__tag">Tag:</span>
             <ul id="tags">
               {this.props.tag.map((tag) => (
                 <li className="tag">
@@ -40,11 +37,11 @@ class SingleQuestion extends Component {
         </a>
         <div className="singleQuestion__container">
           <LikeDislikes question questionId={this.props.questionId} userId={this.props.userId} />
+          <div className="timeAgo">
+            <TimeAgo date={timestamp} />
+          </div>
         </div>
       </div>
-        //  <div className="timeAgo">
-        //     <TimeAgo date={timestamp} />
-        //   </div>
     );
   }
 }

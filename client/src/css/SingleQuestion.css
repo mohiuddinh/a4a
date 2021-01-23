@@ -1,7 +1,6 @@
 @import "./Root.css";
 
 .singleQuestion {
-  /* max-height: 275px; */
   overflow: hidden;
   margin: 24px 0;
   padding: 12px 12px;
@@ -13,6 +12,11 @@
   flex-direction: column;
 }
 
+.singleQuestion__container > span {
+  font-weight: 600;
+  margin-right: 4px;
+}
+
 .singleQuestion__container {
   width: 100%;
   color: var(--heading-text);
@@ -21,11 +25,12 @@
 a .singleQuestion__container:nth-child(1) {
   padding-bottom: 8px;
   border-bottom: 1px solid var(--border-accent);
+  display: flex;
 }
 
 .singleQuestion__container:nth-child(1) h5 {
-  font-size: 16px;
-  font-weight: 600;
+  font-size: 14px;
+  font-weight: 400;
 }
 
 a .singleQuestion__container:nth-child(2) {
@@ -34,10 +39,6 @@ a .singleQuestion__container:nth-child(2) {
   border-bottom: 1px solid var(--border-accent);
   padding: 8px 0;
   color: var(--small-text);
-}
-
-a .singleQuestion__container:nth-child(2) span {
-  font-weight: 600;
 }
 
 .singleQuestion__tag {
@@ -56,6 +57,8 @@ a .singleQuestion__container:nth-child(2) span {
   color: var(--small-text);
 }
 
-.singleQuestion__container:nth-child(3) span {
-  font-weight: 600;
+.singleQuestion > .singleQuestion__container:last-child {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }

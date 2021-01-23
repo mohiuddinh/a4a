@@ -97,7 +97,11 @@ function SinglePostPage(props) {
                 {writer === Question.writer._id ? (
                   <Delete question questionId={questionId} userId={writer} />
                 ) : null}
-                {writer === Question.writer._id ? <button onClick={newPage}>Edit</button> : null}
+                {writer === Question.writer._id ? (
+                  <button onClick={newPage} className="btn-userActions btn-slide-edit">
+                    Edit
+                  </button>
+                ) : null}
               </div>
             </div>
             <div className="singlePost__sub">

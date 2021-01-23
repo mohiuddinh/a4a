@@ -1,0 +1,11 @@
+@import "./Root.css";
+
+.noResults {
+  padding-top: 4vh;
+  height: calc(100vh - 64px);
+}
+
+.noResults h1 {
+  font-size: 16px;
+  text-align: center;
+}
