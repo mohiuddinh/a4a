@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 
 import SingleQuestion from "./SingleQuestion.js";
+import Home from "./Home.js";
 
 class Physics extends Component {
   constructor(props) {
@@ -50,7 +51,7 @@ class Physics extends Component {
     return (
       <div className="questions">
         <div className="questions__main">
-          <input type="text" placeholder="search..." />
+          <Home />
           {questionsList}
         </div>
       </div>

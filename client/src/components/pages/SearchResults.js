@@ -4,6 +4,7 @@ import SingleQuestion from "../pages/SingleQuestion.js";
 
 import "../../css/Questions.css";
 import { post } from "../../utilities";
+import Home from "./Home.js";
 
 class SearchResults extends Component {
   constructor(props) {
@@ -53,17 +54,18 @@ class SearchResults extends Component {
     return (
       <div className="questions">
         <div className="questions__main">
-          <form id="search-bar">
-            <input
+          {/* <form id="search-bar"> */}
+          {/* <input
               type="text"
               placeholder="Search..."
               id="search"
               value={this.state.search}
               onChange={this.onChange}
-            />
-            <div>{questionsList.length} results</div>
-            {questionsList}
-          </form>
+            /> */}
+          <Home />
+          <div className="questions__results">{questionsList.length} results</div>
+          {questionsList}
+          {/* </form> */}
         </div>
       </div>
     );
@@ -71,4 +73,3 @@ class SearchResults extends Component {
 }
 
 export default SearchResults;
-
