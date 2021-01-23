@@ -46,14 +46,13 @@ function Comments(props) {
   };
   return (
     <div className="comments">
-      {/* Comment Lists  */}
-      {/* {console.log(props.CommentLists)} */}
       <div className="comments__container">
+        <h4>Comments</h4>
         {props.CommentLists &&
           props.CommentLists.map(
             (comment, index) =>
               !comment.responseTo && (
-                <React.Fragment>
+                <React.Fragment key={index}>
                   <div className="comments__main">
                     <SingleComment
                       comment={comment}
@@ -74,10 +73,8 @@ function Comments(props) {
               )
           )}
       </div>
-      {/* Root Comment Form */}
       <div className="comments__container">
         <form onSubmit={onSubmit}>
-          {/* <textarea onChange={handleChange} value={Comment} placeholder="comment" /> */}
           <div className="post__richTextEditor">
             <RichTextEditor value={Comment} stateUp={liftStateUp} />
           </div>

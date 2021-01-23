@@ -24,6 +24,7 @@
 }
 
 .dropdown__menu {
+  z-index: 999;
   width: 100%;
   max-height: 256px;
   overflow: auto;
@@ -39,4 +40,20 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  /* transition: all 0.1s ease-in-out; */
+}
+
+.dropdown__items span {
+  font-weight: 400;
+  font-size: 14px;
+  transition: all 0.25s ease-in-out;
+}
+
+.dropdown__items:hover {
+  /* background-color: var(--water); */
+}
+
+.dropdown__items:hover span {
+  transform: translateX(8px);
+  color: #f85959;
 }
