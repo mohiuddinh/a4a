@@ -43,6 +43,8 @@
   width: 100%;
   text-decoration: none;
   list-style-type: none;
+  max-height: 30vh;
+  overflow: auto;
 }
 
 .home__searchItem {

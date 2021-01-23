@@ -72,10 +72,13 @@ function SinglePostPage(props) {
             <div className="singlePost__profileContainer">
               <LikeDislikes question questionId={questionId} userId={writer} />
             </div>
+            <div className="singlePost__profileContainer">{Question.writer.username}</div>
+            <div className="timeAgo singlePost__profileContainer">
+              <TimeAgo date={timestamp} />
+            </div>
           </div>
           <div className="singlePost__main">
             <div className="singlePost__sub">
-              {Question.writer.username}
               <h5>
                 <span>Subject: </span>
                 {Question.subject}
@@ -96,9 +99,6 @@ function SinglePostPage(props) {
                 ) : null}
                 {writer === Question.writer._id ? <button onClick={newPage}>Edit</button> : null}
               </div>
-            </div>
-            <div>
-              Posted at: <TimeAgo date={timestamp} />
             </div>
             <div className="singlePost__sub">
               <span>Question: </span>

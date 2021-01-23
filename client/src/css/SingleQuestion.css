@@ -15,6 +15,7 @@
 
 .singleQuestion__container {
   width: 100%;
+  color: var(--heading-text);
 }
 
 a .singleQuestion__container:nth-child(1) {
@@ -23,7 +24,6 @@ a .singleQuestion__container:nth-child(1) {
 }
 
 .singleQuestion__container:nth-child(1) h5 {
-  color: var(--heading-text);
   font-size: 16px;
   font-weight: 600;
 }
@@ -51,11 +51,11 @@ a .singleQuestion__container:nth-child(2) span {
   margin-bottom: 8px;
 }
 
-.singleQuestion__container:nth-child(3) p {
+.singleQuestion__container:nth-child(3) {
   text-overflow: ellipsis;
   color: var(--small-text);
 }
 
-.singleQuestion__container:nth-child(3) p span {
+.singleQuestion__container:nth-child(3) span {
   font-weight: 600;
 }

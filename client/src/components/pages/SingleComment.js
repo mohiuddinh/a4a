@@ -5,9 +5,9 @@ import ReactHtmlParser from "react-html-parser";
 
 import LikeDislikes from "./LikeDislikes";
 import { get, post } from "../../utilities.js";
-import Delete from './Delete.js'; 
+import Delete from "./Delete.js";
 import ReactTimeAgo from "react-time-ago";
-import TimeAgo from 'react-timeago'; 
+import TimeAgo from "react-timeago";
 
 import "../../css/SingleComment.css";
 
@@ -87,6 +87,9 @@ function SingleComment(props) {
             </div>
           }
         ></Comment>
+        <div className="timeAgo">
+          <TimeAgo date={timestamp} />
+        </div>
         {writerId === props.comment.writer._id ? (
           <Delete
             comment
@@ -95,9 +98,6 @@ function SingleComment(props) {
             questionId={props.questionId}
           />
         ) : null}
-        <div>
-          Posted at: <TimeAgo date={timestamp} />
-        </div>
         {OpenReply && (
           <form className="singleComment__form" onSubmit={onSubmit}>
             <input onChange={handleChange} value={CommentValue} placeholder="comments" />

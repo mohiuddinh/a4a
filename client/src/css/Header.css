@@ -60,26 +60,26 @@
 }
 
 #logo {
-  animation: fill 0.5s ease forwards 3s;
+  animation: fill 0.5s ease forwards 1.75s;
   opacity: 0.7;
 }
 
 #logo path:nth-child(1) {
-  stroke-dasharray: 237px;
-  stroke-dashoffset: 237px;
+  stroke-dasharray: 155px;
+  stroke-dashoffset: 155px;
   animation: line-anim 2s ease forwards;
 }
 #logo path:nth-child(2) {
-  stroke-dasharray: 89px;
-  stroke-dashoffset: 89px;
+  stroke-dasharray: 140px;
+  stroke-dashoffset: 140px;
   animation: line-anim 2s ease forwards 0.3s;
 }
 #logo path:nth-child(3) {
-  stroke-dasharray: 125px;
-  stroke-dashoffset: 125px;
+  stroke-dasharray: 155px;
+  stroke-dashoffset: 155px;
   animation: line-anim 2s ease forwards 0.6s;
 }
-#logo path:nth-child(4) {
+/* #logo path:nth-child(4) {
   stroke-dasharray: 155px;
   stroke-dashoffset: 155px;
   animation: line-anim 2s ease forwards 0.9s;
@@ -93,7 +93,7 @@
   stroke-dasharray: 170px;
   stroke-dashoffset: 170px;
   animation: line-anim 2s ease forwards 1.5s;
-}
+} */
 
 @keyframes line-anim {
   to {
@@ -106,6 +106,6 @@
     fill: transparent;
   }
   to {
-    fill: black;
+    fill: var(--cardinal);
   }
 }

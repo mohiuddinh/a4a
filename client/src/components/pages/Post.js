@@ -18,15 +18,11 @@ class Post extends Component {
   }
 
   liftStateUp = (data) => {
-    // console.log("liftStateUp");
     this.setState({ question: data });
-    // console.log(this.state.question);
   };
 
   onChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
-
-    // console.log(this.state);
   };
 
   handleSubmit = (e) => {
@@ -36,17 +32,13 @@ class Post extends Component {
     const writer = this.props.writerId;
     post("/api/post", { subject, tag, question, writer }).then((res) => {
       console.log("form submitted");
-      // console.log(res);
       navigate(`/questions/${res._id}`);
     });
   };
 
   render() {
     const selectedTags = (tags) => {
-      console.log(tags);
-      this.setState({ tag: tags }, () => {
-        console.log(this.state.tag);
-      });
+      this.setState({ tag: tags }, () => {});
     };
 
     const { subject, tag, question } = this.state;
@@ -68,7 +60,12 @@ class Post extends Component {
               <TagsInput selectedTags={selectedTags} tags={[]} />
             </div>
             <div className="post__richTextEditor">
-              <RichTextEditor value={question} text={this.state.question} stateUp={this.liftStateUp} name="question" />
+              <RichTextEditor
+                value={question}
+                text={this.state.question}
+                stateUp={this.liftStateUp}
+                name="question"
+              />
             </div>
             <div className="post__selection">
               <input type="reset" value="Discard" className="post__btnInput btn" required />
