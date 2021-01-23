@@ -19,6 +19,11 @@ import SearchResults from './pages/SearchResults.js';
 import NoResults from './pages/NoResults'; 
 import EECS from "./pages/EECS.js";
 import Physics from "./pages/Physics.js";
+import Math from './pages/Math.js'; 
+import Chemistry from './pages/Chemistry.js'; 
+import Econ from './pages/Econ.js'; 
+import Social from './pages/Social.js'; 
+import Clubs from './pages/Clubs.js'; 
 
 import "../css/utilities.css";
 import "../css/App.css";
@@ -50,7 +55,9 @@ class App extends Component {
 
   handleLogout = () => {
     this.setState({ userId: null });
-    post("/api/logout");
+    post("/api/logout").then(()=>{
+      navigate('/')
+    });
   };
 
   render() {
@@ -75,6 +82,11 @@ class App extends Component {
             <Questions path="/questions" userId={this.state.userId} />
             <EECS path="/questions/eecs" userId={this.state.userId} />
             <Physics path="/questions/physics" userId={this.state.userId} />
+            <Math path="/questions/math" userId={this.state.userId} />
+            <Chemistry path="/questions/chemistry" userId={this.state.userId} />
+            <Econ path="/questions/econ" userId={this.state.userId} />
+            <Social path="/questions/social" userId={this.state.userId} />
+            <Clubs path="/questions/clubs" userId={this.state.userId} />
             {this.state.userId ? (
               <Redirect from="/login" to="/" />
             ) : (

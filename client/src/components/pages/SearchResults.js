@@ -61,6 +61,7 @@ class SearchResults extends Component {
               value={this.state.search}
               onChange={this.onChange}
             />
+            <div>{questionsList.length} results</div>
             {questionsList}
           </form>
         </div>

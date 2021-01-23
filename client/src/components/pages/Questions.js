@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link, Redirect } from "react-router-dom";
 import axios from 'axios'; 
+import Home from './Home.js'; 
 
 import SingleQuestion from "../pages/SingleQuestion.js";
 
@@ -52,7 +53,7 @@ class Questions extends Component {
     return (
       <div className="questions">
         <div className="questions__main">
-          <form id="search-bar">
+          {/* <form id="search-bar">
             <input
               type="text"
               placeholder="Search..."
@@ -60,8 +61,9 @@ class Questions extends Component {
               value={this.state.search}
               onChange={this.onChange}
             />
-            {questionsList}
-          </form>
+          </form> */}
+          <Home />
+          {questionsList}
         </div>
       </div>
     );
