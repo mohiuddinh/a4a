@@ -1,28 +1,29 @@
 import React, { Component } from "react";
-import { Link, Redirect } from "react-router-dom";
-import axios from 'axios'; 
 
 import SingleQuestion from "../pages/SingleQuestion.js";
 
 import "../../css/Questions.css";
-import { get } from "../../utilities";
+import { post } from "../../utilities";
 
-class Questions extends Component {
+class SearchResults extends Component {
   constructor(props) {
     super(props);
     this.state = {
       questions: [],
+      query: props.query.split("+").join(" "),
     };
   }
 
   componentDidMount() {
-    get("/api/post").then((questionObjs) => {
+    //console.log(this.state.query);
+    post("/api/search", { query: this.state.query }).then((questionObjs) => {
+      //console.log(questionObjs);
       let reversedObjs = questionObjs.reverse();
-      this.setState({ questions: reversedObjs });
-      //console.log("received questions");
+      this.setState({
+        questions: reversedObjs,
+      });
     });
   }
-
 
   render() {
     let questionsList = null;
@@ -68,4 +69,5 @@ class Questions extends Component {
   }
 }
 
-export default Questions;
+export default SearchResults;
+

@@ -58,6 +58,7 @@
     "react-time-ago": "^6.2.2",
     "react-timeago": "^5.2.0",
     "react-tsparticles": "^1.18.11",
+    "react-uuid": "^1.0.2",
     "semantic-ui-react": "^2.0.2",
     "socket.io": "^2.3.0",
     "socket.io-client": "^2.3.1",

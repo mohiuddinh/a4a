@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 import { Router, Link, Redirect, navigate } from "@reach/router";
-import TimeAgo from "javascript-time-ago";
-import en from "javascript-time-ago/locale/en";
 
 import NotFound from "./pages/NotFound.js";
 import Skeleton from "./pages/Skeleton.js";
@@ -17,6 +15,8 @@ import SinglePostPage from "./pages/SinglePostPage.js";
 import Confirmation from "./pages/Confirmation.js";
 import ResetPassword from "./pages/ResetPassword.js";
 import Edit from './pages/Edit.js'; 
+import SearchResults from './pages/SearchResults.js'; 
+import NoResults from './pages/NoResults'; 
 
 import "../css/utilities.css";
 import "../css/App.css";
@@ -26,7 +26,6 @@ import { socket } from "../client-socket.js";
 
 import { get, post } from "../utilities";
 
-TimeAgo.addDefaultLocale(en);
 
 /**
  * Define the "App" component as a class.
@@ -90,6 +89,8 @@ class App extends Component {
             <EmailPasswordLink path="/email-password-link" />
             <Confirmation path="/confirmation/:token" />
             {this.state.userId ? <Post  path="/post" writerId={this.state.userId}/> : <Redirect from='/post' to='/login' />}
+            <SearchResults path='/questions/search/:query' />
+            <NoResults path='/questions/noresults' />
             <Edit path='/questions/edit/:questionId' writerId={this.state.userId} />
             <SinglePostPage path='/questions/:questionId' writerId={this.state.userId}/>
             <Questions path="/questions" userId={this.state.userId}/>
