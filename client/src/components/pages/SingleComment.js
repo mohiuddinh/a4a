@@ -80,7 +80,7 @@ function SingleComment(props) {
       <div className="singleComment">
         <Comment
           actions={actions}
-          author={props.comment.writer.fullName}
+          author={props.comment.writer.username}
           content={
             <div className="reactHtmlParser__container">
               {ReactHtmlParser(props.comment.content)}

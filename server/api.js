@@ -320,17 +320,15 @@ router.get("/post", (req, res) => {
 });
 
 router.post("/search", (req, res) => {
-  console.log(req.body.query);
-  let userPattern = new RegExp(req.body.query);
-  Question.find({ subject: { $regex: userPattern } })
-    .select("_id subject")
-    .then((question) => {
-      console.log(question);
-      res.json(question);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+  //console.log(req.body.query); 
+  let userPattern = new RegExp(req.body.query, 'i')
+  Question.find({subject: {$regex:userPattern}}).populate('writer')
+  .then((question)=>{
+    //console.log(question)
+    res.json(question)
+  }).catch(err=>{
+    console.log(err)
+  })
 });
 
 router.post("/post", auth.ensureLoggedIn, (req, res) => {
@@ -476,12 +474,12 @@ router.post("/upDisLike", auth.ensureLoggedIn, (req, res) => {
   });
 });
 
-router.post("/deletePost", auth.ensureLoggedIn, (req, res) => {
-  console.log(req.body);
-  Question.findOneAndDelete(req.body).exec((err, deleteResult) => {
-    if (err) res.status(400).json({ success: false, err });
-    res.status(200).json({ success: true });
-  });
+router.post('/deletePost', auth.ensureLoggedIn, (req, res) => {
+  //console.log(req.body); 
+  Question.findOneAndDelete(req.body).exec((err, deleteResult)=>{
+    if (err) res.status(400).json( {success: false, err} ); 
+    res.status(200).json({ success: true })
+  })
 });
 
 router.post("/deleteComment", auth.ensureLoggedIn, (req, res) => {

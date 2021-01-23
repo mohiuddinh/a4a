@@ -14,9 +14,11 @@ import EmailPasswordLink from "./pages/EmailPasswordLink.js";
 import SinglePostPage from "./pages/SinglePostPage.js";
 import Confirmation from "./pages/Confirmation.js";
 import ResetPassword from "./pages/ResetPassword.js";
+import Edit from './pages/Edit.js'; 
+import SearchResults from './pages/SearchResults.js'; 
+import NoResults from './pages/NoResults'; 
 import EECS from "./pages/EECS.js";
 import Physics from "./pages/Physics.js";
-import Edit from "./pages/Edit.js";
 
 import "../css/utilities.css";
 import "../css/App.css";
@@ -61,6 +63,8 @@ class App extends Component {
             <ResetPassword path="/reset-password/:token" />
             <EmailPasswordLink path="/email-password-link" />
             <Confirmation path="/confirmation/:token" />
+            <SearchResults path="/questions/search/:query" />
+            <NoResults path="/questions/noresults" />
             {this.state.userId ? (
               <Post path="/post" writerId={this.state.userId} />
             ) : (
