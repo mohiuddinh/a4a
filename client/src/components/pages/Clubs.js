@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import axios from "axios";
-import Home from './Home.js'; 
+import Home from "./Home.js";
 import SingleQuestion from "./SingleQuestion.js";
 
-class EECS extends Component {
+class Clubs extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -13,7 +13,7 @@ class EECS extends Component {
 
   componentDidMount() {
     const data = {
-      group: 6,
+      group: 'Clubs',
     };
     axios.post("/api/department", data).then((res) => {
       const questionObjs = res.data.questions;
@@ -59,4 +59,4 @@ class EECS extends Component {
   }
 }
 
-export default EECS;
+export default Clubs;

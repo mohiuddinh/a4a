@@ -304,7 +304,7 @@ router.post("/department", (req, res) => {
   const data = req.body.group;
   let pattern = new RegExp("^" + data);
   try {
-    Question.find({ tag: pattern }).then((questions) => {
+    Question.find({ tag: pattern }).populate('writer').then((questions) => {
       return res.json({ status: "success", questions: questions });
     });
   } catch (e) {
@@ -501,14 +501,6 @@ router.post("/updatePost", auth.ensureLoggedIn, (req, res) => {
   ).exec((err, result) => {
     if (err) res.status(400).json({ success: false, err });
     res.status(200).json({ success: true, data: result });
-  });
-});
-
-//pass in a string, for example: '6': this will return all questions with tag starting with '6'
-router.post("/variousDept", (req, res) => {
-  Question.find({ tag: /^req.body.query/ }).exec((err, res) => {
-    if (err) res.status(400).json({ success: false, err });
-    res.status(200).json({ success: true, data: res });
   });
 });
 

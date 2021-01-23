@@ -95,31 +95,31 @@ class Dropdown extends Component {
                 <FontAwesomeIcon icon={faMagnet} size="1x" />
               </div>
             </Link>
-            <Link to="" style={link_style}>
+            <Link to="/questions/math" style={link_style}>
               <div className="dropdown__items">
                 <span>Course 18: Mathematics</span>
                 <FontAwesomeIcon icon={faSquareRootAlt} size="1x" />
               </div>
             </Link>
-            <Link to="" style={link_style}>
+            <Link to="/questions/chemistry" style={link_style}>
               <div className="dropdown__items">
                 <span>Course 5: Chemistry</span>
                 <FontAwesomeIcon icon={faAtom} size="1x" />
               </div>
             </Link>
-            <Link to="" style={link_style}>
+            <Link to="/questions/econ" style={link_style}>
               <div className="dropdown__items">
                 <span>Course 14: Economics</span>
                 <FontAwesomeIcon icon={faMoneyBillAlt} size="1x" />
               </div>
             </Link>
-            <Link to="" style={link_style}>
+            <Link to="/questions/social" style={link_style}>
               <div className="dropdown__items">
                 <span>Social</span>
                 <FontAwesomeIcon icon={faUser} size="1x" />
               </div>
             </Link>
-            <Link to="" style={link_style}>
+            <Link to="/questions/clubs" style={link_style}>
               <div className="dropdown__items">
                 <span>Clubs</span>
                 <FontAwesomeIcon icon={faDiceThree} size="1x" />

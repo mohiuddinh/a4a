@@ -17,7 +17,7 @@ class Physics extends Component {
     };
     axios.post("/api/department", data).then((res) => {
       const questionObjs = res.data.questions;
-      //   console.log(res.data.questions);
+      console.log(res.data.questions);
       let reversedObjs = questionObjs.reverse();
       this.setState({ questions: reversedObjs });
     });
@@ -35,13 +35,14 @@ class Physics extends Component {
             subject={questionObj.subject}
             tag={questionObj.tag}
             question={questionObj.question}
+            username={questionObj.writer.username}
             userId={this.props.userId}
             url={`/questions/${questionObj._id}`}
+            timestamp={questionObj.createdAt}
           />
           //</a>
         );
       });
-      console.log({ questionsList });
     } else {
       questionsList = <div>Loading...</div>;
     }
