@@ -1,25 +1,27 @@
 import React, { Component } from "react";
-import axios from "axios";
-import SearchBar from './SearchBar.js'; 
-import SingleQuestion from "./SingleQuestion.js";
 
-class EECS extends Component {
+import SingleQuestion from "../pages/SingleQuestion.js";
+import SearchBar from "./SearchBar.js";
+import "../../css/Questions.css";
+import { post } from "../../utilities";
+
+class SearchResultsTwo extends Component {
   constructor(props) {
     super(props);
     this.state = {
       questions: [],
+      query: props.query.split("+").join(" "),
     };
   }
 
   componentDidMount() {
-    const data = {
-      group: 6,
-    };
-    axios.post("/api/department", data).then((res) => {
-      const questionObjs = res.data.questions;
-      //   console.log(res.data.questions);
+    //console.log(this.state.query);
+    post("/api/search", { query: this.state.query }).then((questionObjs) => {
+      //console.log(questionObjs);
       let reversedObjs = questionObjs.reverse();
-      this.setState({ questions: reversedObjs });
+      this.setState({
+        questions: reversedObjs,
+      });
     });
   }
 
@@ -29,6 +31,7 @@ class EECS extends Component {
       questionsList = this.state.questions.map((questionObj, i) => {
         return (
           //<a href={`/questions/${questionObj._id}`}>
+
           <SingleQuestion
             key={questionObj._id}
             questionId={questionObj._id}
@@ -50,8 +53,17 @@ class EECS extends Component {
     return (
       <div className="questions">
         <div className="questions__main">
-          {/* <input type="text" placeholder="search..." /> */}
-          <SearchBar url="search" />
+          {/* <form id="search-bar">
+            <input
+              type="text"
+              placeholder="Search..."
+              id="search"
+              value={this.state.search}
+              onChange={this.onChange}
+            />
+          </form> */}
+          <SearchBar url='search'/>
+          <div>{questionsList.length} results</div>
           {questionsList}
         </div>
       </div>
@@ -59,4 +71,4 @@ class EECS extends Component {
   }
 }
 
-export default EECS;
+export default SearchResultsTwo;

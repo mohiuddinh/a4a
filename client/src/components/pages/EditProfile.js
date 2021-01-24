@@ -1,14 +1,14 @@
 import React, { Component } from "react";
 import TagsInput from "./TagsInput.js";
 import RichTextEditor from "./RichTextEditor.js";
-import ReactHtmlParser from 'react-html-parser'; 
+import ReactHtmlParser from "react-html-parser";
 
 import { get, post } from "../../utilities";
 import { navigate } from "@reach/router";
 
 import "../../css/Post.css";
 
-class Edit extends Component {
+class EditProfile extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -105,7 +105,12 @@ class Edit extends Component {
               required
             ></textarea> */}
             <div className="post__richTextEditor">
-              <RichTextEditor value={question} text={this.state.question} stateUp={this.liftStateUp} name="question" />
+              <RichTextEditor
+                value={question}
+                text={this.state.question}
+                stateUp={this.liftStateUp}
+                name="question"
+              />
             </div>
             <div className="post__selection">
               <input type="reset" value="Discard" className="post__btnInput btn" required />
@@ -118,4 +123,4 @@ class Edit extends Component {
   }
 }
 
-export default Edit;
+export default EditProfile;

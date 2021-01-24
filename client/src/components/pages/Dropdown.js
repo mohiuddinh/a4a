@@ -40,11 +40,10 @@ class Dropdown extends Component {
   }
 
   closeMenu(event) {
-    if (!this.dropdownMenu.contains(event.target)) {
+    
       this.setState({ showMenu: false }, () => {
         document.removeEventListener("click", this.closeMenu);
       });
-    }
   }
 
   render() {
@@ -75,49 +74,49 @@ class Dropdown extends Component {
               this.dropdownMenu = element;
             }}
           >
-            <Link to="/questions" style={link_style}>
+            <Link to="/questions" style={link_style} onClick={this.closeMenu}>
               <div className="dropdown__items">
                 <span>View All</span>
                 <FontAwesomeIcon icon={faAlignJustify} size="1x" />
               </div>
             </Link>
-            <Link to="/questions/eecs" style={link_style}>
+            <Link to="/questions/eecs" style={link_style} onClick={this.closeMenu}>
               <div className="dropdown__items">
                 <span>Course 6: EECS</span>
                 <FontAwesomeIcon icon={faBolt} size="1x" />
               </div>
             </Link>
-            <Link to="/questions/physics" style={link_style}>
+            <Link to="/questions/physics" style={link_style} onClick={this.closeMenu}>
               <div className="dropdown__items">
                 <span>Course 8: Physics</span>
                 <FontAwesomeIcon icon={faMagnet} size="1x" />
               </div>
             </Link>
-            <Link to="/questions/math" style={link_style}>
+            <Link to="/questions/math" style={link_style} onClick={this.closeMenu}>
               <div className="dropdown__items">
                 <span>Course 18: Mathematics</span>
                 <FontAwesomeIcon icon={faSquareRootAlt} size="1x" />
               </div>
             </Link>
-            <Link to="/questions/chemistry" style={link_style}>
+            <Link to="/questions/chemistry" style={link_style} onClick={this.closeMenu}>
               <div className="dropdown__items">
                 <span>Course 5: Chemistry</span>
                 <FontAwesomeIcon icon={faAtom} size="1x" />
               </div>
             </Link>
-            <Link to="/questions/econ" style={link_style}>
+            <Link to="/questions/econ" style={link_style} onClick={this.closeMenu}>
               <div className="dropdown__items">
                 <span>Course 14: Economics</span>
                 <FontAwesomeIcon icon={faDollarSign} size="1x" />
               </div>
             </Link>
-            <Link to="/questions/social" style={link_style}>
+            <Link to="/questions/social" style={link_style} onClick={this.closeMenu}>
               <div className="dropdown__items">
                 <span>Social</span>
                 <FontAwesomeIcon icon={faDollarSign} size="1x" />
               </div>
             </Link>
-            <Link to="/questions/clubs" style={link_style}>
+            <Link to="/questions/clubs" style={link_style} onClick={this.closeMenu}>
               <div className="dropdown__items">
                 <span>Clubs</span>
                 <FontAwesomeIcon icon={faDollarSign} size="1x" />

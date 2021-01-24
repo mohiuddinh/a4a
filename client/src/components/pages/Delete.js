@@ -24,14 +24,12 @@ function Delete(props){
                   .then((res) => {
                     console.log(res);
                     if (res.success) {
-                      alert("Your question has been successfully deleted!");
+                      navigate("/");
+                      //alert("Your question has been successfully deleted!");
                     } else {
                       alert("Oops, there was an error. Please try again later!");
                     }
                   })
-                  .then(() => {
-                    navigate("/");
-                  });
               } else {
                 console.log('comments');
                 variable = { _id: props.commentId }
@@ -40,14 +38,12 @@ function Delete(props){
                   .then((res) => {
                     console.log(res);
                     if (res.success) {
-                      alert("Your comment has been successfully deleted!");
+                      window.location.reload();
+                      //alert("Your comment has been successfully deleted!");
                     } else {
                       alert("Oops, there was an error. Please try again later!");
                     }
                   })
-                  .then(() => {
-                    window.location.reload(); 
-                  });
               }
               
               

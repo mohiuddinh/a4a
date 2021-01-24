@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
 import SingleQuestion from "../pages/SingleQuestion.js";
-import Home from './Home.js'; 
+import SearchBar from './SearchBar.js'; 
 import "../../css/Questions.css";
 import { post } from "../../utilities";
 
@@ -63,7 +63,7 @@ class SearchResults extends Component {
               onChange={this.onChange}
             />
           </form> */}
-          <Home />
+          <SearchBar url='searchtwo'/>
           <div>{questionsList.length} results</div>
           {questionsList}
         </div>

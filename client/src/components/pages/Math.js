@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
-import Home from "./Home.js";
+import SearchBar from "./SearchBar.js";
 import SingleQuestion from "./SingleQuestion.js";
 
 class Math extends Component {
@@ -51,7 +51,7 @@ class Math extends Component {
       <div className="questions">
         <div className="questions__main">
           {/* <input type="text" placeholder="search..." /> */}
-          <Home />
+          <SearchBar url="search" />
           {questionsList}
         </div>
       </div>
