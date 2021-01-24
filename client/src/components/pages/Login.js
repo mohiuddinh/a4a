@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 import { Link, navigate } from "@reach/router";
 import axios from "axios";
+import { store } from "react-notifications-component";
 
 import "../../css/Login.css";
+import "animate.css/animate.min.css";
 
 const link_style = {
   textDecoration: "inherit",
@@ -32,7 +34,19 @@ class Login extends Component {
         loginMessage.innerHTML = "Success!";
         navigate("/");
       } else {
-        loginMessage.innerHTML = res.data.error;
+        store.addNotification({
+          title: "Uh oh",
+          message: res.data.error,
+          type: "danger",
+          insert: "top",
+          container: "top-right",
+          animationIn: ["animate__animated animate__fadeIn"], 
+          animationOut: ["animate__animated animate__fadeOut"], 
+          dismiss: {
+            duration: 2000,
+            onScreen: true,
+          },
+        });
       }
     });
   };
@@ -42,7 +56,6 @@ class Login extends Component {
       <div className="login">
         <div className="login__container">
           <form id="login-form" onSubmit={this.onSubmit}>
-            <h1 id="login__message"></h1>
             <div className="login__control">
               <input
                 type="text"

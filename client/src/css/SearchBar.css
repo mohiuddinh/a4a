@@ -17,7 +17,7 @@
   background-color: white;
   width: 639px;
   align-items: center;
-  padding: 12px 24px;
+  padding: 0 24px;
   border: 1px solid var(--border-accent);
   border-radius: 61px;
   color: var(--small-text);
@@ -30,6 +30,7 @@
 }
 
 .home__searchContainer input {
+  padding: 12px 0;
   flex: 1;
   text-align: center;
   outline: none;
@@ -43,6 +44,8 @@
   width: 100%;
   text-decoration: none;
   list-style-type: none;
+  max-height: 30vh;
+  overflow: auto;
 }
 
 .home__searchItem {
@@ -63,9 +66,6 @@
 }
 
 .home__icon {
-  opacity: 0.65;
-}
-
-.icon-close {
   cursor: pointer;
+  opacity: 0.65;
 }

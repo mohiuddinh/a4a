@@ -6,7 +6,7 @@ import { Link, navigate } from "@reach/router";
 import SearchIcon from "@material-ui/icons/Search";
 import CloseIcon from "@material-ui/icons/Close";
 import "../../css/Post.css";
-import '../../css/SearchBar.css'
+import "../../css/SearchBar.css";
 
 function SearchBar(props) {
   const searchModal = useRef(null);
@@ -21,13 +21,13 @@ function SearchBar(props) {
     setSearch(query);
     post("/api/search", { query: query }).then((res) => {
       //console.log(res);
-      if (query === '') {
-        console.log(query); 
-        setQuestionDetails([]); 
-      } else if(res.length>5){
+      if (query === "") {
+        console.log(query);
+        setQuestionDetails([]);
+      } else if (res.length > 5) {
         setQuestionDetails(res.slice(0, 5));
       } else {
-        setQuestionDetails(res); 
+        setQuestionDetails(res);
       }
     });
   };
@@ -49,7 +49,12 @@ function SearchBar(props) {
       <div className="home__search">
         <form onSubmit={handleSubmit}>
           <div className="home__searchContainer">
-            <input type="submit" value="Submit" className="post__btnInput btn" required />
+            <SearchIcon
+              type="submit"
+              value="Submit"
+              className="home__icon"
+              onClick={handleSubmit}
+            />
             <input
               type="text"
               placeholder="search..."

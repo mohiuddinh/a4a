@@ -1,0 +1,7 @@
+@import "./Root.css";
+
+.searchResult {
+  padding: 4px;
+  font-weight: 400;
+  font-size: 14px;
+}

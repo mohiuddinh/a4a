@@ -17,6 +17,13 @@
   --forgot-password: #00c0ea;
   --create-account: #36bd4f;
   --btn-text: #5f5f5f;
+  --cardinal: #a31f34;
+  --calm-orange: #f85959;
+  --physics: #f85959;
+  --eecs: #ffa812;
+  --math: #45b3e0;
+  --chem: #8a2be2;
+  --econ: #2dd187;
 }
 
 * {
@@ -54,13 +61,42 @@ img {
   width: 100%;
 }
 
+a:hover {
+  color: inherit !important;
+}
+
 .btn {
   cursor: pointer;
-  height: 40px;
-  width: 96px;
-  border-radius: 12px;
+  padding: 8px 24px;
+  border-radius: 8px;
   border: none;
   outline: none;
+}
+
+.btn-userActions {
+  position: relative;
+  cursor: pointer;
+  outline: none;
+  border: none;
+  padding: 4px 12px;
+  border-radius: 4px;
+  background-color: white;
+  border: 1px solid var(--border-accent);
+  transition: 0.5s;
+}
+
+.btn-slide-delete:hover,
+.btn-slide-delete:focus {
+  box-shadow: inset 6.5em 0 0 0 var(--pale-pink);
+}
+
+.btn-slide-edit:hover,
+.btn-slide-edit:focus {
+  box-shadow: inset 6.5em 0 0 0 var(--tea-green);
+}
+
+.btn-slide-edit {
+  margin-left: 8px;
 }
 
 .quill {
@@ -82,6 +118,8 @@ img {
   border: 1px solid #c6c9cc;
   border-radius: 4px;
   background-color: #f6f6f6;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
 }
 
 .ql-align-center {
@@ -97,6 +135,7 @@ img {
 }
 
 .ql-editor {
+  padding: 12px !important;
   font-size: 14px !important;
 }
 
@@ -114,6 +153,18 @@ img {
   font-size: 13px;
 }
 
+.ant-comment-actions {
+  margin-top: 4px !important;
+}
+
+.ant-comment-actions > li {
+  width: 100%;
+}
+
 *:focus:not(.focus-visible) {
   outline: none !important;
+}
+
+.timeAgo {
+  font-size: 12px;
 }

@@ -1,9 +1,11 @@
 import React, { Component } from "react";
 
 import SingleQuestion from "../pages/SingleQuestion.js";
-import SearchBar from './SearchBar.js'; 
+import SearchBar from "./SearchBar.js";
 import "../../css/Questions.css";
 import { post } from "../../utilities";
+
+import "../../css/SearchResults.css";
 
 class SearchResults extends Component {
   constructor(props) {
@@ -24,7 +26,6 @@ class SearchResults extends Component {
       });
     });
   }
-
 
   render() {
     let questionsList = null;
@@ -54,8 +55,8 @@ class SearchResults extends Component {
     return (
       <div className="questions">
         <div className="questions__main">
-          {/* <form id="search-bar">
-            <input
+          {/* <form id="search-bar"> */}
+          {/* <input
               type="text"
               placeholder="Search..."
               id="search"
@@ -63,9 +64,10 @@ class SearchResults extends Component {
               onChange={this.onChange}
             />
           </form> */}
-          <SearchBar url='searchtwo'/>
-          <div>{questionsList.length} results</div>
+          <SearchBar url="searchtwo" />
+          <div className="searchResult">{questionsList.length} results</div>
           {questionsList}
+          {/* </form> */}
         </div>
       </div>
     );
@@ -73,4 +75,3 @@ class SearchResults extends Component {
 }
 
 export default SearchResults;
-

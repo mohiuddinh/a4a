@@ -1,0 +1,23 @@
+@import "./Root.css";
+
+.noResults {
+  position: relative;
+}
+
+.noResults__container {
+  position: absolute;
+  width: 100%;
+  height: 6vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--calm-orange);
+  top: 0;
+  left: 0;
+}
+
+.noResults__container h5 {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--white);
+}

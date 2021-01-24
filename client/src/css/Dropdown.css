@@ -2,12 +2,12 @@
 
 .dropdown {
   margin-left: 48px;
-  width: 220px;
+  width: 188px;
   position: relative;
-  /* outline: 1px solid var(--border-accent); */
 }
 
 .dropdown button {
+  font-weight: 500;
   border: none;
   cursor: pointer;
   outline: none;
@@ -21,12 +21,18 @@
   justify-content: space-between;
   border-radius: 4px 4px 0 0;
   padding: 4px 8px;
+  outline: transparent;
+  transition: all 0.2s ease-in-out;
+}
+
+.dropdown__selection:hover {
+  outline: 1px solid var(--border-accent);
 }
 
 .dropdown__menu {
   z-index: 999;
   width: 100%;
-  max-height: 256px;
+  max-height: 224px;
   overflow: auto;
   position: absolute;
   outline: 1px solid var(--border-accent);
@@ -40,20 +46,78 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  /* transition: all 0.1s ease-in-out; */
 }
 
 .dropdown__items span {
-  font-weight: 400;
+  font-weight: 500;
   font-size: 14px;
-  transition: all 0.25s ease-in-out;
-}
-
-.dropdown__items:hover {
-  /* background-color: var(--water); */
+  transition: all 0.2s ease-in-out;
 }
 
 .dropdown__items:hover span {
   transform: translateX(8px);
-  color: #f85959;
+}
+
+/* dropdown items hover */
+
+.dropdown__items:hover .fa {
+  transform: translateX(-8px);
+}
+
+.dropdown__items:hover .dt-5 {
+  color: var(--chem);
+}
+
+.dropdown__items:hover .dt-6 {
+  color: var(--eecs);
+}
+
+.dropdown__items:hover .dt-8 {
+  color: var(--physics);
+}
+
+.dropdown__items:hover .dt-14 {
+  color: var(--econ);
+}
+
+.dropdown__items:hover .dt-18 {
+  color: var(--math);
+}
+
+.dropdown__items:hover .dt-social,
+.dropdown__items:hover .dt-clubs,
+.dropdown__items:hover .dt-all {
+  color: var(--calm-orange);
+}
+
+/* fa icon hovers */
+
+.fa {
+  transition: all 0.2s ease-in-out;
+}
+
+.dropdown__items:hover .fa-atom {
+  color: var(--chem);
+}
+
+.dropdown__items:hover .fa-magnet {
+  color: var(--physics);
+}
+
+.dropdown__items:hover .fa-bolt {
+  color: var(--eecs);
+}
+
+.dropdown__items:hover .fa-money-bill-alt {
+  color: var(--econ);
+}
+
+.dropdown__items:hover .fa-square-root-alt {
+  color: var(--math);
+}
+
+.dropdown__items:hover .fa-user,
+.dropdown__items:hover .fa-dice-three,
+.dropdown__items:hover .fa-align-justify {
+  color: var(--calm-orange);
 }

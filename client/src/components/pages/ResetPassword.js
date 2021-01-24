@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { store } from "react-notifications-component";
+
+import "animate.css/animate.min.css";
 
 function ResetPassword(props) {
   const [password, setPassword] = useState("");
@@ -10,15 +13,55 @@ function ResetPassword(props) {
   async function fetchData(jsonData) {
     await axios.post(`/api/reset-password/${token}`, jsonData).then((res) => {
       if (res.data.status === "tokenExpired") {
-        setResetPasswordMessage(
-          "Your link has expired. Please navigate back to forgot password to receive a new link"
-        );
+        // setResetPasswordMessage(
+        //   "Your link has expired. Please navigate back to forgot password to receive a new link"
+        // );
+        store.addNotification({
+          title: "Uh oh",
+          message:
+            "Your link has expired. Please navigate back to forgot password to receive a new link.",
+          type: "danger",
+          insert: "top",
+          container: "top-right",
+          animationIn: ["animate__animated animate__fadeIn"], // `animate.css v4` classes
+          animationOut: ["animate__animated animate__fadeOut"], // `animate.css v4` classes
+          dismiss: {
+            duration: 2000,
+            onScreen: true,
+          },
+        });
       } else if (res.data.status === "success") {
-        setResetPasswordMessage(
-          "You have successfully reset your password! Try logging in again now!"
-        );
+        // setResetPasswordMessage(
+        //   "You have successfully reset your password! Try logging in again now!"
+        // );
+        store.addNotification({
+          title: "Success!",
+          message: "You have successfully reset your password! Try logging in again now!",
+          type: "success",
+          insert: "top",
+          container: "top-right",
+          animationIn: ["animate__animated animate__fadeIn"], // `animate.css v4` classes
+          animationOut: ["animate__animated animate__fadeOut"], // `animate.css v4` classes
+          dismiss: {
+            duration: 2000,
+            onScreen: true,
+          },
+        });
       } else if (res.data.status === "error") {
-        setResetPasswordMessage(res.data.error + "!");
+        // setResetPasswordMessage(res.data.error + "!");
+        store.addNotification({
+          title: "Uh oh",
+          message: res.data.error + "!",
+          type: "danger",
+          insert: "top",
+          container: "top-right",
+          animationIn: ["animate__animated animate__fadeIn"], // `animate.css v4` classes
+          animationOut: ["animate__animated animate__fadeOut"], // `animate.css v4` classes
+          dismiss: {
+            duration: 2000,
+            onScreen: true,
+          },
+        });
       }
     });
   }

@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import axios from "axios";
 import SearchBar from './SearchBar.js'; 
 import SingleQuestion from "./SingleQuestion.js";
+import Home from "./Home.js";
+
+import "../../css/Physics.css";
 
 class Physics extends Component {
   constructor(props) {
@@ -49,12 +52,15 @@ class Physics extends Component {
 
     return (
       <div className="questions">
-        <div className="questions__main">
-          {/* <input type="text" placeholder="search..." /> */}
-          <SearchBar url="search" />
-          {questionsList}
+      <div className="questions__main animate__animated animate__fadeIn">
+        <div className="Physics_title animate__animated animate__slideInUp"> 
+          Physics 
         </div>
+        {/* <input type="text" placeholder="search..." /> */}
+        <SearchBar url="search" />
+        {questionsList}
       </div>
+    </div>
     );
   }
 }

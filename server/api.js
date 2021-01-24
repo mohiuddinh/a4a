@@ -304,9 +304,11 @@ router.post("/department", (req, res) => {
   const data = req.body.group;
   let pattern = new RegExp("^" + data);
   try {
-    Question.find({ tag: pattern }).populate('writer').then((questions) => {
-      return res.json({ status: "success", questions: questions });
-    });
+    Question.find({ tag: pattern })
+      .populate("writer")
+      .then((questions) => {
+        return res.json({ status: "success", questions: questions });
+      });
   } catch (e) {
     return res.json({ status: "error", error: e });
   }
@@ -320,15 +322,17 @@ router.get("/post", (req, res) => {
 });
 
 router.post("/search", (req, res) => {
-  //console.log(req.body.query); 
-  let userPattern = new RegExp(req.body.query, 'i')
-  Question.find({subject: {$regex:userPattern}}).populate('writer')
-  .then((question)=>{
-    //console.log(question)
-    res.json(question)
-  }).catch(err=>{
-    console.log(err)
-  })
+  //console.log(req.body.query);
+  let userPattern = new RegExp(req.body.query, "i");
+  Question.find({ subject: { $regex: userPattern } })
+    .populate("writer")
+    .then((question) => {
+      //console.log(question)
+      res.json(question);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 });
 
 router.post("/post", auth.ensureLoggedIn, (req, res) => {
@@ -472,12 +476,12 @@ router.post("/upDisLike", auth.ensureLoggedIn, (req, res) => {
   });
 });
 
-router.post('/deletePost', auth.ensureLoggedIn, (req, res) => {
-  //console.log(req.body); 
-  Question.findOneAndDelete(req.body).exec((err, deleteResult)=>{
-    if (err) res.status(400).json( {success: false, err} ); 
-    res.status(200).json({ success: true })
-  })
+router.post("/deletePost", auth.ensureLoggedIn, (req, res) => {
+  //console.log(req.body);
+  Question.findOneAndDelete(req.body).exec((err, deleteResult) => {
+    if (err) res.status(400).json({ success: false, err });
+    res.status(200).json({ success: true });
+  });
 });
 
 router.post("/deleteComment", auth.ensureLoggedIn, (req, res) => {
@@ -502,15 +506,16 @@ router.post("/updatePost", auth.ensureLoggedIn, (req, res) => {
   });
 });
 
-router.get("/profile_by_id", (req, res) => {
-  try{
-  User.find({ _id: req.body.id }).then((user)=>{
-    return res.json({ status: 'success', user: user })
-  }) 
-} catch (e) {
-  return res.json({ status: "error", error: e})
-}
-})
+router.get("/profile_by_id/:id", (req, res) => {
+  const { id } = req.params;
+  try {
+    User.find({ _id: id }).then((user) => {
+      return res.json({ status: "success", user: user });
+    });
+  } catch (e) {
+    return res.json({ status: "error", error: e });
+  }
+});
 
 // anything else falls to this "not found" case
 router.all("*", (req, res) => {

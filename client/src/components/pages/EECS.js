@@ -3,6 +3,8 @@ import axios from "axios";
 import SearchBar from './SearchBar.js'; 
 import SingleQuestion from "./SingleQuestion.js";
 
+import "../../css/EECS.css";
+
 class EECS extends Component {
   constructor(props) {
     super(props);
@@ -49,7 +51,10 @@ class EECS extends Component {
 
     return (
       <div className="questions">
-        <div className="questions__main">
+        <div className="questions__main animate__animated animate__fadeIn">
+          <div className="EECS_title animate__animated animate__slideInUp"> 
+            Electrical Engineering and Computer Science 
+          </div>
           {/* <input type="text" placeholder="search..." /> */}
           <SearchBar url="search" />
           {questionsList}

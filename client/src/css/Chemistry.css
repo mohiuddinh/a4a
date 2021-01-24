@@ -1,0 +1,13 @@
+@import "./Root.css";
+
+.Chemistry_title {
+    color: #520f91;
+    position: relative;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 32px;
+    animation-duration: 1.5s;
+  }
+  

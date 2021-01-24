@@ -1,8 +1,24 @@
 @import "./Root.css";
 
+.singleComment .timeAgo {
+  margin-top: 8px;
+}
+
+.singleComment .btn-userActions {
+  margin-top: 8px;
+}
+
 .singleComment__form {
   display: flex;
   align-items: center;
+}
+
+.singleComment__form button {
+  transition: all 0.25s ease-in-out;
+}
+
+.singleComment__form button:hover {
+  background-color: var(--tea-greenHover);
 }
 
 .singleComment__form input {
@@ -16,4 +32,22 @@
 .singleComment__form button {
   margin-left: 8px;
   background-color: var(--tea-green);
+}
+
+.singleComment__infoContainer {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.singleComment__reply {
+  margin-left: 4px;
+  cursor: pointer;
+}
+
+.singleComment__infoContainer .timeAgo {
+  margin-top: 0;
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
 }

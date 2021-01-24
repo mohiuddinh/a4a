@@ -2,8 +2,11 @@ import React, { useEffect, useState } from "react";
 import { Tooltip } from "antd";
 import Axios from "axios";
 import { LikeOutlined, DislikeOutlined, LikeFilled, DislikeFilled } from "@ant-design/icons";
-import "antd/dist/antd.css";
 import { get, post } from "../../utilities.js";
+import { store } from "react-notifications-component";
+
+import "antd/dist/antd.css";
+import "animate.css/animate.min.css";
 
 function LikeDislikes(props) {
   const [Likes, setLikes] = useState(0);
@@ -18,6 +21,20 @@ function LikeDislikes(props) {
   //     userId = res.id;
   //     setLoading(false);
   // })
+
+  const notification = {
+    title: "Uh oh",
+    message: "Please login before you like and comment.",
+    type: "danger",
+    insert: "top",
+    container: "top-right",
+    animationIn: ["animate__animated animate__fadeIn"], // `animate.css v4` classes
+    animationOut: ["animate__animated animate__fadeOut"], // `animate.css v4` classes
+    dismiss: {
+      duration: 2500,
+      onScreen: true,
+    },
+  };
 
   if (props.question) {
     variable = { questionId: props.questionId, userId: props.userId };
@@ -78,8 +95,12 @@ function LikeDislikes(props) {
   }, []);
 
   const onLike = () => {
-    if (LikeAction === null) {
+    console.log(props.userId);
+    if (props.userId === undefined || props.userId === null) {
+      store.addNotification(notification);
+    } else if (LikeAction === null) {
       post("/api/upLike", variable).then((res) => {
+        console.log(res);
         if (res.success) {
           setLikes(Likes + 1);
           setLikeAction("liked");
@@ -110,7 +131,9 @@ function LikeDislikes(props) {
   };
 
   const onDisLike = () => {
-    if (DislikeAction !== null) {
+    if (props.userId === undefined || props.userId === null) {
+      store.addNotification(notification);
+    } else if (DislikeAction !== null) {
       post("/api/unDisLike", variable).then((res) => {
         if (res.success) {
           setDislikes(Dislikes - 1);
@@ -122,6 +145,7 @@ function LikeDislikes(props) {
       });
     } else {
       post("/api/upDisLike", variable).then((res) => {
+        console.log(res);
         if (res.success) {
           setDislikes(Dislikes + 1);
           setDislikeAction("disliked");

@@ -40,7 +40,7 @@ function login(req, res) {
       req.session.user = user;
       res.send(user);
     })
-    .catch((err) => { 
+    .catch((err) => {
       console.log(`Failed to log in: ${err}`);
       res.status(401).send({ err });
     });

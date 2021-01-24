@@ -1,15 +1,15 @@
 import React, { Component } from "react";
 import axios from "axios";
+import { store } from "react-notifications-component";
 
 import "../../css/Register.css";
+import "animate.css/animate.min.css";
 
 class Register extends Component {
   onSubmit = (e) => {
     e.preventDefault();
 
     console.log("form was submitted");
-
-    const registerMessage = document.getElementById("register__message");
 
     const registered = {
       fullName: this.fullName,
@@ -23,9 +23,33 @@ class Register extends Component {
 
     axios.post("/api/register", registered).then((res) => {
       if (res.data.status === "ok") {
-        registerMessage.innerHTML = res.data.ok;
+        store.addNotification({
+          title: "Success!",
+          message: res.data.ok,
+          type: "success",
+          insert: "top",
+          container: "top-right",
+          animationIn: ["animate__animated animate__fadeIn"], 
+          animationOut: ["animate__animated animate__fadeOut"], 
+          dismiss: {
+            duration: 2500,
+            onScreen: true,
+          },
+        });
       } else {
-        registerMessage.innerHTML = res.data.error;
+        store.addNotification({
+          title: "Uh oh",
+          message: res.data.error + "!",
+          type: "danger",
+          insert: "top",
+          container: "top-right",
+          animationIn: ["animate__animated animate__fadeIn"], 
+          animationOut: ["animate__animated animate__fadeOut"], 
+          dismiss: {
+            duration: 2500,
+            onScreen: true,
+          },
+        });
       }
     });
   };
@@ -35,7 +59,6 @@ class Register extends Component {
       <div className="register">
         <div className="register__container">
           <form onSubmit={this.onSubmit}>
-            <h1 id="register__message"></h1>
             <div className="register__control">
               <input
                 type="text"
