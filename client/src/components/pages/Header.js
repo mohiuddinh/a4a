@@ -20,7 +20,24 @@ class Header extends Component {
     super(props);
     this.state = {
       loggedIn: false,
+      showMenu: false,
     };
+    this.showMenu = this.showMenu.bind(this);
+    this.closeMenu = this.closeMenu.bind(this);
+  }
+
+  showMenu(event) {
+    event.preventDefault();
+
+    this.setState({ showMenu: true }, () => {
+      document.addEventListener("click", this.closeMenu);
+    });
+  }
+
+  closeMenu() {
+    this.setState({ showMenu: false }, () => {
+      document.removeEventListener("click", this.closeMenu);
+    });
   }
 
   componentDidMount() {
@@ -87,11 +104,63 @@ class Header extends Component {
             </Link>
           )}
         </div>
-        <div className="header__burger">
-          <div className="burger-1"></div>
-          <div className="burger-2"></div>
-          <div className="burger-3"></div>
+        <div className="header__burgerContainer">
+          <div className="header__burger" onClick={this.showMenu}>
+            <div
+              className="burger-1"
+              style={
+                this.state.showMenu ? { transform: "rotate(-45deg) translate(-7px, 5px)" } : null
+              }
+            ></div>
+            <div className="burger-2" style={this.state.showMenu ? { opacity: "0" } : null}></div>
+            <div
+              className="burger-3"
+              style={
+                this.state.showMenu ? { transform: "rotate(45deg) translate(-6px, -4px)" } : null
+              }
+            ></div>
+          </div>
         </div>
+        {/* menu for media query */}
+        {this.state.showMenu ? (
+          <div
+            className="header__menu"
+            style={this.showMenu ? null : { transform: "translateX(100%)" }}
+          >
+            {this.props.userId ? (
+              <Link to="/post" style={link_style}>
+                <button className="btn">
+                  <span>Post</span>
+                </button>
+              </Link>
+            ) : null}
+            {!this.props.userId ? (
+              <Link to="/login" style={link_style}>
+                <button className="btn">
+                  <span>Login</span>
+                </button>
+              </Link>
+            ) : null}
+            {this.props.userId ? (
+              <Link to={`/profile/${this.props.userId}`} style={link_style}>
+                <button className="btn">
+                  <span>Profile</span>
+                </button>
+              </Link>
+            ) : null}
+            {this.props.userId ? (
+              <button className="btn" onClick={this.props.handleLogout}>
+                <span>Logout</span>
+              </button>
+            ) : (
+              <Link to="/register" style={link_style}>
+                <button className="btn">
+                  <span>Register</span>
+                </button>
+              </Link>
+            )}
+          </div>
+        ) : null}
       </div>
     );
   }

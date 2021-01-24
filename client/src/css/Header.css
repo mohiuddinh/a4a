@@ -1,6 +1,7 @@
 @import "./Root.css";
 
 .header {
+  position: relative;
   height: 64px;
   background-color: var(--white);
   border-bottom: 1px solid var(--border-accent);
@@ -155,6 +156,7 @@
   display: none;
   cursor: pointer;
   margin-right: 24px;
+  z-index: 10;
 }
 
 .header__burger div {
@@ -177,4 +179,56 @@
 
 .header__burger:hover .burger-3 {
   transform: rotate(45deg) translate(-6px, -4px);
+}
+
+/* media queries */
+@media screen and (max-width: 768px) {
+  .header__burgerContainer {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+  }
+  .header__burger {
+    display: block;
+  }
+  .header__user {
+    display: none;
+  }
+  .h-button {
+    pointer-events: none;
+  }
+  .header__selection h5 {
+    display: none;
+  }
+  .header__menu {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: white;
+    outline: 1px solid var(--border-accent);
+    padding: 64px 12px 0 12px;
+    height: 100vh;
+    width: 220px;
+    z-index: 9;
+    transform: translateX(0%);
+    transition: transform 0.5s ease-in-out;
+  }
+  .header__menuUser {
+    display: flex;
+    flex-direction: column;
+  }
+  .header__menu .btn {
+    padding: 8px 12px;
+    width: 100%;
+    background-color: var(--tea-green);
+    margin: 8px 0;
+    transition: all 0.25s ease-in-out;
+  }
+  .header__menu .btn span {
+    font-size: 14px;
+    color: var(--btn-text);
+  }
+  .header__menu .btn:hover {
+    background-color: var(--tea-greenHover);
+  }
 }

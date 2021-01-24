@@ -1,15 +1,18 @@
 import React, { Component } from "react";
 import { get } from "../../utilities.js";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
+import { navigate } from "@reach/router";
+
+import EditProfile from "./EditProfile.js";
 
 import "../../css/Profile.css";
 
 class Profile extends Component {
   constructor(props) {
     super(props);
-    // console.log(props);
+    console.log(props);
     this.state = {
-      user_info: null,
+      id: "",
       loading: true,
       description: "",
       username: "",
@@ -21,19 +24,40 @@ class Profile extends Component {
   }
 
   componentDidMount() {
-    console.log(this.props.userId);
-    get(`/api/profile_by_id/${this.props.userId}`).then((res) => {
+    get(`/api/profile_by_id/${this.props.id}`).then((res) => {
       console.log(res.user);
-      const { description, username, iconColor, major, occupation, email } = res.user[0];
-      this.setState({
-        loading: false,
-        description: description,
-        username: username,
-        iconColor: iconColor,
-        major: major,
-        occupation: occupation,
-        email: email,
-      });
+      const { description, username, iconColor, major, occupation, email, _id } = res.user[0];
+      this.setState(
+        {
+          id: _id,
+          loading: false,
+          description: description,
+          username: username,
+          iconColor: iconColor,
+          major: major,
+          occupation: occupation,
+          email: email,
+        },
+        () => {
+          console.log(this.state.id);
+        }
+      );
+    });
+  }
+
+  newPage() {
+    console.log(this.state.id);
+    navigate(`/profile/edit/${this.state.id}`).then(() => {
+      return (
+        <EditProfile
+          userId={this.props.id}
+          description={this.state.description}
+          iconColor={this.state.iconColor}
+          major={this.state.major}
+          occupation={this.state.occupation}
+          email={this.state.email}
+        />
+      );
     });
   }
 
@@ -58,6 +82,13 @@ class Profile extends Component {
               {this.state.occupation}
             </div>
             <div className="profile__infoSub">{this.state.email}</div>
+            <div className="profile__infoSub">
+              {this.props.userId === this.props.id ? (
+                <button className="btn-userActions btn-slide-edit" onClick={this.newPage}>
+                  Edit
+                </button>
+              ) : null}
+            </div>
           </div>
           <div className="profile__main">
             <div className="profile__mainBio">
