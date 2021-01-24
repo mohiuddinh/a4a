@@ -1,0 +1,13 @@
+@import "./Root.css";
+
+.Math_title {
+    color: #16779e;
+    position: relative;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 32px;
+    animation-duration: 1.5s;
+  }
+  

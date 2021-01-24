@@ -3,6 +3,8 @@ import axios from "axios";
 import SearchBar from "./SearchBar.js";
 import SingleQuestion from "./SingleQuestion.js";
 
+import "../../css/Chemistry.css";
+
 class Chemistry extends Component {
   constructor(props) {
     super(props);
@@ -49,7 +51,10 @@ class Chemistry extends Component {
 
     return (
       <div className="questions">
-        <div className="questions__main">
+        <div className="questions__main animate__animated animate__fadeIn">
+          <div className="Chemistry_title animate__animated animate__slideInUp"> 
+            Chemistry 
+          </div>
           {/* <input type="text" placeholder="search..." /> */}
           <SearchBar url="search" />
           {questionsList}

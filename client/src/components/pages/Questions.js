@@ -62,6 +62,9 @@ class Questions extends Component {
               onChange={this.onChange}
             />
           </form> */}
+          <div classname="department_title">  
+          <p> ECONOMICS </p>
+          </div>
           <SearchBar url="search" />
           {questionsList}
         </div>
