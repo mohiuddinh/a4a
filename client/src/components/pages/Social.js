@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import SearchBar from "./SearchBar.js";
 import SingleQuestion from "./SingleQuestion.js";
+import LoadingOverlay from 'react-loading-overlay'; 
 
 class Social extends Component {
   constructor(props) {
@@ -44,14 +45,17 @@ class Social extends Component {
         );
       });
     } else {
-      questionsList = <div>Loading...</div>;
+      questionsList = (
+        <LoadingOverlay active={true} spinner text="Loading your content...">
+        </LoadingOverlay>
+      );
     }
 
     return (
       <div className="questions">
         <div className="questions__main">
           {/* <input type="text" placeholder="search..." /> */}
-          <SearchBar url="search" />
+          {/* <SearchBar url="search" /> */}
           {questionsList}
         </div>
       </div>

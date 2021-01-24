@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Link, Redirect } from "react-router-dom";
 import axios from 'axios'; 
 import SearchBar from './SearchBar.js'; 
-
 import SingleQuestion from "../pages/SingleQuestion.js";
 
 import "../../css/Questions.css";
@@ -47,7 +46,9 @@ class Questions extends Component {
         );
       });
     } else {
-      questionsList = <div>Loading...</div>;
+      questionsList = (
+        <div>Loading...</div>
+      );
     }
 
     return (

@@ -11,6 +11,7 @@ import "../../css/Post.css";
 class Edit extends Component {
   constructor(props) {
     super(props);
+    console.log(props); 
     this.state = {
       subject: "",
       tag: "",
