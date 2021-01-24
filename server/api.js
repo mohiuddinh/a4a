@@ -506,15 +506,16 @@ router.post("/updatePost", auth.ensureLoggedIn, (req, res) => {
   });
 });
 
-router.get("/profile_by_id", (req, res) => {
-  try{
-  User.find({ _id: req.body.id }).then((user)=>{
-    return res.json({ status: 'success', user: user })
-  }) 
-} catch (e) {
-  return res.json({ status: "error", error: e})
-}
-})
+router.get("/profile_by_id/:id", (req, res) => {
+  const { id } = req.params;
+  try {
+    User.find({ _id: id }).then((user) => {
+      return res.json({ status: "success", user: user });
+    });
+  } catch (e) {
+    return res.json({ status: "error", error: e });
+  }
+});
 
 // anything else falls to this "not found" case
 router.all("*", (req, res) => {

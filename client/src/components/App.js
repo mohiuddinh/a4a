@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Router, Link, Redirect, navigate } from "@reach/router";
+import ReactNotification from "react-notifications-component";
 
 import NotFound from "./pages/NotFound.js";
 import Skeleton from "./pages/Skeleton.js";
@@ -19,14 +20,14 @@ import SearchResults from "./pages/SearchResults.js";
 import NoResults from "./pages/NoResults";
 import EECS from "./pages/EECS.js";
 import Physics from "./pages/Physics.js";
-import Math from './pages/Math.js'; 
-import Chemistry from './pages/Chemistry.js'; 
-import Econ from './pages/Econ.js'; 
-import Social from './pages/Social.js'; 
-import Clubs from './pages/Clubs.js'; 
-import SearchResultsTwo from './pages/SearchResultsTwo.js'; 
-import Profile from './pages/Profile.js';
-import EditProfile from './pages/EditProfile.js'; 
+import Math from "./pages/Math.js";
+import Chemistry from "./pages/Chemistry.js";
+import Econ from "./pages/Econ.js";
+import Social from "./pages/Social.js";
+import Clubs from "./pages/Clubs.js";
+import SearchResultsTwo from "./pages/SearchResultsTwo.js";
+import Profile from "./pages/Profile.js";
+import EditProfile from "./pages/EditProfile.js";
 
 import "../css/utilities.css";
 import "../css/App.css";
@@ -78,7 +79,7 @@ class App extends Component {
             <SearchResults path="/questions/search/:query" />
             <SearchResultsTwo path="/questions/searchtwo/:query" />
             <NoResults path="/questions/noresults" />
-            <Profile path="/profile/:id" />
+            <Profile path="/profile/:id" userId={this.state.userId} />
             <EditProfile path="/profile/edit/:id" />
             {this.state.userId ? (
               <Post path="/post" writerId={this.state.userId} />

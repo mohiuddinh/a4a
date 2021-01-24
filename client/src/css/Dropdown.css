@@ -87,7 +87,7 @@
 .dropdown__items:hover .dt-social,
 .dropdown__items:hover .dt-clubs,
 .dropdown__items:hover .dt-all {
-  color: var(--cardinal);
+  color: var(--calm-orange);
 }
 
 /* fa icon hovers */
@@ -119,5 +119,5 @@
 .dropdown__items:hover .fa-user,
 .dropdown__items:hover .fa-dice-three,
 .dropdown__items:hover .fa-align-justify {
-  color: var(--cardinal);
+  color: var(--calm-orange);
 }
