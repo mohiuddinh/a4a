@@ -11,8 +11,6 @@ class Register extends Component {
 
     console.log("form was submitted");
 
-    const registerMessage = document.getElementById("register__message");
-
     const registered = {
       fullName: this.fullName,
       username: this.username,
@@ -26,9 +24,9 @@ class Register extends Component {
     axios.post("/api/register", registered).then((res) => {
       if (res.data.status === "ok") {
         store.addNotification({
-          title: "Error",
+          title: "Success!",
           message: res.data.ok,
-          type: "danger",
+          type: "success",
           insert: "top",
           container: "top-right",
           animationIn: ["animate__animated animate__fadeIn"], 
@@ -40,8 +38,8 @@ class Register extends Component {
         });
       } else {
         store.addNotification({
-          title: "Error",
-          message: res.data.error,
+          title: "Uh oh",
+          message: res.data.error + "!",
           type: "danger",
           insert: "top",
           container: "top-right",

@@ -20,7 +20,7 @@ class EmailPasswordLink extends Component {
       console.log(res.data.status);
       if (res.data.status === "ok") {
         store.addNotification({
-          title: "Success",
+          title: "Success!",
           message: "An email with the reset link has been sent. Please check your inbox!",
           type: "success",
           insert: "top",
@@ -34,7 +34,7 @@ class EmailPasswordLink extends Component {
         });
       } else {
         store.addNotification({
-          title: "Error",
+          title: "Uh oh",
           message: "No user was found with this email.",
           type: "danger",
           insert: "top",

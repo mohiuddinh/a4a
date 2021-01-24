@@ -35,7 +35,7 @@ class Login extends Component {
         navigate("/");
       } else {
         store.addNotification({
-          title: "Error",
+          title: "Uh oh",
           message: res.data.error,
           type: "danger",
           insert: "top",

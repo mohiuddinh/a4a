@@ -23,8 +23,8 @@ function LikeDislikes(props) {
   // })
 
   const notification = {
-    title: "Error",
-    message: "Please login before you comment and like.",
+    title: "Uh oh",
+    message: "Please login before you like and comment.",
     type: "danger",
     insert: "top",
     container: "top-right",

@@ -17,7 +17,7 @@ function ResetPassword(props) {
         //   "Your link has expired. Please navigate back to forgot password to receive a new link"
         // );
         store.addNotification({
-          title: "Error",
+          title: "Uh oh",
           message:
             "Your link has expired. Please navigate back to forgot password to receive a new link.",
           type: "danger",
@@ -35,7 +35,7 @@ function ResetPassword(props) {
         //   "You have successfully reset your password! Try logging in again now!"
         // );
         store.addNotification({
-          title: "Success",
+          title: "Success!",
           message: "You have successfully reset your password! Try logging in again now!",
           type: "success",
           insert: "top",
@@ -50,7 +50,7 @@ function ResetPassword(props) {
       } else if (res.data.status === "error") {
         // setResetPasswordMessage(res.data.error + "!");
         store.addNotification({
-          title: "Error",
+          title: "Uh oh",
           message: res.data.error + "!",
           type: "danger",
           insert: "top",
