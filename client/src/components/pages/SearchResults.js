@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 
 import SingleQuestion from "../pages/SingleQuestion.js";
-import Home from "./Home.js";
 import "../../css/Questions.css";
 import { post } from "../../utilities";
 import Home from "./Home.js";

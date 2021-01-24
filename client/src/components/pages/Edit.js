@@ -105,7 +105,12 @@ class Post extends Component {
               required
             ></textarea> */}
             <div className="post__richTextEditor">
-              <RichTextEditor value={question} text={this.state.question} stateUp={this.liftStateUp} name="question" />
+              <RichTextEditor
+                value={question}
+                text={this.state.question}
+                stateUp={this.liftStateUp}
+                name="question"
+              />
             </div>
             <div className="post__selection">
               <input type="reset" value="Discard" className="post__btnInput btn" required />

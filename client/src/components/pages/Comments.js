@@ -73,16 +73,18 @@ function Comments(props) {
               )
           )}
       </div>
-      <div className="comments__container">
-        <form onSubmit={onSubmit}>
-          <div className="post__richTextEditor">
-            <RichTextEditor value={Comment} stateUp={liftStateUp} />
-          </div>
-          <button className="btn btn-submit" onClick={onSubmit}>
-            Submit
-          </button>
-        </form>
-      </div>
+      {props.writerId ? (
+        <div className="comments__container">
+          <form onSubmit={onSubmit}>
+            <div className="post__richTextEditor">
+              <RichTextEditor value={Comment} stateUp={liftStateUp} />
+            </div>
+            <button className="btn btn-submit" onClick={onSubmit}>
+              Submit
+            </button>
+          </form>
+        </div>
+      ) : null}
     </div>
   );
 }

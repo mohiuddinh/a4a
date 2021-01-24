@@ -40,6 +40,10 @@
   margin-bottom: 12px;
 }
 
+.singlePost__profileContainer:last-child {
+  margin-bottom: 0;
+}
+
 .singlePost__main {
   flex: 1;
 }
@@ -80,5 +84,5 @@
 }
 
 .reactHtmlParser__container {
-  margin-top: 12px;
+  margin-top: 4px;
 }

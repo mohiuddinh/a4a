@@ -40,7 +40,6 @@
 .post__textInput:nth-child(2) {
   display: flex;
   align-items: center;
-  padding: 12px 12px !important;
   min-height: 50px;
 }
 
@@ -59,7 +58,7 @@
 .post__selection {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
   height: 100px;
   width: 100%;
   border-radius: 0;
@@ -67,22 +66,10 @@
 
 .post__btnInput {
   margin: 0 24px;
-}
-
-.post__btnInput:nth-child(1) {
-  background-color: var(--pale-pink);
-  transition: all 0.25s ease-in-out;
-}
-
-.post__btnInput:nth-child(1):hover {
-  background-color: var(--pale-pinkHover);
-}
-
-.post__btnInput:nth-child(2) {
   background-color: var(--tea-green);
   transition: all 0.25s ease-in-out;
 }
 
-.post__btnInput:nth-child(2):hover {
+.post__btnInput:hover {
   background-color: var(--tea-greenHover);
 }

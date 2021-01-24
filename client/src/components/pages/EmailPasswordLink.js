@@ -1,7 +1,9 @@
 import React, { Component, useState } from "react";
 import axios from "axios";
+import { store } from "react-notifications-component";
 
 import "../../css/ChangePassword.css";
+import "animate.css/animate.min.css";
 
 class EmailPasswordLink extends Component {
   onSubmit = (e) => {
@@ -17,10 +19,33 @@ class EmailPasswordLink extends Component {
     axios.post("/api/email-password-link", email).then((res) => {
       console.log(res.data.status);
       if (res.data.status === "ok") {
-        changeMessage.innerHTML =
-          "An email with the reset link has been sent. Please check your inbox!";
+        store.addNotification({
+          title: "Success",
+          message: "An email with the reset link has been sent. Please check your inbox!",
+          type: "success",
+          insert: "top",
+          container: "top-right",
+          animationIn: ["animate__animated animate__fadeIn"],
+          animationOut: ["animate__animated animate__fadeOut"],
+          dismiss: {
+            duration: 2000,
+            onScreen: true,
+          },
+        });
       } else {
-        changeMessage.innerHTML = "No user was found with this email.";
+        store.addNotification({
+          title: "Error",
+          message: "No user was found with this email.",
+          type: "danger",
+          insert: "top",
+          container: "top-right",
+          animationIn: ["animate__animated animate__fadeIn"],
+          animationOut: ["animate__animated animate__fadeOut"],
+          dismiss: {
+            duration: 2000,
+            onScreen: true,
+          },
+        });
       }
     });
   };
@@ -30,8 +55,7 @@ class EmailPasswordLink extends Component {
       <div className="change">
         <div className="change__container">
           <form id="change-form" onSubmit={this.onSubmit}>
-            <h1 id="changePassword__message"></h1>
-            <h5>Please enter your email to recieve link to reset password!</h5>
+            <h5>Please enter your email to recieve link to reset password.</h5>
             <input
               type="email"
               name="email"

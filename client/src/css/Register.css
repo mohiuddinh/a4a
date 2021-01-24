@@ -9,16 +9,6 @@
   align-items: center;
 }
 
-#register__message {
-  position: absolute;
-  left: 50%;
-  top: 15%;
-  transform: translate(-50%, 0);
-  font-weight: 600;
-  color: var(--heading-text);
-  font-size: 16px;
-}
-
 .register__container {
   background-color: var(--white);
   width: 500px;

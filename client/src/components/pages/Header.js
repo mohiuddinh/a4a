@@ -46,30 +46,18 @@ class Header extends Component {
         </div>
         <div className="header__title">
           <Link to="/" style={link_style}>
-            <svg
-              width="110"
-              height="50"
-              viewBox="0 0 110 28"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              id="logo"
-            >
-              <path
-                d="M25.1686 29.864H13.8406L12.1606 35H0.976562L13.4086 1.016H25.6966L38.0806 35H26.8486L25.1686 29.864ZM22.5766 21.848L19.5046 12.392L16.4326 21.848H22.5766Z"
-                strokeWidth="1"
-                stroke="#a31f34"
-              />
-              <path
-                d="M40.5976 29.72V20.84L54.9016 0.440002H66.3736V20.504H69.8296V29.72H66.3736V35H55.6216V29.72H40.5976ZM56.4856 12.584L51.3016 20.504H56.4856V12.584Z"
-                strokeWidth="1"
-                stroke="#a31f34"
-              />
-              <path
-                d="M96.0904 29.864H84.7624L83.0824 35H71.8984L84.3304 1.016H96.6184L109.002 35H97.7704L96.0904 29.864ZM93.4984 21.848L90.4264 12.392L87.3544 21.848H93.4984Z"
-                strokeWidth="1"
-                stroke="#a31f34"
-              />
-            </svg>
+            <a aria-label="Thanks" class="h-button centered" data-text="A4A" href="#">
+              <span>A</span>
+              <span>s</span>
+              <span>k</span>
+              <span>4</span>
+              <span>A</span>
+              <span>n</span>
+              <span>s</span>
+              <span>w</span>
+              <span>e</span>
+              <span>r</span>
+            </a>
           </Link>
         </div>
         <div className="header__user">

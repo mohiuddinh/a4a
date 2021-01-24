@@ -1,6 +1,7 @@
 @import "./Root.css";
 
 .tags-input {
+  padding: 8px 0;
   display: flex;
   align-items: center;
   flex-wrap: wrap;
@@ -29,18 +30,18 @@
 
 .tag {
   width: auto;
-  height: 32px;
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   color: var(--heading-text);
-  padding: 0 8px;
+  padding: 6px 8px;
   font-size: 13px;
   font-weight: 500;
   list-style: none;
-  border-radius: 6px;
-  margin-right: 8px;
-  background: var(--water);
+  border-radius: 4px;
+  margin-right: 12px;
+background: var(--water);
 }
 
 .tag .tag-close-icon {
@@ -55,4 +56,71 @@
   border-radius: 50%;
   background: var(--small-text);
   cursor: pointer;
+}
+
+/* tooltips */
+.tooltip {
+  position: relative;
+  display: flex;
+}
+
+.tooltip:before,
+.tooltip:after {
+  position: absolute;
+  content: "";
+  opacity: 0;
+  transition: all 0.4s ease;
+}
+
+.tooltip:before {
+  border-width: 10px 8px 0 8px;
+  border-style: solid;
+  border-color: var(--water) transparent transparent transparent;
+  top: 55%;
+  left: 110%;
+  transform: rotate(90deg) translate(-50%, 0) !important;
+}
+
+.tooltip:after {
+  content: attr(data-tooltip);
+  background: var(--water);
+  width: 300px;
+  height: auto;
+  font-size: 14px;
+  font-weight: 400;
+  top: -100%;
+  left: 160%;
+  padding: 10px;
+  border-radius: 8px;
+  letter-spacing: 1px;
+  transform: translateY(20px);
+}
+
+.tooltip:hover::before,
+.tooltip:hover::after {
+  opacity: 1;
+  transform: translateY(-2px);
+}
+
+@keyframes shake {
+  0% {
+    transform: rotate(2deg);
+  }
+  50% {
+    transform: rotate(-3deg);
+  }
+  70% {
+    transform: rotate(3deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+#anim:hover {
+  animation: shake 500ms ease-in-out forwards;
+}
+
+.icon-info {
+  opacity: 0.65;
 }

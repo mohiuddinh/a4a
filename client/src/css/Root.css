@@ -18,6 +18,11 @@
   --create-account: #36bd4f;
   --btn-text: #5f5f5f;
   --cardinal: #a31f34;
+  --physics: #f85959;
+  --eecs: #ffa812;
+  --math: #45b3e0;
+  --chem: #8a2be2;
+  --econ: #2dd187;
 }
 
 * {
@@ -55,10 +60,14 @@ img {
   width: 100%;
 }
 
+a:hover {
+  color: inherit !important;
+}
+
 .btn {
   cursor: pointer;
   padding: 8px 24px;
-  border-radius: 12px;
+  border-radius: 8px;
   border: none;
   outline: none;
 }
@@ -125,6 +134,7 @@ img {
 }
 
 .ql-editor {
+  padding: 12px !important;
   font-size: 14px !important;
 }
 
@@ -140,6 +150,14 @@ img {
   color: black !important;
   font-weight: 600 !important;
   font-size: 13px;
+}
+
+.ant-comment-actions {
+  margin-top: 4px !important;
+}
+
+.ant-comment-actions > li {
+  width: 100%;
 }
 
 *:focus:not(.focus-visible) {

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
-import Home from './Home.js'; 
+import Home from "./Home.js";
 import SingleQuestion from "./SingleQuestion.js";
 
 class EECS extends Component {

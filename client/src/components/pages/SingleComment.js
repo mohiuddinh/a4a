@@ -61,11 +61,20 @@ function SingleComment(props) {
   // if (props.displayReplyTo){
   //   replyText = <span onClick={openReply} key="comment-basic-reply-to">Reply to </span> ;
   // }
+  const timestamp = new Date(props.comment.createdAt);
+
   const actions = [
-    <LikeDislikes comment commentId={props.comment._id} userId={writerId} />,
-    <span className="singleComment__reply" onClick={openReply} key="comment-basic-reply-to">
-      Reply to{" "}
-    </span>,
+    <div className="singleComment__infoContainer">
+      <LikeDislikes comment commentId={props.comment._id} userId={writerId} />
+      {writerId ? (
+        <span className="singleComment__reply" onClick={openReply} key="comment-basic-reply-to">
+          Reply to{" "}
+        </span>
+      ) : null}
+      <div className="timeAgo">
+        <TimeAgo date={timestamp} />
+      </div>
+    </div>,
   ];
 
   // if (props.displayReplyTo){
@@ -75,7 +84,6 @@ function SingleComment(props) {
   if (Loading) {
     return <div>Loading</div>;
   } else {
-    const timestamp = new Date(props.comment.createdAt);
     return (
       <div className="singleComment">
         <Comment
@@ -87,9 +95,7 @@ function SingleComment(props) {
             </div>
           }
         ></Comment>
-        <div className="timeAgo">
-          <TimeAgo date={timestamp} />
-        </div>
+
         {writerId === props.comment.writer._id ? (
           <Delete
             comment

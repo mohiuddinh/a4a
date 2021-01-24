@@ -9,6 +9,7 @@ import "../../css/SingleQuestion.css";
 class SingleQuestion extends Component {
   constructor(props) {
     super(props);
+    
   }
 
   render() {
@@ -23,9 +24,11 @@ class SingleQuestion extends Component {
           <div className="singleQuestion__container">
             <span className="singleQuestion__tag">Tag:</span>
             <ul id="tags">
-              {this.props.tag.map((tag) => (
-                <li className="tag">
-                  <span className="tag-title">{tag}</span>
+              {this.props.tag.map((tag, index) => (
+                <li className="tag" key={index}>
+                  <span className="tag-title">
+                    {tag}
+                  </span>
                 </li>
               ))}
             </ul>
