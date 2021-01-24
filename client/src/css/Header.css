@@ -5,6 +5,7 @@
   background-color: var(--white);
   border-bottom: 1px solid var(--border-accent);
   display: flex;
+  align-items: center;
 }
 
 .header__selection {
@@ -147,4 +148,32 @@
 .header__user button span {
   font-size: 14px;
   color: var(--btn-text);
+}
+
+/* navBar burger */
+.header__burger {
+  cursor: pointer;
+  margin-right: 24px;
+}
+
+.header__burger div {
+  width: 24px;
+  height: 4px;
+  margin: 4px 0;
+  border-radius: 3px;
+  background-color: lightslategrey;
+  transition: all 0.25s ease-in-out;
+}
+
+.header__burger:hover .burger-1 {
+  transform: rotate(-45deg) translate(-7px, 5px);
+}
+
+.header__burger:hover .burger-2 {
+  transition: rotate(180deg);
+  opacity: 0;
+}
+
+.header__burger:hover .burger-3 {
+  transform: rotate(45deg) translate(-6px, -4px);
 }
