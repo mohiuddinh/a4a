@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
-
+import SearchBar from './SearchBar.js'; 
 import SingleQuestion from "./SingleQuestion.js";
 import Home from "./Home.js";
 
@@ -51,7 +51,8 @@ class Physics extends Component {
     return (
       <div className="questions">
         <div className="questions__main">
-          <Home />
+          {/* <input type="text" placeholder="search..." /> */}
+          <SearchBar url="search" />
           {questionsList}
         </div>
       </div>

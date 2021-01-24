@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link, Redirect } from "react-router-dom";
 import axios from 'axios'; 
-import Home from './Home.js'; 
+import SearchBar from './SearchBar.js'; 
 
 import SingleQuestion from "../pages/SingleQuestion.js";
 
@@ -62,7 +62,7 @@ class Questions extends Component {
               onChange={this.onChange}
             />
           </form> */}
-          <Home />
+          <SearchBar url="search" />
           {questionsList}
         </div>
       </div>

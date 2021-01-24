@@ -346,8 +346,6 @@ router.get("/question_by_id", (req, res) => {
   let type = req.query.type;
   let questionId = req.query.id;
 
-  if (type === "array") {
-  }
   Question.find({ _id: { $in: questionId } })
     .populate("writer")
     .exec((err, product) => {
@@ -507,6 +505,16 @@ router.post("/updatePost", auth.ensureLoggedIn, (req, res) => {
     res.status(200).json({ success: true, data: result });
   });
 });
+
+router.get("/profile_by_id", (req, res) => {
+  try{
+  User.find({ _id: req.body.id }).then((user)=>{
+    return res.json({ status: 'success', user: user })
+  }) 
+} catch (e) {
+  return res.json({ status: "error", error: e})
+}
+})
 
 // anything else falls to this "not found" case
 router.all("*", (req, res) => {

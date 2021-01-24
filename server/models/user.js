@@ -7,6 +7,11 @@ const UserSchema = new mongoose.Schema(
     fullName: { type: String, required: true },
     email: { type: String, required: true, unique: true },
     isVerified: { type: Boolean, default: false },
+    description: { type: String, default: 'n/a' }, 
+    major: { type: String, default: 'n/a' }, 
+    occupation: { type: String, default: 'n/a' }, 
+    iconColor: { type: String, default: 'lightblue' }, 
+    tag: { type: Array, default: [] }
   },
   { collection: "users" }
 );

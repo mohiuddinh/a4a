@@ -1,11 +1,11 @@
-import React from "react";
-
-import "../../css/NoResults.css";
+import React from 'react'; 
+import SearchBar from './SearchBar.js'; 
 
 function NoResults() {
   return (
-    <div className="noResults">
-      <h1>Uh oh, there are no nesults :(</h1>
+    <div>
+      <SearchBar url='search' />
+      No Results
     </div>
   );
 }

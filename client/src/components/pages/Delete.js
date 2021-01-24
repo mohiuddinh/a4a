@@ -17,38 +17,37 @@ function Delete(props) {
           onClick: () => {
             let variable = {};
 
-            if (props.question) {
-              console.log("questions");
-              variable = { _id: props.questionId };
-              post("/api/deletePost", variable)
-                .then((res) => {
-                  console.log(res);
-                  if (res.success) {
-                    alert("Your question has been successfully deleted!");
-                  } else {
-                    alert("Oops, there was an error. Please try again later!");
-                  }
-                })
-                .then(() => {
-                  navigate("/");
-                });
-            } else {
-              console.log("comments");
-              variable = { _id: props.commentId };
-              console.log(variable);
-              post("/api/deleteComment", variable)
-                .then((res) => {
-                  console.log(res);
-                  if (res.success) {
-                    alert("Your comment has been successfully deleted!");
-                  } else {
-                    alert("Oops, there was an error. Please try again later!");
-                  }
-                })
-                .then(() => {
-                  window.location.reload();
-                });
-            }
+              if (props.question){
+                console.log('questions')
+                variable = { _id: props.questionId }
+                post("/api/deletePost", variable)
+                  .then((res) => {
+                    console.log(res);
+                    if (res.success) {
+                      navigate("/");
+                      //alert("Your question has been successfully deleted!");
+                    } else {
+                      alert("Oops, there was an error. Please try again later!");
+                    }
+                  })
+              } else {
+                console.log('comments');
+                variable = { _id: props.commentId }
+                console.log(variable); 
+                post("/api/deleteComment", variable)
+                  .then((res) => {
+                    console.log(res);
+                    if (res.success) {
+                      window.location.reload();
+                      //alert("Your comment has been successfully deleted!");
+                    } else {
+                      alert("Oops, there was an error. Please try again later!");
+                    }
+                  })
+              }
+              
+              
+            },
           },
         },
         {
