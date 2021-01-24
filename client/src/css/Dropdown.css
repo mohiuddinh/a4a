@@ -121,3 +121,11 @@
 .dropdown__items:hover .fa-align-justify {
   color: var(--calm-orange);
 }
+
+/* media queries */
+@media screen and (max-width: 768px) {
+  .dropdown {
+    margin-left: 24px;
+    width: 156px;
+  }
+}

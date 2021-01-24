@@ -43,6 +43,7 @@ class App extends Component {
     super(props);
     this.state = {
       userId: null,
+      loading: true,
     };
   }
 
@@ -53,7 +54,7 @@ class App extends Component {
   componentDidMount() {
     get("/api/whoami").then((user) => {
       if (user) {
-        this.setState({ userId: user.id });
+        this.setState({ userId: user.id, loading: false });
       }
     });
   }
@@ -66,6 +67,9 @@ class App extends Component {
   };
 
   render() {
+    if (this.state.loading) {
+      return <div>Loading...</div>;
+    }
     return (
       <>
         <div>
