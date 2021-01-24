@@ -1,0 +1,14 @@
+@import "./Root.css";
+
+.Physics_title {
+    color: #af3131;
+    position: relative;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 32px;
+    animation-duration: 1.5s;
+  }
+  
+

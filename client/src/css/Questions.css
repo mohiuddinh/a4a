@@ -33,8 +33,13 @@
   height: 80vh;
   border-radius: 12px;
   padding: 12px 80px;
+  animation-duration: 2s;
 }
 
 .questions__results {
   padding: 4px 4px;
 }
+
+
+
+
