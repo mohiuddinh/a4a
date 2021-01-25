@@ -175,10 +175,10 @@
 
 @keyframes menu-open {
   from {
-    transform: translateX(100%);
+    width: 0px;
   }
   to {
-    transform: translateX(0%);
+    width: 220px;
   }
 }
 
@@ -190,10 +190,10 @@
 
 @keyframes menu-close {
   from {
-    transform: translateX(0%);
+    width: 220px;
   }
   to {
-    transform: translateX(100%);
+    width: 0px;
   }
 }
 
