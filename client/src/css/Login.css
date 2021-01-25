@@ -96,3 +96,17 @@
 .login__createAccount {
   color: var(--create-account);
 }
+
+@media only screen and (max-width: 568px) {
+  .login__container {
+    height: 450px;
+    width: 325px;
+    font-size: 12px;
+  }
+  .login__control h5 {
+    font-size: 12px !important;
+  }
+  .login__btnInput {
+    font-size: 12px;
+  }
+}

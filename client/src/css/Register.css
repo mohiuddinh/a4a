@@ -63,3 +63,14 @@
   font-weight: 800;
   font-size: 18px;
 }
+
+@media only screen and (max-width: 568px) {
+  .register__container {
+    height: 450px;
+    width: 325px;
+    font-size: 12px;
+  }
+  .register__btnInput {
+    font-size: 12px;
+  }
+}

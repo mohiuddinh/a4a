@@ -56,12 +56,12 @@ function SearchBar(props) {
               value={search}
               onChange={(e) => fetchUsers(e.target.value)}
             />
-            <SearchIcon
+            {/* <SearchIcon
               type="submit"
               value="Submit"
               className="home__icon"
               onClick={handleSubmit}
-            />
+            /> */}
             {/* <CloseIcon onClick={() => setSearch("")} className="home__icon icon-close" /> */}
           </div>
         </form>

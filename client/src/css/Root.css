@@ -39,6 +39,7 @@
 
 body {
   overflow-x: hidden;
+  overflow: hidden;
 }
 
 h1,
@@ -146,6 +147,11 @@ a:hover {
   align-items: center;
   font-size: 32px;
   animation-duration: 1.5s;
+}
+
+.notifications-component {
+  width: 100% !important;
+  height: 100% !important;
 }
 
 /* media queries */

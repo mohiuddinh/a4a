@@ -39,3 +39,9 @@
 .questions__results {
   padding: 4px 4px;
 }
+
+@media only screen and (max-width: 768px) {
+  .questions__main {
+    padding: 12px 56px;
+  }
+}

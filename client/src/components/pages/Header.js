@@ -122,8 +122,8 @@ class Header extends Component {
         {/* menu for media query */}
         {this.state.showMenu ? (
           <div
-            className={classnames}
-            // style={this.showMenu ? null : { transform: "translateX(100%)" }}
+            className="header__menu"
+            style={this.showMenu ? null : { transform: "translateX(100%)" }}
           >
             {this.props.userId ? (
               <Link to="/post" style={link_style}>
