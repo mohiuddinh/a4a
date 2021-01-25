@@ -54,7 +54,7 @@ const router = express.Router();
 //initialize socket
 const socketManager = require("./server-socket");
 const { _ } = require("core-js");
-const { resolve } = require("../webpack.config");
+// const { resolve } = require("../webpack.config");
 const { isValidObjectId } = require("mongoose");
 
 // router.post("/login", auth.login);
