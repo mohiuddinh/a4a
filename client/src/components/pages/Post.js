@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import TagsInput from "./TagsInput.js";
 import RichTextEditor from "./RichTextEditor.js";
 
-import { get, post } from "../../utilities";
+import { post } from "../../utilities";
 import { navigate } from "@reach/router";
 
 import "../../css/Post.css";
@@ -14,15 +14,8 @@ class Post extends Component {
       subject: "",
       tag: [],
       question: "",
-      loading: true, 
-      writer: ""
+      loading: true
     };
-  }
-
-  componentDidMount() {
-    get('/api/whoami').then((res)=>{ 
-      this.setState({ loading: false, writer: res.id })
-    })
   }
 
   liftStateUp = (data) => {
@@ -37,7 +30,7 @@ class Post extends Component {
     e.preventDefault();
     const { subject, tag, question } = this.state;
 
-    const writer = this.state.writer;
+    const writer = this.props.writerId;
     post("/api/post", { subject, tag, question, writer }).then((res) => {
       console.log("form submitted");
       navigate(`/questions/${res._id}`);
@@ -45,12 +38,6 @@ class Post extends Component {
   };
 
   render() {
-    if(this.state.loading){
-      return(
-        <div>Loading...</div>
-      )
-    }
-
     const selectedTags = (tags) => {
       this.setState({ tag: tags }, () => {});
     };

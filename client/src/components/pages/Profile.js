@@ -12,42 +12,35 @@ class Profile extends Component {
     super(props);
     console.log(props);
     this.state = {
-      id: "",
       loading: true,
       description: "",
       username: "",
       iconColor: "",
       major: "",
-      occupation: "",
-      email: "",
+      occupation: ""
     };
   }
 
   componentDidMount() {
     get(`/api/profile_by_id/${this.props.id}`).then((res) => {
       console.log(res.user);
-      const { description, username, iconColor, major, occupation, email, _id } = res.user[0];
+      const { description, username, iconColor, major, occupation} = res.user[0];
       this.setState(
         {
-          id: _id,
           loading: false,
           description: description,
           username: username,
           iconColor: iconColor,
           major: major,
-          occupation: occupation,
-          email: email,
-        },
-        () => {
-          console.log(this.state.id);
+          occupation: occupation
         }
       );
     });
   }
 
-  newPage() {
-    console.log(this.state.id);
-    navigate(`/profile/edit/${this.state.id}`).then(() => {
+  newPage = () => {
+    console.log(this.props.id);
+    navigate(`/profile/edit/${this.props.id}`).then(() => {
       return (
         <EditProfile
           userId={this.props.id}

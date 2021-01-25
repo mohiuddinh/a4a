@@ -12,34 +12,32 @@ class EditProfile extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      subject: "",
-      tag: "",
-      question: "",
       loading: true,
+      description: "",
+      username: "",
+      iconColor: "",
+      major: "",
+      occupation: ""
     };
   }
 
   componentDidMount() {
-    get(`/api/question_by_id?id=${this.props.questionId}&type=single`).then((res) => {
+    get(`/api/profile_by_id/${this.props.id}`).then((res) => {
+      console.log(res.user);
+      const { description, username, iconColor, major, occupation } = res.user[0];
       this.setState({
-        subject: res[0].subject,
-        tag: res[0].tag,
-        question: res[0].question,
         loading: false,
+        description: description,
+        username: username,
+        iconColor: iconColor,
+        major: major,
+        occupation: occupation
       });
     });
   }
 
-  liftStateUp = (data) => {
-    // console.log("liftStateUp");
-    this.setState({ question: data });
-    // console.log(this.state.question);
-  };
-
   onChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
-
-    // console.log(this.state);
   };
 
   handleSubmit = (e) => {
