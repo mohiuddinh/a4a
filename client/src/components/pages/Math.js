@@ -4,6 +4,7 @@ import SearchBar from "./SearchBar.js";
 import SingleQuestion from "./SingleQuestion.js";
 
 import "../../css/Math.css";
+import Background from "./Background.js";
 
 class Math extends Component {
   constructor(props) {
@@ -51,11 +52,11 @@ class Math extends Component {
 
     return (
       <div className="questions">
+        <Background color={"45b3e0"} />
         <div className="questions__main animate__animated animate__fadeIn">
-          <div className="Math_title animate__animated animate__slideInUp"> 
-            Mathematics 
+          <div className="page_title Math_title animate__animated animate__slideInUp">
+            Mathematics
           </div>
-          {/* <input type="text" placeholder="search..." /> */}
           <SearchBar url="search" />
           {questionsList}
         </div>

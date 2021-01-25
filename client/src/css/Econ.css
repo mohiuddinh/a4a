@@ -1,15 +1,5 @@
 @import "./Root.css";
 
 .Econ_title {
-    color: green;
-    position: relative;
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 32px;
-    animation-duration: 1.5s;
-  }
-  
-
-
+  color: green;
+}

@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import axios from "axios";
-import SearchBar from './SearchBar.js'; 
+import SearchBar from "./SearchBar.js";
 import SingleQuestion from "./SingleQuestion.js";
 import Home from "./Home.js";
 
 import "../../css/Physics.css";
+import Background from "./Background.js";
 
 class Physics extends Component {
   constructor(props) {
@@ -52,15 +53,16 @@ class Physics extends Component {
 
     return (
       <div className="questions">
-      <div className="questions__main animate__animated animate__fadeIn">
-        <div className="Physics_title animate__animated animate__slideInUp"> 
-          Physics 
+        <Background color={"f85959"} />
+        <div className="questions__main animate__animated animate__fadeIn">
+          <div className="page_title Physics_title animate__animated animate__slideInUp">
+            Physics
+          </div>
+          {/* <input type="text" placeholder="search..." /> */}
+          <SearchBar url="search" />
+          {questionsList}
         </div>
-        {/* <input type="text" placeholder="search..." /> */}
-        <SearchBar url="search" />
-        {questionsList}
       </div>
-    </div>
     );
   }
 }

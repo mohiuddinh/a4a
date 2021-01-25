@@ -5,6 +5,7 @@ import { store } from "react-notifications-component";
 
 import "../../css/Login.css";
 import "animate.css/animate.min.css";
+import Background from "./Background";
 
 const link_style = {
   textDecoration: "inherit",
@@ -40,8 +41,8 @@ class Login extends Component {
           type: "danger",
           insert: "top",
           container: "top-right",
-          animationIn: ["animate__animated animate__fadeIn"], 
-          animationOut: ["animate__animated animate__fadeOut"], 
+          animationIn: ["animate__animated animate__fadeIn"],
+          animationOut: ["animate__animated animate__fadeOut"],
           dismiss: {
             duration: 2000,
             onScreen: true,
@@ -54,6 +55,7 @@ class Login extends Component {
   render() {
     return (
       <div className="login">
+        <Background color={"525252"} />
         <div className="login__container">
           <form id="login-form" onSubmit={this.onSubmit}>
             <div className="login__control">

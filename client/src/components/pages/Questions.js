@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { Link, Redirect } from "react-router-dom";
-import axios from 'axios'; 
-import SearchBar from './SearchBar.js'; 
+import axios from "axios";
+import SearchBar from "./SearchBar.js";
+import Background from "./Background.js";
 
 import SingleQuestion from "../pages/SingleQuestion.js";
 
@@ -17,13 +18,12 @@ class Questions extends Component {
   }
 
   componentDidMount() {
-    get("/api/post").then((questionObjs) => { 
+    get("/api/post").then((questionObjs) => {
       let reversedObjs = questionObjs.reverse();
       this.setState({ questions: reversedObjs });
       //console.log("received questions");
     });
   }
-
 
   render() {
     let questionsList = null;
@@ -52,19 +52,11 @@ class Questions extends Component {
 
     return (
       <div className="questions">
+        <Background color={"525252"} />
         <div className="questions__main">
-          {/* <form id="search-bar">
-            <input
-              type="text"
-              placeholder="Search..."
-              id="search"
-              value={this.state.search}
-              onChange={this.onChange}
-            />
-          </form> */}
-          <div classname="department_title">  
-          <p> ECONOMICS </p>
-          </div>
+          {/* <div classname="department_title">
+            <p> ECONOMICS </p>
+          </div> */}
           <SearchBar url="search" />
           {questionsList}
         </div>

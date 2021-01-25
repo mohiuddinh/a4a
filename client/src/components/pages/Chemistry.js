@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import SearchBar from "./SearchBar.js";
 import SingleQuestion from "./SingleQuestion.js";
+import Background from "./Background";
 
 import "../../css/Chemistry.css";
 
@@ -51,9 +52,10 @@ class Chemistry extends Component {
 
     return (
       <div className="questions">
+        <Background color={"#8a2be2"} />
         <div className="questions__main animate__animated animate__fadeIn">
-          <div className="Chemistry_title animate__animated animate__slideInUp"> 
-            Chemistry 
+          <div className="page_title Chemistry_title animate__animated animate__slideInUp">
+            Chemistry
           </div>
           {/* <input type="text" placeholder="search..." /> */}
           <SearchBar url="search" />

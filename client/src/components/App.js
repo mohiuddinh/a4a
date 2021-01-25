@@ -75,7 +75,7 @@ class App extends Component {
         <div>
           <ReactNotification />
           <Header userId={this.state.userId} handleLogout={this.handleLogout} />
-          <Background />
+          {/* <Background /> */}
           <Router>
             <ResetPassword path="/reset-password/:token" />
             <EmailPasswordLink path="/email-password-link" />

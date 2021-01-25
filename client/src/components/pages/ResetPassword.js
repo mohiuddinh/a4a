@@ -3,6 +3,7 @@ import axios from "axios";
 import { store } from "react-notifications-component";
 
 import "animate.css/animate.min.css";
+import Background from "./Background";
 
 function ResetPassword(props) {
   const [password, setPassword] = useState("");
@@ -80,6 +81,7 @@ function ResetPassword(props) {
 
   return (
     <div className="change">
+      <Background color={"525252"} />
       <div className="change__container">
         <form onSubmit={onSubmit}>
           <h1 id="changePassword__message">{resetPasswordMessage}</h1>

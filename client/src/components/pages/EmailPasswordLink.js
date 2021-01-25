@@ -4,6 +4,7 @@ import { store } from "react-notifications-component";
 
 import "../../css/ChangePassword.css";
 import "animate.css/animate.min.css";
+import Background from "./Background";
 
 class EmailPasswordLink extends Component {
   onSubmit = (e) => {
@@ -53,6 +54,7 @@ class EmailPasswordLink extends Component {
   render() {
     return (
       <div className="change">
+        <Background color={"525252"} />
         <div className="change__container">
           <form id="change-form" onSubmit={this.onSubmit}>
             <h5>Please enter your email to recieve link to reset password.</h5>

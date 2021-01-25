@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import SearchBar from "./SearchBar.js";
 import SingleQuestion from "./SingleQuestion.js";
+import Background from "./Background.js";
 
 class Social extends Component {
   constructor(props) {
@@ -13,7 +14,7 @@ class Social extends Component {
 
   componentDidMount() {
     const data = {
-      group: 'Social',
+      group: "Social",
     };
     axios.post("/api/department", data).then((res) => {
       const questionObjs = res.data.questions;
@@ -49,8 +50,8 @@ class Social extends Component {
 
     return (
       <div className="questions">
+        <Background color={"525252"} />
         <div className="questions__main">
-          {/* <input type="text" placeholder="search..." /> */}
           <SearchBar url="search" />
           {questionsList}
         </div>
