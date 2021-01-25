@@ -68,7 +68,12 @@ class Post extends Component {
               />
             </div>
             <div className="post__selection">
-              <input type="submit" value="Submit" className="post__btnInput btn" required />
+              <input
+                type="submit"
+                value="Submit"
+                className="post__btnInput btn-hoverDarkGreen btn"
+                required
+              />
             </div>
           </form>
         </div>

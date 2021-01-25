@@ -36,15 +36,6 @@
   outline: none;
 }
 
-.btn-submit {
-  background-color: var(--tea-green);
-  transition: all 0.25s ease-in-out;
-}
-
-.btn-submit:hover {
-  background-color: var(--tea-greenHover);
-}
-
 .comments__main {
   border-bottom: 1px solid var(--border-accent);
 }

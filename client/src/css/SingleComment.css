@@ -13,14 +13,6 @@
   align-items: center;
 }
 
-.singleComment__form button {
-  transition: all 0.25s ease-in-out;
-}
-
-.singleComment__form button:hover {
-  background-color: var(--tea-greenHover);
-}
-
 .singleComment__form input {
   flex: 1;
   padding: 8px 0;

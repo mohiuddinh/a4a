@@ -116,7 +116,7 @@ class EditProfile extends Component {
               ></textarea>
             </div>
             <div className="editProfile__submit">
-              <input type="submit" value="Submit" className="btn" />
+              <input type="submit" value="Save" className="btn" />
             </div>
           </form>
         </div>

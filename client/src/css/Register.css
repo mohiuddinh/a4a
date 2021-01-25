@@ -58,15 +58,8 @@
 }
 
 .register__btnInput {
-  background-color: var(--tea-green);
   width: 100%;
   height: 60%;
   font-weight: 800;
   font-size: 18px;
-  color: var(--btn-text);
-  transition: all 0.25s ease-in-out;
-}
-
-.register__btnInput:hover {
-  background-color: var(--tea-greenHover);
 }

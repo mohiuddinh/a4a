@@ -79,7 +79,7 @@ function Comments(props) {
             <div className="post__richTextEditor">
               <RichTextEditor value={Comment} stateUp={liftStateUp} />
             </div>
-            <button className="btn btn-submit" onClick={onSubmit}>
+            <button className="btn btn-hoverDarkGreen" onClick={onSubmit}>
               Submit
             </button>
           </form>

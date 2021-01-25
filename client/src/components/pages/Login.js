@@ -79,7 +79,7 @@ class Login extends Component {
               />
             </div>
             <div className="login__control">
-              <input type="submit" value="Login" className="login__btnInput btn" required />
+              <input type="submit" value="Login" className="login__btnInput btn btn-hoverDarkGreen" required />
             </div>
             <div className="login__control">
               <Link to="/email-password-link" style={link_style}>

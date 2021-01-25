@@ -29,8 +29,8 @@
 .questions__main {
   position: relative;
   overflow: auto;
-  width: 900px;
-  height: 80vh;
+  width: var(--large-container-width);
+  height: var(--large-container-height);
   border-radius: 12px;
   padding: 12px 80px;
   animation-duration: 2s;
@@ -39,7 +39,3 @@
 .questions__results {
   padding: 4px 4px;
 }
-
-
-
-

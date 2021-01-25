@@ -112,7 +112,12 @@ class Register extends Component {
               />
             </div>
             <div className="register__control">
-              <input type="submit" value="Register" className="register__btnInput btn" required />
+              <input
+                type="submit"
+                value="Register"
+                className="register__btnInput btn btn-hoverDarkGreen"
+                required
+              />
             </div>
           </form>
         </div>

@@ -136,14 +136,6 @@
 
 .header__user button {
   margin-right: 48px;
-  background-color: var(--tea-green);
-  transition: transform 0.25s ease-in-out;
-}
-
-.header__user button:focus,
-.header__user button:hover {
-  box-shadow: 0 10px 10px -10px var(--tea-green);
-  transform: translateY(-3px);
 }
 
 .header__user button span {

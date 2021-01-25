@@ -80,25 +80,25 @@ class Header extends Component {
         <div className="header__user">
           {!this.props.userId ? (
             <Link to="/login" style={link_style}>
-              <button className="btn">
+              <button className="btn btn-hoverUp">
                 <span>Login</span>
               </button>
             </Link>
           ) : null}
           {this.props.userId ? (
             <Link to={`/profile/${this.props.userId}`} style={link_style}>
-              <button className="btn">
+              <button className="btn btn-hoverUp">
                 <span>Profile</span>
               </button>
             </Link>
           ) : null}
           {this.props.userId ? (
-            <button className="btn btn-logout" onClick={this.props.handleLogout}>
+            <button className="btn btn-hoverUp" onClick={this.props.handleLogout}>
               <span>Logout</span>
             </button>
           ) : (
             <Link to="/register" style={link_style}>
-              <button className="btn">
+              <button className="btn btn-hoverUp">
                 <span>Register</span>
               </button>
             </Link>

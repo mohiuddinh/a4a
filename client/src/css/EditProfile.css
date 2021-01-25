@@ -8,8 +8,8 @@
 }
 
 .editProfile__container {
-  width: 800px;
-  height: 80vh;
+  width: var(--medium-container-width);
+  height: var(--large-container-height);
   background-color: var(--white);
   border: 1px solid var(--border-accent);
   border-radius: 12px;

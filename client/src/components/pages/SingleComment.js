@@ -107,7 +107,7 @@ function SingleComment(props) {
         {OpenReply && (
           <form className="singleComment__form" onSubmit={onSubmit}>
             <input onChange={handleChange} value={CommentValue} placeholder="comments" />
-            <button className="btn" onClick={onSubmit}>
+            <button className="btn btn-hoverDarkGreen" onClick={onSubmit}>
               Submit
             </button>
           </form>
