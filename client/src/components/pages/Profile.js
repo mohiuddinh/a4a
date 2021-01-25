@@ -45,7 +45,7 @@ class Profile extends Component {
     });
   }
 
-  newPage() {
+  newPage = () => {
     console.log(this.state.id);
     navigate(`/profile/edit/${this.state.id}`).then(() => {
       return (
@@ -59,7 +59,7 @@ class Profile extends Component {
         />
       );
     });
-  }
+  };
 
   render() {
     if (this.state.loading) {

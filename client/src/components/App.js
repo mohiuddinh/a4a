@@ -2,12 +2,9 @@ import React, { Component } from "react";
 import { Router, Link, Redirect, navigate } from "@reach/router";
 import ReactNotification from "react-notifications-component";
 
-import NotFound from "./pages/NotFound.js";
-import Skeleton from "./pages/Skeleton.js";
 import Header from "./pages/Header.js";
 import Post from "./pages/Post.js";
 import Questions from "./pages/Questions.js";
-import Background from "./pages/Background.js";
 import Home from "./pages/Home.js";
 import Login from "./pages/Login.js";
 import Register from "./pages/Register.js";
@@ -33,8 +30,6 @@ import "../css/utilities.css";
 import "../css/App.css";
 import "../css/scrollbar.css";
 import "react-notifications-component/dist/theme.css";
-
-import { socket } from "../client-socket.js";
 
 import { get, post } from "../utilities";
 
@@ -75,7 +70,6 @@ class App extends Component {
         <div>
           <ReactNotification />
           <Header userId={this.state.userId} handleLogout={this.handleLogout} />
-          {/* <Background /> */}
           <Router>
             <ResetPassword path="/reset-password/:token" />
             <EmailPasswordLink path="/email-password-link" />
