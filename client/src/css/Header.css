@@ -174,7 +174,7 @@
 }
 
 /* media queries */
-@media screen and (max-width: 768px) {
+@media only screen and (max-width: 768px) {
   .header__burgerContainer {
     flex: 1;
     display: flex;

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import TagsInput from "./TagsInput.js";
 import RichTextEditor from "./RichTextEditor.js";
+import Background from "./Background.js";
 
 import { post } from "../../utilities";
 import { navigate } from "@reach/router";
@@ -45,6 +46,7 @@ class Post extends Component {
 
     return (
       <div className="post">
+        <Background color={"525252"} />
         <div className="post__container">
           <form onSubmit={this.handleSubmit}>
             <input
