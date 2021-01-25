@@ -3,6 +3,7 @@ import TagsInput from "./TagsInput.js";
 import RichTextEditor from "./RichTextEditor.js";
 import ReactHtmlParser from "react-html-parser";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
+import Background from "./Background.js";
 
 import { get, post } from "../../utilities";
 import { navigate } from "@reach/router";
@@ -18,9 +19,9 @@ class EditProfile extends Component {
       username: "",
       iconColor: "",
       major: "",
-      occupation: "", 
-      email: "", 
-      tag: []
+      occupation: "",
+      email: "",
+      tag: [],
     };
   }
 
@@ -34,9 +35,9 @@ class EditProfile extends Component {
         username: username,
         iconColor: iconColor,
         major: major,
-        occupation: occupation, 
-        email: email, 
-        tag: tag
+        occupation: occupation,
+        email: email,
+        tag: tag,
       });
     });
   }
@@ -49,40 +50,48 @@ class EditProfile extends Component {
     e.preventDefault();
     const { description, iconColor, major, occupation, tag } = this.state;
     const _id = this.props.id;
-    post("/api/updateProfile", { description, iconColor, major, occupation, tag, _id }).then((res) => {
-      console.log(res); 
-      navigate(`/profile/${_id}`);
-    });
+    post("/api/updateProfile", { description, iconColor, major, occupation, tag, _id }).then(
+      (res) => {
+        console.log(res);
+        navigate(`/profile/${_id}`);
+      }
+    );
   };
 
   render() {
-    if(this.state.loading){
-      return (<div>Loading...</div>)
+    if (this.state.loading) {
+      return <div>Loading...</div>;
     }
 
     const selectedTags = (tags) => {
       this.setState({ tag: tags });
     };
-    
-    const color = this.state.iconColor; 
+
+    const color = this.state.iconColor;
     const { description, iconColor, major, occupation, tag } = this.state;
 
     return (
       <div className="editProfile">
+        <Background color={"525252"} />
         <div className="editProfile__container">
           <form onSubmit={this.handleSubmit}>
-            <div className="editProfile__info">
-              <div className="editProfile__infoContainer">
-                <div className="editProfile__infoSub">
-                  <AccountCircleIcon style={{ color: { color } }} fontSize="large" />
+            <div className="editProfile__user">
+              <div>
+                <div className="editProfile__userSub">
+                  <AccountCircleIcon style={{ color: color }} fontSize="large" />
                 </div>
-                <div className="editProfile__infoSub">
+                <div className="editProfile__userSub">
                   <span>{this.state.username}</span>
                 </div>
-                <div className="editProfile__infoSub">
+                <div className="editProfile__userSub">
                   <span>{this.state.email}</span>
                 </div>
               </div>
+              <div className="editProfile__submit">
+                <input type="submit" value="Save" className="btn" />
+              </div>
+            </div>
+            <div className="editProfile__info">
               <div className="editProfile__infoContainer">
                 <div className="editProfile__infoSub">
                   <label htmlFor="tags">Tags</label>
@@ -135,14 +144,11 @@ class EditProfile extends Component {
                 name="description"
                 value={description}
                 onChange={this.onChange}
-                cols="30"
-                rows="10"
+                // cols="30"
+                // rows="10"
                 placeholder="type your bio in here :)"
                 required
               ></textarea>
-            </div>
-            <div className="editProfile__submit">
-              <input type="submit" value="Save" className="btn" />
             </div>
           </form>
         </div>

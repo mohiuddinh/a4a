@@ -70,59 +70,68 @@ function SinglePostPage(props) {
     console.log(typeof timestamp);
     return (
       <div className="singlePost">
-        <div className="singlePost__container">
-          <div className="singlePost__profile">
-            <div className="singlePost__profileContainer">
-            <AccountCircleIcon style={{ color: iconColor }} fontSize="large" onClick={profileClick}/>
-            </div>
-            <div className="singlePost__profileContainer">
-              <LikeDislikes question questionId={questionId} userId={writer} />
-            </div>
-            <div className="singlePost__profileContainer">{Question.writer.username}</div>
-            <div className="timeAgo singlePost__profileContainer">
-              <TimeAgo date={timestamp} />
-            </div>
-          </div>
-          <div className="singlePost__main">
-            <div className="singlePost__sub">
-              <h5>
-                <span>Subject: </span>
-                {Question.subject}
-              </h5>
-            </div>
-            <div className="singlePost__sub">
-              <span className="singlePost__tag">Tags: </span>
-              <ul id="tags">
-                {Question.tag.map((tag, index) => (
-                  <li className="tag" key={index}>
-                    <span className="tag-title">{tag}</span>
-                  </li>
-                ))}
-              </ul>
-              <div className="singlePost__userActions">
-                {writer === Question.writer._id ? (
-                  <Delete question questionId={questionId} userId={writer} />
-                ) : null}
-                {writer === Question.writer._id ? (
-                  <button onClick={newPage} className="btn-userActions btn-slide-edit">
-                    Edit
-                  </button>
-                ) : null}
+        <div className="singlePost__largeContainer">
+          <div className="singlePost__container">
+            <div className="singlePost__profile">
+              <div className="singlePost__profileContainer">
+                <AccountCircleIcon
+                  style={{ color: iconColor }}
+                  fontSize="large"
+                  onClick={profileClick}
+                  className="singlePost__profileIcon"
+                />
+              </div>
+              <div className="singlePost__profileContainer">
+                <LikeDislikes question questionId={questionId} userId={writer} />
+              </div>
+              <div className="singlePost__profileContainer">{Question.writer.username}</div>
+              <div className="timeAgo singlePost__profileContainer">
+                <TimeAgo date={timestamp} />
               </div>
             </div>
-            <div className="singlePost__sub">
-              <span>Question: </span>
-              <div className="reactHtmlParser__container">{ReactHtmlParser(Question.question)}</div>
+            <div className="singlePost__main">
+              <div className="singlePost__sub">
+                <h5>
+                  <span>Subject: </span>
+                  {Question.subject}
+                </h5>
+              </div>
+              <div className="singlePost__sub">
+                <span className="singlePost__tag">Tags: </span>
+                <ul id="tags">
+                  {Question.tag.map((tag, index) => (
+                    <li className="tag" key={index}>
+                      <span className="tag-title">{tag}</span>
+                    </li>
+                  ))}
+                </ul>
+                <div className="singlePost__userActions">
+                  {writer === Question.writer._id ? (
+                    <Delete question questionId={questionId} userId={writer} />
+                  ) : null}
+                  {writer === Question.writer._id ? (
+                    <button onClick={newPage} className="btn-userActions btn-slide-edit">
+                      Edit
+                    </button>
+                  ) : null}
+                </div>
+              </div>
+              <div className="singlePost__sub">
+                <span>Question: </span>
+                <div className="reactHtmlParser__container">
+                  {ReactHtmlParser(Question.question)}
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-        <div className="singlePost__container">
-          <Comments
-            CommentLists={CommentLists}
-            writerId={writer}
-            questionId={questionId}
-            refreshFunction={updateComment}
-          />
+          <div className="singlePost__container">
+            <Comments
+              CommentLists={CommentLists}
+              writerId={writer}
+              questionId={questionId}
+              refreshFunction={updateComment}
+            />
+          </div>
         </div>
       </div>
     );

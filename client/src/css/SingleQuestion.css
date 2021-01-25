@@ -28,6 +28,11 @@ a .singleQuestion__container:nth-child(1) {
   display: flex;
 }
 
+a .singleQuestion__container:nth-child(1) a {
+  color: inherit !important;
+  font-weight: 600;
+}
+
 .singleQuestion__container:nth-child(1) h5 {
   font-size: 14px;
   font-weight: 400;
@@ -56,4 +61,8 @@ a .singleQuestion__container:nth-child(2) {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.singlePost__profileIcon {
+  cursor: pointer;
 }

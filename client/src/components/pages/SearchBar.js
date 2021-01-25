@@ -5,8 +5,9 @@ import M from "materialize-css";
 import { Link, navigate } from "@reach/router";
 import SearchIcon from "@material-ui/icons/Search";
 import CloseIcon from "@material-ui/icons/Close";
+
 import "../../css/Post.css";
-//import "../../css/SearchBar.css";
+import "../../css/Home.css";
 
 function SearchBar(props) {
   const searchModal = useRef(null);
@@ -49,19 +50,19 @@ function SearchBar(props) {
       <div className="home__search">
         <form onSubmit={handleSubmit}>
           <div className="home__searchContainer">
-            <SearchIcon
-              type="submit"
-              value="Submit"
-              className="home__icon"
-              onClick={handleSubmit}
-            />
             <input
               type="text"
               placeholder="search..."
               value={search}
               onChange={(e) => fetchUsers(e.target.value)}
             />
-            <CloseIcon onClick={() => setSearch("")} className="home__icon icon-close" />
+            <SearchIcon
+              type="submit"
+              value="Submit"
+              className="home__icon"
+              onClick={handleSubmit}
+            />
+            {/* <CloseIcon onClick={() => setSearch("")} className="home__icon icon-close" /> */}
           </div>
         </form>
         <ul className="home__searchCollection">

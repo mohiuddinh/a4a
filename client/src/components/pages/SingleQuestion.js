@@ -15,15 +15,14 @@ class SingleQuestion extends Component {
     const timestamp = new Date(this.props.timestamp);
     return (
       <div className="singleQuestion">
-        {/* <a href={this.props.url}> */}
-        <div className="singleQuestion__container">
-          <span>
-            <a href={`/profile/${this.props.writerId}`}>{this.props.username}: </a>
-          </span>
-
-          <h5>{this.props.subject}</h5>
-        </div>
         <a href={this.props.url}>
+          <div className="singleQuestion__container">
+            <span>
+              <a href={`/profile/${this.props.writerId}`}>{this.props.username}: </a>
+            </span>
+            <h5>{this.props.subject}</h5>
+          </div>
+          {/* <a href={this.props.url}> */}
           <div className="singleQuestion__container">
             <span className="singleQuestion__tag">Tag:</span>
             <ul id="tags">

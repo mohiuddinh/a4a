@@ -27,18 +27,18 @@
 
 .editProfile__container form label {
   font-weight: 500;
-  font-size: 14px;
+  font-size: 12px;
   margin-bottom: 4px;
+}
+
+.editProfile__bio {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 .editProfile__info,
 .editProfile__bio {
-  height: 50%;
-}
-
-.editProfile__info,
-.editProfile__bio,
-.editProfile__submit {
   padding: 12px 0;
   width: 100%;
 }
@@ -51,6 +51,7 @@
 }
 
 .editProfile__textInput {
+  width: 100%;
   flex: 1;
 }
 
@@ -79,17 +80,7 @@
   padding: 0 8px;
 }
 
-.editProfile__infoContainer:nth-child(1) {
-  width: 188px;
-  margin-right: 12px;
-  border-right: 1px solid var(--border-accent);
-}
-
-.editProfile__infoContainer:nth-child(1) .editProfile__infoSub {
-  align-items: center;
-}
-
-.editProfile__infoContainer:nth-child(2) {
+.editProfile__infoContainer {
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -97,16 +88,17 @@
 }
 
 .editProfile__bio textarea {
+  flex: 1;
   width: 100%;
-  height: 100%;
   resize: none;
   outline: none;
   border: none;
 }
 
 .editProfile__submit {
+  width: 100%;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: flex-end;
 }
 
@@ -119,6 +111,7 @@
   background-color: var(--tea-greenHover);
 }
 
-@media only screen and (max-width: 550px) {
-  
+.editProfile__user {
+  display: flex;
+  width: 100%;
 }

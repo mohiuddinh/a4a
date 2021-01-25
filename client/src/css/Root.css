@@ -69,8 +69,7 @@ img {
 }
 
 a {
-  color: inherit !important; 
-  font-weight: 600;
+  color: inherit !important;
 }
 
 a:hover {
@@ -167,9 +166,9 @@ a:hover {
   }
 }
 
-@media only screen and (max-width: 550px) {
+@media only screen and (max-width: 568px) {
   :root {
-    --large-container-width: 500px;
+    --large-container-width: 450px;
     --medium-container-width: 325px;
     --small-container-width: 325px;
   }

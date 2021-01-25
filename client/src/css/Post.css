@@ -65,9 +65,4 @@
   margin: 0 24px;
 }
 
-@media screen and (max-width: 550px) {
-  .profile__container {
-    flex-direction: column;
-    overflow: auto;
-  }
-}
+

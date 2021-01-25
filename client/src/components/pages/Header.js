@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "@reach/router";
+import cs from "classnames";
 import { GoogleLogin, GoogleLogout } from "react-google-login";
 
 import Dropdown from "./Dropdown.js";
@@ -40,15 +41,12 @@ class Header extends Component {
     });
   }
 
-  componentDidMount() {
-    const logo = document.querySelectorAll("#logo path");
-
-    for (let i = 0; i < logo.length; i++) {
-      // console.log(`Letter ${i} is ${logo[i].getTotalLength()}`);
-    }
-  }
-
   render() {
+    const classnames = cs("header__menu", {
+      open: this.showMenu,
+      close: !this.showMenu,
+    });
+
     return (
       <div className="header">
         <div className="header__selection">
@@ -124,8 +122,8 @@ class Header extends Component {
         {/* menu for media query */}
         {this.state.showMenu ? (
           <div
-            className="header__menu"
-            style={this.showMenu ? null : { transform: "translateX(100%)" }}
+            className={classnames}
+            // style={this.showMenu ? null : { transform: "translateX(100%)" }}
           >
             {this.props.userId ? (
               <Link to="/post" style={link_style}>

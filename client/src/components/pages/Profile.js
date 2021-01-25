@@ -2,8 +2,9 @@ import React, { Component } from "react";
 import { get } from "../../utilities.js";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import { navigate } from "@reach/router";
-import SingleQuestion from './SingleQuestion.js'; 
+import SingleQuestion from "./SingleQuestion.js";
 import EditProfile from "./EditProfile.js";
+import Background from "./Background.js";
 
 import "../../css/Profile.css";
 
@@ -14,37 +15,37 @@ class Profile extends Component {
     this.state = {
       loading1: true,
       loading2: true,
+      email: "",
       description: "",
       username: "",
       iconColor: "",
       major: "",
-      occupation: "", 
-      questions: []
+      occupation: "",
+      questions: [],
     };
   }
 
   componentDidMount() {
     get(`/api/profile_by_id/${this.props.id}`).then((res) => {
       console.log(res.user);
-      const { description, username, iconColor, major, occupation} = res.user[0];
-      this.setState(
-        {
-          description: description,
-          username: username,
-          iconColor: iconColor,
-          major: major,
-          occupation: occupation, 
-          loading1: false
-        }
-      )
-      get(`/api/question_by_user_id/${this.props.id}`).then((questionObjs)=>{
-          console.log(questionObjs); 
-          let reversedObjs = questionObjs.reverse();
-          this.setState({
-            loading2: false, 
-            questions: reversedObjs
-          })
+      const { description, username, iconColor, major, occupation, email } = res.user[0];
+      this.setState({
+        description: description,
+        username: username,
+        email: email,
+        iconColor: iconColor,
+        major: major,
+        occupation: occupation,
+        loading1: false,
+      });
+      get(`/api/question_by_user_id/${this.props.id}`).then((questionObjs) => {
+        console.log(questionObjs);
+        let reversedObjs = questionObjs.reverse();
+        this.setState({
+          loading2: false,
+          questions: reversedObjs,
         });
+      });
     });
   }
 
@@ -69,8 +70,8 @@ class Profile extends Component {
       return <div>Loading...</div>;
     }
 
-    let questionsList = null; 
-    if (this.state.questions.length !== 0){
+    let questionsList = null;
+    if (this.state.questions.length !== 0) {
       questionsList = this.state.questions.map((questionObj, i) => {
         return (
           <SingleQuestion
@@ -86,13 +87,14 @@ class Profile extends Component {
             timestamp={questionObj.createdAt}
           />
         );
-      })
+      });
     } else {
-      questionsList = <p>No Posts</p>
+      questionsList = <p>No Posts</p>;
     }
 
     return (
       <div className="profile">
+        <Background color={"525252"} />
         <div className="profile__container">
           <div className="profile__info">
             <div className="profile__infoSub">
