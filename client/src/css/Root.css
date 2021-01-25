@@ -65,6 +65,11 @@ img {
   width: 100%;
 }
 
+a {
+  color: inherit !important; 
+  font-weight: 600;
+}
+
 a:hover {
   color: inherit !important;
 }
@@ -171,4 +176,15 @@ a:hover {
 
 .timeAgo {
   font-size: 12px;
+}
+
+.page_title {
+  font-weight: 500;
+  position: relative;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 32px;
+  animation-duration: 1.5s;
 }

@@ -2,11 +2,12 @@ import React, { Component } from "react";
 import TagsInput from "./TagsInput.js";
 import RichTextEditor from "./RichTextEditor.js";
 import ReactHtmlParser from "react-html-parser";
+import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 
 import { get, post } from "../../utilities";
 import { navigate } from "@reach/router";
 
-import "../../css/Post.css";
+import "../../css/EditProfile.css";
 
 class EditProfile extends Component {
   constructor(props) {
@@ -17,21 +18,25 @@ class EditProfile extends Component {
       username: "",
       iconColor: "",
       major: "",
-      occupation: ""
+      occupation: "", 
+      email: "", 
+      tag: []
     };
   }
 
   componentDidMount() {
     get(`/api/profile_by_id/${this.props.id}`).then((res) => {
       console.log(res.user);
-      const { description, username, iconColor, major, occupation } = res.user[0];
+      const { description, username, iconColor, major, occupation, email, tag } = res.user[0];
       this.setState({
         loading: false,
         description: description,
         username: username,
         iconColor: iconColor,
         major: major,
-        occupation: occupation
+        occupation: occupation, 
+        email: email, 
+        tag: tag
       });
     });
   }
@@ -42,77 +47,102 @@ class EditProfile extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    const { subject, tag, question } = this.state;
-    const _id = this.props.questionId;
-    post("/api/updatePost", { subject, tag, question, _id }).then((res) => {
-      navigate(`/questions/${_id}`);
+    const { description, iconColor, major, occupation, tag } = this.state;
+    const _id = this.props.id;
+    post("/api/updateProfile", { description, iconColor, major, occupation, tag, _id }).then((res) => {
+      console.log(res); 
+      navigate(`/profile/${_id}`);
     });
   };
 
   render() {
-    if (this.state.loading) {
-      return <div>Loading...</div>;
+    if(this.state.loading){
+      return (<div>Loading...</div>)
     }
 
     const selectedTags = (tags) => {
-      // console.log(tags);
       this.setState({ tag: tags });
     };
-
-    const { subject, tag, question } = this.state;
+    
+    const color = this.state.iconColor; 
+    const { description, iconColor, major, occupation, tag } = this.state;
 
     return (
-      <div className="post">
-        <div className="post__container">
+      <div className="editProfile">
+        <div className="editProfile__container">
           <form onSubmit={this.handleSubmit}>
-            <input
-              type="text"
-              name="subject"
-              placeholder="Subject"
-              className="post__textInput"
-              value={subject}
-              onChange={this.onChange}
-              required
-            />
-            {/* <input
-              type="text"
-              name="tag"
-              placeholder="Tags"
-              className="post__textInput"
-              value={tag}
-              onChange={this.onChange}
-              required
-            /> */}
-            <div className="post__textInput">
-              <TagsInput
-                selectedTags={selectedTags}
-                tags={this.state.tag}
-                value={tag}
+            <div className="editProfile__info">
+              <div className="editProfile__infoContainer">
+                <div className="editProfile__infoSub">
+                  <AccountCircleIcon style={{ color: { color } }} fontSize="large" />
+                </div>
+                <div className="editProfile__infoSub">
+                  <span>{this.state.username}</span>
+                </div>
+                <div className="editProfile__infoSub">
+                  <span>{this.state.email}</span>
+                </div>
+              </div>
+              <div className="editProfile__infoContainer">
+                <div className="editProfile__infoSub">
+                  <label htmlFor="tags">Tags</label>
+                  <TagsInput selectedTags={selectedTags} tags={this.state.tag} value={tag} />
+                </div>
+                <div className="editProfile__infoSub">
+                  <label htmlFor="major">Major</label>
+                  <input
+                    type="text"
+                    name="major"
+                    value={major}
+                    onChange={this.onChange}
+                    placeholder="i.e. Course 6, Course 8"
+                    className="editProfile__textInput"
+                    required
+                  />
+                </div>
+                <div className="editProfile__infoSub">
+                  <label htmlFor="occupation">Year/Position</label>
+                  <input
+                    type="text"
+                    name="occupation"
+                    value={occupation}
+                    onChange={this.onChange}
+                    placeholder="i.e. Sophomore"
+                    className="editProfile__textInput"
+                    required
+                  />
+                </div>
+                <div className="editProfile__infoSub">
+                  <label htmlFor="iconCOlor">Icon Color</label>
+                  <select
+                    name="iconColor"
+                    id="iconColor"
+                    value={iconColor}
+                    onChange={this.onChange}
+                  >
+                    <option value="#45b3e0">torquoise-ish</option>
+                    <option value="#f85959">calm orange</option>
+                    <option value="#36bd4f">bright green</option>
+                    <option value="#ffa812">sorta orange</option>
+                    <option value="#8a2be2">purple sorta</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div className="editProfile__bio">
+              <label htmlFor="Bio">Biography</label>
+              <textarea
+                name="description"
+                value={description}
                 onChange={this.onChange}
-                name="tag"
-              />
+                cols="30"
+                rows="10"
+                placeholder="type your bio in here :)"
+                required
+              ></textarea>
             </div>
-            {/* <textarea
-              name="question"
-              id="post__questionField"
-              cols="30"
-              rows="10"
-              placeholder="Question"
-              value={question}
-              onChange={this.onChange}
-              required
-            ></textarea> */}
-            <div className="post__richTextEditor">
-              <RichTextEditor
-                value={question}
-                text={this.state.question}
-                stateUp={this.liftStateUp}
-                name="question"
-              />
-            </div>
-            <div className="post__selection">
-              <input type="reset" value="Discard" className="post__btnInput btn" required />
-              <input type="submit" value="Submit" className="post__btnInput btn" required />
+            <div className="editProfile__submit">
+              <input type="submit" value="Submit" className="btn" />
             </div>
           </form>
         </div>

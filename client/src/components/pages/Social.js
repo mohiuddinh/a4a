@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import SearchBar from "./SearchBar.js";
 import SingleQuestion from "./SingleQuestion.js";
-import LoadingOverlay from 'react-loading-overlay'; 
+import Background from "./Background.js";
 
 class Social extends Component {
   constructor(props) {
@@ -14,7 +14,7 @@ class Social extends Component {
 
   componentDidMount() {
     const data = {
-      group: 'Social',
+      group: "Social",
     };
     axios.post("/api/department", data).then((res) => {
       const questionObjs = res.data.questions;
@@ -39,6 +39,7 @@ class Social extends Component {
             username={questionObj.writer.username}
             userId={this.props.userId}
             url={`/questions/${questionObj._id}`}
+            writerId={questionObj.writer._id}
             timestamp={questionObj.createdAt}
           />
           //</a>
@@ -46,16 +47,15 @@ class Social extends Component {
       });
     } else {
       questionsList = (
-        <LoadingOverlay active={true} spinner text="Loading your content...">
-        </LoadingOverlay>
+        <div>Loading...</div>
       );
     }
 
     return (
       <div className="questions">
+        <Background color={"525252"} />
         <div className="questions__main">
-          {/* <input type="text" placeholder="search..." /> */}
-          {/* <SearchBar url="search" /> */}
+          <SearchBar url="search" />
           {questionsList}
         </div>
       </div>

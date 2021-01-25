@@ -2,6 +2,7 @@ import React, { Component, useState, useEffect } from "react";
 import { Link } from "@reach/router";
 
 import "../../css/Confirmation.css";
+import Background from "./Background";
 
 const link_style = {
   textDecoration: "inherit",
@@ -30,6 +31,7 @@ function Confirmation(props) {
 
   return (
     <div className="confirmation">
+      <Background color={"525252"} />
       <h5>
         <span id="verification-message">{verificationMessage}</span> Please navigate back to{" "}
         <Link to="/login" style={link_style}>

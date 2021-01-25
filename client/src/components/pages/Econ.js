@@ -4,6 +4,7 @@ import SearchBar from "./SearchBar.js";
 import SingleQuestion from "./SingleQuestion.js";
 
 import "../../css/Econ.css";
+import Background from "./Background.js";
 
 class Econ extends Component {
   constructor(props) {
@@ -35,6 +36,7 @@ class Econ extends Component {
             key={questionObj._id}
             questionId={questionObj._id}
             subject={questionObj.subject}
+            writerId={questionObj.writer._id}
             tag={questionObj.tag}
             question={questionObj.question}
             username={questionObj.writer.username}
@@ -51,10 +53,9 @@ class Econ extends Component {
 
     return (
       <div className="questions">
+        <Background color={"2dd187"} />
         <div className="questions__main animate__animated animate__fadeIn">
-          <div className="Econ_title animate__animated animate__slideInUp"> 
-            Economics 
-          </div>
+          <div className="page_title Econ_title animate__animated animate__slideInUp">Economics</div>
           {/* <input type="text" placeholder="search..." /> */}
           <SearchBar url="search" />
           {questionsList}

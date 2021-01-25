@@ -72,14 +72,14 @@
   transition: all 0.4s ease;
 }
 
-.tooltip:before {
+/* .tooltip:before {
   border-width: 10px 8px 0 8px;
   border-style: solid;
   border-color: var(--water) transparent transparent transparent;
   top: 55%;
   left: 110%;
   transform: rotate(90deg) translate(-50%, 0) !important;
-}
+} */
 
 .tooltip:after {
   content: attr(data-tooltip);

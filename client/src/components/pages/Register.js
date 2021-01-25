@@ -4,6 +4,7 @@ import { store } from "react-notifications-component";
 
 import "../../css/Register.css";
 import "animate.css/animate.min.css";
+import Background from "./Background";
 
 class Register extends Component {
   onSubmit = (e) => {
@@ -29,8 +30,8 @@ class Register extends Component {
           type: "success",
           insert: "top",
           container: "top-right",
-          animationIn: ["animate__animated animate__fadeIn"], 
-          animationOut: ["animate__animated animate__fadeOut"], 
+          animationIn: ["animate__animated animate__fadeIn"],
+          animationOut: ["animate__animated animate__fadeOut"],
           dismiss: {
             duration: 2500,
             onScreen: true,
@@ -43,8 +44,8 @@ class Register extends Component {
           type: "danger",
           insert: "top",
           container: "top-right",
-          animationIn: ["animate__animated animate__fadeIn"], 
-          animationOut: ["animate__animated animate__fadeOut"], 
+          animationIn: ["animate__animated animate__fadeIn"],
+          animationOut: ["animate__animated animate__fadeOut"],
           dismiss: {
             duration: 2500,
             onScreen: true,
@@ -57,6 +58,7 @@ class Register extends Component {
   render() {
     return (
       <div className="register">
+        <Background color={"525252"} />
         <div className="register__container">
           <form onSubmit={this.onSubmit}>
             <div className="register__control">

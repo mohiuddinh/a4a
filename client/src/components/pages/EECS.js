@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import axios from "axios";
-import SearchBar from './SearchBar.js'; 
+import SearchBar from "./SearchBar.js";
 import SingleQuestion from "./SingleQuestion.js";
 
 import "../../css/EECS.css";
+import Background from "./Background.js";
 
 class EECS extends Component {
   constructor(props) {
@@ -35,6 +36,7 @@ class EECS extends Component {
             key={questionObj._id}
             questionId={questionObj._id}
             subject={questionObj.subject}
+            writerId={questionObj.writer._id}
             tag={questionObj.tag}
             question={questionObj.question}
             username={questionObj.writer.username}
@@ -51,11 +53,11 @@ class EECS extends Component {
 
     return (
       <div className="questions">
+        <Background color={"ffa812"} />
         <div className="questions__main animate__animated animate__fadeIn">
-          <div className="EECS_title animate__animated animate__slideInUp"> 
-            Electrical Engineering and Computer Science 
+          <div className="page_title EECS_title animate__animated animate__slideInUp">
+            Electrical Engineering and Computer Science
           </div>
-          {/* <input type="text" placeholder="search..." /> */}
           <SearchBar url="search" />
           {questionsList}
         </div>

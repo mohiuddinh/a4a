@@ -1,0 +1,120 @@
+@import "./Root.css";
+
+.editProfile {
+  height: calc(100vh - 64px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.editProfile__container {
+  width: 800px;
+  height: 80vh;
+  background-color: var(--white);
+  border: 1px solid var(--border-accent);
+  border-radius: 12px;
+  padding: 12px;
+}
+
+.editProfile__container form {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.editProfile__container form label {
+  font-weight: 500;
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+
+.editProfile__info,
+.editProfile__bio {
+  height: 50%;
+}
+
+.editProfile__info,
+.editProfile__bio,
+.editProfile__submit {
+  padding: 12px 0;
+  width: 100%;
+}
+
+.editProfile__info {
+  display: flex;
+  font-size: 14px;
+  font-weight: 500;
+  border-bottom: 1px solid var(--border-accent);
+}
+
+.editProfile__textInput {
+  flex: 1;
+}
+
+.editProfile__textInput,
+.editProfile__infoSub select,
+.editProfile__infoSub .tags-input {
+  border-radius: 4px;
+  outline: none;
+  border: 1px solid var(--border-accent);
+  padding: 8px;
+}
+
+.editProfile__infoSub select:hover {
+  cursor: pointer;
+}
+
+.editProfile__infoSub {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 8px 0;
+}
+
+.editProfile__infoSub .tag {
+  padding: 0 8px;
+}
+
+.editProfile__infoContainer:nth-child(1) {
+  width: 188px;
+  margin-right: 12px;
+  border-right: 1px solid var(--border-accent);
+}
+
+.editProfile__infoContainer:nth-child(1) .editProfile__infoSub {
+  align-items: center;
+}
+
+.editProfile__infoContainer:nth-child(2) {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.editProfile__bio textarea {
+  width: 100%;
+  height: 100%;
+  resize: none;
+  outline: none;
+  border: none;
+}
+
+.editProfile__submit {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.editProfile__submit .btn {
+  background-color: var(--tea-green);
+  transition: all 0.25s ease-in-out;
+}
+
+.editProfile__submit .btn:hover {
+  background-color: var(--tea-greenHover);
+}

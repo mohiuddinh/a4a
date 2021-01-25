@@ -1,7 +1,7 @@
 import React, { Component, useEffect, useState } from "react";
 import { get, post } from "../../utilities.js";
 import ReactHtmlParser from "react-html-parser";
-import { navigate } from "@reach/router";
+import { navigate, Link } from "@reach/router";
 import TimeAgo from "react-timeago";
 import LikeDislikes from "./LikeDislikes.js";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
@@ -58,7 +58,13 @@ function SinglePostPage(props) {
     });
   }
 
+  function profileClick() {
+    navigate(`/profile/${Question.writer._id}`);
+  }
+
   if (Question.writer) {
+    const iconColor = Question.writer.iconColor;
+    console.log(iconColor)
     const timestamp = new Date(Question.createdAt);
     console.log(timestamp);
     console.log(typeof timestamp);
@@ -67,7 +73,7 @@ function SinglePostPage(props) {
         <div className="singlePost__container">
           <div className="singlePost__profile">
             <div className="singlePost__profileContainer">
-              <AccountCircleIcon style={{ color: "lightblue" }} fontSize="large" />
+            <AccountCircleIcon style={{ color: iconColor }} fontSize="large" onClick={profileClick}/>
             </div>
             <div className="singlePost__profileContainer">
               <LikeDislikes question questionId={questionId} userId={writer} />

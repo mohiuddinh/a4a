@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import SearchBar from "./SearchBar.js";
 import SingleQuestion from "./SingleQuestion.js";
+import Background from "./Background.js";
 
 class Clubs extends Component {
   constructor(props) {
@@ -13,7 +14,7 @@ class Clubs extends Component {
 
   componentDidMount() {
     const data = {
-      group: 'Clubs',
+      group: "Clubs",
     };
     axios.post("/api/department", data).then((res) => {
       const questionObjs = res.data.questions;
@@ -36,6 +37,7 @@ class Clubs extends Component {
             tag={questionObj.tag}
             question={questionObj.question}
             username={questionObj.writer.username}
+            writerId={questionObj.writer._id}
             userId={this.props.userId}
             url={`/questions/${questionObj._id}`}
             timestamp={questionObj.createdAt}
@@ -49,8 +51,8 @@ class Clubs extends Component {
 
     return (
       <div className="questions">
+        <Background color={"525252"} />
         <div className="questions__main">
-          {/* <input type="text" placeholder="search..." /> */}
           <SearchBar url="search" />
           {questionsList}
         </div>
