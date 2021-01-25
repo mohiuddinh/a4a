@@ -3,3 +3,11 @@
 .EECS_title {
   color: #c27f0c;
 }
+
+.loader_eecs .line {
+  background: -webkit-gradient(linear, left top, left bottom, from( #ffa812), to(#c27f0c));
+  background: -webkit-linear-gradient(top, #ffa812, #c27f0c);
+  background: -o-linear-gradient(top, #ffa812, #c27f0c);
+  background: linear-gradient(to bottom,  #ffa812,#c27f0c); 
+}
+

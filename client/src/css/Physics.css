@@ -3,3 +3,11 @@
 .Physics_title {
   color: #af3131;
 }
+
+.loader_physics .line {
+  background: -webkit-gradient(linear, left top, left bottom, from(#f85959), to( #af3131));
+  background: -webkit-linear-gradient(top,#f85959, #af3131);
+  background: -o-linear-gradient(top,#f85959,  #af3131);
+  background: linear-gradient(to bottom, #f85959, #af3131);
+}
+

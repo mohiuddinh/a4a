@@ -45,7 +45,11 @@ class Social extends Component {
         );
       });
     } else {
-      questionsList = <div>Loading...</div>;
+      questionsList = <div className = "loader loader_general">
+                      <div class="line line1"></div>
+                      <div class="line line2"></div>
+                      <div class="line line3"></div>
+                      </div>;;
     }
 
     return (
