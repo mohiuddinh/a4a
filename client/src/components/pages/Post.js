@@ -15,6 +15,7 @@ class Post extends Component {
       subject: "",
       tag: [],
       question: "",
+      loading: true
     };
   }
 

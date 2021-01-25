@@ -42,6 +42,7 @@ class Physics extends Component {
             username={questionObj.writer.username}
             userId={this.props.userId}
             url={`/questions/${questionObj._id}`}
+            writerId={questionObj.writer._id}
             timestamp={questionObj.createdAt}
           />
           //</a>

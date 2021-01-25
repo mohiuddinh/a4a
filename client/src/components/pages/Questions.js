@@ -39,6 +39,7 @@ class Questions extends Component {
             tag={questionObj.tag}
             question={questionObj.question}
             username={questionObj.writer.username}
+            writerId={questionObj.writer._id}
             userId={this.props.userId}
             url={`/questions/${questionObj._id}`}
             timestamp={questionObj.createdAt}
@@ -47,7 +48,9 @@ class Questions extends Component {
         );
       });
     } else {
-      questionsList = <div>Loading...</div>;
+      questionsList = (
+        <div>Loading...</div>
+      );
     }
 
     return (

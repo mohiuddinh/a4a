@@ -36,6 +36,7 @@ class EECS extends Component {
             key={questionObj._id}
             questionId={questionObj._id}
             subject={questionObj.subject}
+            writerId={questionObj.writer._id}
             tag={questionObj.tag}
             question={questionObj.question}
             username={questionObj.writer.username}

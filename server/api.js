@@ -517,6 +517,49 @@ router.get("/profile_by_id/:id", (req, res) => {
   }
 });
 
+router.post("/updateProfile", auth.ensureLoggedIn, (req, res) => {
+  User.findOneAndUpdate(
+    { _id: req.body._id },
+    {
+      $set: {
+        description: req.body.description,
+        iconColor: req.body.iconColor,
+        major: req.body.major,
+        occupation: req.body.occupation,
+        tag: req.body.tag,
+      },
+    },
+    { returnOriginal: false }
+  ).exec((err, result) => {
+    if (err) res.status(400).json({ success: false, err });
+    res.status(200).json({ success: true, data: result });
+  });
+});
+
+router.get("/question_by_user_id/:id", (req, res) => {
+  const { id } = req.params;
+  try {
+    Question.find({ writer: id }).populate("writer").then((questions) => {
+      return res.json(questions);
+    });
+  } catch (e) {
+    return res.json({ status: "error", error: e });
+  }
+});
+
+router.get("/grouped_question", (req, res) => {
+  try {
+    Like.aggregate([
+      { $group: { _id: "$questionId", count: { $sum: 1 } } },
+      { $sort: { count: -1 } },
+    ]).then((result) => {
+      return res.json({ status: "success", data: result });
+    });
+  } catch (e) {
+    return res.json({ status: "error", error: e });
+  }
+});
+
 // anything else falls to this "not found" case
 router.all("*", (req, res) => {
   console.log(`API route not found: ${req.method} ${req.url}`);

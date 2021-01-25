@@ -19,6 +19,8 @@
     "node": ">=12.0.0"
   },
   "dependencies": {
+    "@emotion/core": "^11.0.0",
+    "@emotion/react": "^11.1.4",
     "@fortawesome/fontawesome-svg-core": "^1.2.34",
     "@fortawesome/free-solid-svg-icons": "^5.15.2",
     "@fortawesome/react-fontawesome": "^0.1.14",
@@ -54,11 +56,13 @@
     "react-dom": "^16.14.0",
     "react-google-login": "^5.2.1",
     "react-html-parser": "^2.0.2",
+    "react-loading-overlay": "^1.0.1",
     "react-notifications": "^1.7.2",
     "react-notifications-component": "^3.0.3",
     "react-particles-js": "^3.4.1",
     "react-quill": "^1.3.5",
     "react-router-dom": "^5.2.0",
+    "react-spinners": "^0.10.4",
     "react-time-ago": "^6.2.2",
     "react-timeago": "^5.2.0",
     "react-tsparticles": "^1.18.11",

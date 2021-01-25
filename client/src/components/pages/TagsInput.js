@@ -41,7 +41,7 @@ function TagsInput(props) {
       <div id="anim">
         <span
           class="tooltip"
-          data-tooltip="Tags can be general or specific. i.e. '6' for EECS, '6.0001' for python, 'club' for clubs in general, etc. Pressing space will enter the tag, so please don't write multiple words in one tag :)"
+          data-tooltip="Tags can be general or specific. i.e. '6' for EECS, '6.0001' for python, 'Clubs' for clubs in general, etc. Pressing space will enter the tag, so please don't write multiple words in one tag :)"
         >
           <InfoIcon className="icon-info" />
         </span>
