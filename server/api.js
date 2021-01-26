@@ -157,12 +157,12 @@ router.post("/email-password-link", async (req, res) => {
     });
 
     jwt.sign({ user: user._id }, EMAIL_SECRET, { expiresIn: 900 }, (err, emailToken) => {
-      const url = `https://mit-ask.herokuapp.com/reset-password/${emailToken}`;
+      const url = `https://a4a.herokuapp.com/reset-password/${emailToken}`;
 
       transporter.sendMail({
         from: EMAIL_USERNAME,
         to: user.email,
-        subject: "Reset Password for your MIT Ask Account",
+        subject: "Reset Password for your A4A Account",
         html: `Please click on this link to reset your password: <a href="${url}">${url}</a>`,
       });
     });
@@ -273,7 +273,7 @@ router.post("/register", async (req, res) => {
     });
 
     jwt.sign({ user: user._id }, EMAIL_SECRET, (err, emailToken) => {
-      const url = `https://mit-ask.herokuapp.com/confirmation/${emailToken}`;
+      const url = `https://a4a.herokuapp.com/confirmation/${emailToken}`;
 
       transporter.sendMail({
         from: EMAIL_USERNAME,
@@ -487,7 +487,7 @@ router.post("/deletePost", auth.ensureLoggedIn, (req, res) => {
 router.post("/deleteComment", auth.ensureLoggedIn, (req, res) => {
   Comment.findOneAndUpdate(
     { _id: req.body._id },
-    { $set: { writer: mongoose.Types.ObjectId("600b55059b20900022c00f73"), content: "[removed]" } },
+    { $set: { writer: mongoose.Types.ObjectId("600efbfb2d5c8804f77f1da7"), content: "[removed]" } },
     { returnOriginal: false }
   ).exec((err, result) => {
     if (err) res.status(400).json({ success: false, err });
