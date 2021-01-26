@@ -44,7 +44,6 @@ function LikeDislikes(props) {
 
   useEffect(() => {
     post("/api/getLikes", variable).then((res) => {
-
       if (res.success) {
         //How many likes does this video or comment have
         setLikes(res.likes.length);
@@ -159,7 +158,7 @@ function LikeDislikes(props) {
                         theme={LikeAction === 'liked' ? 'filled' : 'outlined'}
                         onClick={onLike} /> */}
             {LikeAction === "liked" ? (
-              <LikeFilled onClick={onLike} />
+              <LikeFilled onClick={onLike} style={{ color: "#36bd4f" }} />
             ) : (
               <LikeOutlined onClick={onLike} />
             )}
@@ -175,7 +174,7 @@ function LikeDislikes(props) {
                         onClick={onDisLike}
                     /> */}
             {DislikeAction === "disliked" ? (
-              <DislikeFilled onClick={onDisLike} />
+              <DislikeFilled onClick={onDisLike} style={{ color: "#f85959" }} />
             ) : (
               <DislikeOutlined onClick={onDisLike} />
             )}

@@ -47,7 +47,10 @@ function ReplyComment(props) {
   return (
     <div className="replyComment">
       {ChildCommentNumber > 0 && (
-        <span onClick={handleChange}>View {ChildCommentNumber} more comment(s)</span>
+        <span onClick={handleChange}>
+          View {ChildCommentNumber} {OpenReplyComments ? <span>less</span> : <span>more</span>}{" "}
+          comment(s)
+        </span>
       )}
 
       {OpenReplyComments && renderReplyComment(props.parentCommentId)}

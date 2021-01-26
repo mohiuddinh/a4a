@@ -25,7 +25,6 @@
   border-radius: 12px;
   display: flex;
   max-height: var(--large-container-height);
-  overflow: auto;
 }
 
 .singlePost__profile {
@@ -49,6 +48,7 @@
 }
 
 .singlePost__main {
+  overflow: auto;
   flex: 1;
 }
 

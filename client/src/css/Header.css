@@ -1,12 +1,20 @@
 @import "./Root.css";
 
+.header__sticky {
+  position: sticky;
+  top: 0;
+  z-index: 999;
+}
+
 .header {
   position: relative;
-  height: 64px;
+  padding: 12px 0;
+  /* height: 64px; */
   background-color: var(--white);
   border-bottom: 1px solid var(--border-accent);
   display: flex;
   align-items: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
 .header__selection {
@@ -243,6 +251,16 @@
 }
 
 /* media queries */
+@media only screen and (max-width: 865px) {
+  .header__titleMobile {
+    display: flex;
+    align-items: center;
+    padding-bottom: 8px;
+  }
+  .h-button {
+    display: none;
+  }
+}
 @media only screen and (max-width: 768px) {
   .header__burgerContainer {
     flex: 1;
@@ -255,14 +273,7 @@
   .header__user {
     display: none;
   }
-  .h-button {
-    display: none;
-  }
-  .header__titleMobile {
-    display: flex;
-    align-items: center;
-    padding-bottom: 8px;
-  }
+
   .header__selection h5 {
     display: none;
   }
@@ -274,7 +285,7 @@
     outline: 1px solid var(--border-accent);
     padding: 64px 12px 0 12px;
     height: 100vh;
-    z-index: 9;
+    z-index: 10;
   }
   .header__menuUser {
     display: flex;
