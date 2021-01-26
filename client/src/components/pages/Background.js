@@ -12,7 +12,7 @@ class Background extends Component {
   }
 
   render() {
-    return <ParticlesBg num={50} type="cobweb" bg={true} color={this.props.color} />;
+    return <ParticlesBg num={25} type="cobweb" bg={true} color={this.props.color} />;
   }
 }
 
