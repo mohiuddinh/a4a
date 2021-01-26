@@ -36,6 +36,7 @@
 }
 
 .profile__main {
+  overflow: auto;
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -81,6 +82,9 @@
 }
 
 @media screen and (max-width: 768px) {
+  .profile__main {
+    overflow: visible;
+  }
   .profile__container {
     width: 500px;
     flex-direction: column;
