@@ -11,7 +11,7 @@
 
 .post__container {
   background-color: var(--white);
-  width: var(--small-container-width);
+  width: 700px;
   height: var(--large-container-height);
   display: flex;
   border-radius: 12px;
@@ -65,4 +65,14 @@
   margin: 0 24px;
 }
 
+@media only screen and (max-width: 768px) {
+  .post__container {
+    width: 550px;
+  }
+}
 
+@media only screen and (max-width: 568px) {
+  .post__container {
+    width: 350px;
+  }
+}

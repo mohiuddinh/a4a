@@ -22,13 +22,14 @@ class Profile extends Component {
       major: "",
       occupation: "",
       questions: [],
+      tags: [],
     };
   }
 
   componentDidMount() {
     get(`/api/profile_by_id/${this.props.id}`).then((res) => {
       console.log(res.user);
-      const { description, username, iconColor, major, occupation, email } = res.user[0];
+      const { description, username, iconColor, major, occupation, email, tag } = res.user[0];
       this.setState({
         description: description,
         username: username,
@@ -36,6 +37,7 @@ class Profile extends Component {
         iconColor: iconColor,
         major: major,
         occupation: occupation,
+        tags: tag,
         loading1: false,
       });
       get(`/api/question_by_user_id/${this.props.id}`).then((questionObjs) => {
@@ -110,6 +112,15 @@ class Profile extends Component {
               {this.state.occupation}
             </div>
             <div className="profile__infoSub">{this.state.email}</div>
+            <div className="profile__mainTags">
+              <ul id="tags">
+                {this.state.tags.map((tag, index) => (
+                  <li className="tag" key={index}>
+                    <span className="tag-title">{tag}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
             <div className="profile__infoSub">
               {this.props.userId === this.props.id ? (
                 <button className="btn-userActions btn-slide-edit" onClick={this.newPage}>

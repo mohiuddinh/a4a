@@ -30,18 +30,16 @@
 
 .tag {
   width: auto;
-  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   color: var(--heading-text);
   padding: 6px 8px;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 500;
   list-style: none;
   border-radius: 4px;
   margin-right: 12px;
-  background: var(--water);
 }
 
 .tag .tag-close-icon {
@@ -60,67 +58,47 @@
 
 /* tooltips */
 .tooltip {
-  position: relative;
   display: flex;
+  align-items: center;
+  position: relative;
 }
 
-.tooltip:before,
-.tooltip:after {
+.tooltip .tooltiptext {
+  font-size: 12px;
+  visibility: hidden;
+  width: 160px;
+  background-color: rgb(150, 150, 150);
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 4px;
   position: absolute;
-  content: "";
+  z-index: 1;
+  top: 0%;
+  left: 0%;
+  margin-left: -170px;
   opacity: 0;
-  transition: all 0.4s ease;
+  transition: opacity 0.3s;
 }
 
-/* .tooltip:before {
-  border-width: 10px 8px 0 8px;
+.tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 5%;
+  right: -6%;
+  margin-left: -5px;
+  border-width: 5px;
   border-style: solid;
-  border-color: var(--water) transparent transparent transparent;
-  top: 55%;
-  left: 110%;
-  transform: rotate(90deg) translate(-50%, 0) !important;
-} */
-
-.tooltip:after {
-  content: attr(data-tooltip);
-  background: var(--water);
-  width: 300px;
-  height: auto;
-  font-size: 14px;
-  font-weight: 400;
-  top: -100%;
-  left: 160%;
-  padding: 10px;
-  border-radius: 8px;
-  letter-spacing: 1px;
-  transform: translateY(20px);
+  border-color: rgb(150, 150, 150) transparent transparent transparent;
+  transform: rotate(-90deg);
 }
 
-.tooltip:hover::before,
-.tooltip:hover::after {
+.tooltip:hover .tooltiptext {
+  visibility: visible;
   opacity: 1;
-  transform: translateY(-2px);
-}
-
-@keyframes shake {
-  0% {
-    transform: rotate(2deg);
-  }
-  50% {
-    transform: rotate(-3deg);
-  }
-  70% {
-    transform: rotate(3deg);
-  }
-  100% {
-    transform: rotate(0deg);
-  }
-}
-
-#anim:hover {
-  animation: shake 500ms ease-in-out forwards;
 }
 
 .icon-info {
+  cursor: pointer;
   opacity: 0.5;
 }

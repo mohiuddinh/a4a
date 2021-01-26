@@ -95,7 +95,9 @@ class EditProfile extends Component {
               <div className="editProfile__infoContainer">
                 <div className="editProfile__infoSub">
                   <label htmlFor="tags">Tags</label>
-                  <TagsInput selectedTags={selectedTags} tags={this.state.tag} value={tag} />
+                  <div className="editProfile__tagsInput">
+                    <TagsInput selectedTags={selectedTags} tags={this.state.tag} value={tag} />
+                  </div>
                 </div>
                 <div className="editProfile__infoSub">
                   <label htmlFor="major">Major</label>

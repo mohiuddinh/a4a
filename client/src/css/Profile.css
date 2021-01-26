@@ -44,8 +44,10 @@
 }
 
 .profile__mainBio,
-.profile__mainPosts {
+.profile__mainPosts,
+.profile__mainTags {
   width: 100%;
+  padding: 4px 0;
 }
 
 .profile__mainBio {
@@ -53,6 +55,15 @@
   overflow: auto;
   padding-bottom: 8px;
   border-bottom: 1px solid var(--border-accent);
+}
+
+.profile__mainTags {
+  max-height: 50%;
+  overflow: auto;
+}
+
+.profile__mainTags .tag {
+  margin-bottom: 8px;
 }
 
 .profile__main span {
@@ -73,10 +84,17 @@
 
 @media screen and (max-width: 768px) {
   .profile__container {
+    width: 500px;
     flex-direction: column;
     overflow: auto;
   }
   .profile__info {
-    width: auto;
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 568px) {
+  .profile__container {
+    width: 350px;
   }
 }

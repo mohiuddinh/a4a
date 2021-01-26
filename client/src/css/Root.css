@@ -156,26 +156,9 @@ a:hover {
 
 /* media queries */
 @media only screen and (max-width: 768px) {
-  :root {
-    --large-container-width: 700px;
-    --medium-container-width: 600px;
-    --small-container-width: 500px;
-  }
   .page_title {
     font-size: 22px;
   }
 }
 
-@media only screen and (max-width: 680px) {
-  :root {
-    --medium-container-width: 500px;
-  }
-}
 
-@media only screen and (max-width: 568px) {
-  :root {
-    --large-container-width: 450px;
-    --medium-container-width: 325px;
-    --small-container-width: 325px;
-  }
-}
