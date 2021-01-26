@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Link } from "@reach/router";
 import cs from "classnames";
 import { GoogleLogin, GoogleLogout } from "react-google-login";
+import MediaQuery from "react-responsive";
 
 import Dropdown from "./Dropdown.js";
 
@@ -42,11 +43,6 @@ class Header extends Component {
   }
 
   render() {
-    const classnames = cs("header__menu", {
-      open: this.showMenu,
-      close: !this.showMenu,
-    });
-
     return (
       <div className="header">
         <div className="header__selection">
@@ -61,6 +57,7 @@ class Header extends Component {
         </div>
         <div className="header__title">
           <Link to="/" style={link_style}>
+            <a className="header__titleMobile">A4A</a>
             <a aria-label="Thanks" className="h-button centered" data-text="A4A" href="#">
               <span>A</span>
               <span>s</span>

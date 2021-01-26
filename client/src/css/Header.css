@@ -46,6 +46,11 @@
   color: var(--heading-text);
   text-decoration: none;
 }
+
+.header__titleMobile {
+  display: none;
+}
+
 .centered {
   position: absolute;
   left: 50%;
@@ -217,7 +222,10 @@
     display: none;
   }
   .h-button {
-    pointer-events: none;
+    display: none;
+  }
+  .header__titleMobile {
+    display: block;
   }
   .header__selection h5 {
     display: none;
@@ -231,8 +239,6 @@
     padding: 64px 12px 0 12px;
     height: 100vh;
     z-index: 9;
-    /* animation-name: menu;
-    animation-duration: 1s; */
   }
   .header__menuUser {
     display: flex;
