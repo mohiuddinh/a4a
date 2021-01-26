@@ -3,3 +3,11 @@
 .Chemistry_title {
   color: #520f91;
 }
+
+.loader_chemistry .line {
+  background: -webkit-gradient(linear, left top, left bottom, from( #8a2be2), to( #520f91));
+  background: -webkit-linear-gradient(top, #8a2be2,  #520f91);
+  background: -o-linear-gradient(top, #8a2be2,  #520f91);
+  background: linear-gradient(to bottom, #8a2be2, #520f91); 
+}
+

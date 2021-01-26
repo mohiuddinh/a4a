@@ -68,8 +68,12 @@ class Profile extends Component {
   };
 
   render() {
-    if (this.state.loading1 && this.state.loading2) {
-      return <div>Loading...</div>;
+    if (this.state.loading) {
+      return <div className = "loader loader_general">
+             <div class="line line1"></div>
+             <div class="line line2"></div>
+             <div class="line line3"></div>
+             </div>;;
     }
 
     let questionsList = null;

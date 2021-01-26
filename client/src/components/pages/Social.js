@@ -4,6 +4,8 @@ import SearchBar from "./SearchBar.js";
 import SingleQuestion from "./SingleQuestion.js";
 import Background from "./Background.js";
 
+import "../../css/Activities.css";
+
 class Social extends Component {
   constructor(props) {
     super(props);
@@ -49,13 +51,20 @@ class Social extends Component {
         );
       });
     } else {
-      questionsList = <div>Loading...</div>;
+      questionsList = <div className = "loader loader_activities">
+                      <div class="line line1"></div>
+                      <div class="line line2"></div>
+                      <div class="line line3"></div>
+                      </div>;;
     }
 
     return (
       <div className="questions">
-        <Background color={"FFB8D1"} />
-        <div className="questions__main">
+        <Background color={"a31f34"} />
+        <div className="questions__main animate__animated animate__fadeIn">
+          <div className="page_title activities_title animate__animated animate__slideInUp">
+            Social
+          </div>
           <SearchBar url="search" />
           {questionsList}
         </div>

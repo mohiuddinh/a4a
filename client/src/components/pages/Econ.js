@@ -51,7 +51,11 @@ class Econ extends Component {
         );
       });
     } else {
-      questionsList = <div>Loading...</div>;
+      questionsList = <div className = "loader loader_econ">
+                      <div class="line line1"></div>
+                      <div class="line line2"></div>
+                      <div class="line line3"></div>
+                      </div>;
     }
 
     return (

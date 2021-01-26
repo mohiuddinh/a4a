@@ -29,6 +29,7 @@ import NotFound from './pages/NotFound.js';
 
 import "../css/utilities.css";
 import "../css/App.css";
+import "../css/Questions.css";
 import "../css/scrollbar.css";
 import "react-notifications-component/dist/theme.css";
 
@@ -64,7 +65,11 @@ class App extends Component {
 
   render() {
     if (this.state.loading) {
-      return <div>Loading...</div>;
+      return <div className = "loader loader_general">
+             <div class="line line1"></div>
+             <div class="line line2"></div>
+             <div class="line line3"></div>
+             </div>;
     }
     return (
       <>

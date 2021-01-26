@@ -1,0 +1,13 @@
+@import "./Root.css";
+
+.activities_title {
+  color: black;
+}
+
+.loader_activities .line {
+  background: -webkit-gradient(linear, left top, left bottom, from( #000000), to(var(--cardinal)));
+  background: -webkit-linear-gradient(top,#000000,var(--cardinal));
+  background: -o-linear-gradient(top, #000000, var(--cardinal));
+  background: linear-gradient(to bottom,  #000000,var(--cardinal)); 
+}
+

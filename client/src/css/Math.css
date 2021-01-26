@@ -3,3 +3,11 @@
 .Math_title {
   color: #16779e;
 }
+
+.loader_math .line {
+    background: -webkit-gradient(linear, left top, left bottom, from(#8bfcf6), to(#16779e));
+    background: -webkit-linear-gradient(top, #8bfcf6, #16779e);
+    background: -o-linear-gradient(top,#8bfcf6, #16779e);
+    background: linear-gradient(to bottom, #8bfcf6,#16779e); 
+}
+

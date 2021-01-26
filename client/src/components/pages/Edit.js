@@ -54,7 +54,11 @@ class Edit extends Component {
 
   render() {
     if (this.state.loading) {
-      return <div>Loading...</div>;
+      return <div className = "loader loader_general">
+             <div class="line line1"></div>
+             <div class="line line2"></div>
+             <div class="line line3"></div>
+             </div>;;
     }
 
     const selectedTags = (tags) => {
