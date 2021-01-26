@@ -47,6 +47,12 @@ class Profile extends Component {
       });
     });
   }
+  
+  componentDidUpdate(prevProps){
+    if(prevProps.id !== this.props.id){
+      this.componentDidMount(); 
+    }
+  }
 
   newPage = () => {
     navigate(`/profile/edit/${this.props.id}`).then(() => {

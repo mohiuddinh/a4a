@@ -82,17 +82,23 @@ function SingleComment(props) {
   // }
 
   if (Loading) {
-    return <div className = "loader loader_general">
-           <div class="line line1"></div>
-           <div class="line line2"></div>
-           <div class="line line3"></div>
-           </div>;
+    return (
+      <div className="loader loader_general">
+        <div class="line line1"></div>
+        <div class="line line2"></div>
+        <div class="line line3"></div>
+      </div>
+    );
   } else {
     return (
       <div className="singleComment">
         <Comment
           actions={actions}
-          author={props.comment.writer.username}
+          author={
+            <a href={`/profile/${props.comment.writer._id}`}>
+              {props.comment.writer.username}
+            </a>
+          }
           content={
             <div className="reactHtmlParser__container">
               {ReactHtmlParser(props.comment.content)}
