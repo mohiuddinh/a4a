@@ -9,7 +9,7 @@ Team Members: Dejon Kurti, Hassan Mohiuddinh, Haoran Wen
 
 [A4A](https://a4a.herokuapp.com/ "Ask4Answer")
 
-![Home](https://imgur.com/oMG2UH7)
+![Home](https://i.imgur.com/oMG2UH7.png)
 ---
 
 ## CITATIONS
