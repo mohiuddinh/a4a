@@ -69,7 +69,7 @@ function SinglePostPage(props) {
     console.log(timestamp);
     console.log(typeof timestamp);
     return (
-      <div className="singlePost">
+      <div className="singlePost animate__animated animate__fadeIn">
         <div className="singlePost__largeContainer">
           <div className="singlePost__container">
             <div className="singlePost__profile">

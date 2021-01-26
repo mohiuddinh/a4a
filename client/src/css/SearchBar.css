@@ -29,6 +29,10 @@
   box-shadow: 0 1px 8px var(--border-accent);
 }
 
+.home__searchContainer:active {
+  border-color: red;
+}
+
 .home__searchContainer input {
   padding: 12px 0;
   flex: 1;
