@@ -33,7 +33,7 @@ class Clubs extends Component {
         return (
           //<a href={`/questions/${questionObj._id}`}>
           <SingleQuestion
-            tagColor={"#a1cc69"}
+            tagColor={"#a31f34"}
             tagFontColor={"white"}
             key={questionObj._id}
             questionId={questionObj._id}
@@ -51,20 +51,20 @@ class Clubs extends Component {
         );
       });
     } else {
-      questionsList = <div className = "loader loader_activities">
-                      <div class="line line1"></div>
-                      <div class="line line2"></div>
-                      <div class="line line3"></div>
-                      </div>;
+      questionsList = (
+        <div className="loader loader_activities">
+          <div class="line line1"></div>
+          <div class="line line2"></div>
+          <div class="line line3"></div>
+        </div>
+      );
     }
 
     return (
       <div className="questions">
         <Background color={"a31f34"} />
         <div className="questions__main animate__animated animate__fadeIn">
-          <div className="page_title activities_title animate__animated animate__slideInUp">
-            Clubs
-          </div>
+          <div className="page_title activities_title animate__animated animate__slideInUp">Clubs</div>
           <SearchBar url="search" />
           {questionsList}
         </div>

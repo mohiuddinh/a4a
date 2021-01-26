@@ -84,18 +84,17 @@
   color: var(--math);
 }
 
-.dropdown__items:hover .dt-social{
-  color: var(--social)
+.dropdown__items:hover .dt-social {
+  color: var(--cardinal);
 }
 
-.dropdown__items:hover .dt-clubs{
-  color: var(--clubs)
+.dropdown__items:hover .dt-clubs {
+  color: var(--cardinal);
 }
 
 .dropdown__items:hover .dt-all {
   color: var(--all);
 }
-
 
 /* fa icon hovers */
 
@@ -123,12 +122,9 @@
   color: var(--math);
 }
 
-.dropdown__items:hover .fa-user{
-  color: var(--social)
-}
-
-.dropdown__items:hover .fa-dice-three{
-  color: var(--clubs)
+.dropdown__items:hover .fa-user,
+.dropdown__items:hover .fa-dice-three {
+  color: var(--cardinal);
 }
 
 .dropdown__items:hover .fa-align-justify {

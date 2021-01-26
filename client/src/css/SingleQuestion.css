@@ -22,10 +22,10 @@
   box-shadow: 0px 0px 0px 1px var(--chem);
 }
 .clubs.singleQuestion:hover {
-  box-shadow: 0px 0px 0px 1px var(--clubs);
+  box-shadow: 0px 0px 0px 1px var(--cardinal);
 }
 .social.singleQuestion:hover {
-  box-shadow: 0px 0px 0px 1px var(--social);
+  box-shadow: 0px 0px 0px 1px var(--cardinal);
 }
 .econ.singleQuestion:hover {
   box-shadow: 0px 0px 0px 1px var(--econ);

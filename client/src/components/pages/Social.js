@@ -33,7 +33,7 @@ class Social extends Component {
         return (
           //<a href={`/questions/${questionObj._id}`}>
           <SingleQuestion
-            tagColor={"#ffb8d1"}
+            tagColor={"#a31f34"}
             tagFontColor={"white"}
             key={questionObj._id}
             questionId={questionObj._id}
@@ -51,11 +51,13 @@ class Social extends Component {
         );
       });
     } else {
-      questionsList = <div className = "loader loader_activities">
-                      <div class="line line1"></div>
-                      <div class="line line2"></div>
-                      <div class="line line3"></div>
-                      </div>;;
+      questionsList = (
+        <div className="loader loader_activities">
+          <div class="line line1"></div>
+          <div class="line line2"></div>
+          <div class="line line3"></div>
+        </div>
+      );
     }
 
     return (
