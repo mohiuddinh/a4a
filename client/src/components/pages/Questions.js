@@ -57,10 +57,7 @@ class Questions extends Component {
     return (
       <div className="questions">
         <Background color={"525252"} />
-        <div className="questions__main">
-          {/* <div classname="department_title">
-            <p> ECONOMICS </p>
-          </div> */}
+        <div className="questions__main animate__animated animate__fadeIn">
           <SearchBar url="search" />
           {questionsList}
         </div>

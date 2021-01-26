@@ -84,11 +84,15 @@
   color: var(--math);
 }
 
-.dropdown__items:hover .dt-social,
-.dropdown__items:hover .dt-clubs,
 .dropdown__items:hover .dt-all {
-  color: var(--calm-orange);
+  color:  #5f5f5f;
 }
+
+.dropdown__items:hover .dt-social,
+.dropdown__items:hover .dt-clubs {
+  color: #a31f34;
+}
+
 
 /* fa icon hovers */
 
@@ -117,9 +121,12 @@
 }
 
 .dropdown__items:hover .fa-user,
-.dropdown__items:hover .fa-dice-three,
+.dropdown__items:hover .fa-dice-three {
+  color: var(--cardinal);
+}
+
 .dropdown__items:hover .fa-align-justify {
-  color: var(--calm-orange);
+  color: #5f5f5f
 }
 
 /* media queries */
