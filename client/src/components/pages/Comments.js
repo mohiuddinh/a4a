@@ -28,8 +28,6 @@ function Comments(props) {
   const onSubmit = (e) => {
     e.preventDefault();
 
-    console.log(Comment);
-
     const variables = {
       content: Comment,
       writer: props.writerId,

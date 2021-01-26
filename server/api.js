@@ -64,7 +64,6 @@ router.get("/whoami", (req, res) => {
     // not logged in
     return res.send({});
   }
-  //console.log(res);
   return res.send(req.session.user);
 });
 
@@ -89,7 +88,6 @@ router.post("/initsocket", (req, res) => {
 
 // reset-password
 router.post("/reset-password/:token", async (req, res) => {
-  console.log("Accessed reset-password endpoint");
   const { token } = req.params;
   const { password, passwordTwo } = req.body;
 

@@ -27,7 +27,6 @@ class EditProfile extends Component {
 
   componentDidMount() {
     get(`/api/profile_by_id/${this.props.id}`).then((res) => {
-      console.log(res.user);
       const { description, username, iconColor, major, occupation, email, tag } = res.user[0];
       this.setState({
         loading: false,
@@ -52,7 +51,6 @@ class EditProfile extends Component {
     const _id = this.props.id;
     post("/api/updateProfile", { description, iconColor, major, occupation, tag, _id }).then(
       (res) => {
-        console.log(res);
         navigate(`/profile/${_id}`);
       }
     );

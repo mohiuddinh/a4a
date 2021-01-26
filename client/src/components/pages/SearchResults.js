@@ -17,9 +17,7 @@ class SearchResults extends Component {
   }
 
   componentDidMount() {
-    //console.log(this.state.query);
     post("/api/search", { query: this.state.query }).then((questionObjs) => {
-      //console.log(questionObjs);
       let reversedObjs = questionObjs.reverse();
       this.setState({
         questions: reversedObjs,

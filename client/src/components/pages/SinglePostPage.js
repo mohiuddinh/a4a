@@ -21,7 +21,6 @@ function SinglePostPage(props) {
   };
 
   const writer = props.writerId;
-  //console.log(writer);
   useEffect(() => {
     get(`/api/question_by_id?id=${questionId}&type=single`).then((res) => {
       setQuestion(res[0]);
@@ -64,10 +63,7 @@ function SinglePostPage(props) {
 
   if (Question.writer) {
     const iconColor = Question.writer.iconColor;
-    console.log(iconColor);
     const timestamp = new Date(Question.createdAt);
-    console.log(timestamp);
-    console.log(typeof timestamp);
     return (
       <div className="singlePost">
         <div className="singlePost__largeContainer">

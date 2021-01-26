@@ -40,28 +40,21 @@ function LikeDislikes(props) {
     variable = { questionId: props.questionId, userId: props.userId };
   } else {
     variable = { commentId: props.commentId, userId: props.userId };
-    //console.log(variable)
   }
 
   useEffect(() => {
     post("/api/getLikes", variable).then((res) => {
-      //console.log('getLikes',response.data)
-      //console.log(res);
 
       if (res.success) {
         //How many likes does this video or comment have
         setLikes(res.likes.length);
-        //console.log(props.userId);
         //if I already click this like button or not
         res.likes.map((like) => {
-          //console.log(like.userId);
           if (
             like.userId === props.userId &&
             ((props.question && like.questionId === props.questionId) ||
               (props.comment && like.commentId === props.commentId))
           ) {
-            //console.log('liked');
-            //console.log((like));
             setLikeAction("liked");
           }
         });
@@ -71,7 +64,6 @@ function LikeDislikes(props) {
     });
 
     post("/api/getDislikes", variable).then((res) => {
-      //console.log('getDislike',response.data)
       if (res.success) {
         //How many likes does this video or comment have
         setDislikes(res.dislikes.length);
@@ -83,8 +75,6 @@ function LikeDislikes(props) {
             ((props.question && dislike.questionId === props.questionId) ||
               (props.comment && dislike.commentId === props.commentId))
           ) {
-            //console.log("disliked");
-            //console.log(dislike);
             setDislikeAction("disliked");
           }
         });
@@ -95,17 +85,13 @@ function LikeDislikes(props) {
   }, []);
 
   const onLike = () => {
-    console.log(props.userId);
     if (props.userId === undefined || props.userId === null) {
       store.addNotification(notification);
     } else if (LikeAction === null) {
       post("/api/upLike", variable).then((res) => {
-        console.log(res);
         if (res.success) {
           setLikes(Likes + 1);
           setLikeAction("liked");
-          //console.log("Liked message");
-          //console.log(res);
 
           //If dislike button is already clicked
 
@@ -122,9 +108,7 @@ function LikeDislikes(props) {
         if (res.success) {
           setLikes(Likes - 1);
           setLikeAction(null);
-          //console.log("Unliked message");
         } else {
-          //console.log("Failed to decrease the like");
         }
       });
     }
@@ -138,18 +122,15 @@ function LikeDislikes(props) {
         if (res.success) {
           setDislikes(Dislikes - 1);
           setDislikeAction(null);
-          console.log("Undisliked message");
         } else {
           console.log("Failed to decrease dislike");
         }
       });
     } else {
       post("/api/upDisLike", variable).then((res) => {
-        console.log(res);
         if (res.success) {
           setDislikes(Dislikes + 1);
           setDislikeAction("disliked");
-          console.log("Disliked Message");
 
           //If dislike button is already clicked
           if (LikeAction !== null) {

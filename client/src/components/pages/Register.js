@@ -10,8 +10,6 @@ class Register extends Component {
   onSubmit = (e) => {
     e.preventDefault();
 
-    console.log("form was submitted");
-
     const registered = {
       fullName: this.fullName,
       username: this.username,
@@ -19,8 +17,6 @@ class Register extends Component {
       password: this.password,
       passwordTwo: this.passwordTwo,
     };
-
-    // console.log(registered);
 
     axios.post("/api/register", registered).then((res) => {
       if (res.data.status === "ok") {

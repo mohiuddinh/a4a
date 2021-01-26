@@ -12,13 +12,10 @@ const link_style = {
 function Confirmation(props) {
   const [verificationMessage, setVerificationMessage] = useState("");
   const token = props.token;
-  // console.log(token);
-
   useEffect(() => {
     fetch(`/api/confirmation/${token}`)
       .then((res) => res.json())
       .then((data) => {
-        console.log(data.status);
         if (data.status === "noUserFound") {
           setVerificationMessage("Uh oh, no user has been found with this email.");
         } else if (data.status === "alreadyVerified") {

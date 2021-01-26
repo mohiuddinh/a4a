@@ -33,7 +33,6 @@ class Post extends Component {
 
     const writer = this.props.writerId;
     post("/api/post", { subject, tag, question, writer }).then((res) => {
-      console.log("form submitted");
       navigate(`/questions/${res._id}`);
     });
   };

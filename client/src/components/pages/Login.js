@@ -18,7 +18,6 @@ class Login extends Component {
   }
 
   onSubmit = (e) => {
-    console.log("form was submitted");
     e.preventDefault();
 
     const loginMessage = document.getElementById("login__message");
@@ -32,7 +31,6 @@ class Login extends Component {
       localStorage.setItem("token", res.token);
       if (res.data.status === "ok") {
         this.props.liftStateUp(res.data.userInfo.id);
-        loginMessage.innerHTML = "Success!";
         navigate("/");
       } else {
         store.addNotification({
