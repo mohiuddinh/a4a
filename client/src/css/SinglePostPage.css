@@ -61,12 +61,6 @@
 
 .singlePost__userActions {
   display: flex;
-  flex: 1;
-  justify-content: flex-end;
-}
-
-.singlePost__userActionsMobile {
-  display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
@@ -110,8 +104,5 @@
   }
   .singlePost__container:nth-child(1) {
     flex-direction: column;
-  }
-  .singlePost__userActions {
-    display: none;
   }
 }

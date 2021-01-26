@@ -86,7 +86,7 @@ function SinglePostPage(props) {
               <div className="timeAgo singlePost__profileContainer">
                 <TimeAgo date={timestamp} />
               </div>
-              <div className="singlePost__userActionsMobile">
+              <div className="singlePost__userActions">
                 {writer === Question.writer._id ? (
                   <Delete question questionId={questionId} userId={writer} />
                 ) : null}
@@ -117,16 +117,6 @@ function SinglePostPage(props) {
                     </li>
                   ))}
                 </ul>
-                <div className="singlePost__userActions">
-                  {writer === Question.writer._id ? (
-                    <Delete question questionId={questionId} userId={writer} />
-                  ) : null}
-                  {writer === Question.writer._id ? (
-                    <button onClick={newPage} className="btn-userActions btn-slide-edit">
-                      Edit
-                    </button>
-                  ) : null}
-                </div>
               </div>
               <div className="singlePost__sub">
                 <span>Question: </span>

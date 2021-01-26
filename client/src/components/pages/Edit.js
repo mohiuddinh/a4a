@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import TagsInput from "./TagsInput.js";
 import RichTextEditor from "./RichTextEditor.js";
-import ReactHtmlParser from 'react-html-parser'; 
+import ReactHtmlParser from "react-html-parser";
+import Background from "./Background.js";
 
 import { get, post } from "../../utilities";
 import { navigate } from "@reach/router";
@@ -49,11 +50,13 @@ class Edit extends Component {
 
   render() {
     if (this.state.loading) {
-      return <div className = "loader loader_general">
-             <div class="line line1"></div>
-             <div class="line line2"></div>
-             <div class="line line3"></div>
-             </div>;;
+      return (
+        <div className="loader loader_general">
+          <div class="line line1"></div>
+          <div class="line line2"></div>
+          <div class="line line3"></div>
+        </div>
+      );
     }
 
     const selectedTags = (tags) => {
@@ -65,6 +68,7 @@ class Edit extends Component {
 
     return (
       <div className="post">
+        <Background color={"525252"} />
         <div className="post__container">
           <form onSubmit={this.handleSubmit}>
             <input
@@ -113,8 +117,12 @@ class Edit extends Component {
               />
             </div>
             <div className="post__selection">
-              <input type="reset" value="Discard" className="post__btnInput btn" required />
-              <input type="submit" value="Submit" className="post__btnInput btn" required />
+              <input
+                type="submit"
+                value="Submit"
+                className="post__btnInput btn-hoverDarkGreen btn"
+                required
+              />
             </div>
           </form>
         </div>

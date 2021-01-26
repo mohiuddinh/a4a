@@ -32,7 +32,7 @@
 .dropdown__menu {
   z-index: 999;
   width: 100%;
-  max-height: 224px;
+  max-height: 180px;
   overflow: auto;
   position: absolute;
   outline: 1px solid var(--border-accent);
@@ -143,5 +143,11 @@
   .dropdown {
     margin-left: 12px;
     width: 112px;
+  }
+  .dropdown__items:hover .fa {
+    transform: none;
+  }
+  .dropdown__items:hover span {
+    transform: none;
   }
 }
