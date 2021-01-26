@@ -127,7 +127,7 @@
 
 @media only screen and (max-width: 568px) {
   .questions__main {
-    padding: 12px 32px;
-    width: auto;
+    padding: 12px 12px;
+    width: 350px;
   }
 }

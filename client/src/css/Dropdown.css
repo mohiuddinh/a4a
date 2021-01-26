@@ -138,3 +138,10 @@
     width: 156px;
   }
 }
+
+@media screen and (max-width: 568px) {
+  .dropdown {
+    margin-left: 12px;
+    width: 112px;
+  }
+}

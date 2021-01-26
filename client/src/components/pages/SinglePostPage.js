@@ -5,6 +5,7 @@ import { navigate, Link } from "@reach/router";
 import TimeAgo from "react-timeago";
 import LikeDislikes from "./LikeDislikes.js";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
+import Background from "./Background.js";
 
 import "../../css/SinglePostPage.css";
 import Comments from "./Comments.js";
@@ -70,6 +71,7 @@ function SinglePostPage(props) {
     console.log(typeof timestamp);
     return (
       <div className="singlePost">
+        <Background color={"525252"} />
         <div className="singlePost__largeContainer">
           <div className="singlePost__container">
             <div className="singlePost__profile">
@@ -87,6 +89,16 @@ function SinglePostPage(props) {
               <div className="singlePost__profileContainer">{Question.writer.username}</div>
               <div className="timeAgo singlePost__profileContainer">
                 <TimeAgo date={timestamp} />
+              </div>
+              <div className="singlePost__userActionsMobile">
+                {writer === Question.writer._id ? (
+                  <Delete question questionId={questionId} userId={writer} />
+                ) : null}
+                {writer === Question.writer._id ? (
+                  <button onClick={newPage} className="btn-userActions btn-slide-edit">
+                    Edit
+                  </button>
+                ) : null}
               </div>
             </div>
             <div className="singlePost__main">
@@ -140,11 +152,13 @@ function SinglePostPage(props) {
       </div>
     );
   } else {
-    return <div className = "loader loader_general">
-           <div class="line line1"></div>
-           <div class="line line2"></div>
-           <div class="line line3"></div>
-           </div>;
+    return (
+      <div className="loader loader_general">
+        <div class="line line1"></div>
+        <div class="line line2"></div>
+        <div class="line line3"></div>
+      </div>
+    );
   }
 }
 

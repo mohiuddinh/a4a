@@ -65,6 +65,13 @@
   justify-content: flex-end;
 }
 
+.singlePost__userActionsMobile {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
 .singlePost__sub h5 {
   font-weight: normal;
   font-size: 14px;
@@ -99,6 +106,12 @@
 
 @media only screen and (max-width: 568px) {
   .singlePost__largeContainer {
-    width: 365px;
+    width: 350px;
+  }
+  .singlePost__container:nth-child(1) {
+    flex-direction: column;
+  }
+  .singlePost__userActions {
+    display: none;
   }
 }

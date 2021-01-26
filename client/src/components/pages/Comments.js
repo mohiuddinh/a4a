@@ -16,19 +16,13 @@ const replyTo = true;
 function Comments(props) {
   const [Comment, setComment] = useState("");
 
-  // const handleChange = (e) => {
-  //   setComment(e.currentTarget.value);
-  // };
-
   const liftStateUp = (data) => {
     setComment(data);
   };
 
   const onSubmit = (e) => {
     e.preventDefault();
-
-    console.log(Comment);
-
+    
     const variables = {
       content: Comment,
       writer: props.writerId,
