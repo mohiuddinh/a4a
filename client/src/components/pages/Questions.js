@@ -33,30 +33,35 @@ class Questions extends Component {
           //<a href={`/questions/${questionObj._id}`}>
 
           <SingleQuestion
+            tagColor={"#caf4f4"}
+            tagFontColor={"black"}
             key={questionObj._id}
             questionId={questionObj._id}
             subject={questionObj.subject}
             tag={questionObj.tag}
             question={questionObj.question}
             username={questionObj.writer.username}
+            writerId={questionObj.writer._id}
             userId={this.props.userId}
             url={`/questions/${questionObj._id}`}
             timestamp={questionObj.createdAt}
+            parentFile="all"
           />
           //</a>
         );
       });
     } else {
-      questionsList = <div>Loading...</div>;
+      questionsList = <div className = "loader loader_general">
+                      <div class="line line1"></div>
+                      <div class="line line2"></div>
+                      <div class="line line3"></div>
+                      </div>;
     }
 
     return (
       <div className="questions">
         <Background color={"525252"} />
-        <div className="questions__main">
-          {/* <div classname="department_title">
-            <p> ECONOMICS </p>
-          </div> */}
+        <div className="questions__main animate__animated animate__fadeIn">
           <SearchBar url="search" />
           {questionsList}
         </div>

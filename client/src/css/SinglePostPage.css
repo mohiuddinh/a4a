@@ -9,8 +9,12 @@
   align-items: center;
 }
 
+.singlePost__largeContainer {
+  width: var(--medium-container-width);
+  height: auto;
+}
+
 .singlePost__container {
-  width: 900px;
   margin: 24px 0;
 }
 
@@ -20,7 +24,7 @@
   padding: 12px 12px;
   border-radius: 12px;
   display: flex;
-  max-height: 80vh;
+  max-height: var(--large-container-height);
   overflow: auto;
 }
 
@@ -85,4 +89,16 @@
 
 .reactHtmlParser__container {
   margin-top: 4px;
+}
+
+@media only screen and (max-width: 768px) {
+  .singlePost__largeContainer {
+    width: 550px;
+  }
+}
+
+@media only screen and (max-width: 568px) {
+  .singlePost__largeContainer {
+    width: 365px;
+  }
 }

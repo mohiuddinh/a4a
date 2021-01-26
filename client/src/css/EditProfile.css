@@ -8,8 +8,8 @@
 }
 
 .editProfile__container {
-  width: 800px;
-  height: 80vh;
+  width: var(--medium-container-width);
+  height: var(--large-container-height);
   background-color: var(--white);
   border: 1px solid var(--border-accent);
   border-radius: 12px;
@@ -27,23 +27,25 @@
 
 .editProfile__container form label {
   font-weight: 500;
-  font-size: 14px;
+  font-size: 12px;
   margin-bottom: 4px;
+}
+
+.editProfile__bio {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 .editProfile__info,
 .editProfile__bio {
-  height: 50%;
-}
-
-.editProfile__info,
-.editProfile__bio,
-.editProfile__submit {
   padding: 12px 0;
   width: 100%;
 }
 
 .editProfile__info {
+  height: 50%;
+  overflow: auto;
   display: flex;
   font-size: 14px;
   font-weight: 500;
@@ -51,16 +53,23 @@
 }
 
 .editProfile__textInput {
+  width: 100%;
   flex: 1;
 }
 
 .editProfile__textInput,
-.editProfile__infoSub select,
-.editProfile__infoSub .tags-input {
+.editProfile__infoSub select {
   border-radius: 4px;
   outline: none;
   border: 1px solid var(--border-accent);
   padding: 8px;
+}
+
+.editProfile__tagsInput {
+  min-height: 40px;
+  padding: 0 8px;
+  border-radius: 4px;
+  border: 1px solid var(--border-accent);
 }
 
 .editProfile__infoSub select:hover {
@@ -75,21 +84,11 @@
   padding: 8px 0;
 }
 
-.editProfile__infoSub .tag {
-  padding: 0 8px;
-}
+/* .editProfile__infoSub .tag {
+  padding: 4px 8px;
+} */
 
-.editProfile__infoContainer:nth-child(1) {
-  width: 188px;
-  margin-right: 12px;
-  border-right: 1px solid var(--border-accent);
-}
-
-.editProfile__infoContainer:nth-child(1) .editProfile__infoSub {
-  align-items: center;
-}
-
-.editProfile__infoContainer:nth-child(2) {
+.editProfile__infoContainer {
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -97,16 +96,17 @@
 }
 
 .editProfile__bio textarea {
+  flex: 1;
   width: 100%;
-  height: 100%;
   resize: none;
   outline: none;
   border: none;
 }
 
 .editProfile__submit {
+  width: 100%;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: flex-end;
 }
 
@@ -117,4 +117,24 @@
 
 .editProfile__submit .btn:hover {
   background-color: var(--tea-greenHover);
+}
+
+.editProfile__user {
+  display: flex;
+  width: 100%;
+}
+
+@media screen and (max-width: 768px) {
+  .editProfile__container {
+    width: 500px;
+  }
+  .editProfile__submit {
+    align-items: center;
+  }
+}
+
+@media screen and (max-width: 568px) {
+  .editProfile__container {
+    width: 350px;
+  }
 }

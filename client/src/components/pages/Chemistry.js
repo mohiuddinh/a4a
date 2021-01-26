@@ -33,21 +33,29 @@ class Chemistry extends Component {
         return (
           //<a href={`/questions/${questionObj._id}`}>
           <SingleQuestion
+            tagColor={"#8441c2"}
+            tagFontColor={"white"}
             key={questionObj._id}
             questionId={questionObj._id}
             subject={questionObj.subject}
             tag={questionObj.tag}
             question={questionObj.question}
             username={questionObj.writer.username}
+            writerId={questionObj.writer._id}
             userId={this.props.userId}
             url={`/questions/${questionObj._id}`}
             timestamp={questionObj.createdAt}
+            parentFile="chemistry"
           />
           //</a>
         );
       });
     } else {
-      questionsList = <div>Loading...</div>;
+      questionsList = <div className = "loader loader_chemistry">
+                      <div class="line line1"></div>
+                      <div class="line line2"></div>
+                      <div class="line line3"></div>
+                      </div>;
     }
 
     return (

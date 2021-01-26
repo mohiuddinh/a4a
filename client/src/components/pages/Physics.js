@@ -34,6 +34,8 @@ class Physics extends Component {
         return (
           //<a href={`/questions/${questionObj._id}`}>
           <SingleQuestion
+            tagColor={"#f85959"}
+            tagFontColor={"white"}
             key={questionObj._id}
             questionId={questionObj._id}
             subject={questionObj.subject}
@@ -42,13 +44,19 @@ class Physics extends Component {
             username={questionObj.writer.username}
             userId={this.props.userId}
             url={`/questions/${questionObj._id}`}
+            writerId={questionObj.writer._id}
             timestamp={questionObj.createdAt}
+            parentFile="physics"
           />
           //</a>
         );
       });
     } else {
-      questionsList = <div>Loading...</div>;
+      questionsList = <div className = "loader_physics loader">
+                      <div class="line line1"></div>
+                      <div class="line line2"></div>
+                      <div class="line line3"></div>
+                      </div>;
     }
 
     return (

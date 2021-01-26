@@ -33,21 +33,31 @@ class EECS extends Component {
         return (
           //<a href={`/questions/${questionObj._id}`}>
           <SingleQuestion
+            tagColor={"#ffa812"}
+            tagFontColor={"white"}
             key={questionObj._id}
             questionId={questionObj._id}
             subject={questionObj.subject}
+            writerId={questionObj.writer._id}
             tag={questionObj.tag}
             question={questionObj.question}
             username={questionObj.writer.username}
             userId={this.props.userId}
             url={`/questions/${questionObj._id}`}
             timestamp={questionObj.createdAt}
+            parentFile="eecs"
           />
           //</a>
         );
       });
     } else {
-      questionsList = <div>Loading...</div>;
+      questionsList = (
+        <div className="loader loader_eecs">
+          <div class="line line1"></div>
+          <div class="line line2"></div>
+          <div class="line line3"></div>
+        </div>
+      );
     }
 
     return (

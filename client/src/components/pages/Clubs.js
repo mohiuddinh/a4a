@@ -4,6 +4,8 @@ import SearchBar from "./SearchBar.js";
 import SingleQuestion from "./SingleQuestion.js";
 import Background from "./Background.js";
 
+import "../../css/Activities.css";
+
 class Clubs extends Component {
   constructor(props) {
     super(props);
@@ -31,27 +33,38 @@ class Clubs extends Component {
         return (
           //<a href={`/questions/${questionObj._id}`}>
           <SingleQuestion
+            tagColor={"#a31f34"}
+            tagFontColor={"white"}
             key={questionObj._id}
             questionId={questionObj._id}
             subject={questionObj.subject}
             tag={questionObj.tag}
             question={questionObj.question}
             username={questionObj.writer.username}
+            writerId={questionObj.writer._id}
             userId={this.props.userId}
             url={`/questions/${questionObj._id}`}
             timestamp={questionObj.createdAt}
+            parentFile="clubs"
           />
           //</a>
         );
       });
     } else {
-      questionsList = <div>Loading...</div>;
+      questionsList = (
+        <div className="loader loader_activities">
+          <div class="line line1"></div>
+          <div class="line line2"></div>
+          <div class="line line3"></div>
+        </div>
+      );
     }
 
     return (
       <div className="questions">
-        <Background color={"525252"} />
-        <div className="questions__main">
+        <Background color={"a31f34"} />
+        <div className="questions__main animate__animated animate__fadeIn">
+          <div className="page_title activities_title animate__animated animate__slideInUp">Clubs</div>
           <SearchBar url="search" />
           {questionsList}
         </div>

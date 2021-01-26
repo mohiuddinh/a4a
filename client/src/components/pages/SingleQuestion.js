@@ -9,26 +9,33 @@ import "../../css/SingleQuestion.css";
 class SingleQuestion extends Component {
   constructor(props) {
     super(props);
-    
   }
 
   render() {
+    const className = "singleQuestion " + this.props.parentFile;
+    console.log(className);
     const timestamp = new Date(this.props.timestamp);
     return (
-      <div className="singleQuestion">
+      <div className={className}>
+        {/* <a href={this.props.url}> */}
         <a href={this.props.url}>
           <div className="singleQuestion__container">
-            <span>{this.props.username}: </span>
+            <span>
+              <a href={`/profile/${this.props.writerId}`}>{this.props.username}: </a>
+            </span>
             <h5>{this.props.subject}</h5>
           </div>
+          {/* <a href={this.props.url}> */}
           <div className="singleQuestion__container">
             <span className="singleQuestion__tag">Tag:</span>
             <ul id="tags">
               {this.props.tag.map((tag, index) => (
-                <li className="tag" key={index}>
-                  <span className="tag-title">
-                    {tag}
-                  </span>
+                <li
+                  className="tag"
+                  key={index}
+                  style={{ backgroundColor: this.props.tagColor, color: this.props.tagFontColor }}
+                >
+                  <span className="tag-title">{tag}</span>
                 </li>
               ))}
             </ul>

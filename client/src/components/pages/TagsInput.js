@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import CancelIcon from "@material-ui/icons/Cancel";
 import InfoIcon from "@material-ui/icons/Info";
+import { Button, Header, Icon, Modal } from "semantic-ui-react";
 
 import "../../css/TagsInput.css";
 
 function TagsInput(props) {
+  const [open, setOpen] = useState(false);
   const [tags, setTags] = useState(props.tags);
   const removeTags = (indexToRemove) => {
     setTags([...tags.filter((_, index) => index !== indexToRemove)]);
@@ -26,7 +28,7 @@ function TagsInput(props) {
     <div className="tags-input">
       <ul id="tags">
         {tags.map((tag, index) => (
-          <li key={index} className="tag">
+          <li key={index} className="tag" style={{ backgroundColor: "#caf4f4" }}>
             <span className="tag-title">{tag}</span>
             <CancelIcon className="tag-close-icon" onClick={() => removeTags(index)} />
           </li>
@@ -37,13 +39,12 @@ function TagsInput(props) {
         onKeyUp={(event) => (event.key === " " ? addTags(event) : null)}
         placeholder="Press space to add tags"
       />
-
-      <div id="anim">
-        <span
-          class="tooltip"
-          data-tooltip="Tags can be general or specific. i.e. '6' for EECS, '6.0001' for python, 'club' for clubs in general, etc. Pressing space will enter the tag, so please don't write multiple words in one tag :)"
-        >
-          <InfoIcon className="icon-info" />
+      <div class="tooltip">
+        <InfoIcon className="icon-info" />
+        <span class="tooltiptext">
+          Tags can be general or specific. i.e. '6' for EECS, '6.0001' for python, 'Clubs' for clubs
+          in general, etc. Pressing space will enter the tag, so please don't write multiple words
+          in one tag :)
         </span>
       </div>
     </div>

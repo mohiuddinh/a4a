@@ -54,7 +54,7 @@ const router = express.Router();
 //initialize socket
 const socketManager = require("./server-socket");
 const { _ } = require("core-js");
-const { resolve } = require("../webpack.config");
+// const { resolve } = require("../webpack.config");
 const { isValidObjectId } = require("mongoose");
 
 // router.post("/login", auth.login);
@@ -511,6 +511,36 @@ router.get("/profile_by_id/:id", (req, res) => {
   try {
     User.find({ _id: id }).then((user) => {
       return res.json({ status: "success", user: user });
+    });
+  } catch (e) {
+    return res.json({ status: "error", error: e });
+  }
+});
+
+router.post("/updateProfile", auth.ensureLoggedIn, (req, res) => {
+  User.findOneAndUpdate(
+    { _id: req.body._id },
+    {
+      $set: {
+        description: req.body.description,
+        iconColor: req.body.iconColor,
+        major: req.body.major,
+        occupation: req.body.occupation,
+        tag: req.body.tag,
+      },
+    },
+    { returnOriginal: false }
+  ).exec((err, result) => {
+    if (err) res.status(400).json({ success: false, err });
+    res.status(200).json({ success: true, data: result });
+  });
+});
+
+router.get("/question_by_user_id/:id", (req, res) => {
+  const { id } = req.params;
+  try {
+    Question.find({ writer: id }).populate("writer").then((questions) => {
+      return res.json(questions);
     });
   } catch (e) {
     return res.json({ status: "error", error: e });

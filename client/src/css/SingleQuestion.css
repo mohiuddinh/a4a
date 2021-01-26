@@ -12,6 +12,34 @@
   flex-direction: column;
 }
 
+.singleQuestion {
+  transition: box-shadow 0.6s linear;
+}
+.eecs.singleQuestion:hover {
+  box-shadow: 0px 0px 0px 1px var(--eecs);
+}
+.chemistry.singleQuestion:hover {
+  box-shadow: 0px 0px 0px 1px var(--chem);
+}
+.clubs.singleQuestion:hover {
+  box-shadow: 0px 0px 0px 1px var(--cardinal);
+}
+.social.singleQuestion:hover {
+  box-shadow: 0px 0px 0px 1px var(--cardinal);
+}
+.econ.singleQuestion:hover {
+  box-shadow: 0px 0px 0px 1px var(--econ);
+}
+.math.singleQuestion:hover {
+  box-shadow: 0px 0px 0px 1px var(--math);
+}
+.physics.singleQuestion:hover {
+  box-shadow: 0px 0px 0px 1px var(--physics);
+}
+.all.singleQuestion:hover {
+  box-shadow: 0px 0px 0px 1px var(--border-accent);
+}
+
 .singleQuestion__container > span {
   font-weight: 600;
   margin-right: 8px;
@@ -26,6 +54,11 @@ a .singleQuestion__container:nth-child(1) {
   padding-bottom: 8px;
   border-bottom: 1px solid var(--border-accent);
   display: flex;
+}
+
+a .singleQuestion__container:nth-child(1) a {
+  color: inherit !important;
+  font-weight: 600;
 }
 
 .singleQuestion__container:nth-child(1) h5 {
@@ -56,4 +89,8 @@ a .singleQuestion__container:nth-child(2) {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.singlePost__profileIcon {
+  cursor: pointer;
 }
