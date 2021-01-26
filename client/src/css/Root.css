@@ -27,6 +27,9 @@
   --medium-container-width: 750px;
   --small-container-width: 700px;
   --large-container-height: 80vh;
+  --social: #FFB8D1; 
+  --clubs: #BCE784; 
+  --all: #525252; 
 }
 
 * {

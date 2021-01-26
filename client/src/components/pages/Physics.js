@@ -44,6 +44,7 @@ class Physics extends Component {
             url={`/questions/${questionObj._id}`}
             writerId={questionObj.writer._id}
             timestamp={questionObj.createdAt}
+            parentFile="physics"
           />
           //</a>
         );

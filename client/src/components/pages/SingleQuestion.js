@@ -10,11 +10,21 @@ class SingleQuestion extends Component {
   constructor(props) {
     super(props);
   }
-
+  
   render() {
+    const className = "singleQuestion " + this.props.parentFile;
+    console.log(className); 
     const timestamp = new Date(this.props.timestamp);
     return (
-      <div className="singleQuestion">
+      <div className={className}>
+        {/* <a href={this.props.url}> */}
+        <div className="singleQuestion__container">
+          <span>
+            <a href={`/profile/${this.props.writerId}`}>{this.props.username}: </a>
+          </span>
+
+          <h5>{this.props.subject}</h5>
+        </div>
         <a href={this.props.url}>
           <div className="singleQuestion__container">
             <span>

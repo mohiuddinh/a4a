@@ -43,6 +43,7 @@ class Questions extends Component {
             userId={this.props.userId}
             url={`/questions/${questionObj._id}`}
             timestamp={questionObj.createdAt}
+            parentFile="all"
           />
           //</a>
         );

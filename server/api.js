@@ -487,7 +487,7 @@ router.post("/deletePost", auth.ensureLoggedIn, (req, res) => {
 router.post("/deleteComment", auth.ensureLoggedIn, (req, res) => {
   Comment.findOneAndUpdate(
     { _id: req.body._id },
-    { $set: { writer: mongoose.Types.ObjectId("600b55059b20900022c00f73"), content: "[removed]" } },
+    { $set: { writer: mongoose.Types.ObjectId("600efbfb2d5c8804f77f1da7"), content: "[removed]" } },
     { returnOriginal: false }
   ).exec((err, result) => {
     if (err) res.status(400).json({ success: false, err });
@@ -541,19 +541,6 @@ router.get("/question_by_user_id/:id", (req, res) => {
   try {
     Question.find({ writer: id }).populate("writer").then((questions) => {
       return res.json(questions);
-    });
-  } catch (e) {
-    return res.json({ status: "error", error: e });
-  }
-});
-
-router.get("/grouped_question", (req, res) => {
-  try {
-    Like.aggregate([
-      { $group: { _id: "$questionId", count: { $sum: 1 } } },
-      { $sort: { count: -1 } },
-    ]).then((result) => {
-      return res.json({ status: "success", data: result });
     });
   } catch (e) {
     return res.json({ status: "error", error: e });

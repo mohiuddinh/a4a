@@ -8,6 +8,7 @@ import CloseIcon from "@material-ui/icons/Close";
 
 import "../../css/Post.css";
 import "../../css/Home.css";
+import "../../css/SearchBar.css";
 
 function SearchBar(props) {
   const searchModal = useRef(null);

@@ -25,6 +25,7 @@ import Clubs from "./pages/Clubs.js";
 import SearchResultsTwo from "./pages/SearchResultsTwo.js";
 import Profile from "./pages/Profile.js";
 import EditProfile from "./pages/EditProfile.js";
+import NotFound from './pages/NotFound.js'; 
 
 import "../css/utilities.css";
 import "../css/App.css";
@@ -101,6 +102,7 @@ class App extends Component {
             )}
             <Register path="/register" />
             <Home path="/" />
+            <NotFound default/>
           </Router>
         </div>
       </>

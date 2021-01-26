@@ -41,6 +41,7 @@ class Clubs extends Component {
             userId={this.props.userId}
             url={`/questions/${questionObj._id}`}
             timestamp={questionObj.createdAt}
+            parentFile="clubs"
           />
           //</a>
         );
@@ -51,7 +52,7 @@ class Clubs extends Component {
 
     return (
       <div className="questions">
-        <Background color={"525252"} />
+        <Background color={"BCE784"} />
         <div className="questions__main">
           <SearchBar url="search" />
           {questionsList}
