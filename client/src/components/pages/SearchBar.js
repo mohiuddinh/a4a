@@ -6,7 +6,7 @@ import { Link, navigate } from "@reach/router";
 import SearchIcon from "@material-ui/icons/Search";
 import CloseIcon from "@material-ui/icons/Close";
 import "../../css/Post.css";
-//import "../../css/SearchBar.css";
+import "../../css/SearchBar.css";
 
 function SearchBar(props) {
   const searchModal = useRef(null);

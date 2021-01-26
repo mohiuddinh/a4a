@@ -63,7 +63,7 @@ class Header extends Component {
         </div>
         <div className="header__title">
           <Link to="/" style={link_style}>
-            <a aria-label="Thanks" class="h-button centered" data-text="A4A" href="#">
+            <a aria-label="Thanks" className="h-button centered" data-text="A4A" href="#">
               <span>A</span>
               <span>s</span>
               <span>k</span>

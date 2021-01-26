@@ -41,6 +41,7 @@ class Social extends Component {
             url={`/questions/${questionObj._id}`}
             writerId={questionObj.writer._id}
             timestamp={questionObj.createdAt}
+            parentFile="social"
           />
           //</a>
         );
@@ -53,7 +54,7 @@ class Social extends Component {
 
     return (
       <div className="questions">
-        <Background color={"525252"} />
+        <Background color={"FFB8D1"} />
         <div className="questions__main">
           <SearchBar url="search" />
           {questionsList}

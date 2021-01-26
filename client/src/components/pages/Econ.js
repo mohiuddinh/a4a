@@ -43,6 +43,7 @@ class Econ extends Component {
             userId={this.props.userId}
             url={`/questions/${questionObj._id}`}
             timestamp={questionObj.createdAt}
+            parentFile="econ"
           />
           //</a>
         );
