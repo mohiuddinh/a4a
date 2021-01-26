@@ -31,6 +31,8 @@ class Social extends Component {
         return (
           //<a href={`/questions/${questionObj._id}`}>
           <SingleQuestion
+            tagColor={"#ffb8d1"}
+            tagFontColor={"white"}
             key={questionObj._id}
             questionId={questionObj._id}
             subject={questionObj.subject}
@@ -47,9 +49,7 @@ class Social extends Component {
         );
       });
     } else {
-      questionsList = (
-        <div>Loading...</div>
-      );
+      questionsList = <div>Loading...</div>;
     }
 
     return (

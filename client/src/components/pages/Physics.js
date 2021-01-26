@@ -34,6 +34,8 @@ class Physics extends Component {
         return (
           //<a href={`/questions/${questionObj._id}`}>
           <SingleQuestion
+            tagColor={"#f85959"}
+            tagFontColor={"white"}
             key={questionObj._id}
             questionId={questionObj._id}
             subject={questionObj.subject}

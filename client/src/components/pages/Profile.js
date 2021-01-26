@@ -77,6 +77,8 @@ class Profile extends Component {
       questionsList = this.state.questions.map((questionObj, i) => {
         return (
           <SingleQuestion
+            tagColor={this.state.iconColor}
+            tagFontColor={"white"}
             key={questionObj._id}
             questionId={questionObj._id}
             subject={questionObj.subject}
@@ -115,7 +117,11 @@ class Profile extends Component {
             <div className="profile__mainTags">
               <ul id="tags">
                 {this.state.tags.map((tag, index) => (
-                  <li className="tag" key={index}>
+                  <li
+                    className="tag"
+                    key={index}
+                    style={{ backgroundColor: this.state.iconColor, color: "white" }}
+                  >
                     <span className="tag-title">{tag}</span>
                   </li>
                 ))}
@@ -131,11 +137,11 @@ class Profile extends Component {
           </div>
           <div className="profile__main">
             <div className="profile__mainBio">
-              <span>Bio:</span>
+              <span className="profile__mainSpan">Bio:</span>
               <p>{this.state.description}</p>
             </div>
             <div className="profile__mainPosts">
-              <span>Posts</span>
+              <span className="profile__mainSpan">Posts:</span>
               {questionsList}
             </div>
           </div>

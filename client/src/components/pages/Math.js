@@ -33,6 +33,8 @@ class Math extends Component {
         return (
           //<a href={`/questions/${questionObj._id}`}>
           <SingleQuestion
+            tagColor={"#45b3e0"}
+            tagFontColor={"white"}
             key={questionObj._id}
             questionId={questionObj._id}
             subject={questionObj.subject}

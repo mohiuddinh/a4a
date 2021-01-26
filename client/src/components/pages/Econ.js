@@ -33,6 +33,8 @@ class Econ extends Component {
         return (
           //<a href={`/questions/${questionObj._id}`}>
           <SingleQuestion
+            tagFontColor={"white"}
+            tagColor={"#2dd187"}
             key={questionObj._id}
             questionId={questionObj._id}
             subject={questionObj.subject}
@@ -56,7 +58,9 @@ class Econ extends Component {
       <div className="questions">
         <Background color={"2dd187"} />
         <div className="questions__main animate__animated animate__fadeIn">
-          <div className="page_title Econ_title animate__animated animate__slideInUp">Economics</div>
+          <div className="page_title Econ_title animate__animated animate__slideInUp">
+            Economics
+          </div>
           {/* <input type="text" placeholder="search..." /> */}
           <SearchBar url="search" />
           {questionsList}

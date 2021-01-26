@@ -131,11 +131,11 @@ class EditProfile extends Component {
                     value={iconColor}
                     onChange={this.onChange}
                   >
-                    <option value="#45b3e0">torquoise-ish</option>
-                    <option value="#f85959">calm orange</option>
-                    <option value="#36bd4f">bright green</option>
-                    <option value="#ffa812">sorta orange</option>
-                    <option value="#8a2be2">purple sorta</option>
+                    <option value="#45b3e0">torquoise</option>
+                    <option value="#f85959">orange</option>
+                    <option value="#36bd4f">green</option>
+                    <option value="#ffa812">yellow</option>
+                    <option value="#8a2be2">purple</option>
                   </select>
                 </div>
               </div>

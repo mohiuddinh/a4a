@@ -64,7 +64,7 @@ function SinglePostPage(props) {
 
   if (Question.writer) {
     const iconColor = Question.writer.iconColor;
-    console.log(iconColor)
+    console.log(iconColor);
     const timestamp = new Date(Question.createdAt);
     console.log(timestamp);
     console.log(typeof timestamp);
@@ -100,7 +100,11 @@ function SinglePostPage(props) {
                 <span className="singlePost__tag">Tags: </span>
                 <ul id="tags">
                   {Question.tag.map((tag, index) => (
-                    <li className="tag" key={index}>
+                    <li
+                      className="tag"
+                      key={index}
+                      style={{ backgroundColor: "#caf4f4", color: "black" }}
+                    >
                       <span className="tag-title">{tag}</span>
                     </li>
                   ))}

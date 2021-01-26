@@ -11,7 +11,7 @@
 
 .singlePost__largeContainer {
   width: var(--medium-container-width);
-  height: var(--large-container-height);
+  height: auto;
 }
 
 .singlePost__container {
@@ -89,4 +89,16 @@
 
 .reactHtmlParser__container {
   margin-top: 4px;
+}
+
+@media only screen and (max-width: 768px) {
+  .singlePost__largeContainer {
+    width: 550px;
+  }
+}
+
+@media only screen and (max-width: 568px) {
+  .singlePost__largeContainer {
+    width: 365px;
+  }
 }

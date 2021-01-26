@@ -33,6 +33,8 @@ class Chemistry extends Component {
         return (
           //<a href={`/questions/${questionObj._id}`}>
           <SingleQuestion
+            tagColor={"#8441c2"}
+            tagFontColor={"white"}
             key={questionObj._id}
             questionId={questionObj._id}
             subject={questionObj.subject}

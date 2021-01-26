@@ -28,7 +28,7 @@ function TagsInput(props) {
     <div className="tags-input">
       <ul id="tags">
         {tags.map((tag, index) => (
-          <li key={index} className="tag" style={{ backgroundColor: "red" }}>
+          <li key={index} className="tag" style={{ backgroundColor: "#caf4f4" }}>
             <span className="tag-title">{tag}</span>
             <CancelIcon className="tag-close-icon" onClick={() => removeTags(index)} />
           </li>

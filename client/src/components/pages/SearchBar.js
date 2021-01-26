@@ -8,7 +8,6 @@ import CloseIcon from "@material-ui/icons/Close";
 
 import "../../css/Post.css";
 import "../../css/Home.css";
-import "../../css/SearchBar.css";
 
 function SearchBar(props) {
   const searchModal = useRef(null);
@@ -53,7 +52,7 @@ function SearchBar(props) {
           <div className="home__searchContainer">
             <input
               type="text"
-              placeholder="search..."
+              placeholder="Search..."
               value={search}
               onChange={(e) => fetchUsers(e.target.value)}
             />

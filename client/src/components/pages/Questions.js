@@ -33,6 +33,8 @@ class Questions extends Component {
           //<a href={`/questions/${questionObj._id}`}>
 
           <SingleQuestion
+            tagColor={"#caf4f4"}
+            tagFontColor={"black"}
             key={questionObj._id}
             questionId={questionObj._id}
             subject={questionObj.subject}
@@ -49,9 +51,7 @@ class Questions extends Component {
         );
       });
     } else {
-      questionsList = (
-        <div>Loading...</div>
-      );
+      questionsList = <div>Loading...</div>;
     }
 
     return (

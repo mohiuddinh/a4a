@@ -12,29 +12,33 @@
   flex-direction: column;
 }
 
-.eecs.singleQuestion { transition: box-shadow 0.6s linear; }
-.eecs.singleQuestion:hover { box-shadow: 0px 0px 0px 3px var(--eecs); }
-
-.chemistry.singleQuestion { transition: box-shadow 0.6s linear; }
-.chemistry.singleQuestion:hover { box-shadow: 0px 0px 0px 3px var(--chem); }
-
-.clubs.singleQuestion { transition: box-shadow 0.6s linear; }
-.clubs.singleQuestion:hover { box-shadow: 0px 0px 0px 3px var(--clubs); }
-
-.social.singleQuestion { transition: box-shadow 0.6s linear; }
-.social.singleQuestion:hover { box-shadow: 0px 0px 0px 3px var(--social); }
-
-.econ.singleQuestion { transition: box-shadow 0.6s linear; }
-.econ.singleQuestion:hover { box-shadow: 0px 0px 0px 3px var(--econ); }
-
-.math.singleQuestion { transition: box-shadow 0.6s linear; }
-.math.singleQuestion:hover { box-shadow: 0px 0px 0px 3px var(--math); }
-
-.physics.singleQuestion { transition: box-shadow 0.6s linear; }
-.physics.singleQuestion:hover { box-shadow: 0px 0px 0px 3px var(--physics); }
-
-.all.singleQuestion { transition: box-shadow 0.6s linear; }
-.all.singleQuestion:hover { box-shadow: 0px 0px 0px 3px var(--border-accent); }
+.singleQuestion {
+  transition: box-shadow 0.6s linear;
+}
+.eecs.singleQuestion:hover {
+  box-shadow: 0px 0px 0px 1px var(--eecs);
+}
+.chemistry.singleQuestion:hover {
+  box-shadow: 0px 0px 0px 1px var(--chem);
+}
+.clubs.singleQuestion:hover {
+  box-shadow: 0px 0px 0px 1px var(--clubs);
+}
+.social.singleQuestion:hover {
+  box-shadow: 0px 0px 0px 1px var(--social);
+}
+.econ.singleQuestion:hover {
+  box-shadow: 0px 0px 0px 1px var(--econ);
+}
+.math.singleQuestion:hover {
+  box-shadow: 0px 0px 0px 1px var(--math);
+}
+.physics.singleQuestion:hover {
+  box-shadow: 0px 0px 0px 1px var(--physics);
+}
+.all.singleQuestion:hover {
+  box-shadow: 0px 0px 0px 1px var(--border-accent);
+}
 
 .singleQuestion__container > span {
   font-weight: 600;
