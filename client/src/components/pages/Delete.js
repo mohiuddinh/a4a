@@ -18,10 +18,8 @@ function Delete(props) {
             let variable = {};
 
             if (props.question) {
-              console.log("questions");
               variable = { _id: props.questionId };
               post("/api/deletePost", variable).then((res) => {
-                console.log(res);
                 if (res.success) {
                   navigate("/");
                   //alert("Your question has been successfully deleted!");
@@ -30,11 +28,8 @@ function Delete(props) {
                 }
               });
             } else {
-              console.log("comments");
               variable = { _id: props.commentId };
-              console.log(variable);
               post("/api/deleteComment", variable).then((res) => {
-                console.log(res);
                 if (res.success) {
                   window.location.reload();
                   //alert("Your comment has been successfully deleted!");

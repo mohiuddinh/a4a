@@ -9,7 +9,6 @@ import Background from "./Background";
 class EmailPasswordLink extends Component {
   onSubmit = (e) => {
     e.preventDefault();
-    // console.log("reset password link form submitted successfully!");
 
     const changeMessage = document.getElementById("changePassword__message");
 

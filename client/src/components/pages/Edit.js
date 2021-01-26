@@ -11,7 +11,6 @@ import "../../css/Post.css";
 class Edit extends Component {
   constructor(props) {
     super(props);
-    console.log(props); 
     this.state = {
       subject: "",
       tag: "",
@@ -32,15 +31,11 @@ class Edit extends Component {
   }
 
   liftStateUp = (data) => {
-    // console.log("liftStateUp");
     this.setState({ question: data });
-    // console.log(this.state.question);
   };
 
   onChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
-
-    // console.log(this.state);
   };
 
   handleSubmit = (e) => {

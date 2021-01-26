@@ -11,7 +11,6 @@ import "../../css/Profile.css";
 class Profile extends Component {
   constructor(props) {
     super(props);
-    console.log(props);
     this.state = {
       loading1: true,
       loading2: true,
@@ -28,7 +27,6 @@ class Profile extends Component {
 
   componentDidMount() {
     get(`/api/profile_by_id/${this.props.id}`).then((res) => {
-      console.log(res.user);
       const { description, username, iconColor, major, occupation, email, tag } = res.user[0];
       this.setState({
         description: description,
@@ -41,7 +39,6 @@ class Profile extends Component {
         loading1: false,
       });
       get(`/api/question_by_user_id/${this.props.id}`).then((questionObjs) => {
-        console.log(questionObjs);
         let reversedObjs = questionObjs.reverse();
         this.setState({
           loading2: false,
@@ -52,7 +49,6 @@ class Profile extends Component {
   }
 
   newPage = () => {
-    console.log(this.props.id);
     navigate(`/profile/edit/${this.props.id}`).then(() => {
       return (
         <EditProfile
@@ -68,7 +64,7 @@ class Profile extends Component {
   };
 
   render() {
-    if (this.state.loading) {
+    if (this.state.loading1 && this.state.loading2) {
       return <div className = "loader loader_general">
              <div class="line line1"></div>
              <div class="line line2"></div>

@@ -21,7 +21,6 @@ class Physics extends Component {
     };
     axios.post("/api/department", data).then((res) => {
       const questionObjs = res.data.questions;
-      console.log(res.data.questions);
       let reversedObjs = questionObjs.reverse();
       this.setState({ questions: reversedObjs });
     });

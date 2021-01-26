@@ -8,6 +8,7 @@ import RichTextEditor from "./RichTextEditor.js";
 
 import "../../css/SinglePostPage.css";
 import "../../css/Comments.css";
+import { navigate } from "@reach/router";
 
 const { TextArea } = Input;
 
@@ -22,7 +23,7 @@ function Comments(props) {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    
+
     const variables = {
       content: Comment,
       writer: props.writerId,
@@ -33,6 +34,7 @@ function Comments(props) {
       if (res.success) {
         setComment("");
         props.refreshFunction(res.result);
+        window.location.reload();
       } else {
         alert("Failed to save comment");
       }

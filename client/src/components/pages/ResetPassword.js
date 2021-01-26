@@ -76,7 +76,6 @@ function ResetPassword(props) {
     };
 
     fetchData(resetPassword);
-    // console.log("fetched successfully!");
   };
 
   return (

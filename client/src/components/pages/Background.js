@@ -11,9 +11,6 @@ class Background extends Component {
     // };
   }
 
-  componentDidMount() {
-    console.log(this.props.color);
-  }
 
   render() {
     return <ParticlesBg num={25} type="cobweb" bg={true} color={this.props.color} />;

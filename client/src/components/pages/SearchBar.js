@@ -21,9 +21,7 @@ function SearchBar(props) {
   const fetchUsers = (query) => {
     setSearch(query);
     post("/api/search", { query: query }).then((res) => {
-      //console.log(res);
       if (query === "") {
-        console.log(query);
         setQuestionDetails([]);
       } else if (res.length > 5) {
         setQuestionDetails(res.slice(0, 5));
@@ -36,9 +34,7 @@ function SearchBar(props) {
   const handleSubmit = (e) => {
     e.preventDefault();
     const newQuery = search.split(" ").join("+");
-    //console.log(newQuery);
     if (QuestionDetails.length > 0) {
-      //console.log(props);
       return navigate(`/questions/${props.url}/${newQuery}`);
     } else {
       return navigate(`/questions/noresults`);

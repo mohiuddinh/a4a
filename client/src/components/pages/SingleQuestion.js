@@ -13,7 +13,6 @@ class SingleQuestion extends Component {
 
   render() {
     const className = "singleQuestion " + this.props.parentFile;
-    console.log(className);
     const timestamp = new Date(this.props.timestamp);
     return (
       <div className={className}>
