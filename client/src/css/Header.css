@@ -48,7 +48,7 @@
   opacity: 0.85;
 }
 
-/* header animation hover */
+/* header animation hover from https://codepen.io/badurski/pen/YxJgoe */
 .header__title a {
   font-weight: 800;
   color: var(--heading-text);
@@ -155,7 +155,7 @@
   font-size: 14px;
   color: var(--btn-text);
 }
-/* header animation for mobile */
+/* header animation for mobile from https://www.youtube.com/watch?v=vJNVramny9k&t=1s */
 #logo {
   animation: fill 0.5s ease forwards 1.75s;
   opacity: 0.7;

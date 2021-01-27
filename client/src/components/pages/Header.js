@@ -43,6 +43,7 @@ class Header extends Component {
   }
 
   render() {
+    // header navbar animation on mobile from https://stackoverflow.com/questions/65888080/reactjs-how-to-apply-transitions-to-inline-stylings-in-react/65888897?noredirect=1#comment116499569_65888897
     const btnClassname = cs("btn", {
       closeBtn: !this.state.showMenu,
       openBtn: this.state.showMenu,

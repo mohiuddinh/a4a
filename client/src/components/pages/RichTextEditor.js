@@ -6,6 +6,8 @@ window.katex = katex;
 
 import "react-quill/dist/quill.snow.css";
 
+// Rich Text Editor from https://www.npmjs.com/package/react-quill
+
 class RichTextEditor extends Component {
   constructor(props) {
     super(props);

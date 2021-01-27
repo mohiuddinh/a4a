@@ -21,6 +21,8 @@ const link_style = {
   color: "inherit",
 };
 
+// Dropdown component from https://blog.campvanilla.com/reactjs-dropdown-menus-b6e06ae3a8fe
+
 class Dropdown extends Component {
   constructor() {
     super();

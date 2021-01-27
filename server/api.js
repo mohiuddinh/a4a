@@ -78,13 +78,9 @@ router.post("/initsocket", (req, res) => {
 // | write your API methods below!|
 // |------------------------------|
 
-// router.get("/login", function (req, res, next) {
-//   return res.render("login", {});
-// });
-
-// router.get("/register", function (req, res, next) {
-//   return res.render("signup", {});
-// });
+// the following authentication backend system (from reset password to register) is from the following youtube videos
+// https://www.youtube.com/watch?v=SQqSMDIzhaE
+// https://www.youtube.com/watch?v=76tKpVbjhu8&t=324s
 
 // reset-password
 router.post("/reset-password/:token", async (req, res) => {
@@ -296,6 +292,8 @@ router.post("/register", async (req, res) => {
     ok: "An email with the verification link has been sent! Please check your inbox or junk mail!",
   });
 });
+
+// Authentication system end
 
 router.post("/department", (req, res) => {
   console.log("accessed endpoint department");
