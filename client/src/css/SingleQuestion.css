@@ -94,3 +94,16 @@ a .singleQuestion__container:nth-child(2) {
 .singlePost__profileIcon {
   cursor: pointer;
 }
+
+@media only screen and (max-width: 568px) {
+  a .singleQuestion__container:nth-child(1) {
+    flex-direction: column;
+  }
+  a .singleQuestion__container:nth-child(2) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .singleQuestion__tag {
+    margin-bottom: 4px;
+  }
+}

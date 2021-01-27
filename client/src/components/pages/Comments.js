@@ -19,11 +19,7 @@ const replyTo = true;
 function Comments(props) {
   const [Comment, setComment] = useState("");
 
-  // const handleChange = (e) => {
-  //   setComment(e.currentTarget.value);
-  // };
-
-  const liftStateUp = (data) => { //ours
+  const liftStateUp = (data) => {
     setComment(data);
   };
 
@@ -40,7 +36,7 @@ function Comments(props) {
       if (res.success) {
         setComment("");
         props.refreshFunction(res.result);
-        window.location.reload(); 
+        window.location.reload();
       } else {
         console.log("Failed to save comment");
       }

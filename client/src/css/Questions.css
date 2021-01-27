@@ -1,7 +1,7 @@
 @import "./Root.css";
 
 .questions {
-  min-height: calc(100vh - 64px);
+  height: calc(100vh - 64px);
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -127,7 +127,12 @@
 
 @media only screen and (max-width: 568px) {
   .questions__main {
-    padding: 12px 32px;
-    width: auto;
+    padding: 12px 12px;
+    width: 350px;
   }
 }
+
+/*  (1)
+Loader Code Adapted from:
+https://codepen.io/slyka85/pen/QvBQPb
+ */

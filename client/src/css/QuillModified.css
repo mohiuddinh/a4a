@@ -2,6 +2,10 @@
   height: 90%;
 }
 
+.ql-container {
+  height: 90% !important;
+}
+
 .ql-toolbar.ql-snow {
   border: none !important;
   border-bottom: 1px solid var(--border-accent) !important;
@@ -36,4 +40,10 @@
 .ql-editor {
   padding: 12px !important;
   font-size: 14px !important;
+}
+
+@media only screen and (max-width: 568px) {
+  .ql-container {
+    height: 80% !important;
+  }
 }

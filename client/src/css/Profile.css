@@ -33,9 +33,11 @@
   justify-content: center;
   align-items: center;
   padding: 12px 0;
+  overflow: auto;
 }
 
 .profile__main {
+  overflow: auto;
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -80,7 +82,10 @@
   margin: 12px 0;
 }
 
-@media screen and (max-width: 768px) {
+@media only screen and (max-width: 768px) {
+  .profile__main {
+    overflow: visible;
+  }
   .profile__container {
     width: 500px;
     flex-direction: column;
@@ -88,10 +93,11 @@
   }
   .profile__info {
     width: 100%;
+    height: auto;
   }
 }
 
-@media screen and (max-width: 568px) {
+@media only screen and (max-width: 568px) {
   .profile__container {
     width: 350px;
   }

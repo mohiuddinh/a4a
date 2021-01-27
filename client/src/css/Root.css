@@ -41,8 +41,8 @@
   /* text-decoration: none; */
 }
 
-body {
-  overflow-x: hidden;
+.app__wrapper {
+  /* overflow-x: hidden; */
 }
 
 h1,

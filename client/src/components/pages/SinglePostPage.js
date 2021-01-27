@@ -5,6 +5,7 @@ import { navigate, Link } from "@reach/router";
 import TimeAgo from "react-timeago";
 import LikeDislikes from "./LikeDislikes.js";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
+import Background from "./Background.js";
 
 import "../../css/SinglePostPage.css";
 import Comments from "./Comments.js";
@@ -66,7 +67,8 @@ function SinglePostPage(props) {
     const iconColor = Question.writer.iconColor;
     const timestamp = new Date(Question.createdAt);
     return (
-      <div className="singlePost">
+      <div className="singlePost animate__animated animate__fadeIn">
+        <Background color={"525252"} />
         <div className="singlePost__largeContainer">
           <div className="singlePost__container">
             <div className="singlePost__profile">
@@ -84,6 +86,16 @@ function SinglePostPage(props) {
               <div className="singlePost__profileContainer">{Question.writer.username}</div>
               <div className="timeAgo singlePost__profileContainer">
                 <TimeAgo date={timestamp} />
+              </div>
+              <div className="singlePost__userActions">
+                {writer === Question.writer._id ? (
+                  <Delete question questionId={questionId} userId={writer} />
+                ) : null}
+                {writer === Question.writer._id ? (
+                  <button onClick={newPage} className="btn-userActions btn-slide-edit">
+                    Edit
+                  </button>
+                ) : null}
               </div>
             </div>
             <div className="singlePost__main">
@@ -106,16 +118,6 @@ function SinglePostPage(props) {
                     </li>
                   ))}
                 </ul>
-                <div className="singlePost__userActions">
-                  {writer === Question.writer._id ? (
-                    <Delete question questionId={questionId} userId={writer} />
-                  ) : null}
-                  {writer === Question.writer._id ? (
-                    <button onClick={newPage} className="btn-userActions btn-slide-edit">
-                      Edit
-                    </button>
-                  ) : null}
-                </div>
               </div>
               <div className="singlePost__sub">
                 <span>Question: </span>

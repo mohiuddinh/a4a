@@ -30,9 +30,9 @@
 }
 
 .dropdown__menu {
-  z-index: 999;
+  z-index: 10;
   width: 100%;
-  max-height: 224px;
+  max-height: 180px;
   overflow: auto;
   position: absolute;
   outline: 1px solid var(--border-accent);
@@ -132,9 +132,22 @@
 }
 
 /* media queries */
-@media screen and (max-width: 768px) {
+@media only screen and (max-width: 768px) {
   .dropdown {
     margin-left: 24px;
     width: 156px;
+  }
+}
+
+@media only screen and (max-width: 568px) {
+  .dropdown {
+    margin-left: 12px;
+    width: 112px;
+  }
+  .dropdown__items:hover .fa {
+    transform: none;
+  }
+  .dropdown__items:hover span {
+    transform: none;
   }
 }

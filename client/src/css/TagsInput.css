@@ -34,7 +34,7 @@
   align-items: center;
   justify-content: center;
   color: var(--heading-text);
-  padding: 4px 8px;
+  padding: 6px 8px;
   font-size: 12px;
   font-weight: 500;
   list-style: none;
@@ -64,7 +64,7 @@
 }
 
 .tooltip .tooltiptext {
-  font-size: 12px;
+  font-size: 14px;
   visibility: hidden;
   width: 160px;
   background-color: rgb(150, 150, 150);
@@ -74,9 +74,8 @@
   padding: 4px;
   position: absolute;
   z-index: 1;
-  top: 0%;
-  left: 0%;
-  margin-left: -170px;
+  top: 10%;
+  right: 110%;
   opacity: 0;
   transition: opacity 0.3s;
 }
@@ -84,9 +83,8 @@
 .tooltip .tooltiptext::after {
   content: "";
   position: absolute;
-  top: 5%;
-  right: -6%;
-  margin-left: -5px;
+  top: 2%;
+  right: -5%;
   border-width: 5px;
   border-style: solid;
   border-color: rgb(150, 150, 150) transparent transparent transparent;

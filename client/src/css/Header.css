@@ -1,12 +1,20 @@
 @import "./Root.css";
 
+.header__sticky {
+  position: sticky;
+  top: 0;
+  z-index: 999;
+}
+
 .header {
   position: relative;
-  height: 64px;
+  padding: 12px 0;
+  /* height: 64px; */
   background-color: var(--white);
   border-bottom: 1px solid var(--border-accent);
   display: flex;
   align-items: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
 .header__selection {
@@ -46,6 +54,11 @@
   color: var(--heading-text);
   text-decoration: none;
 }
+
+.header__titleMobile {
+  display: none;
+}
+
 .centered {
   position: absolute;
   left: 50%;
@@ -142,13 +155,47 @@
   font-size: 14px;
   color: var(--btn-text);
 }
+/* header animation for mobile */
+#logo {
+  animation: fill 0.5s ease forwards 1.75s;
+  opacity: 0.7;
+}
+#logo path:nth-child(1) {
+  stroke-dasharray: 155px;
+  stroke-dashoffset: 155px;
+  animation: line-anim 2s ease forwards;
+}
+#logo path:nth-child(2) {
+  stroke-dasharray: 140px;
+  stroke-dashoffset: 140px;
+  animation: line-anim 2s ease forwards 0.3s;
+}
+#logo path:nth-child(3) {
+  stroke-dasharray: 155px;
+  stroke-dashoffset: 155px;
+  animation: line-anim 2s ease forwards 0.6s;
+}
+@keyframes line-anim {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes fill {
+  from {
+    fill: transparent;
+  }
+  to {
+    fill: black;
+  }
+}
+/* header animation for mobile end */
 
 /* navBar burger */
 .header__burger {
   display: none;
   cursor: pointer;
   margin-right: 24px;
-  z-index: 10;
+  z-index: 15;
 }
 
 .header__burger div {
@@ -160,32 +207,17 @@
   transition: all 0.25s ease-in-out;
 }
 
-.header__burger:hover .burger-1 {
-  transform: rotate(-45deg) translate(-7px, 5px);
-}
-
-.header__burger:hover .burger-2 {
-  transition: rotate(180deg);
-  opacity: 0;
-}
-
-.header__burger:hover .burger-3 {
-  transform: rotate(45deg) translate(-6px, -4px);
-}
-
-@keyframes menu-open {
-  from {
-    width: 0px;
-  }
-  to {
-    width: 220px;
-  }
-}
-
-.open {
-  animation-name: menu-open;
-  animation-duration: 1s;
-  animation-fill-mode: forwards;
+.header__menu {
+  display: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: var(--white);
+  outline: 1px solid var(--border-accent);
+  padding: 64px 12px 0 12px;
+  height: 100vh;
+  z-index: 10;
+  transition: all 0.25s ease-in-out;
 }
 
 @keyframes menu-close {
@@ -197,13 +229,90 @@
   }
 }
 
+@keyframes opacity-close {
+  from {
+    opacity: 1;
+    font-size: 14px;
+  }
+  to {
+    opacity: 0;
+    font-size: 0px;
+  }
+}
+
 .close {
+  padding: 64px 0 0 0;
   animation-name: menu-close;
   animation-duration: 1s;
   animation-fill-mode: forwards;
 }
 
+.closeBtn {
+  animation-name: opacity-close;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+  padding: 0 !important;
+  font-size: 0;
+}
+
+.closeSpan {
+  animation-name: opacity-close;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes menu-open {
+  from {
+    width: 0px;
+  }
+  to {
+    width: 220px;
+  }
+}
+
+@keyframes opacity-open {
+  from {
+    opacity: 0;
+    font-size: 0;
+  }
+  to {
+    opacity: 1;
+    font-size: 14px;
+  }
+}
+
+.open {
+  animation-name: menu-open;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+}
+
+.openBtn {
+  animation-name: opacity-open;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+}
+
+.openSpan {
+  animation-name: opacity-open;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+}
+
 /* media queries */
+@media only screen and (max-width: 865px) {
+  .header__titleMobile {
+    display: flex;
+    align-items: center;
+    padding-bottom: 8px;
+  }
+  .h-button {
+    display: none;
+  }
+  .header {
+    padding: 4px 0;
+  }
+}
 @media only screen and (max-width: 768px) {
   .header__burgerContainer {
     flex: 1;
@@ -216,23 +325,11 @@
   .header__user {
     display: none;
   }
-  .h-button {
-    pointer-events: none;
-  }
   .header__selection h5 {
     display: none;
   }
   .header__menu {
-    position: absolute;
-    top: 0;
-    right: 0;
-    background-color: var(--white);
-    outline: 1px solid var(--border-accent);
-    padding: 64px 12px 0 12px;
-    height: 100vh;
-    z-index: 9;
-    /* animation-name: menu;
-    animation-duration: 1s; */
+    display: block;
   }
   .header__menuUser {
     display: flex;
@@ -243,7 +340,7 @@
     width: 100%;
     background-color: var(--tea-green);
     margin: 8px 0;
-    transition: all 0.25s ease-in-out;
+    transition: all 1s ease-in-out;
   }
   .header__menu .btn span {
     font-size: 14px;
@@ -251,5 +348,10 @@
   }
   .header__menu .btn:hover {
     background-color: var(--tea-greenHover);
+  }
+}
+@media only screen and (max-width: 568px) {
+  .header__burger {
+    margin-right: 12px;
   }
 }

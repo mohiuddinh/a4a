@@ -62,6 +62,7 @@
     "react-notifications-component": "^3.0.3",
     "react-particles-js": "^3.4.1",
     "react-quill": "^1.3.5",
+    "react-responsive": "^8.2.0",
     "react-router-dom": "^5.2.0",
     "react-spinners": "^0.10.4",
     "react-time-ago": "^6.2.2",

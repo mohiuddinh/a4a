@@ -2,6 +2,8 @@ import React, { Component } from "react";
 
 import SingleQuestion from "../pages/SingleQuestion.js";
 import SearchBar from "./SearchBar.js";
+import Background from "./Background.js";
+
 import "../../css/Questions.css";
 import { post } from "../../utilities";
 
@@ -62,6 +64,9 @@ class SearchResults extends Component {
           //<a href={`/questions/${questionObj._id}`}>
 
           <SingleQuestion
+            tagColor={"#caf4f4"}
+            tagFontColor={"black"}
+            parentFile={"all"}
             key={questionObj._id}
             questionId={questionObj._id}
             subject={questionObj.subject}
@@ -76,15 +81,18 @@ class SearchResults extends Component {
         );
       });
     } else {
-      questionsList = <div className = "loader loader_general">
-                      <div class="line line1"></div>
-                      <div class="line line2"></div>
-                      <div class="line line3"></div>
-                      </div>;
+      questionsList = (
+        <div className="loader loader_general">
+          <div class="line line1"></div>
+          <div class="line line2"></div>
+          <div class="line line3"></div>
+        </div>
+      );
     }
 
     return (
       <div className="questions">
+        <Background color={"525252"} />
         <div className="questions__main">
           {/* <form id="search-bar"> */}
           {/* <input

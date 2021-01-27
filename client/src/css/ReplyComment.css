@@ -7,10 +7,15 @@
 .replyComment span {
   cursor: pointer;
   font-size: 12px;
-  margin: 0;
   color: "gray";
 }
 
 .replyComment span:hover {
   color: black !important;
+}
+
+@media only screen and (max-width: 568px) {
+  .replyComment {
+    margin: 4px 0;
+  }
 }

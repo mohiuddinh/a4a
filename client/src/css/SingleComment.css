@@ -43,3 +43,26 @@
   display: flex;
   justify-content: flex-end;
 }
+
+@media only screen and (max-width: 568px) {
+  .singleComment .btn-userActions {
+    padding: 4px;
+    font-size: 12px;
+    margin-top: 4px;
+  }
+  .singleComment__reply {
+    margin: 0;
+  }
+  .singleComment__infoContainer {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .singleComment__form .btn {
+    padding: 8px;
+    font-size: 12px;
+  }
+  .singleComment__form input {
+    padding: 4px 0;
+    font-size: 12px;
+  }
+}
