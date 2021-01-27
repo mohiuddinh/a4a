@@ -5,6 +5,12 @@ import { get, post } from '../../utilities.js';
 
 class Home extends Component {
 
+  componentDidMount() {
+    post("/api/searchtags").then((res)=>{
+      console.log(res); 
+    })
+  }
+
   render() {
     return (
       <div>

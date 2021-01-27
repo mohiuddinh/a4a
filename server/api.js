@@ -321,7 +321,14 @@ router.get("/post", (req, res) => {
 
 router.post("/search", (req, res) => {
   //console.log(req.body.query);
-  let userPattern = new RegExp(req.body.query, "i");
+  if(req.body.query === undefined){
+    return 
+  }
+  function escapeRegExp(str) {
+    return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
+  }
+  const data = escapeRegExp(req.body.query);
+  let userPattern = new RegExp(data, "i");
   Question.find({ subject: { $regex: userPattern } })
     .populate("writer")
     .then((question) => {
@@ -543,6 +550,33 @@ router.get("/question_by_user_id/:id", (req, res) => {
   } catch (e) {
     return res.json({ status: "error", error: e });
   }
+});
+
+router.post("/searchtags", (req, res) => {
+  //console.log(req.body.query);
+  if(req.body.query === undefined){
+    return
+  }
+  let arr = req.body.query; 
+  let finalarr = []; 
+  for(let i = 0; i<arr.length; i++){
+    const l = arr[i].replace(/\s/g, ''); 
+    const item = "^" + l;
+    finalarr.push(item);  
+  }
+  let regex= finalarr.join("|"); 
+  let regex2 = new RegExp(regex, "i");
+
+  //let userPattern = new RegExp(req.body.query, "i");
+  Question.find({ tag: { $regex: regex2 } })
+    .populate("writer")
+    .then((question) => {
+      //console.log(question)
+      res.json(question);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 });
 
 // anything else falls to this "not found" case
