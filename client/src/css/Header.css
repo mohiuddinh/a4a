@@ -207,45 +207,46 @@
   transition: all 0.25s ease-in-out;
 }
 
-.header__burger:hover .burger-1 {
-  transform: rotate(-45deg) translate(-7px, 5px);
-}
-
-.header__burger:hover .burger-2 {
-  transition: rotate(180deg);
-  opacity: 0;
-}
-
-.header__burger:hover .burger-3 {
-  transform: rotate(45deg) translate(-6px, -4px);
-}
-
-@keyframes menu-open {
-  from {
-    width: 0px;
-  }
-  to {
-    width: 220px;
-  }
-}
-
-.open {
-  animation-name: menu-open;
-  animation-duration: 1s;
-  animation-fill-mode: forwards;
+.header__menu {
+  display: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+  /* transform: translateX(100%); */
+  background-color: var(--white);
+  outline: 1px solid var(--border-accent);
+  padding: 64px 12px 0 12px;
+  height: 100vh;
+  z-index: 10;
+  transition: all 0.25s ease-in-out;
 }
 
 @keyframes menu-close {
   from {
-    width: 220px;
+    transform: translateX(0%);
   }
   to {
-    width: 0px;
+    transform: translateX(100%);
   }
 }
 
 .close {
   animation-name: menu-close;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes menu-open {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0%);
+  }
+}
+
+.open {
+  animation-name: menu-open;
   animation-duration: 1s;
   animation-fill-mode: forwards;
 }
@@ -260,6 +261,9 @@
   .h-button {
     display: none;
   }
+  .header {
+    padding: 4px 0;
+  }
 }
 @media only screen and (max-width: 768px) {
   .header__burgerContainer {
@@ -273,19 +277,11 @@
   .header__user {
     display: none;
   }
-
   .header__selection h5 {
     display: none;
   }
   .header__menu {
-    position: absolute;
-    top: 0;
-    right: 0;
-    background-color: var(--white);
-    outline: 1px solid var(--border-accent);
-    padding: 64px 12px 0 12px;
-    height: 100vh;
-    z-index: 10;
+    display: block;
   }
   .header__menuUser {
     display: flex;

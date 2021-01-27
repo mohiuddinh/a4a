@@ -43,6 +43,8 @@ class Header extends Component {
   }
 
   render() {
+    console.log(this.state.showMenu);
+
     return (
       <div className="header__sticky">
         <div className="header">
@@ -143,45 +145,48 @@ class Header extends Component {
             </div>
           </div>
           {/* menu for media query */}
-          {this.state.showMenu ? (
-            <div
-              className="header__menu"
-              style={this.showMenu ? null : { transform: "translateX(100%)" }}
-            >
-              {this.props.userId ? (
-                <Link to="/post" style={link_style}>
-                  <button className="btn">
-                    <span>Post</span>
-                  </button>
-                </Link>
-              ) : null}
-              {!this.props.userId ? (
-                <Link to="/login" style={link_style}>
-                  <button className="btn">
-                    <span>Login</span>
-                  </button>
-                </Link>
-              ) : null}
-              {this.props.userId ? (
-                <Link to={`/profile/${this.props.userId}`} style={link_style}>
-                  <button className="btn">
-                    <span>Profile</span>
-                  </button>
-                </Link>
-              ) : null}
-              {this.props.userId ? (
-                <button className="btn" onClick={this.props.handleLogout}>
-                  <span>Logout</span>
+          {/* {this.state.showMenu ? ( */}
+          <div
+            className={cs("header__menu", {
+              close: !this.state.showMenu,
+              open: this.state.showMenu,
+            })}
+            // style={this.showMenu ? null : { transform: "translateX(100%)" }}
+          >
+            {this.props.userId ? (
+              <Link to="/post" style={link_style}>
+                <button className="btn">
+                  <span>Post</span>
                 </button>
-              ) : (
-                <Link to="/register" style={link_style}>
-                  <button className="btn">
-                    <span>Register</span>
-                  </button>
-                </Link>
-              )}
-            </div>
-          ) : null}
+              </Link>
+            ) : null}
+            {!this.props.userId ? (
+              <Link to="/login" style={link_style}>
+                <button className="btn">
+                  <span>Login</span>
+                </button>
+              </Link>
+            ) : null}
+            {this.props.userId ? (
+              <Link to={`/profile/${this.props.userId}`} style={link_style}>
+                <button className="btn">
+                  <span>Profile</span>
+                </button>
+              </Link>
+            ) : null}
+            {this.props.userId ? (
+              <button className="btn" onClick={this.props.handleLogout}>
+                <span>Logout</span>
+              </button>
+            ) : (
+              <Link to="/register" style={link_style}>
+                <button className="btn">
+                  <span>Register</span>
+                </button>
+              </Link>
+            )}
+          </div>
+          {/* // ) : null} */}
         </div>
       </div>
     );
