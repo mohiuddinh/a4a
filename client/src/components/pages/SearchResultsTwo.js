@@ -5,22 +5,52 @@ import SearchBar from "./SearchBar.js";
 import "../../css/Questions.css";
 import { post } from "../../utilities";
 
-class SearchResultsTwo extends Component {
+import "../../css/SearchResults.css";
+let arr = undefined;
+class SearchResults extends Component {
   constructor(props) {
     super(props);
+    if (props.query.charAt(0) === "[" && props.query.charAt(props.query.length - 1) === "]") {
+      let res = props.query.slice(1, props.query.length - 1);
+      let res2 = res.split(",");
+      arr = [];
+      for (let i = 0; i < res2.length; i++) {
+        let result = undefined;
+        if (res2[i].charAt(0) === "+") {
+          result = res2[i].slice(1, res2[i].length);
+        } else {
+          result = res2[i];
+        }
+        arr.push(result);
+      }
+    } else {
+      arr = props.query.split("+").join(" ");
+    }
     this.state = {
       questions: [],
-      query: props.query.split("+").join(" "),
+      query: arr,
     };
   }
 
   componentDidMount() {
-    post("/api/search", { query: this.state.query }).then((questionObjs) => {
-      let reversedObjs = questionObjs.reverse();
-      this.setState({
-        questions: reversedObjs,
+    if (
+      this.props.query.charAt(0) === "[" &&
+      this.props.query.charAt(this.props.query.length - 1) === "]"
+    ) {
+      post("/api/searchtags", { query: this.state.query }).then((questionObjs) => {
+        let reversedObjs = questionObjs.reverse();
+        this.setState({
+          questions: reversedObjs,
+        });
       });
-    });
+    } else {
+      post("/api/search", { query: this.state.query }).then((questionObjs) => {
+        let reversedObjs = questionObjs.reverse();
+        this.setState({
+          questions: reversedObjs,
+        });
+      });
+    }
   }
 
   render() {
@@ -45,18 +75,20 @@ class SearchResultsTwo extends Component {
         );
       });
     } else {
-      questionsList = <div className = "loader loader_general">
-                      <div class="line line1"></div>
-                      <div class="line line2"></div>
-                      <div class="line line3"></div>
-                      </div>;
+      questionsList = (
+        <div className="loader loader_general">
+          <div class="line line1"></div>
+          <div class="line line2"></div>
+          <div class="line line3"></div>
+        </div>
+      );
     }
 
     return (
       <div className="questions">
         <div className="questions__main">
-          {/* <form id="search-bar">
-            <input
+          {/* <form id="search-bar"> */}
+          {/* <input
               type="text"
               placeholder="Search..."
               id="search"
@@ -64,13 +96,14 @@ class SearchResultsTwo extends Component {
               onChange={this.onChange}
             />
           </form> */}
-          <SearchBar url='search'/>
-          <div>{questionsList.length} results</div>
+          <SearchBar url="search" />
+          <div className="searchResult">{questionsList.length} results</div>
           {questionsList}
+          {/* </form> */}
         </div>
       </div>
     );
   }
 }
 
-export default SearchResultsTwo;
+export default SearchResults;

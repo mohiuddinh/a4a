@@ -6,23 +6,52 @@ import "../../css/Questions.css";
 import { post } from "../../utilities";
 
 import "../../css/SearchResults.css";
-
+let arr = undefined; 
 class SearchResults extends Component {
   constructor(props) {
     super(props);
+    if (props.query.charAt(0) === "[" && props.query.charAt(props.query.length - 1) === "]") {
+      let res = props.query.slice(1, props.query.length - 1); 
+      let res2 = res.split(","); 
+      arr = [];
+      for (let i=0; i<res2.length; i++){
+        let result = undefined; 
+        if(res2[i].charAt(0)==="+"){
+          result = res2[i].slice(1, res2[i].length); 
+        }
+        else {
+          result = res2[i]; 
+        }
+        arr.push(result); 
+      }
+      console.log(arr); 
+    } else {
+      arr = props.query.split("+").join(" ");
+    }
     this.state = {
       questions: [],
-      query: props.query.split("+").join(" "),
+      query: arr,
     };
   }
 
   componentDidMount() {
+    if (this.props.query.charAt(0) === "[" && this.props.query.charAt(this.props.query.length - 1) === "]") {
+      console.log(this.state.query); 
+      post("/api/searchtags", { query: this.state.query }).then((questionObjs)=>{
+        let reversedObjs = questionObjs.reverse();
+        this.setState({
+          questions: reversedObjs,
+        });
+      })
+    }
+    else{
     post("/api/search", { query: this.state.query }).then((questionObjs) => {
       let reversedObjs = questionObjs.reverse();
       this.setState({
         questions: reversedObjs,
       });
     });
+  }
   }
 
   render() {

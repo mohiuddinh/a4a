@@ -20,6 +20,20 @@ function SearchBar(props) {
 
   const fetchUsers = (query) => {
     setSearch(query);
+    if (query.charAt(0) === "[" && query.charAt(query.length - 1 ) === "]"){
+      let res = query.slice(1, query.length -1); 
+      let res2 = res.split(","); 
+      post("/api/searchtags", { query: res2 }).then((res) => {
+        if (query === "") {
+          setQuestionDetails([]);
+        } else if (res.length > 5) {
+          setQuestionDetails(res.slice(0, 5));
+        } else {
+          setQuestionDetails(res);
+        }
+      });
+    }
+    else{
     post("/api/search", { query: query }).then((res) => {
       if (query === "") {
         setQuestionDetails([]);
@@ -29,6 +43,7 @@ function SearchBar(props) {
         setQuestionDetails(res);
       }
     });
+  }
   };
 
   const handleSubmit = (e) => {
