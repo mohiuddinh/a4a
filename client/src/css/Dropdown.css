@@ -132,14 +132,14 @@
 }
 
 /* media queries */
-@media screen and (max-width: 768px) {
+@media only screen and (max-width: 768px) {
   .dropdown {
     margin-left: 24px;
     width: 156px;
   }
 }
 
-@media screen and (max-width: 568px) {
+@media only screen and (max-width: 568px) {
   .dropdown {
     margin-left: 12px;
     width: 112px;
