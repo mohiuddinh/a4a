@@ -18,7 +18,7 @@ class SingleQuestion extends Component {
       <div className={className}>
         {/* <a href={this.props.url}> */}
         <a href={this.props.url}>
-          <div className="singleQuestion__container">
+          <div className="singleQuestion__container animate__animated animate__fadeIn">
             <span>
               <a href={`/profile/${this.props.writerId}`}>{this.props.username}: </a>
             </span>

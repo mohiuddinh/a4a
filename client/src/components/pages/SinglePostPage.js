@@ -66,7 +66,7 @@ function SinglePostPage(props) {
     const iconColor = Question.writer.iconColor;
     const timestamp = new Date(Question.createdAt);
     return (
-      <div className="singlePost">
+      <div className="singlePost animate__animated animate__fadeIn">
         <Background color={"525252"} />
         <div className="singlePost__largeContainer">
           <div className="singlePost__container">

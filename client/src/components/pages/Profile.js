@@ -133,7 +133,7 @@ class Profile extends Component {
                 ))}
               </ul>
             </div>
-            <div className="profile__infoSub">
+            <div className="profile__infoSub animate__animated animate__fadeIn">
               {this.props.userId === this.props.id ? (
                 <button className="btn-userActions btn-slide-edit" onClick={this.newPage}>
                   Edit
@@ -142,11 +142,11 @@ class Profile extends Component {
             </div>
           </div>
           <div className="profile__main">
-            <div className="profile__mainBio">
+            <div className="profile__mainBio animate__animated animate__fadeIn">
               <span className="profile__mainSpan">Bio:</span>
               <p>{this.state.description}</p>
             </div>
-            <div className="profile__mainPosts">
+            <div className="profile__mainPosts animate__animated animate__fadeIn">
               <span className="profile__mainSpan">Posts:</span>
               {questionsList}
             </div>
