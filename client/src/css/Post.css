@@ -46,7 +46,7 @@
 
 .post__richTextEditor {
   flex: 1;
-  height: 80%;
+  height: 70%;
   resize: none;
   border: none;
   outline: none;
@@ -75,5 +75,8 @@
 @media only screen and (max-width: 568px) {
   .post__container {
     width: 350px;
+  }
+  .post .ql-container {
+    height: 90% !important;
   }
 }

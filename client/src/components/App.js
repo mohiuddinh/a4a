@@ -73,7 +73,7 @@ class App extends Component {
     }
     return (
       <>
-        <div>
+        <div className="app__wrapper">
           <ReactNotification />
           <Header userId={this.state.userId} handleLogout={this.handleLogout} />
           <Router>

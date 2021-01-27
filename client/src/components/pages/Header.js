@@ -43,7 +43,14 @@ class Header extends Component {
   }
 
   render() {
-    console.log(this.state.showMenu);
+    const btnClassname = cs("btn", {
+      closeBtn: !this.state.showMenu,
+      openBtn: this.state.showMenu,
+    });
+    const spanClassname = cs({
+      closeSpan: !this.state.showMenu,
+      openSpan: this.state.showMenu,
+    });
 
     return (
       <div className="header__sticky">
@@ -155,33 +162,33 @@ class Header extends Component {
           >
             {this.props.userId ? (
               <Link to="/post" style={link_style}>
-                <button className="btn">
-                  <span>Post</span>
+                <button className={btnClassname}>
+                  <span className={spanClassname}>Post</span>
                 </button>
               </Link>
             ) : null}
             {!this.props.userId ? (
               <Link to="/login" style={link_style}>
-                <button className="btn">
-                  <span>Login</span>
+                <button className={btnClassname}>
+                  <span className={spanClassname}>Login</span>
                 </button>
               </Link>
             ) : null}
             {this.props.userId ? (
               <Link to={`/profile/${this.props.userId}`} style={link_style}>
-                <button className="btn">
-                  <span>Profile</span>
+                <button className={btnClassname}>
+                  <span className={spanClassname}>Profile</span>
                 </button>
               </Link>
             ) : null}
             {this.props.userId ? (
-              <button className="btn" onClick={this.props.handleLogout}>
-                <span>Logout</span>
+              <button className={btnClassname} onClick={this.props.handleLogout}>
+                <span className={spanClassname}>Logout</span>
               </button>
             ) : (
               <Link to="/register" style={link_style}>
-                <button className="btn">
-                  <span>Register</span>
+                <button className={btnClassname}>
+                  <span className={spanClassname}>Register</span>
                 </button>
               </Link>
             )}

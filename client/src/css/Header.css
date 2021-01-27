@@ -212,7 +212,6 @@
   position: absolute;
   top: 0;
   right: 0;
-  /* transform: translateX(100%); */
   background-color: var(--white);
   outline: 1px solid var(--border-accent);
   padding: 64px 12px 0 12px;
@@ -223,30 +222,79 @@
 
 @keyframes menu-close {
   from {
-    transform: translateX(0%);
+    width: 220px;
   }
   to {
-    transform: translateX(100%);
+    width: 0px;
+  }
+}
+
+@keyframes opacity-close {
+  from {
+    opacity: 1;
+    font-size: 14px;
+  }
+  to {
+    opacity: 0;
+    font-size: 0px;
   }
 }
 
 .close {
+  padding: 64px 0 0 0;
   animation-name: menu-close;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+}
+
+.closeBtn {
+  animation-name: opacity-close;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+  padding: 0 !important;
+  font-size: 0;
+}
+
+.closeSpan {
+  animation-name: opacity-close;
   animation-duration: 1s;
   animation-fill-mode: forwards;
 }
 
 @keyframes menu-open {
   from {
-    transform: translateX(100%);
+    width: 0px;
   }
   to {
-    transform: translateX(0%);
+    width: 220px;
+  }
+}
+
+@keyframes opacity-open {
+  from {
+    opacity: 0;
+    font-size: 0;
+  }
+  to {
+    opacity: 1;
+    font-size: 14px;
   }
 }
 
 .open {
   animation-name: menu-open;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+}
+
+.openBtn {
+  animation-name: opacity-open;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+}
+
+.openSpan {
+  animation-name: opacity-open;
   animation-duration: 1s;
   animation-fill-mode: forwards;
 }
@@ -292,7 +340,7 @@
     width: 100%;
     background-color: var(--tea-green);
     margin: 8px 0;
-    transition: all 0.25s ease-in-out;
+    transition: all 1s ease-in-out;
   }
   .header__menu .btn span {
     font-size: 14px;

@@ -4,6 +4,7 @@ import { post } from "../../utilities.js";
 import M from "materialize-css";
 import { Link, navigate } from "@reach/router";
 import SearchIcon from "@material-ui/icons/Search";
+import InfoOutlinedIcon from "@material-ui/icons/InfoOutlined";
 import CloseIcon from "@material-ui/icons/Close";
 
 import "../../css/Post.css";
@@ -20,9 +21,9 @@ function SearchBar(props) {
 
   const fetchUsers = (query) => {
     setSearch(query);
-    if (query.charAt(0) === "[" && query.charAt(query.length - 1 ) === "]"){
-      let res = query.slice(1, query.length -1); 
-      let res2 = res.split(","); 
+    if (query.charAt(0) === "[" && query.charAt(query.length - 1) === "]") {
+      let res = query.slice(1, query.length - 1);
+      let res2 = res.split(",");
       post("/api/searchtags", { query: res2 }).then((res) => {
         if (query === "") {
           setQuestionDetails([]);
@@ -32,18 +33,17 @@ function SearchBar(props) {
           setQuestionDetails(res);
         }
       });
+    } else {
+      post("/api/search", { query: query }).then((res) => {
+        if (query === "") {
+          setQuestionDetails([]);
+        } else if (res.length > 5) {
+          setQuestionDetails(res.slice(0, 5));
+        } else {
+          setQuestionDetails(res);
+        }
+      });
     }
-    else{
-    post("/api/search", { query: query }).then((res) => {
-      if (query === "") {
-        setQuestionDetails([]);
-      } else if (res.length > 5) {
-        setQuestionDetails(res.slice(0, 5));
-      } else {
-        setQuestionDetails(res);
-      }
-    });
-  }
   };
 
   const handleSubmit = (e) => {
@@ -61,19 +61,27 @@ function SearchBar(props) {
       <div className="home__search">
         <form onSubmit={handleSubmit}>
           <div className="home__searchContainer">
+            <SearchIcon
+              type="submit"
+              value="Submit"
+              className="home__icon"
+              onClick={handleSubmit}
+            />
             <input
               type="text"
               placeholder="Search..."
               value={search}
               onChange={(e) => fetchUsers(e.target.value)}
             />
-            {/* <SearchIcon
-              type="submit"
-              value="Submit"
-              className="home__icon"
-              onClick={handleSubmit}
-            /> */}
+
             {/* <CloseIcon onClick={() => setSearch("")} className="home__icon icon-close" /> */}
+            <div class="tooltip">
+              <InfoOutlinedIcon className="icon-info" />
+              <span class="tooltiptext">
+                Search by either question title or associated tags. To search by tags, use the
+                following notation: [tag1, tag2, tag3, etc]. i.e. [6.01, Social, 8]
+              </span>
+            </div>
           </div>
         </form>
         <ul className="home__searchCollection">
