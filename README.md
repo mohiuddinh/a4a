@@ -4,7 +4,7 @@
 
 Team Name: We Are Not Normal
 
-Team Members: Dejon Kurti, Hassan Mohiuddinh, Haoran Wen
+Team Members: Dejon Kurti, Hassan Mohiuddin, Haoran Wen
 
 [A4A](https://a4a.herokuapp.com/ "Ask4Answer")
 
