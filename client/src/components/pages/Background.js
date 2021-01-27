@@ -13,7 +13,7 @@ class Background extends Component {
 
 
   render() {
-    return <ParticlesBg num={25} type="cobweb" bg={true} color={this.props.color} />;
+    return <ParticlesBg num={25} type="cobweb" bg={true} color={this.props.color} />; //code used from react particle-bg library (https://www.npmjs.com/package/particles-bg)
   }
 }
 

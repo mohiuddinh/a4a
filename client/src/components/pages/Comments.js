@@ -14,6 +14,8 @@ const { TextArea } = Input;
 
 const replyTo = true;
 
+//code citation: https://github.com/jaewonhimnae/react-youtube-clone/blob/master/client/src/components/views/DetailVideoPage/Sections/Comments.js
+
 function Comments(props) {
   const [Comment, setComment] = useState("");
 
@@ -21,11 +23,11 @@ function Comments(props) {
   //   setComment(e.currentTarget.value);
   // };
 
-  const liftStateUp = (data) => {
+  const liftStateUp = (data) => { //ours
     setComment(data);
   };
 
-  const onSubmit = (e) => {
+  const onSubmit = (e) => { //from source
     e.preventDefault();
 
     const variables = {
@@ -34,13 +36,13 @@ function Comments(props) {
       questionId: props.questionId,
     };
 
-    post("/api/saveComment", variables).then((res) => {
+    post("/api/saveComment", variables).then((res) => { //idea from source, our implementation
       if (res.success) {
         setComment("");
         props.refreshFunction(res.result);
         window.location.reload(); 
       } else {
-        alert("Failed to save comment");
+        console.log("Failed to save comment");
       }
     });
   };
@@ -50,7 +52,7 @@ function Comments(props) {
         <h4>Comments</h4>
         {props.CommentLists &&
           props.CommentLists.map(
-            (comment, index) =>
+            (comment, index) => //from source
               !comment.responseTo && (
                 <React.Fragment key={index}>
                   <div className="comments__main">
@@ -73,7 +75,7 @@ function Comments(props) {
               )
           )}
       </div>
-      {props.writerId ? (
+      {props.writerId ? ( //our code
         <div className="comments__container">
           <form onSubmit={onSubmit}>
             <div className="post__richTextEditor">

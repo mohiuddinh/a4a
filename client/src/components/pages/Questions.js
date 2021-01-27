@@ -9,6 +9,8 @@ import SingleQuestion from "../pages/SingleQuestion.js";
 import "../../css/Questions.css";
 import { get } from "../../utilities";
 
+//code citation (idea): staff code in catbook: https://github.com/weblab-workshops/catbook-react/blob/master/client/src/components/pages/Feed.js
+
 class Questions extends Component {
   constructor(props) {
     super(props);

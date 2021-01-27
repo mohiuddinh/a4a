@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+//code citation: https://github.com/jaewonhimnae/react-youtube-clone/blob/master/server/models/Like.js
 const likeSchema = new mongoose.Schema({
    userId: {
        type: Schema.Types.ObjectId,

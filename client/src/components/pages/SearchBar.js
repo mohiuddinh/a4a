@@ -9,6 +9,8 @@ import CloseIcon from "@material-ui/icons/Close";
 import "../../css/Post.css";
 import "../../css/Home.css";
 
+//code citation: https://github.com/mukeshphulwani66/Instagram-clone-MERN-Stack/blob/master/client/src/components/Navbar.js
+
 function SearchBar(props) {
   const searchModal = useRef(null);
   const [search, setSearch] = useState("");
@@ -20,7 +22,7 @@ function SearchBar(props) {
 
   const fetchUsers = (query) => {
     setSearch(query);
-    if (query.charAt(0) === "[" && query.charAt(query.length - 1 ) === "]"){
+    if (query.charAt(0) === "[" && query.charAt(query.length - 1 ) === "]"){ //OUR idea + implementation with the tag search feature
       let res = query.slice(1, query.length -1); 
       let res2 = res.split(","); 
       post("/api/searchtags", { query: res2 }).then((res) => {
@@ -34,7 +36,7 @@ function SearchBar(props) {
       });
     }
     else{
-    post("/api/search", { query: query }).then((res) => {
+    post("/api/search", { query: query }).then((res) => { //from source
       if (query === "") {
         setQuestionDetails([]);
       } else if (res.length > 5) {
@@ -48,14 +50,14 @@ function SearchBar(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const newQuery = search.split(" ").join("+");
+    const newQuery = search.split(" ").join("+"); //our idea + implementation
     if (QuestionDetails.length > 0) {
       return navigate(`/questions/${props.url}/${newQuery}`);
     } else {
       return navigate(`/questions/noresults`);
     }
   };
-
+  //some of the code is from source, styling is ours
   return (
     <div className="home" ref={searchModal}>
       <div className="home__search">

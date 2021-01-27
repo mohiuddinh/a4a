@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import TagsInput from "./TagsInput.js";
 import RichTextEditor from "./RichTextEditor.js";
-import ReactHtmlParser from 'react-html-parser'; 
+import ReactHtmlParser from "react-html-parser";
 
 import { get, post } from "../../utilities";
 import { navigate } from "@reach/router";
+import NotFound from './NotFound.js'; 
 
 import "../../css/Post.css";
 
@@ -15,6 +16,7 @@ class Edit extends Component {
       subject: "",
       tag: "",
       question: "",
+      id: undefined, 
       loading: true,
     };
   }
@@ -25,6 +27,7 @@ class Edit extends Component {
         subject: res[0].subject,
         tag: res[0].tag,
         question: res[0].question,
+        id: res[0].writer._id,
         loading: false,
       });
     });
@@ -49,11 +52,15 @@ class Edit extends Component {
 
   render() {
     if (this.state.loading) {
-      return <div className = "loader loader_general">
-             <div class="line line1"></div>
-             <div class="line line2"></div>
-             <div class="line line3"></div>
-             </div>;;
+      return (
+        <div className="loader loader_general">
+          <div class="line line1"></div>
+          <div class="line line2"></div>
+          <div class="line line3"></div>
+        </div>
+      );
+    } else if (this.state.id !== this.props.writerId) {
+      return <NotFound />;
     }
 
     const selectedTags = (tags) => {

@@ -7,6 +7,7 @@ import Background from "./Background.js";
 
 import { get, post } from "../../utilities";
 import { navigate } from "@reach/router";
+import NotFound from './NotFound.js'; 
 
 import "../../css/EditProfile.css";
 
@@ -24,7 +25,7 @@ class EditProfile extends Component {
       tag: [],
     };
   }
-
+  
   componentDidMount() {
     get(`/api/profile_by_id/${this.props.id}`).then((res) => {
       const { description, username, iconColor, major, occupation, email, tag } = res.user[0];
@@ -58,13 +59,21 @@ class EditProfile extends Component {
 
   render() {
     if (this.state.loading) {
-      return <div className = "loader loader_general">
-             <div class="line line1"></div>
-             <div class="line line2"></div>
-             <div class="line line3"></div>
-             </div>;;
+      return (
+        <div className="loader loader_general">
+          <div class="line line1"></div>
+          <div class="line line2"></div>
+          <div class="line line3"></div>
+        </div>
+      );
     }
 
+    else if (this.props.id !== this.props.userId){
+      return (
+        <NotFound />
+      )
+    }
+    
     const selectedTags = (tags) => {
       this.setState({ tag: tags });
     };

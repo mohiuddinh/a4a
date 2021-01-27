@@ -23,6 +23,7 @@ function SinglePostPage(props) {
   const writer = props.writerId;
   useEffect(() => {
     get(`/api/question_by_id?id=${questionId}&type=single`).then((res) => {
+      //used online code for this api request: https://github.com/mukeshphulwani66/Instagram-clone-MERN-Stack/blob/master/client/src/components/screens/Profile.js
       setQuestion(res[0]);
     });
 
@@ -136,11 +137,13 @@ function SinglePostPage(props) {
       </div>
     );
   } else {
-    return <div className = "loader loader_general">
-           <div class="line line1"></div>
-           <div class="line line2"></div>
-           <div class="line line3"></div>
-           </div>;
+    return (
+      <div className="loader loader_general">
+        <div class="line line1"></div>
+        <div class="line line2"></div>
+        <div class="line line3"></div>
+      </div>
+    );
   }
 }
 

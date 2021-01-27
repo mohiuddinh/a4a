@@ -15,12 +15,14 @@ const { TextArea } = Input;
 
 let writerId = null;
 
+//code citation: https://github.com/jaewonhimnae/react-youtube-clone/blob/master/client/src/components/views/DetailVideoPage/Sections/SingleComment.js
+
 function SingleComment(props) {
   const [CommentValue, setCommentValue] = useState("");
   const [OpenReply, setOpenReply] = useState(false);
   const [Loading, setLoading] = useState(true);
 
-  get("/api/whoami")
+  get("/api/whoami") //our code
     .then((res) => {
       writerId = res.id;
     })
@@ -36,7 +38,7 @@ function SingleComment(props) {
     setOpenReply(!OpenReply);
   };
 
-  const onSubmit = (e) => {
+  const onSubmit = (e) => {//from source
     e.preventDefault();
 
     const variables = {
@@ -46,13 +48,13 @@ function SingleComment(props) {
       content: CommentValue,
     };
 
-    post("/api/saveComment", variables).then((res) => {
+    post("/api/saveComment", variables).then((res) => {//idea from source, modified source's code 
       if (res.success) {
         setCommentValue("");
         setOpenReply(!OpenReply);
         props.refreshFunction(res.result);
       } else {
-        alert("Failed to save Comment");
+        console.log("Failed to save Comment");
       }
     });
   };
@@ -63,9 +65,9 @@ function SingleComment(props) {
   // }
   const timestamp = new Date(props.comment.createdAt);
 
-  const actions = [
+  const actions = [ //some idea from source, some ours
     <div className="singleComment__infoContainer">
-      <LikeDislikes comment commentId={props.comment._id} userId={writerId} />
+      <LikeDislikes comment commentId={props.comment._id} userId={writerId} /> 
       {writerId ? (
         <span className="singleComment__reply" onClick={openReply} key="comment-basic-reply-to">
           Reply to{" "}
@@ -90,6 +92,7 @@ function SingleComment(props) {
       </div>
     );
   } else {
+    //in return statement, we borrowed some code from source but had a lot original 
     return (
       <div className="singleComment">
         <Comment

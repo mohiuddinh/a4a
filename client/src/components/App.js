@@ -25,7 +25,7 @@ import Clubs from "./pages/Clubs.js";
 import SearchResultsTwo from "./pages/SearchResultsTwo.js";
 import Profile from "./pages/Profile.js";
 import EditProfile from "./pages/EditProfile.js";
-import NotFound from './pages/NotFound.js'; 
+import NotFound from "./pages/NotFound.js";
 
 import "../css/utilities.css";
 import "../css/App.css";
@@ -65,11 +65,13 @@ class App extends Component {
 
   render() {
     if (this.state.loading) {
-      return <div className = "loader loader_general">
-             <div class="line line1"></div>
-             <div class="line line2"></div>
-             <div class="line line3"></div>
-             </div>;
+      return (
+        <div className="loader loader_general">
+          <div class="line line1"></div>
+          <div class="line line2"></div>
+          <div class="line line3"></div>
+        </div>
+      );
     }
     return (
       <>
@@ -84,7 +86,7 @@ class App extends Component {
             <SearchResultsTwo path="/questions/searchtwo/:query" />
             <NoResults path="/questions/noresults" />
             <Profile path="/profile/:id" userId={this.state.userId} />
-            <EditProfile path="/profile/edit/:id" />
+            <EditProfile path="/profile/edit/:id" userId={this.state.userId} />
             {this.state.userId ? (
               <Post path="/post" writerId={this.state.userId} />
             ) : (
@@ -107,7 +109,7 @@ class App extends Component {
             )}
             <Register path="/register" />
             <Home path="/" />
-            <NotFound default/>
+            <NotFound default />
           </Router>
         </div>
       </>

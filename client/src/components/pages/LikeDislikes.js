@@ -8,6 +8,8 @@ import { store } from "react-notifications-component";
 import "antd/dist/antd.css";
 import "animate.css/animate.min.css";
 
+//code citation: https://github.com/jaewonhimnae/react-youtube-clone/blob/master/client/src/components/views/DetailVideoPage/Sections/LikeDislikes.js
+
 function LikeDislikes(props) {
   const [Likes, setLikes] = useState(0);
   const [Dislikes, setDislikes] = useState(0);
@@ -22,7 +24,7 @@ function LikeDislikes(props) {
   //     setLoading(false);
   // })
 
-  const notification = {
+  const notification = { //we used a library here and wrote the code (not from source)
     title: "Uh oh",
     message: "Please login before you like and comment.",
     type: "danger",
@@ -43,7 +45,7 @@ function LikeDislikes(props) {
   }
 
   useEffect(() => {
-    post("/api/getLikes", variable).then((res) => {
+    post("/api/getLikes", variable).then((res) => { //idea from source, modified implementation a bit
 
       if (res.success) {
         //How many likes does this video or comment have
@@ -85,7 +87,7 @@ function LikeDislikes(props) {
   }, []);
 
   const onLike = () => {
-    if (props.userId === undefined || props.userId === null) {
+    if (props.userId === undefined || props.userId === null) { //our idea to add notifications
       store.addNotification(notification);
     } else if (LikeAction === null) {
       post("/api/upLike", variable).then((res) => {
@@ -149,9 +151,9 @@ function LikeDislikes(props) {
   //     <div>Loading</div>
   //   );
   // };
-
+          // code from source, styling is ours
   return (
-    <React.Fragment>
+    <React.Fragment> 
       <div className="likeDislikes">
         <span key="comment-basic-like">
           <Tooltip title="Like">

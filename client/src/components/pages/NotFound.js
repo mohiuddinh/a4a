@@ -8,7 +8,7 @@ class NotFound extends Component {
     super(props);
   }
 
-  render() {
+  render() { //most of the code in this file is from the code the staff gave us
     return (
       <div className="notFound">
         <Background color={"525252"} />

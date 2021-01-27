@@ -5,6 +5,8 @@ import "../../css/ReplyComment.css";
 
 const replyTo = false;
 
+//code citation: https://github.com/jaewonhimnae/react-youtube-clone/blob/master/client/src/components/views/DetailVideoPage/Sections/ReplyComment.js
+
 function ReplyComment(props) {
   const [ChildCommentNumber, setChildCommentNumber] = useState(0);
   const [OpenReplyComments, setOpenReplyComments] = useState(false);

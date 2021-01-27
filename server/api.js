@@ -300,7 +300,7 @@ router.post("/register", async (req, res) => {
 router.post("/department", (req, res) => {
   console.log("accessed endpoint department");
   const data = req.body.group;
-  let pattern = new RegExp("^" + data);
+  let pattern = new RegExp("^" + data); //learned regexp from here https://docs.mongodb.com/manual/reference/operator/query/regex/
   try {
     Question.find({ tag: pattern })
       .populate("writer")
@@ -312,7 +312,7 @@ router.post("/department", (req, res) => {
   }
 });
 
-router.get("/post", (req, res) => {
+router.get("/post", (req, res) => { //staff code from catbook
   // empty selector means get all documents
   Question.find({})
     .populate("writer")
@@ -325,6 +325,7 @@ router.post("/search", (req, res) => {
     return 
   }
   function escapeRegExp(str) {
+    //code citation: https://stackoverflow.com/questions/3446170/escape-string-for-use-in-javascript-regex
     return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
   }
   const data = escapeRegExp(req.body.query);
@@ -351,7 +352,7 @@ router.get("/question_by_id", (req, res) => {
   let type = req.query.type;
   let questionId = req.query.id;
 
-  Question.find({ _id: { $in: questionId } })
+  Question.find({ _id: { $in: questionId } }) //learned about $in https://docs.mongodb.com/manual/reference/operator/query/in/
     .populate("writer")
     .exec((err, product) => {
       if (err) {
@@ -361,6 +362,7 @@ router.get("/question_by_id", (req, res) => {
     });
 });
 
+//code citation: https://github.com/jaewonhimnae/react-youtube-clone/blob/master/server/routes/comment.js
 router.post("/saveComment", auth.ensureLoggedIn, (req, res) => {
   const comment = new Comment(req.body);
 
@@ -376,6 +378,7 @@ router.post("/saveComment", auth.ensureLoggedIn, (req, res) => {
   });
 });
 
+//code citation: https://github.com/jaewonhimnae/react-youtube-clone/blob/master/server/routes/comment.js
 router.post("/getComments", (req, res) => {
   Comment.find({ questionId: req.body.questionId })
     .populate("writer")
@@ -385,6 +388,7 @@ router.post("/getComments", (req, res) => {
     });
 });
 
+//code citation: https://github.com/jaewonhimnae/react-youtube-clone/blob/master/server/routes/like.js
 router.post("/getLikes", (req, res) => {
   let variable = {};
   if (req.body.questionId) {
@@ -399,6 +403,7 @@ router.post("/getLikes", (req, res) => {
   });
 });
 
+//code citation: https://github.com/jaewonhimnae/react-youtube-clone/blob/master/server/routes/like.js
 router.post("/getDislikes", (req, res) => {
   let variable = {};
   if (req.body.questionId) {
@@ -413,6 +418,7 @@ router.post("/getDislikes", (req, res) => {
   });
 });
 
+//code citation: https://github.com/jaewonhimnae/react-youtube-clone/blob/master/server/routes/like.js
 router.post("/upLike", auth.ensureLoggedIn, (req, res) => {
   let variable = {};
   if (req.body.questionId) {
@@ -433,6 +439,7 @@ router.post("/upLike", auth.ensureLoggedIn, (req, res) => {
   });
 });
 
+//code citation: https://github.com/jaewonhimnae/react-youtube-clone/blob/master/server/routes/like.js
 router.post("/unLike", auth.ensureLoggedIn, (req, res) => {
   let variable = {};
   if (req.body.questionId) {
