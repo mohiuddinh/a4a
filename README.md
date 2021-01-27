@@ -16,6 +16,8 @@ Team Members: Dejon Kurti, Hassan Mohiuddin, Haoran Wen
 ### 3rd Party Libraries
 
 * [Animate.css](https://animate.style/)
+* [Particles](https://www.npmjs.com/package/particles-bg)
+https://www.npmjs.com/package/particles-bg
 
 
 ### /src/CSS
