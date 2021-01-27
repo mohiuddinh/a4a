@@ -18,7 +18,7 @@
 }
 
 .profile__info {
-  width: 188px;
+  max-width: 225px;
   height: 100%;
   margin-right: 12px;
   font-weight: 600;
@@ -33,7 +33,7 @@
   justify-content: center;
   align-items: center;
   padding: 12px 0;
-  overflow: auto;
+  /* overflow: auto; */
 }
 
 .profile__main {

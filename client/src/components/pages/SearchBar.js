@@ -63,12 +63,12 @@ function SearchBar(props) {
       <div className="home__search">
         <form onSubmit={handleSubmit}>
           <div className="home__searchContainer">
-            {/* <SearchIcon
+            <SearchIcon
               type="submit"
               value="Submit"
               className="home__icon"
               onClick={handleSubmit}
-            /> */}
+            />
             <input
               type="text"
               placeholder="Search..."

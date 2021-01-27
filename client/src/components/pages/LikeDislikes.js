@@ -24,7 +24,8 @@ function LikeDislikes(props) {
   //     setLoading(false);
   // })
 
-  const notification = { //we used a library here and wrote the code (not from source)
+  const notification = {
+    //we used a library here and wrote the code (not from source)
     title: "Uh oh",
     message: "Please login before you like and comment.",
     type: "danger",
@@ -45,7 +46,8 @@ function LikeDislikes(props) {
   }
 
   useEffect(() => {
-    post("/api/getLikes", variable).then((res) => { //idea from source, modified implementation
+    post("/api/getLikes", variable).then((res) => {
+      //idea from source, modified implementation
       if (res.success) {
         //How many likes does this video or comment have
         setLikes(res.likes.length);
@@ -86,7 +88,8 @@ function LikeDislikes(props) {
   }, []);
 
   const onLike = () => {
-    if (props.userId === undefined || props.userId === null) { //our idea to add notifications
+    if (props.userId === undefined || props.userId === null) {
+      //our idea to add notifications
       store.addNotification(notification);
     } else if (LikeAction === null) {
       post("/api/upLike", variable).then((res) => {
@@ -150,9 +153,10 @@ function LikeDislikes(props) {
   //     <div>Loading</div>
   //   );
   // };
-          // code from source, styling is ours
+
+  // code from source, styling is ours
   return (
-    <React.Fragment> 
+    <React.Fragment>
       <div className="likeDislikes">
         <span key="comment-basic-like">
           <Tooltip title="Like">
