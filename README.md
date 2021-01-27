@@ -41,7 +41,21 @@ Team Members: Dejon Kurti, Hassan Mohiuddin, Haoran Wen
 * [Body-parser](https://www.npmjs.com/package/body-parser)
 * [atob](https://www.npmjs.com/package/atob)
 
-### /src/CSS
+### Animations
 
 * [Loader](https://codepen.io/slyka85/pen/QvBQPb "CSS code was adapted from Anya Melnyk for our page loaders")
+* [Header SVG Title Animation](https://www.youtube.com/watch?v=vJNVramny9k&t=1s)
+* [Header Hover Animation](https://codepen.io/badurski/pen/YxJgoe)
+* [Header NavBar Animation](https://stackoverflow.com/questions/65888080/reactjs-how-to-apply-transitions-to-inline-stylings-in-react/65888897?noredirect=1#comment116499569_65888897)
+* [Background Cobweb Animation](https://www.npmjs.com/package/particles-bg)
+
+### Functionalities
+* [Authentication Login and Register](https://www.youtube.com/watch?v=SQqSMDIzhaE)
+* [Authentication Email Verification](https://www.youtube.com/watch?v=76tKpVbjhu8&t=324s)
+* [Header Dropdown Menu](https://blog.campvanilla.com/reactjs-dropdown-menus-b6e06ae3a8fe)
+* [Tags Input](https://www.youtube.com/watch?v=RqQpnU6rbDE&t=346s)
+* [Live Search](https://www.youtube.com/watch?v=e4VVDYhLRkw)
+
+
+
 
