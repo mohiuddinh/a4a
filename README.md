@@ -48,6 +48,7 @@ Team Members: Dejon Kurti, Hassan Mohiuddin, Haoran Wen
 * [Header Hover Animation](https://codepen.io/badurski/pen/YxJgoe)
 * [Header NavBar Animation](https://stackoverflow.com/questions/65888080/reactjs-how-to-apply-transitions-to-inline-stylings-in-react/65888897?noredirect=1#comment116499569_65888897)
 * [Background Cobweb Animation](https://www.npmjs.com/package/particles-bg)
+* [Tooltip on hover](https://www.w3schools.com/howto/howto_css_tooltip.asp)
 
 ### Functionalities
 * [Authentication Login and Register](https://www.youtube.com/watch?v=SQqSMDIzhaE)
@@ -55,7 +56,7 @@ Team Members: Dejon Kurti, Hassan Mohiuddin, Haoran Wen
 * [Header Dropdown Menu](https://blog.campvanilla.com/reactjs-dropdown-menus-b6e06ae3a8fe)
 * [Tags Input](https://www.youtube.com/watch?v=RqQpnU6rbDE&t=346s)
 * [Live Search](https://www.youtube.com/watch?v=e4VVDYhLRkw)
-
-
-
-
+* [Like and Dislike](https://github.com/jaewonhimnae/react-youtube-clone)
+* [Comments and Nested Comments](https://github.com/jaewonhimnae/react-youtube-clone)
+* [Time Ago Feature](https://www.npmjs.com/package/react-timeago)
+* [Rich Text Editor](https://www.npmjs.com/package/react-quill)
