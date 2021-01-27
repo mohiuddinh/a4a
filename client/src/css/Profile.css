@@ -81,7 +81,7 @@
   margin: 12px 0;
 }
 
-@media screen and (max-width: 768px) {
+@media only screen and (max-width: 768px) {
   .profile__main {
     overflow: visible;
   }
@@ -95,7 +95,7 @@
   }
 }
 
-@media screen and (max-width: 568px) {
+@media only screen and (max-width: 568px) {
   .profile__container {
     width: 350px;
   }

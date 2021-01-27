@@ -26,7 +26,7 @@ class SingleQuestion extends Component {
           </div>
           {/* <a href={this.props.url}> */}
           <div className="singleQuestion__container">
-            <span className="singleQuestion__tag">Tag:</span>
+            <span className="singleQuestion__tag">Tags:</span>
             <ul id="tags">
               {this.props.tag.map((tag, index) => (
                 <li

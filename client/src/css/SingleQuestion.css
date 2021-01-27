@@ -103,4 +103,7 @@ a .singleQuestion__container:nth-child(2) {
     flex-direction: column;
     align-items: flex-start;
   }
+  .singleQuestion__tag {
+    margin-bottom: 4px;
+  }
 }
