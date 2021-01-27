@@ -23,9 +23,10 @@ function SearchBar(props) {
 
   const fetchUsers = (query) => {
     setSearch(query);
-    if (query.charAt(0) === "[" && query.charAt(query.length - 1 ) === "]"){ //OUR idea + implementation with the tag search feature
-      let res = query.slice(1, query.length -1); 
-      let res2 = res.split(","); 
+    if (query.charAt(0) === "[" && query.charAt(query.length - 1) === "]") {
+      //OUR idea + implementation with the tag search feature
+      let res = query.slice(1, query.length - 1);
+      let res2 = res.split(",");
       post("/api/searchtags", { query: res2 }).then((res) => {
         if (query === "") {
           setQuestionDetails([]);
@@ -63,12 +64,14 @@ function SearchBar(props) {
       <div className="home__search">
         <form onSubmit={handleSubmit}>
           <div className="home__searchContainer">
-            <SearchIcon
-              type="submit"
-              value="Submit"
-              className="home__icon"
-              onClick={handleSubmit}
-            />
+            <div className="home__searchIcon">
+              <SearchIcon
+                type="submit"
+                value="Submit"
+                className="home__icon"
+                onClick={handleSubmit}
+              />
+            </div>
             <input
               type="text"
               placeholder="Search..."

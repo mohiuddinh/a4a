@@ -25,6 +25,12 @@
   transition: all 0.1s ease-in-out;
 }
 
+.home__searchIcon {
+  background: transparent;
+  display: flex;
+  align-items: center;
+}
+
 .home__searchContainer:hover {
   box-shadow: 0 1px 8px var(--border-accent);
 }
@@ -66,6 +72,7 @@
 }
 
 .home__icon {
+  background: transparent;
   cursor: pointer;
   opacity: 0.65;
 }
@@ -77,6 +84,9 @@
   .home__searchContainer input {
     padding: 8px 0;
   }
+  /* .home__searchIcon {
+    display: none;
+  } */
 }
 
 @media only screen and (max-width: 568px) {
