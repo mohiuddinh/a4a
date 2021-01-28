@@ -63,6 +63,7 @@ class SearchResults extends Component {
           //<a href={`/questions/${questionObj._id}`}>
 
           <SingleQuestion
+            writerId={questionObj.writer._id}
             tagColor={"#caf4f4"}
             tagFontColor={"black"}
             parentFile={"all"}
